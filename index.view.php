@@ -9,6 +9,6 @@
         <?php 
         require 'index.php';
         ?>
-        <h1><?php echo $person['name'] . ' is a ' . $person['occupation'] . '. He is ' . $person['age'] . ' and his BMI is currently ' . $person['bmi'] ?></h1>
+        <h1></h1>
     </body>
 </html>
