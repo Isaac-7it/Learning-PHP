@@ -627,9 +627,8 @@ This also follows for single quotes
   $length = strlen( $message ); // $length will be 13
   ```
 
-* The in built `is_string()` function checks whether a variable is of string type. It returns true if the variable is a string, otherwise false. Example
+* The in built `is_string()` function checks whether a variable is of string type. It returns true if the variable is a string, otherwise false.
 
-````php
 # PHP Heredoc
 
 - Heredoc is a syntax for defining multi-line strings in PHP. It allows you to create strings that span multiple lines without the need for concatenation or escape characters.
@@ -643,7 +642,7 @@ echo $message;
 // Output:
 // He said, "Hello, Bob!"
 // She replied, "Hi, Alice!"
-````
+```
 
 Thus for any string that contains both single and double quotes say `"any_str"`, we can escape as follows
 
@@ -831,8 +830,738 @@ echo gettype( $var ); // Output: string
 ```
 
 - Comparing string and integer using the equality operator (`==`) results in type juggling, where the string is converted to an integer for comparison.
-+ Loosely comparing `NULL` with the boolean false using the equality operator (`==`) results in type juggling, where `NULL` and `false` are treated as false for comparison.
-+ PHP has conversion priorities:
-  + Numeric comparison if possible
-  + Boolean comparison only when necessary
-  + Special loose rules for NULL, "", "0"
+
+* Loosely comparing `NULL` with the boolean false using the equality operator (`==`) results in type juggling, where `NULL` and `false` are treated as false for comparison.
+* PHP has conversion priorities:
+  - Numeric comparison if possible
+  - Boolean comparison only when necessary
+  - Special loose rules for NULL, "", "0"
+
+# PHP Operators
+
+- PHP provides various operators to perform operations such as addition, subtraction, multiplication, division, modulus and exponenetial on variables and values.
+- In PHP, numerical operators require a numerical value (integer or float) on both sides. If one of the operands is not a number, PHP will attempt to convert it to a number using type juggling rules before performing the operation. If the conversion is not possible, PHP will treat the non-numeric operand as 0.
+- The following are the arithmetic operators in PHP:
+  - Addition (`+`) -
+    - The sum of an integer and a float or a float and a float is a float.
+    - Computers cannot represent floats precisely. In some cases, the result will not be what you expect. For example:
+    ```php
+    $result = 0.1 + 0.2;
+    echo $result; // Output: 0.30000000000000004
+    ```
+    An issue will occur if you add floats and then compare the result using the equality operator (`==`) to another float. To avoid this, you can use a tolerance value (epsilon) when comparing floating-point numbers. Example
+    ```php
+    $total = 0.1 + 0.2;
+    $expected = 0.3;
+    echo $total == $expected; // Output: (false)
+    // Fix
+    $epsilon = 0.00001; // Define a small tolerance value
+    if ( abs( $total - $expected ) < $epsilon ) {
+        echo "The numbers are equal.";
+    } else {
+        echo "The numbers are not equal.";
+    }
+    ```
+    - Add a number to a string reults in PHP converting the string to a number using type juggling rules before performing the addition to yield a numerical result. If the numerical string contains a non-numeric character, PHP issues a warning and ignores the non-numeric part. Example
+    ```php
+    $num_str = "100 apples";
+    $num = 50;
+    $sum = $num_str + $num; // $num_str is converted to
+    echo $sum; // Output: 150
+    ```
+    Warning: A non-numeric value encountered in /path/to/file.php on line X
+    - If PHP fails to convert a string to a number, it will result into a fatal error. Example
+    ```php
+    $num_str = "apples 100";
+    $num = 50;
+    $sum = $num_str + $num; // Fatal error
+    ```
+    Notice that the string wasn't converted to a truthy value which is 1. Instead, it resulted into a fatal error.
+  - Subtraction (`-`) - subtracts one number from another
+    - Subtracting a float from an integer or a float from a float results in a float.
+    - Similar to addition, subtracting a float from another float is inaccurate due to the imprecision of float representation in computers.
+      Example
+    ```php
+    $x = 0.3 - 0.1;
+    echo $x; // Output: 0.19999999999999998
+    // expected output is 0.2
+    ```
+  - Multiplication (`*`) - multiplies two numbers together
+    - Multiplying a float from an integer or a float from a float results in a float.
+  - Division (`/`) - divides first number by the second number
+    - Dividing a float from an integer or a float from a float results in a float.
+    - Dividing by zero results in a fatal error.
+    - Basic Division rules still follows
+  - Modulus (`%`) - returns the remainder of a division operation
+  - Exponentiation (`**`) - raises a number to the power of another number-
+
+* PHP decides how to convert values based on the OPERATOR being used — not just the values themselves.
+
+# PHP Assignment Operators
+
+- The `=` represents the assignment operator in PHP. It is used to assign a value to a variable.
+- Basically, it assigns a values or an expression to a variable and returns the assigned value. Syntax
+
+```php
+$variable = value;
+```
+
+- On the left side of the assignment operator is the variable name while on the right side is the value or expression to be assigned to the variable.
+- When evaluating an assignment expression, PHP first evaluates the right side of the assignment operator to obtain the value to be assigned. Then, it assigns that value to the variable on the left side. Example
+
+```php
+$first_name = "John";
+$last_name = "Doe";
+$full_name = $first_name . " " . $last_name; // Concatenate first and last names
+echo $full_name; // Output: John Doe
+```
+
+Here, the assignemnt operator returns a value which is the value of the expression at the right side of the operator.
+
+- Consider this piece of code
+
+```php
+echo $full_name = 'Harry' . ' ' . 'Potter', '<br>';
+echo $full_name, '<br>';
+```
+
+First, PHP executes code from left to right. Thus, it first evaluates the expression `$full_name = 'Harry' . ' ' . 'Potter'` which results in the value `Harry Potter`. Then, it assigns this value to the variable `$full_name`. Finally, it echoes the value of `$full_name`, which is `Harry Potter`. The second `echo` statement simply outputs the value of `$full_name` again, which is still `Harry Potter`.
+
+## Arithmetic Assignment Operators
+
+- Suppose you want to add a value to an existing variable and update the variable with the new value. You can use the addition assignment operator (`+=`) to achieve this. Example
+
+```php
+i = 0
+i += 5; // Equivalent to i = i + 5
+echo i; // Output: 5
+```
+
+Thus for any arithmetic operation, you can use the corresponding arithmetic assignment operator to update the variable with the result of the operation. The following are the arithmetic assignment operators in PHP:
+
+- Addition assignment (`+=`) - adds a value to a variable and assigns the result to the variable
+- Subtraction assignment (`-=`) - subtracts a value from a variable and assigns the result to the variable
+- Multiplication assignment (`*=`) - multiplies a variable by a value and assigns the result to the variable
+- Division assignment (`/=`) - divides a variable by a value and assigns the result to the variable
+- Modulus assignment (`%=`) - calculates the modulus of a variable by a value and assigns the result to the variable
+- Exponentiation assignment (`**=`) - raises a variable to the power of a value and assigns the result to the variable
+
+* Notice that the arithmetic assignment operators perform the arithmetic operation on the current value of the variable and the specified value, then update the variable with the new result.
+* Also, in the syntax, the variable appears at the left side of the operator while the value appears at the right side. Furthermore, for each arithmetic assignment operator, the arithmetic operation is performed and comes first before the assignment operation. Below is more of a general syntax of an arithmetic assignment operator
+
+```php
+$variable operator= value;
+```
+
+- Where `operator` can be any of the arithmetic operators (+, -, \*, /, %, \*\*)
+- The arithmetic assignment operators combine the arithmetic operation and the assignment operation into a single operation, making the code more concise and easier to read.
+
+## Concatenation Assignment Operator
+
+PHP uses `.` for concatenation. To concatenate a string to an existing variable and update the variable with the new value, you can use the concatenation assignment operator (`.=`). Example
+
+```php
+$message = "Hello";
+$message .= ", World!"; // Equivalent to $message = $message . ", World!"
+echo $message; // Output: Hello, World!
+```
+
+# PHP Comparison Operators
+
+- PHP comparsion operators are used to compare two values. They return a boolean value (true or false) based on the result of the comparison.
+- The following are the comparison operators in PHP:
+  - Equal (`==`) - returns true if two values are equal without considering the type (loose comparison => type juggling) else false
+  - Identical (`===`) - returns true if two values are equal and of the same type (strict comparison) else false
+  - Not equal (`!=` or `<>`) - returns true if two values are not equal (with type juggling - loose comparison) else false
+  - Not identical (`!==`) - returns true if two values are not equal or not of the same type (strict comparison) else false
+  - Greater than (`>`) - returns true if the left value is greater than the right value else false
+  - Less than (`<`) - returns true if the left value is less than the right value else false
+  - Greater than or equal to (`>=`) - returns true if the left value is greater than or equal to the right value else false. Note that `>` comes first before `=`. If otherwise, it will be treated as the assignment operator and you will most likely get a syntax error
+  - Less than or equal to (`<=`) - returns true if the left value is less than or equal to the right value else false. Similarly, note that `<` comes first before `=`. If otherwise you will most likely get a syntax error
+
+# PHP AND Operator
+
+- The logical AND operator (denoted by `and` or `&&`. Note that by case-insensitivity, And, AND and aNd are also valid but by convention, use `and` or `&&`) is used to combine two boolean expressions. It returns true if both expressions are true, otherwise it returns false.
+- The following illustrates the result of the logical AND operator on two boolean values
+
+```
+| Expression 1 | Expression 2 | Result  |
+|--------------|--------------|---------|
+| true         | true         | true    |
+| true         | false        | false   |
+| false        | true         | false   |
+| false        | false        | false   |
+```
+
+- `and` and `&&` are the same but they differ in their precedence. The `and` operator has a lower precedence than the `&&` operator. This means that when using `and`, it is evaluated after, while `&&` is evaluated before.
+
+## Short-Circuiting
+
+- When the values of the first boolean operand is false, the second operand is not evaluated because the overall result will be false regardless of the value of the second operand since we know that `false && anything` is always false. This is known as Short-Circuiting. Thus, the `&&` or `and` operator is for Short-Circuiting logical AND operation.
+
+# PHP OR Operator
+
+- The logical OR operator (denoted by `or` or `||`. Note that by case-insensitivity, Or, OR and oR are also valid but by convention, use `or` or `||`) is used to combine two boolean expressions. It returns true if at least one of the expressions is true, otherwise it returns false.
+- The following illustrates the result of the logical OR operator on two boolean values
+
+```
+| Expression 1 | Expression 2 | Result  |
+|--------------|--------------|---------|
+| true         | true         | true    |
+| true         | false        | true    |
+| false        | true         | true    |
+| false        | false        | false   |
+```
+
+- Similarly, `or` and `||` are the same but they differ in their precedence. The `or` operator has a lower precedence than the `||` operator. This means that when using `or`, it is evaluated after, while `||` is evaluated before.
+
+## Short-Circuiting
+
+- When the values of the first boolean operand is true, the second operand is not evaluated because the overall result will be true regardless of the value of the second operand since we know that `true || anything` is always true. This is known as Short-Circuiting. Thus, the `||` or `or` operator is for Short-Circuiting logical OR operation.
+- Practically, the or operator is used in the following pattern
+
+```php
+function_name() || die("Error message");
+```
+
+Here, if `function_name()` returns false, the `die()` function is executed to terminate the script with an error message. If `function_name()` returns true, the `die()` function is not executed. Also, regardless of the return value, if the function executes successfully without errors, it returns true and the script continues to run.
+
+## The PHP OR gotchas
+
+- Consider the following code snippet
+
+```php
+$access_granted = false or true;
+var_dump( $access_granted ); // Output: bool(false)
+```
+
+Here, the output is `bool(false)` because the assignment operator (`=`) has a higher precedence than the `or` operator. The expression is evaluated as follows
+
+```php
+( $access_granted = false ) or true;
+```
+
+By this, it assigns the $access_granted variable the value false before the `or` operation is evaluated. Therefore, printing $access_granted outputs false.
+
+- To achieve the expected result, you can use parentheses to explicitly define the order of evaluation as follows
+
+```php
+$access_granted = ( false or true );
+```
+
+- This logical fuss applies to the `and` operator as well. Thus, always use parentheses when combining assignment with logical operators to avoid confusion. Or to rather play safe, use `&&` and `||` instead of `and` and `or` when combining with assignment.
+
+# PHP NOT Operator
+
+- Unlike the AND and OR operators that are binary operators (require two operands), the NOT operator (denoted by `!`) is a unary operator (requires only one operand). It is used to negate a boolean expression. It returns true if the expression is false, and false if the expression is true.
+- The following illustrates the result of the logical NOT operator on a boolean value
+
+```
+| Expression | Result  |
+|------------|---------|
+| true       | false   |
+| false      | true    |
+```
+
+# PHP Logical Operators Precedence
+
+```
+NOT ( ! ) > AND ( && ) > OR ( || ) > AND ( and ) > or ( or )
+
+```
+
+## PHP Operators Precedence
+
+```
+Arithmetic Operators (highest):
+( ) > ** > * / % > + -
+> . > << >> > >>
+Comparison Operators:
+< <= > >= == != === !== <>
+>= <=
+Assignment Operators:
+= += -= *= /= %= .= **=
+Logical Operators (lowest):
+and or
+```
+
+# PHP If Statement
+
+- The `if` statement is a conditional statement that allows you to execute a block of code only if a specified condition or a logical expression is true. The syntax of the `if` statement in PHP is as follows:
+
+```php
+if(expression) {
+    // code to be executed if the expression is true
+}
+```
+
+- Here, the `expression` is a boolean expression that evaluates to either true or false. It is executed first. If the expression is true, the code block inside the curly braces `{}` is executed. If the expression is false, the code block is skipped and the program continues with the next statement after the `if` block.
+
+* The below diagram illustrates the flow of control in an `if` statement
+  ![](php-if.png)
+
+- If you want to execute only a single statement when the condition is true, you can omit the curly braces. Example
+
+```php
+$age = 18;
+if ( $age >= 18 )
+    echo "You are an adult.";
+```
+
+But still, it’s a good practice to always use curly braces with the if statement even though it has a single statement to execute
+
+## Nesting If Statements
+
+- This can be done as follows:
+
+```php
+if ( condition1 ) {
+    // code to be executed if condition1 is true
+    if ( condition2 ) {
+        // code to be executed if condition2 is true
+    }
+}
+```
+
+## Embeded If Statements
+
+- PHP provieds an alternative syntax for embedding `if` statements within HTML code. This syntax is particularly useful when you want to mix PHP code with HTML markup. The syntax for embedded `if` statements is as follows:
+
+```php
+<?php if ( expression ): ?>
+    <!-- HTML code to be executed if the expression is true -->
+<?php endif; ?>
+```
+
+- If you require an `else` block, you can use the following syntax:
+
+```php
+<?php if ( expression ): ?>
+    <!-- HTML code to be executed if the expression is true -->
+<?php else: ?>
+    <!-- HTML code to be executed if the expression is false -->
+<?php endif; ?>
+```
+
+- If you require an `elseif` block, you can use the following syntax:
+
+```php
+<?php if ( expression1 ): ?>
+    <!-- HTML code to be executed if expression1 is true -->
+<?php elseif ( expression2 ): ?>
+    <!-- HTML code to be executed if expression2 is true -->
+<?php else: ?>
+    <!-- HTML code to be executed if both expression1 and expression2 are false -->
+<?php endif; ?>
+```
+
+- Notice that the `if`, `elseif`, `else`, and `endif` keywords are used to define the structure of the embedded `if` statement. Also, they are written in a different <?php ?> element. The colon (`:`) is used to indicate the start of the code block, and the `endif;` keyword is used to close the `if` statement.
+- After all conditions have been checked, the `endif;` keyword is used to close the `if` statement.
+
+* Avoid the mistake of using curly braces `{}` with the embedded `if` statement.
+* Also, avoid the use of the assignment operator (`=`) in place of the equality operator (`==`) in the expression of an `if` statement.
+
+# PHP If...Else Statement
+
+- Suppose you want to execute a block of code when a condition is true and another block of code when the condition is false. You can use the `if...else` statement to achieve this. The syntax of the `if...else` statement in PHP is as follows:
+
+```php
+if ( expression ) {
+    // code to be executed if the expression is true
+} else {
+    // code to be executed if the expression is false
+}
+```
+
+Here, if the expression is true, PHP executes the if block. Otherwise, it executes the else block.
+
+- The flow of control in an `if...else` statement is illustrated below
+  ![](php-if-else.png)
+
+## PHP If...else statement in HTML
+
+- Similar to the embedded `if` statement, you can also embed the `if...else` statement within HTML code using the following syntax:
+
+```php
+<?php if (expression): ?>
+// HTML code to be executed if expression is true
+<?php else:>
+// HTML code to be executed if expression is false
+<?php endif ?> //super important - ends the conditonal block
+```
+
+- Note that you don’t need to place a semicolon (;) after the endif keyword because the endif is the last statement in the PHP block. The enclosing tag ?> automatically implies a semicolon
+
+* An examples is as follows
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta />
+    <title>Login</title>
+  </head>
+  <body>
+    <?php $is_authenticated = true ?>
+    <?php if ($is_authenticated): ?>
+    <h1>Welcome, again!</h1>
+    <a href="#">Log out</a>
+    <?php else: ?>
+    <h1>Welcome! Log in to your account</h1>
+    <a href="#">Login</a>
+    <?php endif ?>
+  </body>
+</html>
+```
+
+# PHP If elseif statement
+
+- The PHP If elseif statement is particularly useful when you have multiple conditions to check. It allows you to test several conditions sequentially and execute different blocks of code based on which condition is true. The syntax of the `if...elseif...else` statement in PHP is as follows:
+
+```php
+if ( expression1 ) {
+    // code to be executed if expression1 is true
+} elseif ( expression2 ) {
+    // code to be executed if expression2 is true
+} else {
+    // code to be executed if both expression1 and expression2 are false
+}
+```
+
+This illustrates how the If elseif statement works
+![](php-if-elseif.png)
+
+- Here, one a certain if block is executed, the rest are skipped even thought their expression is `true`.
+
+## PHP if elseif alternative syntax
+
+- PHP supposrts an alternative syntax for the `elseif` statement. This involves exempting the curly braces and using colons (`:`) to indicate the start of each code block. The syntax is as follows:
+
+```php
+if (expression1):
+// code to be executed
+elseif (expression2):
+// code to be executed
+elseif (expression3):
+// code to be executed
+else:
+// code to be executed
+endif;
+```
+
+- Colons indicates the start of each `if` statements
+- Use the `endif` statement followed by a semi-colon to terminate the final conditional block (either the `else` or `elseif` block)
+- This is similar to writing `if..else` statements in Python
+- Now `elseif` and `else if` are the same in PHP. However, `elseif` is preferred as it is a single word and more concise. Also, if you decide to use the `else if` in the alternative syntax it yields an error. Example
+
+```php
+<?php
+
+$x = 10;
+$y = 20;
+
+if ($x > $y) :
+	echo 'x is greater than y';
+else if ($x < $y):
+	echo 'x is equal to y';
+else:
+	echo 'x is less than y';
+endif;
+```
+
+The above code snipett yields an error. To fix it, use `elseif` instead of `else if` - remove the space between else and if.
+
+- Use the elseif whenever possible to make your code more consistent.
+
+# PHP Ternary Operator
+
+- The ternary operator is a shorthand way of writing an `if...else` statement. It is called the ternary operator because it takes three operands: a condition, a value to return if the condition is true, and a value to return if the condition is false. The syntax of the ternary operator in PHP is similar to that in JavaScript and is as follows:
+
+```php
+condition ? value_if_true : value_if_false;
+```
+
+- Conside the following example
+
+```php
+$render = true
+?
+<<< TEXT
+<h1>Welcome!</h1>
+<a href="#">LogOut</a>
+TEXT
+:
+<<< TEXT
+<h1>Hello</h1>
+<a href="#">Login</a>
+TEXT;
+echo $render;
+```
+
+Here, if the condition `$render` is true, the value of the first block (the HTML code for welcome message and logout link) is assigned to the variable `$render`. Otherwise, the value of the second block (the HTML code for hello message and login link) is assigned to `$render`. Finally, the value of `$render` is echoed.
+
+- If an unassigned variable is used in the condition, it is treated as null which by type juggling gets converted to `null`.
+
+## The shorthand ternary operator
+
+- From PHP 5.3 onwards, you can use the shorthand ternary operator (also known as the Elvis operator) to simplify the ternary operation when the value to return if the condition is true is the same as the condition itself. The syntax of the shorthand ternary operator is as follows:
+
+```php
+$result = condition ?: value_if_false;
+```
+
+- Here is `condition` is `false`, the `$result` variable is assigned the `value_if_false`. If it is `true`, the `$result` variable is assigned the value produced by the `condition`
+- The following example uses the shorthand ternary operator to assign the value of the `$path` to the `$url` if the $path is not empty. If the `$path` is empty, the ternary operator assigns the literal string ‘`/`’ to the `$url`
+
+```php
+$path = "\about"
+
+$url = $path ?: "\"
+echo $url; // Output: \about
+```
+
+- If `$path` is an empty string, null, false, 0 or not assigned a value, the output will be `\` instead.
+
+## Chaining Ternary Operators
+
+- Tenary operators can be chained together to evaluate multiple conditions in a single expression. This is useful when you have several possible outcomes based on different conditions. In this case, each ternary operators are nested using parentheses `()`. The syntax for chaining (3) ternary operators is as follows:
+
+```php
+condition1 ? value_if_true1 :
+    ( condition2 ? value_if_true2 :
+        ( condition3 ? value_if_true3 :
+            value_if_false ) );
+```
+
+- Most times, chaining ternary operators can make your code hard to read and maintain. Thus, it is advisable to use `if...elseif...else` statements instead of chaining ternary operators when you have multiple conditions to check.
+- However, if you still want to use chained ternary operators, ensure to use parentheses and indentations to clearly define the order of evaluation and improve readability.
+
+# PHP Switch
+
+- The switch statement is particularly useful when the value of a variable needs to be compared against multiple possible values in a boolean expression. It provides a more concise and readable way to handle such scenarios compared to using multiple `if...elseif...else` statements.
+- The syntax of the switch statement in PHP is as follows:
+
+```php
+switch(expression){
+  case value1:
+    // code block 1;
+    break;
+  case value2:
+    // code block 2;
+    break;
+  default:
+    // code to be executed when expression don't fit any of the cases
+}
+```
+
+- It's alternative syntax
+
+```php
+switch(expression):
+  case value1:
+    // code block 1;
+    break;
+  case value2:
+    // code block 2;
+    break;
+  default:
+    // code to be executed when expression don't fit any of the cases
+endswitch;
+```
+
+is used when embedding PHP in HTML. Do not forget the `endswitch;` statement to terminate the switch block.
+
+- Here, the `expression` is evaluated once and its value is compared against the values specified in each `case`. If a match is found, the corresponding code block is executed. The `break` statement is used to exit the switch statement after executing a case block. If no match is found, the code block under the `default` case is executed (if provided). If the `default` case is omitted and no match is found, no code block is executed.
+
+* The flow of control in a switch statement is illustrated below
+  ![](php-switch.png)
+
+- Scenario: Suppose that you’re building a website whose users have many roles like admin, editor, author, and subscriber. You can basically use an if...elseif...else statement to check the user role and display the appropriate content as
+
+```php
+$role = 'editor';
+$message = '';
+
+if ($role === 'editor') {
+    $message = 'Welcome! You have some pending articles to edit';
+} elseif ($role === 'author') {
+    $message = 'Welcome! Do you want to publish the draft article?';
+} elseif ($role === 'admin') {
+        $message = 'Welcome, admin!';
+    } elseif ($role === 'subscriber') {
+             $message = 'Welcome! Check out some new articles';
+}
+
+echo <<<TEXT
+<h1>$message</h1>
+TEXT;
+```
+
+- Instead of using the if...elseif...else statement, you can use the switch statement to achieve the same result more concisely as follows:
+
+```php
+$role = 'editor';
+$message = '';
+
+switch ($role):
+    case 'editor':
+        $message = 'Welcome! You have some pending articles to edit';
+        break;
+    case 'author':
+        $message = 'Welcome! Do you want to publish the draft article?';
+        break;
+    case 'admin':
+         $message = 'Welcome, admin!';
+         break;
+    case 'subscriber':
+        $message = 'Welcome! Check out some new articles';
+         break;
+    default:
+        $message = 'Unauthorized!';
+    endswitch;
+```
+
+or using the standard syntax
+
+```php
+$role = 'editor';
+$message = '';
+
+switch ($role) {
+    case 'editor':
+        $message = 'Welcome! You have some pending articles to edit';
+        break;
+    case 'author':
+        $message = 'Welcome! Do you want to publish the draft article?';
+        break;
+    case 'admin':
+         $message = 'Welcome, admin!';
+         break;
+    case 'subscriber':
+        $message = 'Welcome! Check out some new articles';
+         break;
+    default:
+        $message = 'Unauthorized!';
+}
+```
+
+## Combining cases
+
+- Since PHP executes a certain case block when a match is found till it encounters a break statement, you can combine multiple cases that share the same code block. Example: Suppose both the editor and author roles share the same welcome message. You can combine their cases as follows:
+
+````php
+switch ($role):
+    case 'editor':
+    case 'author':
+        $message = 'Welcome! Do you want to publish the draft article?';
+        break;
+    case 'admin':
+         $message = 'Welcome, admin!';
+         break;
+    case 'subscriber':
+        $message = 'Welcome! Check out some new articles';
+         break;
+    default:
+        $message = 'Unauthorized!';
+    endswitch;
+
+# PHP for
++ The `for` statement allows you to execute a block of code repeatedly for a specified number of times. It is commonly used when the number of iterations is known beforehand. The syntax of the `for` statement in PHP is as follows:
+
+```php
+for (start; condition; increment) {
+
+}
+````
+
+- `start` statement is executed when the loop starts
+- `condition` is mostly a boolean expression or value. If its `true`, the code in the block gets executed
+- the `increment` expression is expressed at each iteration
+- In PHP, you can multiply multiple `start`, `condition` and `increment` expressions by separating them with commas. Example
+
+```php
+for ( $i = 0, $j = 10; $i < 10, $j > 0; $i++, $j-- ) {
+    echo "i: $i, j: $j\n";
+}
+```
+
+This is mostly when you want to control multiple variables in a single `for` loop.
+
+- The following illustrates the flow of control in a `for` loop
+  ![](php-for.png)
+- Also, you can leave any of the three expressions (`start`, `condition`, `increment`) empty. If this happens, use the `break` statement to exit or terminate the loop at some point Example
+
+```php
+for(;;) {
+    // infinite loop
+    // use break statement to exit the loop
+    if ( some_condition ) {
+        break;
+    }
+}
+```
+
+- Notice that even though `condition`, `start` and `increment` expressions are optional, the semicolons (`;`) separating them are mandatory.
+- Also, don't forget to use the `break` statement to exit the loop when the `condition` expression is omitted; otherwise, it will result in an infinite loop.
+- The increment operator `++` can be used rather than explicitly adding 1 to a variable. Example
+
+```php
+for ( $i = 0; $i < 10; $i++ ) {
+    echo "i: $i\n";
+}
+```
+
+instead of
+
+```php
+for ( $i = 0; $i < 10; $i += 1 ) {
+    echo "i: $i\n";
+}
+```
+
+# PHP while
++  The `while`statement executes a block of code as long as a specified condition (a boolean) is true. It is commonly used when the number of iterations is not known beforehand and depends on a certain condition being met. The syntax of the `while` statement in PHP is as follows:
+
+```php
+while ( condition ) {
+    // code to be executed
+}
+``` 
++ How it works
+  + The `condition` is evaluated first. If it is true, the code block inside the curly braces `{}` is executed. After executing the code block, the `condition` is evaluated again. This process continues until the `condition` evaluates to false. When the `condition` is false, the loop terminates, and the program continues with the next statement after the `while` block.
++ Since PHP evaluaates `condition` before executing the code block, the `while` loop is known as an Pretest loop.
++ The `while` loop doesn't require curly braces `{}` if it contains only a single statement. Example
+
+```php
+while (condition)
+    // single statement to be executed
+```
+However, it's a good practice to always use curly braces `{}` with the `while` loop, even if it has a single statement to execute, to improve code readability and maintainability.
++ The following illustrates the flow of control in a `while` loop
+  ![](php-while.png)
+## An alternative syntax for `while` loop
++ An alternative syntax for the `while` loop is provided in PHP, which is particularly useful when embedding PHP code within HTML. This syntax uses a colon (`:`) to indicate the start of the loop block and the `endwhile;` statement to terminate the loop. The syntax is as follows:
+
+```php
+while ( condition ):
+    // code to be executed
+endwhile;
+```
+
+
+# PHP do...while
++ The `do...while` statement is similar to the `while` statement, but with a key difference: the code block is executed at least once before the condition is evaluated. This means that the code block will always run at least one time, regardless of whether the condition is true or false. The syntax of the `do...while` statement in PHP is as follows:
+
+```php
+do {
+  // code to be executed
+} while(expression)
+```
+Here, the code is executed first before the `expression` is evaluated. If the `expression` evaluates to true, the code block is executed again. This process continues until the `expression` evaluates to false. When the `expression` is false, the loop terminates, and the program continues with the next statement after the `do...while` block.
++ The illustration of the flow of control in a `do...while` loop is as follows
+  ![](php-do-while.png)
+
+## do...while vs while
++ PHP executes the code in the `do...while` loop at least once, even if the condition is false from the beginning. In contrast, the `while` loop may not execute the code block at all if the condition is false initially.
++ The expression is evaluted at the end of each iteration in the `do...while` loop, while it is evaluated at the beginning of each iteration in the `while` loop.
