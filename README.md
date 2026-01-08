@@ -1521,27 +1521,33 @@ for ( $i = 0; $i < 10; $i += 1 ) {
 ```
 
 # PHP while
-+  The `while`statement executes a block of code as long as a specified condition (a boolean) is true. It is commonly used when the number of iterations is not known beforehand and depends on a certain condition being met. The syntax of the `while` statement in PHP is as follows:
+
+- The `while`statement executes a block of code as long as a specified condition (a boolean) is true. It is commonly used when the number of iterations is not known beforehand and depends on a certain condition being met. The syntax of the `while` statement in PHP is as follows:
 
 ```php
 while ( condition ) {
     // code to be executed
 }
-``` 
-+ How it works
-  + The `condition` is evaluated first. If it is true, the code block inside the curly braces `{}` is executed. After executing the code block, the `condition` is evaluated again. This process continues until the `condition` evaluates to false. When the `condition` is false, the loop terminates, and the program continues with the next statement after the `while` block.
-+ Since PHP evaluaates `condition` before executing the code block, the `while` loop is known as an Pretest loop.
-+ The `while` loop doesn't require curly braces `{}` if it contains only a single statement. Example
+```
+
+- How it works
+  - The `condition` is evaluated first. If it is true, the code block inside the curly braces `{}` is executed. After executing the code block, the `condition` is evaluated again. This process continues until the `condition` evaluates to false. When the `condition` is false, the loop terminates, and the program continues with the next statement after the `while` block.
+- Since PHP evaluaates `condition` before executing the code block, the `while` loop is known as an Pretest loop.
+- The `while` loop doesn't require curly braces `{}` if it contains only a single statement. Example
 
 ```php
 while (condition)
     // single statement to be executed
 ```
+
 However, it's a good practice to always use curly braces `{}` with the `while` loop, even if it has a single statement to execute, to improve code readability and maintainability.
-+ The following illustrates the flow of control in a `while` loop
+
+- The following illustrates the flow of control in a `while` loop
   ![](php-while.png)
+
 ## An alternative syntax for `while` loop
-+ An alternative syntax for the `while` loop is provided in PHP, which is particularly useful when embedding PHP code within HTML. This syntax uses a colon (`:`) to indicate the start of the loop block and the `endwhile;` statement to terminate the loop. The syntax is as follows:
+
+- An alternative syntax for the `while` loop is provided in PHP, which is particularly useful when embedding PHP code within HTML. This syntax uses a colon (`:`) to indicate the start of the loop block and the `endwhile;` statement to terminate the loop. The syntax is as follows:
 
 ```php
 while ( condition ):
@@ -1549,19 +1555,535 @@ while ( condition ):
 endwhile;
 ```
 
-
 # PHP do...while
-+ The `do...while` statement is similar to the `while` statement, but with a key difference: the code block is executed at least once before the condition is evaluated. This means that the code block will always run at least one time, regardless of whether the condition is true or false. The syntax of the `do...while` statement in PHP is as follows:
+
+- The `do...while` statement is similar to the `while` statement, but with a key difference: the code block is executed at least once before the condition is evaluated. This means that the code block will always run at least one time, regardless of whether the condition is true or false. The syntax of the `do...while` statement in PHP is as follows:
 
 ```php
 do {
   // code to be executed
-} while(expression)
+} while(expression);
 ```
+
 Here, the code is executed first before the `expression` is evaluated. If the `expression` evaluates to true, the code block is executed again. This process continues until the `expression` evaluates to false. When the `expression` is false, the loop terminates, and the program continues with the next statement after the `do...while` block.
-+ The illustration of the flow of control in a `do...while` loop is as follows
+
+- The semi-colon (`;`) after the `while` expression is mandatory in a `do...while` loop.
+- The illustration of the flow of control in a `do...while` loop is as follows
   ![](php-do-while.png)
 
 ## do...while vs while
-+ PHP executes the code in the `do...while` loop at least once, even if the condition is false from the beginning. In contrast, the `while` loop may not execute the code block at all if the condition is false initially.
-+ The expression is evaluted at the end of each iteration in the `do...while` loop, while it is evaluated at the beginning of each iteration in the `while` loop.
+
+- PHP executes the code in the `do...while` loop at least once, even if the condition is false from the beginning. In contrast, the `while` loop may not execute the code block at all if the condition is false initially.
+- The expression is evaluted at the end of each iteration in the `do...while` loop, while it is evaluated at the beginning of each iteration in the `while` loop.
+
+# PHP foreach
+
+- The `for...each` statement is specifically designed for iterating over elements in arrays or objects. It provides a convenient way to loop through each element in an array or each property in an object without the need for manual indexing.
+- This illustrates the flow of control in a `foreach` loop
+  ![](php-foreach.png)
+
+## PHP foreach with indexed arrays
+
+Syntax:
+
+```php
+foreach ( $array_name as $element ) {
+    // code to be executed
+}
+```
+
+- Here, if PHP encounters a `foreach` loop, it assigns the first element of the array to the variable `$element` and executes the code block. After executing the code block, it assigns the next element of the array to `$element` and executes the code block again. This process continues until all elements in the array have been processed. Then at the last element, the loop terminates, and the program continues with the next statement after the `foreach` block.
+
+## PHP foreach with associative arrays
+
+- Syntax:
+
+```php
+foreach($array_name as $key => $value) {
+  //code to be executed
+}
+```
+
+- Here, when PHP executes the `foreach` loop, it assigns the first key of the associative array to the variable `$key` and its corresponding value to the variable `$value`. Then, it executes the code block. After executing the code block, it assigns the next key to `$key` and its corresponding value to `$value`, and executes the code block again. This process continues until all key-value pairs in the associative array have been processed. Finally, when the last key-value pair is processed, the loop terminates, and the program continues with the next statement after the `foreach` block.
+
+# PHP `break` statement
+
+- The `break` statement terminates the execution of the `for`, `do...while`, `while`, and `switch` statement
+- Practically, we use the `break` statement alongside the `if` statement to specify the condition for the termination of the loop
+- Also, by default, the `break` statement terminates only the innermost loop or switch statement in which it is placed.
+
+```php
+if (condition){
+  break
+}
+```
+
+## PHP `break` statement with nested loops
+
+- When using nested loops (a loop inside another loop), the `break` statement only terminates the innermost loop in which it is placed. The outer loop continues to execute as normal. Example
+
+```php
+for ($i = 1; $i <= 3; $i++) {
+    echo "Outer loop iteration: $i\n";
+    for ($j = 1; $j <= 5; $j++) {
+        if ($j == 3) {
+            break; // This will break only the inner loop
+        }
+        echo "  Inner loop iteration: $j\n";
+    }
+}
+```
+
+- In this example, when `$j` equals 3, the `break` statement terminates the inner loop. The outer loop continues to the next iteration.
+
+* Now, to break out the both the outer and inner loops, you can specify the number of levels to break out of by providing an optional numeric argument to the `break` statement. Example
+
+```php
+for ($i = 1; $i <= 3; $i++) {
+    echo "Outer loop iteration: $i\n";
+    for ($j = 1; $j <= 5; $j++) {
+        if ($j == 3) {
+            break 2; // This will break out of both the inner and outer loops
+        }
+        echo "  Inner loop iteration: $j\n";
+    }
+}
+```
+
+- Here, the `break 2;` statement terminates both the inner and outer loops when `$j` equals 3.
+- Basically, the numeric argument specifies how many nested levels of loops to break out of. If no argument is provided, it defaults to 1, meaning only the innermost loop is terminated.
+
+* Consider this a similar example with switch statement
+
+```php
+$grade = 'B';
+while (true) {
+  switch ($grade) {
+      case 'A':
+          echo "Excellent!";
+          break 2; // This will break out of the switch statement and any enclosing loop (if present) - here, the while loop
+      case 'B':
+          echo "Good job!";
+          break;
+      case 'C':
+          echo "You passed.";
+          break;
+      default:
+          echo "Invalid grade.";
+  }
+}
+```
+
+- Consider another similar example with nested switch statements
+
+```php
+$level1 = 'A';
+$level2 = 'B';
+switch ($level1) {
+    case 'A':
+        echo "Level 1: A\n";
+        switch ($level2) {
+            case 'A':
+                echo "Level 2: A\n";
+                break 2; // This will break out of both switch statements
+            case 'B':
+                echo "Level 2: B\n";
+                break;
+            default:
+                echo "Level 2: Invalid\n";
+        }
+        break;
+    case 'B':
+        echo "Level 1: B\n";
+        break;
+    default:
+        echo "Level 1: Invalid\n";
+}
+```
+
+- Consider another example with nested loops
+
+```php
+for ($i = 0; $i < 6; $i++) {
+    for ($j = 0; $j < 4; $j++) {
+        if ($j === 3 || $i === 3) {
+            echo "Coordinate containing 3 has been found! Exiting inner loop now...<br>";
+            break;
+        }
+
+        echo "($i,$j) <br>";
+    }
+}
+```
+
+# PHP `continue` Statement
+
+- The `continue` statement is used to skip the current iteration of a loop and move to the next iteration. It is commonly used when you want to skip certain iterations based on a specific condition.
+
+* It is used to skip all remaining statement that follow it in the current iteration of a loop and proceed to the next iteration of the loop.
+* The syntax of the `continue` statement in PHP is as follows:
+
+```php
+if (condition) {
+    continue;
+}
+```
+
+# PHP Functions
+
+- A function is a named block of code that is reusable and performs a specific task. Functions are used to organize code into reusable modules, making it easier to read, maintain, and debug. In PHP, functions are defined using the `function` keyword followed by the function name and parentheses `()`. The syntax for defining a function in PHP is as follows:
+
+```php
+function function_name() {
+    // code to be executed
+}
+```
+
+- In this syntax:
+  - First, specify the function name followed by the function keyword. The function’s name must start with a letter or underscore followed by zero or more letters, underscores, and digits.
+  - Second, define one or more statements inside the function body. The function body starts with the `{` and ends with `}`.
+- To call or invoke a function, you simply use the function name followed by parentheses `()`. That is
+
+```php
+function_name();
+```
+
+- This is only appropriate when a function has no parameter
+
+## PHP Function Parameters
+
+- Practically, functions often require input values to perform their tasks. These input values are called parameters (or arguments). You can define parameters in the function definition by specifying them inside the parentheses `()`. Example
+
+```php
+function function_name($parameter_1, $parameter_2, ...) {
+
+}
+```
+
+- In the function body, you can use the parameters as variables to perform operations or calculations. When calling the function, you provide the actual values (arguments) for the parameters. In this function body, paramters are called local variables because they are only accessible within the function.
+- Scenario: Suppose you want to create a function that calculates the sum of two numbers. You can define the function with two parameters as follows:
+
+```php
+function sum ($x, $y) {
+  echo $x + $y;
+}
+```
+
+- Now, when calling a function with a parameter, you simply need to specify an argument which is more of the actual value to be worked on with the the function body. To call the above `sum` function, we do this
+
+```php
+sum(1, 2); //Output: 3
+```
+
+- In the above code, the value of `1` is assigned to the parameter `$x`, and the value of `2` is assigned to the parameter `$y`. The function then calculates the sum of `$x` and `$y` and echoes the result.
+
+## Parameters vs Arguments
+
+- Parameters are simply the local variables (or dummy variables) specified when defining a function.
+- Arguments, on the other hand, are the actual values passed to the function when calling it.
+
+## PHP `return` Statement
+
+- Basically, functions can return values. To do this, we use the `return` statement. The `return` statement is used to specify the value that a function should return to the caller. When a function encounters a `return` statement, it immediately exits the function and sends the specified value back to the point where the function was called.
+- This value can be literarily any valid data type in PHP, such as integers, strings, arrays, objects, etc. It can even be an expression that evaluates to a value.
+
+## HTML Code inside a function
+
+- You can include HTML code inside a PHP function using echo or heredoc syntax. Example using echo
+
+```php
+function displayGreeting($name) {
+    echo "<h1>Hello, $name!</h1>";
+    echo "<p>Welcome to our website.</p>";
+}
+```
+
+- Or you can follow this syntax
+
+```php
+<?php function function_name ?>
+  <!-- HTML code here -->
+<?php endfunction ?>
+```
+
+- The above can be written in PHP as follows:
+
+```php
+<?php
+function displayGreeting($name) { ?>
+  // HTML code here
+<?php } ?>
+```
+
+# PHP Function Parameters
+
+- Functions can have zero or more parameters
+- In case where your function has multiple parameters, separate them with commas `,`
+- The `concat()` function is used to concatenate two strings. It takes two parameters: `$str1` and `$str2`. The function returns the concatenated result of the two strings. Specifying 1 error brings about an error
+- It's a good argument to list arguments vertically when the arguments list becomes long for better readability
+
+## Trailing Comma in Function Parameters
+
+- From PHP 8 onwards, you can include a trailing comma after the last parameter in a function definition. This means that you can add a comma after the last parameter without causing a syntax error. Example
+
+```php
+function exampleFunction($param1, $param2, $param3,) {
+    // Function body
+}
+```
+
+- The trailing comma is optional and does not affect the functionality of the function. However, it can be useful when adding new parameters to the function in the future, as it allows you to add new parameters without modifying the previous line.
+- Similarly, from PHP 7.3 onward, you can also use trailing commas in function calls. Example
+
+```php
+exampleFunction('value1', 'value2', 'value3',);
+```
+
+## Passing Arguments by Value
+
+- When a variable is passed as an argument to a function, the value of the variable is copied to the corresponding parameter in the function. This means that any changes made to the parameter inside the function do not affect the original variable outside the function. This is known as passing by value.
+
+## Passing Arguments by Reference
+
+- When a variable is passed as an argument to a function by reference, the function receives a reference (or pointer) to the original variable instead of a copy of its value. This means that any changes made to the parameter inside the function will directly affect the original variable outside the function. To pass an argument by reference, you need to prefix the parameter name with an ampersand (`&`) in the function definition. Example
+
+```php
+function incrementByReference( &$number ) {
+    $number++;
+}
+$value = 5;
+incrementByReference( $value );
+echo $value; // Output: 6
+```
+
+- Here, since we passed the `$value` variable by reference using the `&` symbol, any changes made to the `$number` parameter inside the `incrementByReference` function directly affect the original `$value` variable outside the function. Thus, after calling the function, the value of `$value` is incremented to `6`. But if the paramter wasn't assigned a value by reference, `$value` will still be unchanged and the output would have been `5`
+- So reassigning the parameter inside the function will also change the original variable outside the function.
+- What `&` is neccesarily doing is making the parameter an alias to the argument passed in. Thus, any changes made to the parameter inside the function will directly affect the original variable outside the function.
+
+# PHP Default Function Parameters
+
+- In PHP, you can define default values for function parameters. This means that if a caller does not provide a value for a parameter when calling the function, the default value will be used instead. To define a default value for a parameter, you simply assign a value to the parameter in the function definition. Example
+
+```php
+function function_name($param1 = default_value, $param2 = default_value, ...) {
+
+}
+```
+
+- This is practically useful when you already know that a certain parameter will mostly have a specific value. Thus, you can set that value as the default value for the parameter.
+- Default Parameters must be at the end
+
+## Default Arguments
+
+- Default arguments are the actual values assigned to the parameters when defining a function with default parameters. These default arguments are used when the caller does not provide a (default) value for the corresponding parameter when calling the function.
+
+* Thus a default argument exists when a function parameter has a default value
+
+# PHP Named Arguments
+
+- The named arguments feature in PHP 8.0 upward allows you to pass an argument to a function based on the parameter name, rather than the parameter position. This means that you can specify the name of the parameter when calling a function, making it easier to understand which argument corresponds to which parameter, especially when dealing with functions that have many parameters or optional parameters.
+- The syntax for using named arguments is as follows:
+
+```php
+function function_name($param1, $param2, $param3...) {
+    // function body
+}
+
+function_name(param2: value2, param1: value1, param3: value3);
+```
+
+- Notice that when referencing the parameters by name, the order of the arguments does not matter. You can specify the arguments in any order you like. Also, the `$` sign is omitted and colons (`:`) are used to separate the parameter names from their corresponding values.
+
+## Mixing Positional and Named Arguments
+
+- PHP allows you to mix positional and named arguments when calling a function. However, there are some rules to follow:
+
+* Positional arguments must come before named arguments. This means that if you are using both positional and named arguments in a function call, all positional arguments must be specified first, followed by the named arguments else we get an error.
+
+# PHP Variable Scope
+
+- The scope of a variable determines which part of the code can access or modify that variable. In PHP, there are 4 types of variable scopes:
+  - Local Scope
+  - Global Scope
+  - Static Scope
+  - Function Parameter Scope
+
+## Local Variable
+
+- When you defined a variable within the body of a function, that variable is said to have a local scope. This means that the variable can only be accessed and modified within the function where it is defined - it cannot be accessed outside that function. Example
+
+```php
+function greet() {
+    $message = "Hello, World!"; // Local variable
+    echo $message;
+}
+
+echo $message; // This will result in an error because $message is not defined in the global scope
+```
+
+- Also, Local scoped variables only exist during the execution of the function. Once the function completes its execution, the local variables are destroyed and their values are lost.
+
+## Global Variable
+
+- When you define a variable outside of any function, that variable is said to have a global scope. This means that the variable can be accessed and modified from anywhere in the script, including inside functions.
+- Now, for a global variable to be accessible inside a function, you need to use the `global` keyword to import the global variable into the local scope of the function. Example
+
+```php
+$message = "Hello, World!"; // Global variable
+function greet() {
+    global $message; // Accessing the global variable
+    echo $message;
+}
+greet(); // Output: Hello, World!
+```
+
+- It is important to note that using global variables can lead to code that is harder to read and maintain, as it can create dependencies between different parts of the code. Therefore, it is generally recommended to minimize the use of global variables and instead pass data to functions through parameters whenever possible. It is a bad practice!
+
+## Superglobal Variables
+
+- These are basiclally bult-in global variables in PHP that are always accessible, regardless of scope.
+- They provide information about the PHP script's environment, server, and user input.
+- Some common superglobal variables include `$_GET`, `$_POST`, `$_SESSION`, `$_COOKIE`, and `$_SERVER`.
+
+* Below shows a table of some common superglobal variables in PHP and their meanings:
+  - $GLOBALS | An associative array containing references to all global variables in the script. The variable names are the keys of the array.
+  - $\_SERVER | An associative array containing information about the server and execution environment.
+  - $\_GET | An associative array of variables passed to the current script via the URL parameters (query string). Basically used to collect data sent in the URL.It returns data from a GET request.
+  - $\_POST | An associative array of variables passed to the current script via the HTTP POST method. It is used to collect data sent in a POST request.
+  - $\_COOKIE | An associative array of variables passed to the current script via HTTP cookies. It returns data from an HTTP cookies.
+  - $\_FILES | An associative array of items uploaded to the current script via the HTTP POST method. It returns data from a POST file upload.
+  - $\_ENV | An associative array of variables passed to the current script via the environment method.
+  - $_REQUEST | An associative array that contains the contents of `$\_GET`, `$_POST`, and `$\_COOKIE`. It is used to collect data after submitting an HTML form.
+  - $\_SESSION | An associative array containing session variables available to the current script. It is used to store and retrieve data across multiple pages during a user's session.
+
+## Static Variables
+
+- A Static variable is a local variable that retains its value between function calls. This means that the value of the static variable persists even after the function has completed its execution, and it can be accessed and modified in subsequent calls to the same function.
+- To declare a static variable in PHP, you use the `static` keyword before the variable name inside the function. Example
+
+```php
+function counter() {
+    static $count = 0; // Static variable
+    $count++;
+    echo $count;
+}
+counter(); // Output: 1
+counter(); // Output: 2
+counter(); // Output: 3
+```
+
+- In this example, the `$count` variable is declared as static inside the `counter` function. Each time the function is called, the value of `$count` is incremented by 1 and echoed. Since `$count` is static, it retains its value between function calls, resulting in the output of `1`, `2`, and `3` on successive calls to the `counter` function.
+
+## Function Parameter Scope
+
+- Function Parameter Scope refers to the scope of variables that are defined as parameters in a function. These parameters are local to the function and can only be accessed and modified within the function body. Example
+
+```php
+function greet($name) { // $name is a parameter with local scope
+    echo "Hello, $name!";
+}
+greet("Alice"); // Output: Hello, Alice!
+greet("Bob");   // Output: Hello, Bob!
+```
+
+# PHP Type Hints
+
+- Adding a string and an integer together results in an error
+- By type hints you can enforce the types for function parameters and return values.
+- Type hints help catch type-related errors early in the development process, making your code more robust and easier to maintain.
+- It is mostly used in function definitions to specify the expected data types of parameters and return values.
+- To add type hints to function parameters, you simply specify the desired type before the parameter name in the function definition. That is
+
+```php
+function function_name( type $parameter_1, type $parameter_2, ...) {
+
+}
+```
+
+where
+
+- `type` can be any valid data type in PHP, such as `int`, `float`, `string`, `array`, `bool`, `callable`, `iterable`, `object`, or a class/interface name.
+- `parameter_1`, `parameter_2`, ... are the names of the parameters.
+- By this, PHP will enforce that the arguments passed to the function match the specified types. If an argument of a different type (that cannot be coerced) is passed, a `TypeError` will be thrown.
+
+## PHP Type Hints for Return Values
+
+- To specify the return type of a function, you add a colon (`:`) followed by the desired return type after the closing parenthesis of the parameter list in the function definition. That is
+
+```php
+function function_name( type $parameter_1, type $parameter_2, ... ) : return_type {
+
+}
+```
+
+where
+
+- `return_type` can be any valid data type in PHP, such as `int`, `float`, `string`, `array`, `bool`, `callable`, `iterable`, `object`, or a class/interface name.
+- By this, PHP will enforce that the value returned by the function matches the specified return type. If a value of a different type (that cannot be coerced) is returned, a `TypeError` will be thrown.
++ From PHP 7.0 onward, if a function does not return any value, you can specify the return type as `void`. This indicates that the function is not expected to return any value. Example
+
+```php
+function function_name( type $parameter_1, type $parameter_2, ... ) : void {
+
+}
+```
+
+## The Union Type
++ From PHP 8.0 onward, if a function return a value that can be of multiple types, you can specify a union type for the return type. This is done by separating the possible types with a pipe (`|`) symbol. Example
+
+```php
+function function_name( type $parameter_1, type $parameter_2, ... ) : type1 | type2 | type3 {
+
+}
+```
+Thus, the type of value returned depends on the type of arguments passed to the function.
+
+## The mixed type
++ From PHP 8.0 onward, you can use the `mixed` type hint to indicate that a function parameter or return value can be of any type. This is useful when you want to allow flexibility in the types of values that can be passed to or returned from a function. The `mixed` type is equivalent to
+```
+object|resource|array|string|int|float|bool|null
+```
+
+## The nullable type
++ The following defines a function that converts a string to uppercase.
+```php
+function toUpperCase( string $input ) : string 
+{
+    return strtoupper($input);
+}
+```
++ In the above code, if you pass null as an argument, you'll get a TypeError because the function expects a string argument. To allow null values, you can use the nullable type hint by prefixing the (parameter and return) type with a question mark (`?`). Example
+
+```php
+function toUpperCase( ?string $input ) : ?string 
+{
+    if ( $input === null ) {
+        return null;
+    }
+    return strtoupper( $input );
+}
+```
+
++ Generally, for any defined function of a certain type(s)
+```php
+function function_name( type $parameter_1, type $parameter_2, ... ) : return_type {
+
+}
+```
+you can make it nullable as follows
+```php
+function function_name (?type $parameter_1, ?type $parameter_2, ...): ?return_type {
+  if ($parameter_1 != null) {
+    return $paramter_1;
+  }
+
+  return null;
+}
+```
++ In the above general snipett, we add the `?` to the type of the parameter. The ?return_type allows you to pass the return type of the function argument or null.
++ The nullable type was introduced in PHP 7.1
++ Note that the `mixed` type has already included the `null` type for return values.So there is no need to do this
+```php
+?mixed
+```
+Doing this will result in an error.

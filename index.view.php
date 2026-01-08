@@ -24,13 +24,13 @@
             <h1>You are unauthorized to view this page!</h1>
         <?php endif ?> -->
 
-        <?php 
+        <!-- <?php 
         $sum = 0;
         $j = 1; 
         ?>
         <?php while ($j < 10): ?>
             <h1><?php echo $j ?></h1>
         <?php $j++ ?>
-        <?php endwhile; ?>
+        <?php endwhile; ?> -->
     </body>
 </html>
