@@ -1,4 +1,5 @@
 <?php
+// declare(strict_types = 1);
 // $person = ['name' => 'Kylian','occupation' => 'Footballer', 'age' => 35, 'bmi' => 13.5, 'is_active' => true]; //Associated Array
 
 // $he = 'Bob';
@@ -331,3 +332,128 @@ function add (int $x, int $y): mixed
 }
 
 echo add(1, 2.1);
+
+// echo '<pre>';
+// echo var_dump($capitals);
+// echo '<pre>';
+
+unset($capitals['Japan']);
+
+echo '<br>';
+print_r($capitals);
+echo '<br>';
+
+array_splice($capitals, 1, 2);
+
+echo '<br>';
+print_r($capitals);
+echo '<br>';
+
+$numbers = [1, 4, 3];
+print_r($numbers);
+
+usort($numbers, function($x, $y) {
+    return $x <=> $y;
+});
+
+echo '<br>';
+print_r($numbers);
+echo '<br>';
+
+echo '<br>';
+echo array_unshift($numbers, 34, 7);
+echo '<br>';
+
+echo '<br>';
+print_r($numbers);
+echo '<br>';
+
+$person = [
+    'name'=> 'Buddy',
+    'age'=> 35,
+    'occupation' => 'Waiter'
+];
+
+$person = $person + ['expenses' => '278 USD'];
+
+echo '<br>';
+print_r($person);
+
+echo array_pop($person), '<br>';
+echo array_pop($person), '<br>';
+
+echo '<br>';
+print_r(array_keys($person));
+echo '<br>';
+
+$numbers = [0, 1, 3, '3'];
+echo '<br>';
+print_r (array_keys($numbers, 3));
+echo '<br>';
+
+$device = [
+    'on' => true,
+    'off' => null
+];
+
+var_dump(array_key_exists('off', $device));
+var_dump(isset($device['off']));
+
+var_dump(in_array(false, $device));
+
+function smash(array $words): string {
+  if (count($words) > 1) {
+    $concat = "";
+    foreach($words as $word) {
+        if (array_search($word, $words) === (count($words) -1)) {
+            $concat .= ($word);
+        } else {
+            $concat .= ($word . " ");
+        }
+    }
+
+    return $concat;
+  } elseif (count($words) === 1) {
+    return $words[0];
+  } elseif (count($words) === 0) {
+    return '';
+  }
+}
+
+echo '<pre>';
+echo smash(['Hello', "World", 'Anticipate']);
+echo '<pre>';
+
+function solution($a, $x) {
+  foreach($a as $element) {
+    if($element == $x) {
+        return true;
+    }
+  }
+
+  return false;
+}
+
+echo '<pre>';
+echo var_dump(solution([1, 2, 3], 2));
+echo '<pre>';
+
+function points(array $games): int {
+    $point = 0;
+    foreach($games as $score) {
+      $x_score = $score[0];
+      $y_score = $score[-1];
+      
+      if($x_score > $y_score) {
+        $point += 3;
+      } elseif($x_score > $y_score) {
+        $point += 0;
+      } elseif($x_score == $y_score) {
+        $point += 1;
+      }
+    }
+    
+  return $point;
+}
+
+echo points(["0:1", "0:2", "0:1",]);

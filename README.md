@@ -1578,7 +1578,7 @@ Here, the code is executed first before the `expression` is evaluated. If the `e
 
 # PHP foreach
 
-- The `for...each` statement is specifically designed for iterating over elements in arrays or objects. It provides a convenient way to loop through each element in an array or each property in an object without the need for manual indexing.
+- The `foreach` statement is specifically designed for iterating over elements in arrays or objects. It provides a convenient way to loop through each element in an array or each property in an object without the need for manual indexing.
 - This illustrates the flow of control in a `foreach` loop
   ![](php-foreach.png)
 
@@ -2020,7 +2020,8 @@ where
 
 - `return_type` can be any valid data type in PHP, such as `int`, `float`, `string`, `array`, `bool`, `callable`, `iterable`, `object`, or a class/interface name.
 - By this, PHP will enforce that the value returned by the function matches the specified return type. If a value of a different type (that cannot be coerced) is returned, a `TypeError` will be thrown.
-+ From PHP 7.0 onward, if a function does not return any value, you can specify the return type as `void`. This indicates that the function is not expected to return any value. Example
+
+* From PHP 7.0 onward, if a function does not return any value, you can specify the return type as `void`. This indicates that the function is not expected to return any value. Example
 
 ```php
 function function_name( type $parameter_1, type $parameter_2, ... ) : void {
@@ -2029,33 +2030,40 @@ function function_name( type $parameter_1, type $parameter_2, ... ) : void {
 ```
 
 ## The Union Type
-+ From PHP 8.0 onward, if a function return a value that can be of multiple types, you can specify a union type for the return type. This is done by separating the possible types with a pipe (`|`) symbol. Example
+
+- From PHP 8.0 onward, if a function return a value that can be of multiple types, you can specify a union type for the return type. This is done by separating the possible types with a pipe (`|`) symbol. Example
 
 ```php
 function function_name( type $parameter_1, type $parameter_2, ... ) : type1 | type2 | type3 {
 
 }
 ```
+
 Thus, the type of value returned depends on the type of arguments passed to the function.
 
 ## The mixed type
-+ From PHP 8.0 onward, you can use the `mixed` type hint to indicate that a function parameter or return value can be of any type. This is useful when you want to allow flexibility in the types of values that can be passed to or returned from a function. The `mixed` type is equivalent to
+
+- From PHP 8.0 onward, you can use the `mixed` type hint to indicate that a function parameter or return value can be of any type. This is useful when you want to allow flexibility in the types of values that can be passed to or returned from a function. The `mixed` type is equivalent to
+
 ```
 object|resource|array|string|int|float|bool|null
 ```
 
 ## The nullable type
-+ The following defines a function that converts a string to uppercase.
+
+- The following defines a function that converts a string to uppercase.
+
 ```php
-function toUpperCase( string $input ) : string 
+function toUpperCase( string $input ) : string
 {
     return strtoupper($input);
 }
 ```
-+ In the above code, if you pass null as an argument, you'll get a TypeError because the function expects a string argument. To allow null values, you can use the nullable type hint by prefixing the (parameter and return) type with a question mark (`?`). Example
+
+- In the above code, if you pass null as an argument, you'll get a TypeError because the function expects a string argument. To allow null values, you can use the nullable type hint by prefixing the (parameter and return) type with a question mark (`?`). Example
 
 ```php
-function toUpperCase( ?string $input ) : ?string 
+function toUpperCase( ?string $input ) : ?string
 {
     if ( $input === null ) {
         return null;
@@ -2064,13 +2072,16 @@ function toUpperCase( ?string $input ) : ?string
 }
 ```
 
-+ Generally, for any defined function of a certain type(s)
+- Generally, for any defined function of a certain type(s)
+
 ```php
 function function_name( type $parameter_1, type $parameter_2, ... ) : return_type {
 
 }
 ```
+
 you can make it nullable as follows
+
 ```php
 function function_name (?type $parameter_1, ?type $parameter_2, ...): ?return_type {
   if ($parameter_1 != null) {
@@ -2080,10 +2091,554 @@ function function_name (?type $parameter_1, ?type $parameter_2, ...): ?return_ty
   return null;
 }
 ```
-+ In the above general snipett, we add the `?` to the type of the parameter. The ?return_type allows you to pass the return type of the function argument or null.
-+ The nullable type was introduced in PHP 7.1
-+ Note that the `mixed` type has already included the `null` type for return values.So there is no need to do this
+
+- In the above general snipett, we add the `?` to the type of the parameter. The ?return_type allows you to pass the return type of the function argument or null.
+- The nullable type was introduced in PHP 7.1
+- Note that the `mixed` type has already included the `null` type for return values.So there is no need to do this
+
 ```php
 ?mixed
 ```
+
 Doing this will result in an error.
+
+# PHP Stict Types
+
+- To enable strict typing in a PHP file, you can use the `declare(strict_types=1);` directive at the very beginning of the file, before any other code. This directive tells PHP to enforce strict type checking for function calls and return values within that file.
+- Adding strict types means that PHP will not perform type coercion when passing arguments to functions or returning values from functions. Instead, it will throw a `TypeError` if the types do not match exactly. Example
+
+```php
+declare(strict_types=1);
+function add(int $a, int $b): int {
+    return $a + $b;
+}
+echo add(1, 2); // Output: 3
+echo add(1.5, 2.5); // Throws TypeError
+```
+
+## PHP Strict Types: the Special case
+
+- PHP has a special case when the target type is `float` and the argument type is `int`. In this case, PHP allows the conversion from `int` to `float` even in strict mode. This means that if a function expects a `float` parameter and you pass an `int` argument, PHP will automatically convert the `int` to a `float` without throwing a `TypeError`. Example
+
+```php
+declare(strict_types=1);
+function calculateArea(float $radius): float {
+    return 3.14 * $radius * $radius;
+}
+echo calculateArea(5); // Output: 78.5
+```
+
+- Thus if your parametrs are of type float, you can still pass integers without causing a TypeError.
+
+## PHP strict_types and include
+
+- The `include` and `require` statements in PHP are used to include and evaluate files in the current script. When using these statements, the `strict_types` directive is not inherited from the included file to the including file or vice versa. Each file has its own `strict_types` setting, and they do not affect each other.
+
+# PHP Variadic Functions
+
+- A variadic function is a function that can accept a variable number of arguments. That is, there no fixed number of parameters that must be passed to the function when it is called. Instead, you can pass any number of arguments, and the function will handle them accordingly.
+- In PHP, to allow a function accept a variable number of arguments, we use the `func_get_args()` function.
+- The `func_get_args()` function returns an array containing all the arguments passed to the function. Example
+
+```php
+function sum() {
+    $args = func_get_args(); // Get all arguments as an array
+    $total = 0;
+    foreach ($args as $num) {
+        $total += $num; // Sum up the arguments
+    }
+    return $total;
+}
+echo sum(1, 2, 3); // Output: 6
+echo sum(4, 5, 6, 7, 8); // Output: 30
+```
+
+Here, the `args` variable is an array that contains all the arguments passed to the `sum` function. The function then iterates over the array and calculates the total sum of the arguments.
+
+- Notice that no parameters are defined in the function definition. This is because the function can accept any number of arguments.
+- From PHP 5.6 onward, you can also use the `...` (splat) operator to define variadic functions. This operator allows you to specify a parameter that can accept a variable number of arguments. Example
+
+```php
+function sum(...$numbers) {// Get all arguments as an array. Those are stored in $numbers
+    $total = 0;
+    foreach ($numbers as $num) {
+        $total += $num; // Sum up the arguments
+    }
+    return $total;
+}
+echo sum(1, 2, 3); // Output: 6
+echo sum(4, 5, 6, 7, 8); // Output: 30
+```
+
+Here, the `...$numbers` parameter basically acts as an array that contains all the arguments passed to the `sum` function. The function then iterates over the array and calculates the total sum of the arguments.
+
+- The splat operator is more concise and easier to read than using `func_get_args()`. Also, from PHP 7, it allows you to specify type hints for the variadic parameter. Example
+
+```php
+function sum(int ...$numbers) {; // Get all arguments of the type int as an array
+    $total = 0;
+    foreach ($numbers as $num) {
+        $total += $num; // Sum up the arguments
+    }
+    return $total;
+}
+echo sum(1, 2, 3); // Output: 6
+echo sum(4, 5, 6, 7, 8); // Output: 30
+```
+
+- Now, if a function has multiple parameters, only the last parameter can be variadic. That is
+
+```php
+function function_name($param1, $param2, ...$variadic_param) {
+
+}
+```
+
+- If a variadic parameter is not defined last, we get a syntax error.
+
+```php
+Fatal error: Only the last parameter can be variadic in...
+```
+
+- Also, a function can have only one variadic parameter.
+
+# PHP Arrays
+
+- An array is basically a list/collection of elements (values) that are stored under a single variable name.
+- PHP Arrays are of two types
+  - Indexed Arrays
+  - Associative Arrays
+- The keys in an Associative array are usually strings, while the keys in an Indexed array are usually integers from 0 to the number of elements present in the array minus one.
+
+## Creating Arrays
+
+- To define a array, you can either use the `array()` function or the short array syntax `[]`. For readability, the short array syntax is preferred.
+- You use the `array()` construct as follows:
+
+```php
+$array_name = array( element1, element2, element3, ... );
+```
+
+- Or you can use the short array syntax as follows:
+
+```php
+$array_name = [ element1, element2, element3, ... ];
+```
+
+- The short syntax is known as the JSON notation.
+
+## Displaying Arrays
+
+- To show the contents of an array, you can use the `print_r()` function or the `var_dump()` function. Example
+- Using `var_dump()` in this manner
+
+```php
+$array_name = [ "Apple", "Banana", "Orange" ];
+var_dump( $array_name );
+```
+
+yields this output
+
+````array(3) {
+  [0]=>
+  string(5) "Apple"
+  [1]=>
+  string(6) "Banana"
+  [2]=>
+  string(6) "Orange"
+}
+- Using `print_r()` in this manner
+
+```php
+$array_name = [ "Apple", "Banana", "Orange" ];
+print_r( $array_name );
+````
+
+yields this output
+
+```Array
+(
+    [0] => Apple
+    [1] => Banana
+    [2] => Orange
+)
+```
+
+- To make the output of `print_r()` more readable in a web browser, you can wrap it in `<pre>` HTML tags as follows:
+
+```php
+echo "<pre>";
+print_r( $array_name );
+echo "</pre>";
+```
+
+## Accessing Elements in an Array
+
+- To access individual elements in an array, you use the index (for indexed arrays) or the key (for associative arrays) inside square brackets `[]`. Example
+
+```php
+$array_name = [ "Apple", "Banana", "Orange" ];
+echo $array_name[1]; // Output: Banana
+```
+
+- Here, we access the second element of the array (index 1) and echo its value, which is "Banana".
+- For associative arrays, you access elements using their keys. Example
+
+```php
+$array_name = [ "name" => "John", "age" => 30, "city" => "New York" ];
+echo $array_name["age"]; // Output: 30
+```
+
+## Adding Elements to an Array
+
+- To add an element to an indexed array, you use the following syntax:
+
+```php
+$array_name[] = new_element;
+```
+
+- Here, PHP calculates the highest integer index currently in the array and adds 1 to it and assigns it as the new index of the new element. Thus, the new element is added to the end of the array.
+
+## Changing Array Elements
+
+- The following syntax is used to change an element in an array:
+
+```php
+$array_name[index_or_key] = new_value;
+```
+
+- Here, you specify the index (for indexed arrays) or key (for associative arrays) of the element you want to change, and assign it a new value.
+
+## Removing Elements from an Array
+
+- To remove an element from an array, you can use the `unset()` function. Example
+
+```php
+$array_name = [ "Apple", "Banana", "Orange" ];
+unset( $array_name[1] ); // Removes the element at index 1 (Banana)
+print_r( $array_name ); // Output: Array ( [0] => Apple [2] => Orange )
+```
+
+## Getting the Length / Size of an Array
+
+- To get the length (number of elements) of an array, you can use the `count()` function. Example
+
+```php
+$score = [ 90, 85, 78, 92 ];
+$length = count( $score );
+echo $length; // Output: 4
+```
+
+## PHP Associative Arrays
+
+- To add an element, to an associative array, you have to specify the key for the new element. That is:
+
+```php
+$array_name["new_key"] = new_value;
+```
+
+- Use an associative array to reference elements by names (keys) instead of numbers (indexes).
+
+# PHP Multidimensional Arrays
+
+- A multidimensional array is an array that contains one or more arrays as its elements. This allows you to create complex data structures that can represent more than one dimension of data.
+- For example, you can create a two-dimensional array (an array of arrays) to represent tasks and number of hours spent on each task for different days of the week.
+
+```php
+$tasks = [
+  ['Learn PHP programming', 2],
+  ['Practice PHP', 2],
+  ['Work', 8]
+]
+```
+
+## Removing Elements from a Multidimensional Array
+
+- To remove an element from a multidimensional array, you can use the `unset()` function along with the appropriate indexes or keys to specify the element you want to remove. Example
+
+```php
+$tasks = [
+  ['Learn PHP programming', 2],
+  ['Practice PHP', 2],
+  ['Work', 8]
+];
+
+unset( $tasks[1] ); // Removes the second element (['Practice PHP', 2])
+print_r( $tasks ); // Output: Array ( [0] => Array ( [0] => Learn PHP programming [1] => 2 ) [2] => Array ( [0] => Work [1] => 8 ) )
+```
+
+- The `array_splice` function can also be used to remove elements from a multidimensional array. It takes the array, the starting index, and the number of elements to remove as arguments.
+- It's syntax is as follows:
+
+```php
+array_splice( array, start_index, number_of_elements_to_remove );
+```
+
+- Consider this example
+
+```php
+$tasks = [
+  ['Learn PHP programming', 2],
+  ['Practice PHP', 2],
+  ['Work', 8]
+];
+array_splice( $tasks, 1, 1 ); // Removes only the second element (['Practice PHP', 2])
+print_r( $tasks ); // Output: Array ( [0] => Array ( [0] => Learn PHP programming [1] => 2 ) [1] => Array ( [0] => Work [1] => 8 ) )
+```
+
+- Generally, `array_splice` is more useful when you want to remove multiple elements or a range of elements from a multidimensional array.
+
+## Iterating over a Multidimensional Array using foreach
+
+- To iterate over a multidimensional array using `foreach`, you can use nested `foreach` loops. The outer loop iterates over the main array, while the inner loop iterates over each sub-array. Example
+
+```php
+$tasks = [
+  ['Learn PHP programming', 2],
+  ['Practice PHP', 2],
+  ['Work', 8]
+];
+
+foreach ( $tasks as $task ) {
+    foreach ( $task as $detail ) {
+        echo $detail . " ";
+    }
+    echo "\n"; // New line after each task
+}
+```
+
+## Accessing Elements in a Multidimensional Array
+
+- We follow this syntax to access elements in a multidimensional array:
+
+```php
+$array_name[index1][index2]...
+```
+
+## Sorting a Multidimensional Array
+
+- To sort a multidimensional array in PHP, you can use the `usort()` function along with a custom comparison function. The `usort()` function sorts an array by values using a user-defined comparison function. It takes two parameters: the array to be sorted and the comparison function.
+
+* The `usort()` has the following syntax:
+
+```php
+usort( array, comparison_function );
+```
+
+- The `comparison_function` is a callback function that defines the sorting logic. It takes two parameters (elements from the array) and returns:
+  - A negative value if the first element should come before the second element.
+  - A positive value if the first element should come after the second element.
+  - Zero if both elements are considered equal.
+- If the `comparison_function`can be an Anonymous function (Closure) or a Named function.
+- If it is an Anonymous function, it is defined directly within the `usort()` call as follows:
+
+```php
+usort( $array, function ( $a, $b ) {
+    // Comparison logic here
+} );
+```
+
+- If it is a Named function, it is defined separately and then passed as a string to `usort()` as follows:
+
+```php
+function compare( $a, $b ) {
+    // Comparison logic here
+}
+usort( $array, 'compare' );
+```
+
+- Consider this example where we sort a multidimensional array based on the second element of each sub-array (number of hours spent on each task):
+
+```php
+$tasks = [
+  ['Learn PHP programming', 2],
+  ['Practice PHP', 2],
+  ['Work', 8]
+];
+
+usort( $tasks, function ( $a, $b ) {
+    return $a[1] <=> $b[1]; // Compare based on the second element (hours)
+} );
+```
+
+## PHP array_unshift() function
+
+- To prepend one or more elements to the beginning of an (Indexed) array, you can use the `array_unshift()` function. This function adds the specified elements to the start of the array and shifts the existing elements to higher indexes.
+- The `array_unshift()` function:
+  - Adds elements to the beginning of an array
+  - Shifts existing elements to the right
+  - Reindexes numeric keys
+- It returns the new number of elements in the array after the elements have been added.
+- Also, it modifies the original array directly.
+- The syntax of the `array_unshift()` function is as follows:
+
+```php
+array_unshift( array &$array, mixed  $value1, mixed  $value2, ... );
+```
+
+- When multiple values are provided, they are added to the beginning of the array in the order they are specified.
+- Example:
+
+```php
+$fruits = [ "Banana", "Orange" ];
+array_unshift( $fruits, "Apple", "Mango" );
+print_r( $fruits ); // Output: Array ( [0] => Apple [1] => Mango [2] => Banana [3] => Orange )
+```
+
+## Preceding an element to the beginning of a Associative array
+
+- To prepend an element to the beginning of an associative array in PHP, we reassign the array as follows:
+
+```php
+$array_name = [ "new_key" => new_value ] + $array_name ;
+```
+
+- Here, we create a new array with the new key-value pair and then use the `+` operator to combine it with the existing associative array. This effectively adds the new element to the beginning of the array.
+- This is called array union in PHP.
+- Similarly, to prepend elements to the end of an associative array, you can do this:
+
+```php
+$array_name = $array_name + [ "new_key" => new_value ];
+```
+
+Notice that the new value and key pair is defined after the existing array.
+
+# PHP array_push() function
+
+- The PHP `array_push()` function is used to add one or more elements to the end of an (Indexed) array. This function appends the specified elements to the end of the array and increases the size of the array accordingly.
+- The `array_push()` function:
+  - Adds elements to the end of an array
+  - Increases the size of the array
+  - Modifies the original array directly
+- It returns the new number of elements in the array after the elements have been added.
+- The syntax of the `array_push()` function is as follows:
+
+```php
+array_push( array &$array, mixed  $value1, mixed  $value2, ... );
+```
+
+- It has the same functionality as using the `[]` operator to append elements to an array.
+- Use `[]` to add a single element to the end of an array as follows while `array_push()` is used to add multiple elements.
+
+```php
+$array_name[] = new_value; // Adds a single element to the end of the array
+array_push( $array_name, new_value1, new_value2, ... ); // Adds multiple elements to the end of the array
+```
+
+# PHP array_pop() function
+
+- The `array_pop()` function in PHP is used to remove and return the last element from an array. This function modifies the original array by removing the last element and returns the value of that element.
+- It's syntax is as follows:
+
+```php
+array_pop($array_name);
+```
+
+- If the array is empty, `array_pop()` returns `NULL`.
+## Removing the last element from an Associative array
++ Using `array_pop()` on an associative array simply return the value to the last key.
+
+# PHP array_shift() function
++ The `array_shift()` function in PHP is used to remove and return the first element from an array. This function modifies the original array by removing the first element and returns the value of that element.
++ It's syntax is as follows:
+
+```php
+array_shift($array_name);
+```
++ Similarly, if the array is empty, `array_shift()` returns `NULL`.
+
+# PHP array_keys() function
++ The `array_keys()` function in PHP is used to retrieve all the keys from an array. This function returns a new array containing the keys of the original array.
++ It's syntax is as follows:
+
+```php
+array_keys( array $array, mixed $search_value = null, bool $strict = false ) : array
+```
++ Here,
+  - `array` is the input array from which you want to retrieve the keys.
+  - `search_value` (optional) is a value to search for in the array. If provided, only the keys corresponding to this value will be returned as elements in the array.
+  - `strict` (optional) is a boolean flag that determines whether to use strict comparison (type and value) when searching for the `search_value`. The default is `false`.
+
++ Consider this example:
+
+```php
+$fruits = [
+    "a" => "Apple",
+    "b" => "Banana",
+    "c" => "Orange",
+    "d" => "Banana"
+];
+$keys = array_keys( $fruits, "Banana" );
+print_r( $keys ); // Output: Array ( [0] => b [1] => d )
+```
++ Condider this other example with the `search_value` parameter and `strict`:
+
+```php
+$values = [
+    "x" => 10,
+    "y" => "10",
+    "z" => 20
+];
+$keys = array_keys( $values, 10, true );
+print_r( $keys ); // Output: Array ( [0] => x )
+```
+Here, since we set `strict` to `true`, only the key "x" is returned because it corresponds to the integer value `10`, while "y" corresponds to the string value `"10"`. Type matters in strict comparison.
++ Notice that if the `search_value` parameter is not provided, the `array_keys()` function will return all the keys from the input array.
++ Thus the `strict` parameter is only useful when the `search_value` parameter is provided.
+
+# PHP array_key_exists() function
++ The `array_key_exists()` function in PHP is used to check if a specific key exists in an array. This function returns `true` if the key is found in the array, and `false` otherwise.
++ It's syntax is as follows:
+
+```php
+array_key_exists( mixed $key, array $array ) : bool
+```
+Here, the `key` comes before the array.
++ The function searches for the specified `key` in the first dimension of the array only. It does not search in nested arrays.
+## PHP array_key_exists() vs isset()
++ `isset()` works similarly to `array_key_exists()`, but there is a key difference:
+  - `isset()` returns `false` if the key exists but its value is `NULL`.
+  - `array_key_exists()` returns `true` if the key exists, regardless of its value (even if it is `NULL`).
++ The syntax of `isset()` is as follows:
+
+```php
+isset($vars['key']);
+```
+
++ Consider this example:
+
+```php
+$device = [
+    'on' => true,
+    'off' => null
+];
+
+var_dump(array_key_exists('off', $device));// Output: bool(true)
+var_dump(isset($device['off']));// Output: bool(false)
+```
+
++ Stick to `array_key_exists()` when you want to check for the existence of a key in an array, regardless of its value. Use `isset()` when you want to check if a key exists and its value is not `NULL`.
+
+# PHP in_array() function
++ The `in_array()` function in PHP is used to check if a specific value exists in an array. This function returns `true` if the value is found in the array, and `false` otherwise.
++ It's syntax is as follows:
+
+```php
+
+in_array( mixed $needle, array $haystack, bool $strict = false ) : bool
+```
+Here,
+- `$needle` is the varaible that holds value you want to search for in the array. 
+- `haystack` is the input array in which you want to search for the value.
+- `strict` (optional) is a boolean flag that determines whether to use strict comparison (type and value) when searching for the `needle`. The default is `false`. This is useful to avoid type juggling during the search.
++ Consider this example:
+
+```php
+$device = [
+    'on' => true,
+    'off' => null
+];
+
+var_dump(in_array(false, $device)); // Output: bool(true) because null is considered equal to false in non-strict comparison
+var_dump(in_array(false, $device, true)); // Output: bool(false) because null is not identical to false in strict comparison
+```
