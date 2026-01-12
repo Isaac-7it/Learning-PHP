@@ -457,3 +457,193 @@ function points(array $games): int {
 }
 
 echo points(["0:1", "0:2", "0:1",]);
+
+$odd_days_hours = [
+    'Monday' => 4,
+    'Wednesday'=> 2,
+    'Friday' => 9
+];
+
+$even_days_hours = [
+    'Tuesday' => 7,
+    'Thursday' => 4
+];
+
+print_r(array_merge($odd_days_hours, $even_days_hours));
+
+$even = [2, 4, 6, 8];
+$odd = [1, 3, 5, 7];
+
+print_r(array_merge($even, $odd));
+
+$odd_days_hours = [
+    'Monday' => 4,
+    'Wednesday'=> 2,
+    'Friday' => 9
+];
+
+$even_days_hours = [
+    'Tuesday' => 7,
+    'Thursday' => 4,
+    'Monday' => 3
+];
+
+print_r(($odd_days_hours + $even_days_hours));
+
+
+function multiply_by_2($n) {
+    return $n * 2;
+}
+
+echo multiply_by_2(...$even);
+
+function sum($a, $b, $c) {
+    return $a + $b + $c;
+}
+$numbers = [1, 2, 3];
+sum(...$numbers);
+
+echo '<pre>';
+echo rand(1, 2);
+echo '<pre>';
+
+function even_number()
+{
+    for($i =2; $i < 10; $i+=2){
+        yield $i;
+    }
+}
+
+echo '<pre>';
+print_r(even_number());
+echo '<pre>';
+
+$even = [...even_number()];
+
+print_r($even);
+
+class RGB implements IteratorAggregate
+{
+    private $colors = ['red', 'green', 'blue'];
+
+    public function getIterator(): Traversable
+    {
+        return new ArrayIterator($this->colors);
+    }
+}
+
+$rgb = new RGB();
+$colors = [...$rgb];
+
+print_r($colors);
+
+function format_name(string $first, string $middle, string $last): string
+{
+    return $middle ?
+        "$first $middle $last" :
+        "$first $last";
+}
+
+echo format_name(
+    middle: 'V.',
+    first: 'John',
+    last: 'Doe'
+);
+
+echo format_name(...[
+    'middle' => 'Oluwamayowa',
+    'first' => 'Isaac',
+    'last' => 'Aladegbehingbe'
+]);
+
+$nums = [1, 2, 3];
+list($a) = $nums;
+
+echo '<br>';
+var_dump($a);
+echo '<br>';
+
+$prices = [100, 0.1, 0.05];
+
+list($buy_price, $discount) = $prices;
+echo "The price is $buy_price with the discount of $discount";
+
+$person = [
+    'first_name' => 'John',
+    'last_name' => 'Doe',
+    'age' => 25
+];
+
+list(
+    'first_name' => $first,
+    'last_name' => $last,
+    'age' => $age) = $person;
+
+echo '<br>';
+var_dump($first, $last, $age);
+echo '<br>';
+
+
+/* $numbers = [2, 1, 3];
+
+function sorted(array $arr): array 
+{
+    $maximum = $arr[0];
+    $sorted_arr = [];
+    foreach($arr as $element) {
+        if ($element >= $maximum) {
+            $sorted_arr[] = $element;
+            $maximum = $element;
+            array
+        } else {
+
+        }
+    }
+
+    return $sorted_arr;
+} 
+
+print_r(sorted($numbers));
+*/
+
+$fruits = ['apple', 'Banana', 'orange'];
+sort($fruits, SORT_STRING);
+
+print_r($fruits);
+
+$ranks = ['A-1', 'A-2', 'A-12', 'A-11'];
+sort($ranks, SORT_STRING | SORT_NATURAL);
+
+print_r($ranks);
+
+
+$numbers = [2, 4, 36, 43, 9, 2, 0];
+
+usort($numbers, function ($x, $y) {
+    if($x === $y) {
+        return 0;
+    }
+
+    return $x < $y ? -1 : 1;
+});
+
+print_r($numbers);
+
+$person = [
+    'person_1' => null,
+    'person_2' => 'Gabriel',
+    'person_3' => 'Peter'
+];
+
+arsort($person);
+
+print_r($person);
+
+$is_key_null = isset($person['person_1']);
+
+var_dump($is_key_null);
+
+$x = "0";
+
+var_dump(isset($x));
+var_dump(empty($x));

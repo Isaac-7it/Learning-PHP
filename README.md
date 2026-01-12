@@ -2535,31 +2535,38 @@ array_pop($array_name);
 ```
 
 - If the array is empty, `array_pop()` returns `NULL`.
+
 ## Removing the last element from an Associative array
-+ Using `array_pop()` on an associative array simply return the value to the last key.
+
+- Using `array_pop()` on an associative array simply return the value to the last key.
 
 # PHP array_shift() function
-+ The `array_shift()` function in PHP is used to remove and return the first element from an array. This function modifies the original array by removing the first element and returns the value of that element.
-+ It's syntax is as follows:
+
+- The `array_shift()` function in PHP is used to remove and return the first element from an array. This function modifies the original array by removing the first element and returns the value of that element.
+- It's syntax is as follows:
 
 ```php
 array_shift($array_name);
 ```
-+ Similarly, if the array is empty, `array_shift()` returns `NULL`.
+
+- Similarly, if the array is empty, `array_shift()` returns `NULL`.
 
 # PHP array_keys() function
-+ The `array_keys()` function in PHP is used to retrieve all the keys from an array. This function returns a new array containing the keys of the original array.
-+ It's syntax is as follows:
+
+- The `array_keys()` function in PHP is used to retrieve all the keys from an array. This function returns a new array containing the keys of the original array.
+- It's syntax is as follows:
 
 ```php
 array_keys( array $array, mixed $search_value = null, bool $strict = false ) : array
 ```
-+ Here,
+
+- Here,
+
   - `array` is the input array from which you want to retrieve the keys.
   - `search_value` (optional) is a value to search for in the array. If provided, only the keys corresponding to this value will be returned as elements in the array.
   - `strict` (optional) is a boolean flag that determines whether to use strict comparison (type and value) when searching for the `search_value`. The default is `false`.
 
-+ Consider this example:
+- Consider this example:
 
 ```php
 $fruits = [
@@ -2571,7 +2578,8 @@ $fruits = [
 $keys = array_keys( $fruits, "Banana" );
 print_r( $keys ); // Output: Array ( [0] => b [1] => d )
 ```
-+ Condider this other example with the `search_value` parameter and `strict`:
+
+- Condider this other example with the `search_value` parameter and `strict`:
 
 ```php
 $values = [
@@ -2582,30 +2590,37 @@ $values = [
 $keys = array_keys( $values, 10, true );
 print_r( $keys ); // Output: Array ( [0] => x )
 ```
+
 Here, since we set `strict` to `true`, only the key "x" is returned because it corresponds to the integer value `10`, while "y" corresponds to the string value `"10"`. Type matters in strict comparison.
-+ Notice that if the `search_value` parameter is not provided, the `array_keys()` function will return all the keys from the input array.
-+ Thus the `strict` parameter is only useful when the `search_value` parameter is provided.
+
+- Notice that if the `search_value` parameter is not provided, the `array_keys()` function will return all the keys from the input array.
+- Thus the `strict` parameter is only useful when the `search_value` parameter is provided.
 
 # PHP array_key_exists() function
-+ The `array_key_exists()` function in PHP is used to check if a specific key exists in an array. This function returns `true` if the key is found in the array, and `false` otherwise.
-+ It's syntax is as follows:
+
+- The `array_key_exists()` function in PHP is used to check if a specific key exists in an array. This function returns `true` if the key is found in the array, and `false` otherwise.
+- It's syntax is as follows:
 
 ```php
 array_key_exists( mixed $key, array $array ) : bool
 ```
+
 Here, the `key` comes before the array.
-+ The function searches for the specified `key` in the first dimension of the array only. It does not search in nested arrays.
+
+- The function searches for the specified `key` in the first dimension of the array only. It does not search in nested arrays.
+
 ## PHP array_key_exists() vs isset()
-+ `isset()` works similarly to `array_key_exists()`, but there is a key difference:
+
+- `isset()` works similarly to `array_key_exists()`, but there is a key difference:
   - `isset()` returns `false` if the key exists but its value is `NULL`.
   - `array_key_exists()` returns `true` if the key exists, regardless of its value (even if it is `NULL`).
-+ The syntax of `isset()` is as follows:
+- The syntax of `isset()` is as follows:
 
 ```php
 isset($vars['key']);
 ```
 
-+ Consider this example:
+- Consider this example:
 
 ```php
 $device = [
@@ -2617,21 +2632,25 @@ var_dump(array_key_exists('off', $device));// Output: bool(true)
 var_dump(isset($device['off']));// Output: bool(false)
 ```
 
-+ Stick to `array_key_exists()` when you want to check for the existence of a key in an array, regardless of its value. Use `isset()` when you want to check if a key exists and its value is not `NULL`.
+- Stick to `array_key_exists()` when you want to check for the existence of a key in an array, regardless of its value. Use `isset()` when you want to check if a key exists and its value is not `NULL`.
 
 # PHP in_array() function
-+ The `in_array()` function in PHP is used to check if a specific value exists in an array. This function returns `true` if the value is found in the array, and `false` otherwise.
-+ It's syntax is as follows:
+
+- The `in_array()` function in PHP is used to check if a specific value exists in an array. This function returns `true` if the value is found in the array, and `false` otherwise.
+- It's syntax is as follows:
 
 ```php
 
 in_array( mixed $needle, array $haystack, bool $strict = false ) : bool
 ```
+
 Here,
-- `$needle` is the varaible that holds value you want to search for in the array. 
+
+- `$needle` is the varaible that holds value you want to search for in the array.
 - `haystack` is the input array in which you want to search for the value.
 - `strict` (optional) is a boolean flag that determines whether to use strict comparison (type and value) when searching for the `needle`. The default is `false`. This is useful to avoid type juggling during the search.
-+ Consider this example:
+
+* Consider this example:
 
 ```php
 $device = [
@@ -2642,3 +2661,1162 @@ $device = [
 var_dump(in_array(false, $device)); // Output: bool(true) because null is considered equal to false in non-strict comparison
 var_dump(in_array(false, $device, true)); // Output: bool(false) because null is not identical to false in strict comparison
 ```
+
+# PHP array_merge()
+
+- The `array_merge()` function is used to merge one or two arrays together. It returns a new array that contains element from the two input arrays
+- It appends elements of the next array to the last element of the previous array
+- It's syntax is as follows
+
+```php
+array_merge( array $array1, array $array2, ... ) : array
+```
+
+- Example
+
+```php
+$even = [2, 4, 6, 8];
+$odd = [1, 3, 5, 7];
+
+array_merge($even, $odd);
+print_r(array_merge($even, $odd));
+/* Output:
+Array
+(
+    [0] => 2
+    [1] => 4
+    [2] => 6
+    [3] => 8
+    [4] => 1
+    [5] => 3
+    [6] => 5
+    [7] => 7
+)*/
+```
+
+## Using `array_merge()` with an Associative Array
+
+- Consider the following code snippet
+
+```php
+$odd_days_hours = [
+    'Monday' => 4,
+    'Wednesday'=> 2,
+    'Friday' => 9
+];
+
+$even_days_hours = [
+    'Tuesday' => 7,
+    'Thursday' => 4
+];
+
+print_r(array_merge($odd_days_hours, $even_days_hours));
+
+/*Output
+Array
+(
+    [Monday] => 4
+    [Wednesday] => 2
+    [Friday] => 9
+    [Tuesday] => 7
+    [Thursday] => 4
+)
+*/
+```
+
+Notice that the order is kept. The elements of the next array is appended to the last element of the previous array
+
+- Now, consider another code snippet
+
+```php
+$odd_days_hours = [
+    'Monday' => 4,
+    'Wednesday'=> 2,
+    'Friday' => 9
+];
+
+$even_days_hours = [
+    'Tuesday' => 7,
+    'Thursday' => 4,
+    'Monday' => 3
+];
+
+print_r(array_merge($odd_days_hours, $even_days_hours));
+
+/*Output
+Array
+(
+    [Monday] => 3
+    [Wednesday] => 2
+    [Friday] => 9
+    [Tuesday] => 7
+    [Thursday] => 4
+)
+*/
+```
+
+Notice that in this example, the key `'Monday'` is reassigned. Thus, if a key reoccurs in the next array, its value in the previous array is ignored and the value in the next is assigned to it instead. But it keeps to the position it happens to be in the previous
+
+- Now, notice that to merge two associaitve arrays together, you can simply do this
+
+```php
+$odd_days_hours = [
+    'Monday' => 4,
+    'Wednesday'=> 2,
+    'Friday' => 9
+];
+
+$even_days_hours = [
+    'Tuesday' => 7,
+    'Thursday' => 4,
+    'Monday' => 3
+];
+
+print_r(($odd_days_hours + $even_days_hours));
+```
+
+But the difference of this and using the `array_merge()` function is that it whenever the key reappears in the next array with a different value, it is totally ignored. Rather, it keeps to the key and its value in the previous
+
+- From PHP 7.4, PHP returns an empty array whenever `array_merge()` is called with no arguments. Before PHP 7.4, it resulted in a warning.
+
+# PHP Spread Operator (`...`)
+
+- The spread operator (`...`) in PHP is used to unpack arrays or objects into individual elements. It allows you to expand an array or object into a list of arguments when calling a function or creating a new array.
+- The spread operator can be used in the following contexts:
+  - Function Calls
+  - Array Creation
+
+## Using the Spread Operator in Function Calls
+
+- When calling a function, you can use the spread operator to pass the elements of an array as individual arguments to the function. Example
+
+```php
+function sum($a, $b, $c) {
+    return $a + $b + $c;
+}
+$numbers = [1, 2, 3];
+sum(...$numbers); // Equivalent to sum(1, 2, 3)
+```
+
+- If the number of elements in the array does not match the number of parameters in the function, a `TypeError` will be thrown.
+- If only one parameter is expected in the function, it only works with the first element of the array. Example
+
+```php
+$even = [2, 4, 6, 8];
+
+function multiply_by_2($n) {
+    return $n * 2;
+}
+
+echo multiply_by_2(...$even);
+// Output: 4 because only the first element (2) is used
+```
+
+## Using the Spread Operator in Array Creation
+
+- You can use the spread operator to create a new array by unpacking elements from existing arrays. Example
+
+```php
+$array1 = [1, 2, 3];
+$array2 = [4, 5, 6];
+$new_array = [...$array1, ...$array2]; // Result: [1, 2, 3, 4, 5, 6]
+```
+
+- Consider another example
+
+```php
+$fruits = ['Apple', 'Banana'];
+$foods = ['Carrot', 'Broccoli', ...$fruits];
+print_r($foods); // Output: Array ( [0] => Carrot [1] => Broccoli [2] => Apple [3] => Banana )
+```
+
+Note that the spread operator maintains the order of elements when unpacking arrays.
+
+## Using spread operator with a generator
+
+- In the following example, first, we define a generator that returns even numbers between 2 and 10. Then, we use the spread operator to spread out the returned value of the generator into an array:
+
+```php
+<?php
+
+function even_number()
+{
+    for($i =2; $i < 10; $i+=2){
+        yield $i;
+    }
+}
+
+$even = [...even_number()];
+
+print_r($even);
+/* Output:
+(
+    [0] => 2
+    [1] => 4
+    [2] => 6
+    [3] => 8
+)*/
+```
+
+- How it works:
+  - The `even_number()` function is a generator that yields even numbers from 2 to 8. The `yield` keyword allows the function to return a value and pause its execution, maintaining its state for the next call.
+  - When we use the spread operator (`...`) with the generator function call `even_number()`, it iterates over the yielded values and unpacks them into a new array. The `even_number()` generator produces the values one by one, and the spread operator collects them into the `$even` array.
+  - The resulting `$even` array contains all the even numbers generated by the `even_number()` function.
+
+## Using spread operator with a Traversable object
+
+- PHP allows you to apply the spread operator not only to an array but also to any object that implements the Traversable interface. For example:
+
+```php
+<?php
+
+class RGB implements IteratorAggregate
+{
+    private $colors = ['red', 'green', 'blue'];
+
+    public function getIterator(): Traversable
+    {
+        return new ArrayIterator($this->colors);
+    }
+}
+
+$rgb = new RGB();
+$colors = [...$rgb];
+
+print_r($colors);
+```
+
+How it works:
+
+- The `RGB` class implements the `IteratorAggregate` interface, which requires the implementation of the `getIterator()` method. This method returns an instance of `ArrayIterator`, which allows iteration over the `$colors` array.
+- When we create an instance of the `RGB` class and use the spread operator (`...`) with it, PHP calls the `getIterator()` method to obtain the iterator for the object. The spread operator then iterates over the colors provided by the iterator and unpacks them into a new array.
+- The resulting `$colors` array contains the colors 'red', 'green', and 'blue'.
+
+## Spread Operator and named arguments
+
+- You can call a function using named arguments. Example
+
+```php
+<?php
+
+
+function format_name(string $first, string $middle, string $last): string
+{
+    return $middle ?
+        "$first $middle $last" :
+        "$first $last";
+}
+
+echo format_name(
+    first: 'John',
+    middle: 'V.',
+    last: 'Doe'
+); // John V. Doe
+```
+
+By this, the order of the arguments does not matter.
+
+- Consider the following as a general syntax for using named arguments
+
+```php
+function_name(paramter_name1: value1, parameter_name2: value2, ...);
+```
+
+Note that the dollar sign `$` is not used when specifying the parameter names.
+
+- The spread operator can be used along with named arguments as follows:
+
+```php
+<?php
+
+
+function format_name(string $first, string $middle, string $last): string
+{
+    return $middle ?
+        "$first $middle $last" :
+        "$first $last";
+}
+
+
+$names = [
+  'middle' => 'V.',
+    'first' => 'John',
+    'last' => 'Doe'
+];
+
+echo format_name(...$names); // John V. Doe
+```
+
+Here, the keys of the associative must correspond to the parameter names of the function.
+
+# PHP rand() function
+
+- The `rand(min, max)` function generates a random integer between the specified minimum and maximum values. Example
+
+```php
+$min = 1;
+$max = 10;
+$random_number = rand($min, $max);
+echo $random_number; // Output: A random integer between 1 and 10 including 1 and 10
+```
+
+# PHP List
+
+- The `list()` function in PHP is used to assign values from an array to a list of variables in a single operation. It is often used in conjunction with the `array` construct or when working with functions that return arrays.
+- The syntax of the `list()` function is as follows:
+
+```php
+list( $var1, $var2, ... ) = array;
+```
+
+where,
+
+- `$var1`, `$var2`, etc. are the variables that will receive the values from the array.
+- `array` is the array from which the values will be extracted.
+
+## Using a list to skip array elements
+
+- The following example uses the list to assign the first and the third element to variables. Here, it skips the second element:
+
+```php
+$prices = [100, 0.1, 0.05];
+
+list($buy_price, , $discount) = $prices;
+echo "The price is $buy_price with the discount of $discount";
+// Output: The price is 100 with the discount of 0.05
+```
+
+## Using the nested list to assign variables
+
+- The following example uses a nested list to assign variables from a multidimensional array:
+
+```php
+$elements = ['body', ['white','blue']];
+list($element, list($bgcolor, $color)) = $elements;
+
+var_dump($element, $bgcolor, $color);
+/* Output:
+string(4) "body"
+string(5) "white"
+string(4) "blue"
+*/
+```
+
+## Using PHP List with an Associative Array
+
+- From PHP 7.1, you can use the `list()` function with associative arrays by specifying the keys of the array elements you want to assign to variables. Example
+
+```php
+$person = [
+    'first_name' => 'John',
+    'last_name' => 'Doe',
+    'age' => 25
+];
+
+list(
+    'first_name' => $first,
+    'last_name' => $last,
+    'age' => $age) = $person;
+
+var_dump($first, $last, $age);
+/* Output:
+string(4) "John"
+string(3) "Doe"
+int(25)
+*/
+```
+
+Here, we specify the keys of the associative array in the `list()` function to assign their corresponding values to the variables `$first`, `$last`, and `$age`.
+
+- This allows for more flexibility when working with associative arrays, as you can directly map the keys to variables without relying on their order in the array.
+- The following can be considered as the general syntax for using `list()` with an associative array:
+
+```php
+list(
+    'key1' => $var1,
+    'key2' => $var2,
+    ...
+) = $associative_array;
+```
+
+# PHP Array Destructuring
+
+- Array destructuring in PHP allows you to extract values from an array and assign them to individual variables in a concise manner. This feature is new and was introduced in PHP 7.1 and provides a more readable way to work with arrays.
+- The syntax for array destructuring is similar to the `list()` function but uses square brackets `[]` instead of the `list()` keyword. Example
+
+```php
+[$var1, $var2, ...] = $array;
+```
+
+- For Associative arrays, you can use the following syntax:
+
+```php
+['key1' => $var1, 'key2' => $var2, ...] = $associative_array;
+```
+
+- Example of PHP Array Destructuring using an Associative Array:
+
+```php
+$person = [
+    'first_name' => 'John',
+    'last_name' => 'Doe',
+    'age' => 25
+];
+
+['first_name' => $first, 'last_name' => $last, 'age' => $age] = $person;
+var_dump($first, $last, $age);
+/* Output:
+string(4) "John"
+string(3) "Doe"
+int(25)
+*/
+```
+
+- Example of PHP Array Destructuring using an Indexed Array:
+
+```php
+$coordinates = [10, 20, 30];
+
+[$x, $y, $z] = $coordinates;
+var_dump($x, $y, $z);
+/* Output:
+int(10)
+int(20)
+int(30)
+*/
+```
+
+## Skipping Elements during Destructuring
+
+- You can skip elements during destructuring by leaving the corresponding variable position empty. Example
+
+```php
+$values = [100, 200, 300];
+
+[$first, , $third] = $values;
+var_dump($first, $third);
+/* Output:
+int(100)
+int(300)
+*/
+```
+
+## Swapping Variables using Destructuring
+
+- Generally, to swap the values of two variables, you would need a temporary variable as follows:
+
+```php
+$a = 5;
+$b = 10;
+$temp = $b;
+$b = $a;
+$a = $temp;
+
+echo "a: $a, b: $b"; // Output: a: 10, b: 5
+```
+
+- But with array destructuring, you can swap the values of two variables in a single line without needing a temporary variable. Example
+
+```php
+$a = 5;
+$b = 10;
+
+[$a, $b] = [$b, $a];
+echo "a: $a, b: $b"; // Output: a: 10, b: 5
+```
+
+Here, we create an array with the values of `$b` and `$a`, and then destructure it back into `$a` and `$b`, effectively swapping their values.
+
+# PHP `parse_url()` function
+
+- The `parse_url()` function in PHP is used to parse a URL and return its components as an associative array. This function breaks down the URL into its various parts, such as scheme, host, port, path, query, and fragment.
+
+```php
+$url = "https://www.example.com:8080/path/to/resource?query=php#
+section1";
+$components = parse_url($url);
+print_r($components);
+/*
+Output:
+Array
+(
+    [scheme] => https
+    [host] => www.example.com
+    [port] => 8080
+    [path] => /path/to/resource
+    [query] => query=php
+    [fragment] => section1
+)
+*/
+```
+
+# PHP Array `sort()` function
+
+- The `sort()` function in PHP is used to sort the elements of an array in ascending order. This function modifies the original array and sorts its elements based on their values.
+- The syntax of the `sort()` function is as follows:
+
+```php
+sort( array &$array, int $flags = SORT_REGULAR ) : bool
+```
+
+where,
+
+- `array` is the input array that you want to sort.
+- `flags` (optional) is a parameter that determines the sorting behavior. It can take various values such as `SORT_REGULAR`, `SORT_NUMERIC`, `SORT_STRING`, etc. The default is `SORT_REGULAR`.
+
+## Sorting an array of strings
+
+- The following example demonstrates how to sort an array of strings using the `sort()` function:
+
+```php
+$fruits = [ "Banana", "Orange", "Mango" ];
+sort( $fruits );
+/* Output:
+Array
+(
+    [0] => Banana
+    [1] => Mango
+    [2] => Orange
+)
+*/
+```
+
+Here, sorting is done according to the ASCII values of the characters in the strings.Also, the function use the `SORT_STRING` flag by default when sorting strings. By this flag, the array elements will be considered as strings during the sorting process.
+
+## Sorting an array of strings case-insensitively
+
+- To sort an array of strings in a case-insensitive manner, you can use the `SORT_FLAG_CASE` flag along with the `SORT_STRING` flag. Example:
+
+```php
+$fruits = ['apple', 'Banana', 'orange'];
+sort($fruits, SORT_STRING | SORT_FLAG_CASE);
+
+print_r($fruits);
+/* Output:
+Array
+(
+    [0] => apple
+    [1] => Banana
+    [2] => orange
+)
+*/
+```
+
+without the `SORT_FLAG_CASE` flag, the sorting would be case-sensitive, and uppercase letters would be sorted before lowercase letters based on their ASCII values.
+
+```php
+$fruits = ['apple', 'Banana', 'orange'];
+sort($fruits, SORT_STRING);
+/* Output:
+Array
+(
+    [0] => apple
+    [1] => Banana
+    [2] => orange
+)
+*/
+```
+
+## Sorting an array using Natural Ordering
+
+- To sort an array using natural ordering, you can use the `SORT_NATURAL` flag along with the `sort()` function. Natural ordering sorts strings in a way that is more intuitive for humans, especially when dealing with numbers within strings. Example:
+
+```php
+  $files = ['file10.txt', 'file2.txt', 'file1.txt'];
+  sort($files, SORT_NATURAL);
+  print_r($files);
+/* Output:
+Array
+(
+    [0] => file1.txt
+    [1] => file2.txt
+    [2] => file10.txt
+)
+*/
+```
+
+Here, the `SORT_NATURAL` flag ensures that the files are sorted in a way that considers the numeric values within the strings, resulting in a more human-friendly order. Without the `SORT_NATURAL` flag, the sorting would be based on ASCII values, leading to an incorrect order:
+
+```php
+  $files = ['file10.txt', 'file2.txt', 'file1.txt'];
+  sort($files);
+  print_r($files);
+/* Output:
+Array
+(
+    [0] => file1.txt
+    [1] => file10.txt
+    [2] => file2.txt
+)
+*/
+```
+
+Here, the sorting is done based on ASCII values, which places 'file10.txt' before 'file2.txt' because '1' comes before '2' in ASCII order.
+
+## PHP `rsort()` function
+
+- The `rsort()` function in PHP is used to sort the elements of an array in descending order. This function modifies the original array and sorts its elements based on their values.
+- The syntax of the `rsort()` function is as follows:
+
+```php
+rsort( array &$array, int $flags = SORT_REGULAR ) : bool
+```
+
+where,
+
+- `array` is the input array that you want to sort.
+- `flags` (optional) is a parameter that determines the sorting behavior. It can take various values such as `SORT_REGULAR`, `SORT_NUMERIC`, `SORT_STRING`, etc. The default is `SORT_REGULAR`.
+
+* Example of using `rsort()` function:
+
+```php
+$numbers = [ 5, 2, 8, 1, 4 ];
+rsort( $numbers );
+/* Output:
+Array
+(
+    [0] => 8
+    [1] => 5
+    [2] => 4
+    [3] => 2
+    [4] => 1
+)
+*/
+```
+
+- `rsort()` function is similar to `sort()` function only with the exception that `rsort()` sorts in descending order
+
+# PHP `ksort()` function
+
+- The `ksort()` function sorts elements by keys. Mainly useful for associative arrays
+- It's syntax is as follow:
+
+```php
+ksort( array &$array, int $flags = SORT_REGULAR ) : bool
+```
+
+- To combine the flag values, you can use the `|` operator. Example:
+
+```php
+$fruits = [
+    "b" => "Banana",
+    "a" => "apple",
+    "c" => "Orange"
+];
+ksort( $fruits, SORT_STRING | SORT_FLAG_CASE );
+print_r( $fruits );
+/* Output:
+Array
+(
+    [a] => apple
+    [b] => Banana
+    [c] => Orange
+)
+*/
+```
+
+Here, the `ksort()` function sorts the associative array `$fruits` by its keys in a case-insensitive manner using the `SORT_STRING` and `SORT_FLAG_CASE` flags. The resulting array is sorted alphabetically by the keys 'a', 'b', and 'c'.
+
+## PHP `krsort()` function
+
+- The `krsort()` function in PHP is used to sort the elements of an array by their keys in descending order. This function modifies the original array and sorts its elements based on their keys.
+
+* The syntax of the `krsort()` function is as follows:
+
+```php
+krsort( array &$array, int $flags = SORT_REGULAR ) : bool
+```
+
+- Example of using `krsort()` function:
+
+```php
+$fruits = [
+    "b" => "Banana",
+    "a" => "apple",
+    "c" => "Orange"
+];
+krsort( $fruits );
+print_r( $fruits );
+/* Output:
+Array
+(
+    [c] => Orange
+    [b] => Banana
+    [a] => apple
+)
+*/
+```
+
+# PHP `usort()` function
+
+- The `usort()` function in PHP is used to sort an array by values using a user-defined comparison function. This function allows you to define your own sorting logic based on specific criteria.
+- The syntax of the `usort()` function is as follows:
+
+```php
+usort( array &$array, callable $callback ) : bool
+```
+
+where,
+
+- `array` is the input array that you want to sort.
+- `callback` is a user-defined comparison function that determines the sorting order. This function should take two parameters (elements from the array to compare) and return:
+  - A negative value if the first element should come before the second element.
+  - A positive value if the first element should come after the second element.
+  - Zero if both elements are considered equal.
+
+## Sorting an array of numbers
+
+- Consider this example where we sort an array of numbers in ascending order using `usort()`:
+
+```php
+$numbers = [2, 4, 36, 43, 9, 2, 0];
+
+usort($numbers, function ($x, $y) {
+    if($x === $y) {
+        return 0;
+    }
+
+    return $x < $y ? -1 : 1;
+});
+
+print_r($numbers);
+/* Output:
+Array
+(
+    [0] => 0
+    [1] => 2
+    [2] => 2
+    [3] => 4
+    [4] => 9
+    [5] => 36
+    [6] => 43
+)
+*/
+```
+
+How it works:
+
+- The `usort()` function takes the `$numbers` array and a comparison function as arguments.
+  - The comparison function compares two elements `$x` and `$y` from the array.
+  - If `$x` is equal to `$y`, it returns `0`, indicating that they are equal.
+  - If `$x` is less than `$y`, it returns `-1`, indicating that `$x` should come before `$y`.
+  - If `$x` is greater than `$y`, it returns `1`, indicating that `$x` should come after `$y`.
+- The `usort()` function uses this comparison logic to sort the `$numbers` array in ascending order.
+
+* To sort in descending order, you can modify the comparison function as follows:
+
+```php
+$numbers = [2, 4, 36, 43, 9, 2, 0];
+usort($numbers, function ($x, $y) {
+    if($x === $y) {
+        return 0;
+    }
+
+    return $x > $y ? -1 : 1;
+});
+print_r($numbers);
+/* Output:
+Array
+(
+    [0] => 43
+    [1] => 36
+    [2] => 9
+    [3] => 4
+    [4] => 2
+    [5] => 2
+    [6] => 0
+)
+*/
+```
+
+- From PHP 7.0, you can use the spaceship operator (`<=>`) to simplify the comparison function as follows:
+
+```php
+$numbers = [2, 4, 36, 43, 9, 2, 0];
+usort($numbers, function ($x, $y) {
+    return $x <=> $y; // Ascending order
+});
+print_r($numbers);
+/* Output:
+Array
+(
+    [0] => 0
+    [1] => 2
+    [2] => 2
+    [3] => 4
+    [4] => 9
+    [5] => 36
+    [6] => 43
+)
+*/
+```
+
+Here, the spaceship operator (`<=>`) compares `$x` and `$y` and returns `-1`, `0`, or `1` based on their relationship, making the code more concise.
+
+- If the callback is simple, you can use an arrow function like this
+
+```php
+$numbers = [2, 4, 36, 43, 9, 2, 0];
+usort($numbers, fn($x, $y) => $x <=> $y);
+print_r($numbers);
+/* Output:
+Array
+(
+    [0] => 0
+    [1] => 2
+    [2] => 2
+    [3] => 4
+    [4] => 9
+    [5] => 36
+    [6] => 43
+)
+*/
+```
+
+How it works:
+
+- The arrow function `fn($x, $y) => $x <=> $y` is a concise way to define the comparison logic for sorting.
+- It compares two elements `$x` and `$y` from the array using the spaceship operator (`<=>`), which returns:
+  - A negative value if `$x` is less than `$y`.
+  - A positive value if `$x` is greater than `$y`.
+  - Zero if both elements are equal.
+
+## Sorting an Array of String by Length
+
+- Consider this example where we sort an array of strings by their length using `usort()`:
+
+```php
+$names = [ 'Alex', 'Peter',  'John' ];
+usort($names, fn($x,$y) => strlen($x) <=> strlen($y));
+
+var_dump($names);
+/* Output:
+Array
+(
+    [0] => Alex
+    [1] => John
+    [2] => Peter
+)
+*/
+```
+
+## Sorting an Array of Objects
+
+- Consider this example where we sort an array of objects by a specific property using `usort()`:
+
+```php
+class Person
+{
+    public $name;
+    public $age;
+
+    public function __construct(string $name, int $age)
+    {
+        $this->name = $name;
+        $this->age = $age;
+    }
+}
+
+$group = [
+    new Person('Bob', 20),
+    new Person('Alex', 25),
+    new Person('Peter', 30),
+];
+
+usort($group, fn($x, $y) => $x->age <=> $y->age);
+
+print_r($group);
+/* Output:
+Array
+(
+    [0] => Person Object
+        (
+            [name] => Bob
+            [age] => 20
+        )
+
+    [1] => Person Object
+        (
+            [name] => Alex
+            [age] => 25
+        )
+
+    [2] => Person Object
+        (
+            [name] => Peter
+            [age] => 30
+        )
+
+)
+*/
+```
+
+How it works:
+
+- The `usort()` function takes the `$group` array and a comparison function as arguments.
+- The comparison function compares the `age` property of two `Person` objects `$x` and `$y`.
+- The spaceship operator (`<=>`) is used to compare the ages, allowing the `usort()` function to sort the array of `Person` objects in ascending order based on their age.
+
+## Using a Static Method as a callback
+
+- A Static Method is a method that belongs to the class itself rather than to any specific instance of the class. You can use a static method as a callback function in `usort()`. Example:
+
+```php
+class Person
+{
+    public $name;
+
+    public $age;
+
+    public function __construct(string $name, int $age)
+    {
+        $this->name = $name;
+        $this->age = $age;
+    }
+}
+
+class PersonComparer
+{
+    public static function compare(Person $x, Person $y)
+    {
+        return $x->age <=> $y->age;
+    }
+}
+
+$group = [
+    new Person('Bob', 20),
+    new Person('Alex', 25),
+    new Person('Peter', 30),
+];
+
+usort($group, ['PersonComparer', 'compare']);
+
+print_r($group);
+```
+
+Here, we define a static method `compare` in the `PersonComparer` class that compares the `age` property of two `Person` objects. We then pass this static
+method as a callback to the `usort()` function to sort the array of `Person` objects by age.
+
+# PHP asort
+
+- The `asort()` function sorts the elements (values) of an associative array in ascending order. Unlike sort functions, `asort()` maintains the index association
+- It's syntax is as follow
+
+```php
+ asort(array &$array, int $flags = SORT_REGULAR) : bool
+```
+
+Example
+
+```php
+$fruits = [
+    "b" => "Banana",
+    "a" => "Apple",
+    "c" => "Orange"
+];
+asort( $fruits, SORT_STRING );
+print_r( $fruits );
+/* Output:
+Array
+(
+    [a] => Apple
+    [b] => Banana
+    [c] => Orange
+)
+*/
+```
+
+## PHP `arsort()` function
+
+- The `arsort()` function in PHP is used to sort the elements (values) of an associative array in descending order while maintaining the index association.
+- The syntax of the `arsort()` function is as follows:
+
+```php
+arsort( array &$array, int $flags = SORT_REGULAR ) : bool
+```
+
+# PHP `uasort()` function
+
+- The `uasort()` function in PHP is used to sort an array by values using a user-defined comparison function while maintaining the index association (That is, the keys are preserved). This function allows you to define your own sorting logic based on specific criteria.
+- The syntax of the `uasort()` function is as follows:
+
+```php
+uasort( array &$array, callable $callback ) : bool
+```
+
+where
+
+- `array` is the input array that you want to sort.
+- `callback` is a user-defined comparison function that determines the sorting order. This function should take two parameters (elements from the array to compare) and return:
+  - A negative value if the first element should come before the second element.
+  - A positive value if the first element should come after the second element.
+  - Zero if both elements are considered equal.
+
+* Example of using `uasort()` function:
+
+```php
+$countries = [
+    'China' => ['gdp' => 12.238 , 'gdp_growth' => 6.9],
+    'Germany' => ['gdp' => 3.693 , 'gdp_growth' => 2.22 ],
+    'Japan' => ['gdp' => 4.872 , 'gdp_growth' => 1.71 ],
+    'USA' => ['gdp' => 19.485, 'gdp_growth' => 2.27 ],
+];
+
+// sort the country by GDP
+uasort($countries, function ($x, $y) {
+    return $x['gdp'] <=> $y['gdp'];
+});
+
+// show the array
+foreach ($countries as $name => $stat) {
+    echo "$name has a GDP of {$stat['gdp']} trillion USD with a GDP growth rate of {$stat['gdp_growth']}%" . '<br>';
+}
+/* Output:
+Germany has a GDP of 3.693 trillion USD with a GDP growth rate of 2.22%
+Japan has a GDP of 4.872 trillion USD with a GDP growth rate of 1.71%
+China has a GDP of 12.238 trillion USD with a GDP growth rate of 6.9%
+USA has a GDP of 19.485 trillion USD with a GDP growth rate of 2.27%
+*/
+```
+
+# PHP `uksort()` function
+
+- The `uksort()` function in PHP is used to sort an array by keys using a user-defined comparison function while maintaining the index association (That is, the values are preserved). This function allows you to define your own sorting logic based on specific criteria.
+- The syntax of the `uksort()` function is as follows:
+
+```php
+uksort( array &$array, callable $callback ) : bool
+```
+
+- Example of using `uksort()` function:
+
+```php
+$fruits = [
+    "B" => "Banana",
+    "a" => "Apple",
+    "c" => "Orange"
+];
+
+uksort($fruits, fn ($x, $y) => $x <=> $y);
+print_r($fruits);
+/* Output:
+Array
+(
+    [a] => Apple
+    [B] => Banana
+    [c] => Orange
+)
+*/
+```
+
+# PHP Arrow functions
+
+- Arrow functions, introduced in PHP 7.4, provide a more concise syntax for defining anonymous functions (also known as closures). They are particularly useful for short functions that consist of a single expression.
+- The syntax of an arrow function is as follows:
+
+```php
+fn (parameter_list) => expression;
+```
+
+where,
+
+- `parameter_list` is a comma-separated list of parameters that the function takes.
+- `expression` is a single expression that the function evaluates and returns.
+
+# PHP `isset()`
+
+- The `isset()` is a language construct in PHP is used to determine if a variable is set and is not `NULL`. It returns `true` only if the variable exists and has a value other than `NULL`, and `false` otherwise.
+- The syntax of the `isset()` function is as follows:
+
+```php
+isset( mixed $var, mixed ...$vars ) : bool
+```
+
+where,
+
+- `var` is the variable to be checked.
+- `vars` (optional) is additional variables to be checked.
+
+## PHP `isset()` with multiple variables
+
+- When using `isset()` with multiple variables, it returns `true` only if all the specified variables are set and not `NULL`. If any of the variables is not set or is `NULL`, it returns `false`.
+- Example of using `isset()` with multiple variables:
+
+```php
+$var1 = "Hello";
+$var2 = 42;
+$var3 = null;
+
+if (isset($var1, $var2, $var3)) {
+    echo "All variables are set and not null.";
+} else {
+    echo "One or more variables are not set or are null.";
+}
+
+/* Output:
+One or more variables are not set or are null.
+*/
+```
+
+Also, one an unset variable is found, the preceding variable are not evaluated
+
+# PHP `empty()` construct
+
+- The `empty()` construct accepts a variable and returns true is the variable is empty. Otherwise, it returns `false`
+- It's syntax is as follows
+
+```php
+empty(mixed $var) : bool
+```
+- A variable is said to be empty if it does not exist or if its value equal `false` (or equal to any of false, (int) 0, (float) 0.0, -0.0, (string) "0", (array) [], or NULL)
++ The `empty($var)` is essentially the same as this expression that uses `isset()` and equality operator `==`
+```php
+!isset($v) ||  $v == false
+```
+
+Example of using `empty()` construct:
+
+```php
+$var1 = "";
+if (empty($var1)) { //true
+    echo "The variable is empty.";
+} else {
+    echo "The variable is not empty.";
+}
+/* Output:
+The variable is empty.
+*/
+```
+
++ `empty()` is a language construct in PHP not a function.
++ `empty()` will not throw an error even though the input variable isn't defined
+
++ In practice, you use the `empty()` construct in the situation where you’re unsure if a variable exists.
+
+For example, suppose you receive an array `$data` from an external source, e.g., an API call or a database query.
+
+To check if the `$data` array has an element with the key 'username' and it is not empty, and you may use the following expression:
+
+```php
+if (!empty($data['username'])) {
+    // The 'username' key exists and is not empty
+    $username = $data['username'];
+} else {
+    // The 'username' key does not exist or is empty
+    $username = 'Guest';
+}
+```
+
+Similarly, this can be done with `isset()` as follows:
+
+```php
+if (isset($data['username']) && $data['username']) {
+    // The 'username' key exists and is not empty
+    $username = $data['username'];
+} else {
+    // The 'username' key does not exist or is empty
+    $username = 'Guest';
+}
+```
+
++ `isset()` and `empty()` are not opposite of each other
