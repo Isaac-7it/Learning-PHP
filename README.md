@@ -3820,3 +3820,29 @@ if (isset($data['username']) && $data['username']) {
 ```
 
 + `isset()` and `empty()` are not opposite of each other
+
+# PHP `is_null()`
++ The `is_null()` construct accepts a variable and returns true if it's value equals `null`. Otherwise, it returns `false`
+```php
+is_null(mixed $var): bool
+```
++ `is_null()` also returns `true` if a variable does not exist. Afterwards, it isuses a warning
+```php
+var_dump(is_null($undefined_var)); // true with a warning
+```
+The warning is as follows:
+```
+Notice: Undefined variable: $undefined_var in ...
+```
+
+## PHP `is_null()` with array
++ `is_null()` returns `false` if a certain key does not exist in an array. Example:
+```php
+$data = ['name' => null];
+var_dump(is_null($data['age'])); // false
+Thereafter, we have this error
+```
+Notice: Undefined index: link
+```
+
+## PHP is_null(), equal operator (==), and identity operator (===)

@@ -647,3 +647,6 @@ $x = "0";
 
 var_dump(isset($x));
 var_dump(empty($x));
+
+$data = ['name' => null];
+var_dump(is_null($data['name']));
