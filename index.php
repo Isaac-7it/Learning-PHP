@@ -1,5 +1,5 @@
 <?php
-// declare(strict_types = 1);
+declare(strict_types = 1);
 // $person = ['name' => 'Kylian','occupation' => 'Footballer', 'age' => 35, 'bmi' => 13.5, 'is_active' => true]; //Associated Array
 
 // $he = 'Bob';
@@ -12,6 +12,7 @@
 
 // echo $text;
 
+/*
 $price = 100;
 
 echo (float) $price, '<br>';
@@ -68,6 +69,7 @@ echo var_dump(true || false && false), '<br>';
 // }
 
 // echo $render;
+/*
 
 if (false) {
     echo 'expression1', '<br>';
@@ -255,7 +257,7 @@ switch ($level1) { //A
     default:
         echo "Level 1: Invalid\n";
 } */ 
-
+/*
 $counter = 1;
 
 function increase (&$value) { 
@@ -279,7 +281,7 @@ echo $joined, '<br>';
 }
 
 echo find('awesome', 'PHP is awesome!'); */
-
+/*
 for ($i = 1; $i < 6; $i++) {
     $sum = 0;
     $sum += $i;
@@ -336,7 +338,7 @@ echo add(1, 2.1);
 // echo '<pre>';
 // echo var_dump($capitals);
 // echo '<pre>';
-
+/*
 unset($capitals['Japan']);
 
 echo '<br>';
@@ -606,6 +608,8 @@ function sorted(array $arr): array
 print_r(sorted($numbers));
 */
 
+/*
+
 $fruits = ['apple', 'Banana', 'orange'];
 sort($fruits, SORT_STRING);
 
@@ -650,3 +654,61 @@ var_dump(empty($x));
 
 $data = ['name' => null];
 var_dump(is_null($data['name']));
+
+function arrayDiff($a, $b) {
+  // your code here
+  
+  foreach($a as $element_a) {
+    array_unique($a);
+    array_unique($b);
+    foreach($b as $element_b) {
+      if($element_a === $element_b) {
+        unset($a[array_search($element_a, $a)]);
+        unset($b[array_search($element_b, $b)]);
+      }
+    }
+  }
+  
+  return (array_merge($a, $b));
+}
+
+$nums_1 = [1, 2, 2, 2, 3];
+$nums_2 = [2];
+
+
+function unique(array $arr) : array
+{
+    $new_arr = [];
+    foreach($arr as $element) {
+        if (!in_array($element, $new_arr)) {
+            $new_arr[] = $element;
+        }
+    }
+
+    return $new_arr;
+}
+
+print_r(unique($nums_1));
+print_r(unique($nums_2));
+
+function difference(array $a,array $b) : array
+{
+    $unique_a = unique($a);
+    $unique_b = unique($b);
+    foreach($unique_a as $element_a) {
+        foreach($unique_b as $element_b) {
+            if($element_a === $element_b) {
+                unset($unique_a[array_search($element_a, $unique_a)]);
+                unset($unique_b[array_search($element_b, $unique_b)]);
+            }
+        }
+    }
+
+    return array_merge($unique_a, $unique_b);
+}
+
+print_r(difference($nums_1, $nums_2)); */
+
+$mixed = [10, '5', 3.14, 'apple', 2, '20', 'banana', true, .5];
+sort($mixed, SORT_NUMERIC);
+print_r($mixed);

@@ -2247,6 +2247,7 @@ yields this output
   [2]=>
   string(6) "Orange"
 }
+```
 - Using `print_r()` in this manner
 
 ```php
@@ -2256,7 +2257,8 @@ print_r( $array_name );
 
 yields this output
 
-```Array
+```
+Array
 (
     [0] => Apple
     [1] => Banana
@@ -2311,13 +2313,36 @@ $array_name[index_or_key] = new_value;
 
 ## Removing Elements from an Array
 
-- To remove an element from an array, you can use the `unset()` function. Example
+- To remove an element from an array, you can use the `unset()` function.
+
++ Its syntax is as follows:
+
+```php
+unset( $array_name[index_or_key] );
+```
+
++ Example
 
 ```php
 $array_name = [ "Apple", "Banana", "Orange" ];
 unset( $array_name[1] ); // Removes the element at index 1 (Banana)
 print_r( $array_name ); // Output: Array ( [0] => Apple [2] => Orange )
 ```
+Note that after removing an element, the array keys are not automatically reindexed. Thus, if you try to access the removed index, you will get an undefined index error.
++ To reindex the array after removing an element, you can use the `array_values()` function. Example
+
+```php
+$array_name = [ "Apple", "Banana", "Orange" ];
+unset( $array_name[1] ); // Removes the element at index 1 (Banana)
+$array_name = array_values( $array_name ); // Reindex the array
+print_r( $array_name ); // Output: Array ( [0] => Apple [1] => Orange )
+```
+
++ The `array_values()` function returns a new array with the values from the original array, reindexed with sequential integer keys starting from 0. 
+
++ This function does not work for an associative array. Also, it doesn't modify the original array; it returns a new array with reindexed values.
+
++ Thus, whenever unset is used to remove an element from an indexed array, it is a good practice to use `array_values()` to reindex the array if you plan to access the elements by their indexes later.
 
 ## Getting the Length / Size of an Array
 
@@ -2331,11 +2356,12 @@ echo $length; // Output: 4
 
 ## PHP Associative Arrays
 
-- To add an element, to an associative array, you have to specify the key for the new element. That is:
+- To append an element, to an associative array, you have to specify the key for the new element. That is:
 
 ```php
 $array_name["new_key"] = new_value;
 ```
+This element will be added at the last of the array.
 
 - Use an associative array to reference elements by names (keys) instead of numbers (indexes).
 
@@ -2363,11 +2389,12 @@ $tasks = [
   ['Work', 8]
 ];
 
-unset( $tasks[1] ); // Removes the second element (['Practice PHP', 2])
-print_r( $tasks ); // Output: Array ( [0] => Array ( [0] => Learn PHP programming [1] => 2 ) [2] => Array ( [0] => Work [1] => 8 ) )
+unset( $tasks[1][0] ); // Removes only the first element of the second sub-array ('Practice PHP')
+print_r( $tasks ); // Output: Array ( [0] => Array ( [0] => Learn PHP programming [1] => 2 ) [1] => Array ( [0] => [1] => 2 ) [2] => Array ( [0] => Work [1] => 8 ) )
 ```
 
-- The `array_splice` function can also be used to remove elements from a multidimensional array. It takes the array, the starting index, and the number of elements to remove as arguments.
+# PHP `array_splice()` function
+- The `array_splice` function can also be used to remove elements from a array. It takes the array, the starting index, and the number of elements to remove as arguments.
 - It's syntax is as follows:
 
 ```php
@@ -2387,6 +2414,19 @@ print_r( $tasks ); // Output: Array ( [0] => Array ( [0] => Learn PHP programmin
 ```
 
 - Generally, `array_splice` is more useful when you want to remove multiple elements or a range of elements from a multidimensional array.
+- Practically, use `array_splice` when you want to remove element(s) from an Indexed Array
+
+### PHP `array_splice()` with Associative array
++ Whenever `array_splice()` is used with an Associative array, the keys are reindexed to numeric indexes starting from 0. Example
+```php
+$assoc_array = [
+  "first" => "Apple",
+  "second" => "Banana",
+  "third" => "Orange"
+];
+array_splice( $assoc_array, 1, 1 ); // Removes only the second element ("Banana")
+print_r( $assoc_array ); // Output: Array ( [0] => Apple [1] => Orange )
+```
 
 ## Iterating over a Multidimensional Array using foreach
 
@@ -3253,6 +3293,37 @@ Array
 
 Here, the sorting is done based on ASCII values, which places 'file10.txt' before 'file2.txt' because '1' comes before '2' in ASCII order.
 
+## Sorting an array of mixed data types
+- When sorting an array that contains mixed data types (e.g., integers, strings, floats), the `sort()` function uses either the `SORT_STRING` or `SORT_NUMERIC` flag based on the types of the elements in the array. By default, it uses `SORT_REGULAR`, which compares the elements based on their values without considering their types.
+
+### Using `SORT_STRING` flag
++ When using the `SORT_STRING` flag, all elements are treated as strings during the sorting process
++ Boolean valeu `true` is converted to the string `1` while `false` is converted to an empty string `""`. 
+
+Example:
+
+```php
+$mixed = [10, '5', 3.14, 'apple', 2, '20', 'banana', true, .5];
+sort($mixed, SORT_STRING);
+print_r($mixed);
+/* Output:
+Array ( [0] => 0.5 [1] => 1 [2] => 10 [3] => 2 [4] => 20 [5] => 3.14 [6] => 5 [7] => apple [8] => banana )
+*/
+```
+
+### Using `SORT_NUMERIC` flag
++ When using the `SORT_NUMERIC` flag, all elements are treated as numbers during the sorting process. Non-numeric strings are considered to the integer `0` thus, they appear first.
+Example:
+
+```php
+$mixed = [10, '5', 3.14, 'apple', 2, '20', 'banana', true, .5];
+sort($mixed, SORT_STRING);
+print_r($mixed);
+/* Output:
+Array ( [0] => apple [1] => banana [2] => 0.5 [3] => 1 [4] => 2 [5] => 3.14 [6] => 5 [7] => 10 [8] => 20 )
+*/
+```
+
 ## PHP `rsort()` function
 
 - The `rsort()` function in PHP is used to sort the elements of an array in descending order. This function modifies the original array and sorts its elements based on their values.
@@ -3700,12 +3771,7 @@ $fruits = [
 uksort($fruits, fn ($x, $y) => $x <=> $y);
 print_r($fruits);
 /* Output:
-Array
-(
-    [a] => Apple
-    [B] => Banana
-    [c] => Orange
-)
+Array ( [B] => Banana [a] => Apple [c] => Orange )
 */
 ```
 
@@ -3725,7 +3791,7 @@ where,
 
 # PHP `isset()`
 
-- The `isset()` is a language construct in PHP is used to determine if a variable is set and is not `NULL`. It returns `true` only if the variable exists and has a value other than `NULL`, and `false` otherwise.
+- The `isset()` is a language construct in PHP is used to determine if a variable is set and is not `NULL`. It returns `true` only if the variable exists and has a value other than `NULL`, and `false` if the variable does not exist or exist but has its value set to `null`.
 - The syntax of the `isset()` function is as follows:
 
 ```php
@@ -3840,6 +3906,7 @@ Notice: Undefined variable: $undefined_var in ...
 ```php
 $data = ['name' => null];
 var_dump(is_null($data['age'])); // false
+```
 Thereafter, we have this error
 ```
 Notice: Undefined index: link
