@@ -5,12 +5,12 @@ declare(strict_types = 1);
 // $he = 'Bob';
 // $she = 'Alice';
 
-// $text = <<<IDENTITY
+// $formatted_text = <<<IDENTITY
 // Bobby called her a 'dog'
 // and she decided to 'curse' him
 // IDENTITY;
 
-// echo $text;
+// echo $formatted_text;
 
 /*
 $price = 100;
@@ -29,11 +29,11 @@ echo var_dump($price), '<br>';
 echo 10 % 3, '<br>';
 
 $name = 'Biscuit';
-$response = <<< TEXT
+$response = <<< for$formatted_text
 "Hey brother!
 I'm $name
 I belive you are doing good"
-TEXT;
+for$formatted_text;
 
 echo $response, '<br>';
 
@@ -57,15 +57,15 @@ echo var_dump(true || false && false), '<br>';
 // $is_authenticated = true;
 
 // if ($is_authenticated) {
-//     $render = <<< TEXT
+//     $render = <<< for$formatted_text
 //     <h1>Welcome!</h1>
 //     <a href="#">LogOut</a>
-//     TEXT;
+//     for$formatted_text;
 // } else {
-//     $render = <<< TEXT
+//     $render = <<< for$formatted_text
 //     <h1>Hello</h1>
 //     <a href="#">Login</a>
-//     TEXT;
+//     for$formatted_text;
 // }
 
 // echo $render;
@@ -94,15 +94,15 @@ endif;
 
 $render = true
 ? 
-<<< TEXT
+<<< for$formatted_text
 <h1>Welcome!</h1>
 <a href="#">LogOut</a>
-TEXT
+for$formatted_text
 : 
-<<< TEXT
+<<< for$formatted_text
 <h1>Hello</h1>
 <a href="#">Login</a>
-TEXT;
+for$formatted_text;
 echo $render, '<br>';
 
 $eligible = true;
@@ -152,9 +152,9 @@ $message = '';
     endswitch;
 
 
-echo <<<TEXT
+echo <<<for$formatted_text
 <h1>$message</h1>
-TEXT; */
+for$formatted_text; */
 
 // for (;;) {
 
@@ -175,9 +175,9 @@ TEXT; */
 $a = 1;
 do {
     echo
-    <<<TEXT
+    <<<for$formatted_text
     <h1>$a</h1>
-    TEXT;
+    for$formatted_text;
     $a++;
 } while ($a < 1);
 
@@ -708,7 +708,293 @@ function difference(array $a,array $b) : array
 }
 
 print_r(difference($nums_1, $nums_2)); */
-
+/*
 $mixed = [10, '5', 3.14, 'apple', 2, '20', 'banana', true, .5];
 sort($mixed, SORT_NUMERIC);
 print_r($mixed);
+
+$numbers = [1932, 1003, 3428, 253, 901];
+
+echo '<br>';
+print_r($numbers);
+echo '<br>';
+/*
+function sort_by_size($x, $y) {
+    return $x <=> $y;
+}
+
+usort($numbers, 'sort_by_size');
+
+echo '<br>';
+print_r($numbers);
+echo '<br>';*/
+/*
+usort($numbers, fn ($x, $y) => $x <=> $y);
+
+echo '<pre>';
+print_r($numbers);
+echo '<pre>';
+
+$fruits = ['grapes', 'avocada', 'StrAWberry', 'orangEE'];
+
+usort($fruits, function($x, $y) {
+    if($x === $y) {
+        return 0;
+    }
+
+    return $x < $y ? 1 : -1;
+});
+
+echo '<pre>';
+print_r($fruits);
+echo '<pre>';
+
+$evens = [2, 4, 6];
+
+echo '<pre>';
+echo call_user_func_array(fn ($x, $y, $z) => $x + $y, $evens);
+echo '<pre>';
+*/
+
+/*
+$lengths = [10, 20, 30];
+$areas = [];
+
+foreach ($lengths as $length) {
+    $areas[] = $length ** 2;
+}
+
+echo '<br>';
+print_r($areas);
+echo '<br>';
+
+
+class User {
+    public $username;
+
+    public $email;
+
+    public $id;
+
+    public function __construct (int $id, string $username, string $email) {
+        $this -> id = $id;
+        $this -> username = $username;
+        $this -> email = $email;
+    }
+};
+
+$users = [
+    new User(2, 'Harray Matthews', 'harraymat@gmail.com'),
+    new User(1, 'John Doe', 'johndoe@gmail.com'),
+    new User(3, 'Collins Fox', 'collfox@gmail.com')
+];
+*/
+
+/* 
+Assume the first object has the highest ID
+Loop through the array
+
+If the assumed is less than or equal the next, the assume is not more considered t be the highest. It gets moved to a new array
+The next element that made it fail becomes the highest.
+This process continues to the last
+*/
+/*
+usort($users, fn($x, $y) => $x -> id <=> $y -> id);
+
+echo '<br>';
+print_r($users);
+echo '<br>';
+*/
+/*
+$users = [
+    ['Hello', 'John Doe', 'johndoe@gmail.com'],
+    ['Hello', 'Harray Matthews', 'harraymat@gmail.com'],
+    ['Hello', 'Collins Fox', 'collfox@gmail.com']
+];
+
+$usernames = array_map(function ($user) {
+    usort($user, fn ($x, $y) => $x <=> $y);
+    return $user;
+} , $users);
+
+echo '<br>';
+print_r($usernames);
+echo '<br>';
+*/
+/*
+class Square {
+    public $length;
+
+    public static function area($length) {
+        return $length ** 2;
+    }
+};
+
+$lengths = [2, 3, 4];
+
+$areas = array_map('Square::area', $lengths);
+
+echo '<br>';
+print_r($areas);
+echo '<br>';
+
+$codes = ['#$288IF1', '#$102OJ9', '#$504XD0', '#$192PL0', '#$453ND4', '#$548DA6'];
+
+// $codes = [1, 2, 3, 4, 5, 6];
+
+$filtered_codes = array_filter($codes, fn ($x) => $x % 2 === 0 ? true : false, ARRAY_FILTER_USE_KEY);
+
+echo '<br>';
+print_r($filtered_codes);
+echo '<br>';
+
+$indexes = [1, 2, 3, 4, 5, 6]; */
+
+/*
+class Odd {
+    public function isOdd($x) {
+        return !($x % 2 === 0);
+    }
+}
+
+$filtered_indexes = array_filter($indexes, [new Odd, 'isOdd']);
+*/
+
+/*
+class Odd {
+    public static function isOdd($x) {
+        return !($x % 2 === 0);
+    }
+}
+
+$filtered_indexes = array_filter($indexes, ['Odd', 'isOdd']);
+
+echo '<pr>';
+print_r($filtered_indexes);
+echo '<pr>';
+
+
+$mixed_numbers = [-2, -4, 5, -2, 5, 5, 3];
+
+class Positive {
+    public function __invoke($number) {
+        return $number > 0;
+    }
+}
+
+$filtered_numbers = array_unique(array_filter($mixed_numbers, new Positive()));
+
+echo '<pre>';
+print_r($filtered_numbers);
+echo '<pre>';
+
+$words = ['Sage', 'The', 'Warrior'];
+
+$smashed_words = array_reduce($words, fn ($previous, $current) => $previous . $current);
+
+echo '<br>';
+echo $smashed_words;
+echo '<br>';
+
+$carts = [
+    ['item' => 'A', 'qty' => 2, 'price' => 10],
+    ['item' => 'B', 'qty' => 3, 'price' => 20],
+    ['item' => 'C', 'qty' => 5, 'price' => 30]
+];
+
+$total_item = array_reduce($carts, fn($x, $y) => $x + $y['qty']);
+
+echo '<br>';
+echo $total_item;
+echo '<br>';
+
+__DIR__ */
+/*
+function toCamelCase(string $text)
+{
+    $formatted_text = $text . '_';
+    $accumulator = "";
+    $words = [];
+    $camel_words = [];
+    $i = 0;
+    
+    if($formatted_text !== ucfirst($formatted_text)) {
+      while ($i < strlen($formatted_text)) {
+        if($formatted_text[$i] === '_' || $formatted_text[$i] === '-') {
+            $words[] = $accumulator;
+            $accumulator = "";
+        } else {
+            $accumulator .= $formatted_text[$i];
+        }
+
+        $i++;
+    }
+    
+    foreach($words as $word) {
+        if($word === $words[0]) {
+            $camel_words[] = strtolower($word);
+        } else {
+            $camel_words[] = ucfirst($word);
+        }
+    }
+
+    $camel_case = "";
+
+    foreach($camel_words as $word) {
+        $camel_case .= $word;
+    }
+
+    return $words;
+   } else {
+      while ($i < strlen($formatted_text)) {
+        if($formatted_text[$i] === '_' || $formatted_text[$i] === '-') {
+            $words[] = $accumulator;
+            $accumulator = "";
+        } else {
+            $accumulator .= $formatted_text[$i];
+        }
+
+        $i++;
+    }
+
+    $camel_case = "";
+
+    foreach($camel_words as $word) {
+        $camel_case .= $word;
+    }
+
+    return $words;
+    }
+}
+
+echo '<br>';
+var_dump(toCamelCase("The_Stealth-Warrior"));
+echo '<br>';
+
+echo */
+
+// $person = [
+//     'name' => 'Geek',
+//     'age' => 18
+// ];
+
+// unset($person['age']);
+
+// echo '<br>';
+// print_r($person);
+// echo '<br>';
+
+const TIME = 60;
+
+$returning_user = false;
+
+if (isset($_COOKIE['return'])) {
+    $returning_user = true;
+    $name = 'User';
+} else {
+    setcookie('return', '1', time() + TIME);
+    $name = 'Guest';
+}
+
+echo $returning_user ? "Welcome back!
+$name" : "Welcome to my website $name";
