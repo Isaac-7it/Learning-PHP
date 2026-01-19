@@ -1,3 +1,5 @@
+<!-- @format -->
+
 # PHP
 
 - PHP is a server-side and general-purpose scripting language especially suited for web development
@@ -680,7 +682,8 @@ $html = <<<HTML
 </div>
 HTML;
 ```
-+ Note that if you want to write HTML using the Heredoc syntax, you need the `HTML` identifier after the `<<<` operator else, it will be considered as a normal string
+
+- Note that if you want to write HTML using the Heredoc syntax, you need the `HTML` identifier after the `<<<` operator else, it will be considered as a normal string
 
 # PHP Nowdoc Syntax
 
@@ -4085,33 +4088,43 @@ How it works:
 ```php
 fn ($parameter_1, $parameter_2, ...) => expression;
 ```
+
 where,
+
 - `parameter_1, parameter_2, ...` is a comma-separated list of parameters that the function takes.
 - `expression` is a single expression that the function evaluates and returns. It can't take more than one
-Notice that there is no need for the `return` keyword.
+  Notice that there is no need for the `return` keyword.
 - The above syntax is the same as the below Anonymous function
+
 ```php
 function ($parameter_1, $parameter_2, ...) {
     return expression;
 };
 ```
 
-+ Unlike anonymous functions, arrow functions can also access variables from the parent scope using the `use` construct. However, arrow functions automatically capture variables from the parent scope by value, so there is no need to explicitly use the `use` construct.
-+ Also, arrow function needs to either be assigned to a variable or passed explicitly as an argument to another function.
+- Unlike anonymous functions, arrow functions can also access variables from the parent scope using the `use` construct. However, arrow functions automatically capture variables from the parent scope by value, so there is no need to explicitly use the `use` construct.
+- Also, arrow function needs to either be assigned to a variable or passed explicitly as an argument to another function.
 
 # PHP Variable Functions
-+ In PHP, variable functions allow you to call a function using a variable that contains the name of the function as a string. This feature provides flexibility in function calls, enabling dynamic function invocation based on runtime conditions.
-+ To use variable functions, you simply assign the name of the function to a variable and then use that variable followed by parentheses to call the function.
+
+- In PHP, variable functions allow you to call a function using a variable that contains the name of the function as a string. This feature provides flexibility in function calls, enabling dynamic function invocation based on runtime conditions.
+- To use variable functions, you simply assign the name of the function to a variable and then use that variable followed by parentheses to call the function.
 
 ## Using variable functions to call a method
-+ The variable functions allow you to call the methods of an object. The syntax for calling a method using a variable function is as follows:
+
+- The variable functions allow you to call the methods of an object. The syntax for calling a method using a variable function is as follows:
+
 ```php
 $this->$variable($arguments)
 ```
+
 where,
+
 - `$variable` is a variable that contains the name of the method as a string.
 - `$arguments` are the arguments to be passed to the method.
-+ Example of using variable functions to call a method:
+
+* Example of using variable functions to call a method:
+
 ```php
 class Calculator {
     public function add($a, $b) {
@@ -4132,37 +4145,51 @@ echo $result; // Output: 5
 ```
 
 # PHP call_user_func_array()
-+ The `call_user_func_array()` function in PHP is used to call a callback function with an array of parameters. This function is particularly useful when you want to pass a variable number of arguments to a function or when the arguments are stored in an array.
-+ The syntax of the `call_user_func_array()` function is as follows:
+
+- The `call_user_func_array()` function in PHP is used to call a callback function with an array of parameters. This function is particularly useful when you want to pass a variable number of arguments to a function or when the arguments are stored in an array.
+- The syntax of the `call_user_func_array()` function is as follows:
+
 ```php
 call_user_func_array(callable $callback, array $args): mixed
 ```
+
 where,
+
 - `callback` is the function to be called. It can be a string containing the function name, an array containing an object and method name, or a closure.
 - `args` is an array of parameters to be passed to the callback function.
-+ Example of using `call_user_func_array()` function:
+
+* Example of using `call_user_func_array()` function:
+
 ```php
 $evens = [2, 4, 6];
 
 echo call_user_func_array(fn ($x, $y, $z) => $x + $y, $evens);
 // Output: 6
 ```
+
 How it works:
+
 - The `call_user_func_array()` function takes a callback function (in this case, an arrow function that sums two numbers) and an array of arguments (`$evens`).
 - It calls the callback function with the elements of the `$evens` array as individual arguments. Here, only the first two elements are sum since the callback requires only two parameters
 
 # PHP `array_map()` function
-+ The `array_map()` function in PHP is used to apply a callback function to each element of one or more arrays. It returns a new array containing the results of applying the callback function to each element.
-+ The syntax of the `array_map()` function is as follows:
+
+- The `array_map()` function in PHP is used to apply a callback function to each element of one or more arrays. It returns a new array containing the results of applying the callback function to each element.
+- The syntax of the `array_map()` function is as follows:
+
 ```php
 array_map(callable $callback, array $array1, array ...$arrays): array
 ```
+
 where,
+
 - `callback` is the function to be applied to each element of the array(s). It can be a string containing the function name, an array containing an object and method name, or a closure.
 - `array1, arrays` are the input arrays to be processed. You can pass multiple arrays, and the callback function will receive corresponding elements from each array as arguments.
 
 ## Using the PHP array_map() function with an array of objects
-+ The following code snippet defines a class with three properties `id`, `username`, and `email`. It then creates an array of objects of that class and uses the `array_map()` function to extract the `email` property from each object in the array.
+
+- The following code snippet defines a class with three properties `id`, `username`, and `email`. It then creates an array of objects of that class and uses the `array_map()` function to extract the `email` property from each object in the array.
+
 ```php
 class User {
     public $username;
@@ -4195,7 +4222,9 @@ Array ( [0] => John Doe [1] => Harray Matthews [2] => Collins Fox )
 ```
 
 ## Using a static metho as a callback in array_map()
-+ You can also use a static method as a callback function in the `array_map()` function. Example:
+
+- You can also use a static method as a callback function in the `array_map()` function. Example:
+
 ```php
 class Square {
     public $length;
@@ -4216,30 +4245,40 @@ echo '<br>';
 Array ( [0] => 4 [1] => 9 [2] => 16 )
 */
 ```
+
 How it works:
+
 - The `Square` class defines a public static method `area()` that calculates the area of a square given its length.
 - An array `$lengths` is created containing the lengths of three squares.
 - The `array_map()` function is used to apply the static method `Square::area` to each element of the `$lengths` array.
 - The result is stored in the `$areas` array, which contains the areas of the squares.
-+ Note that the syntax for passing a public static method to the array_map() function is as follows:
+
+* Note that the syntax for passing a public static method to the array_map() function is as follows:
+
 ```php
 'className::staticMethodName'
 ```
 
 # PHP `array_filter()` function
-+ The `array_filter()` function in PHP is used to filter elements of an array using a callback function. It returns a new array containing only the elements that satisfy the condition defined in the callback function.
-+ The syntax of the `array_filter()` function is as follows:
+
+- The `array_filter()` function in PHP is used to filter elements of an array using a callback function. It returns a new array containing only the elements that satisfy the condition defined in the callback function.
+- The syntax of the `array_filter()` function is as follows:
+
 ```php
 array_filter(array $array, ?callable $callback = null, int $mode = 0): array
 ```
+
 where,
+
 - `array` is the input array to be filtered.
 - `callback` (optional) is a function that defines the filtering condition. It should return `true` for elements that should be included in the result and `false` for elements that should be excluded. If no callback is provided, all truthy values will be included.
 - `mode` (optional) is a flag that determines what arguments are passed to the callback function. It can take the following values:
   - `ARRAY_FILTER_USE_KEY`: Passes the key of each element to the callback function.
   - `ARRAY_FILTER_USE_BOTH`: Passes both the value and the key of each element to the callback function.
   - Default is `0`, which means only the value of each element is passed to the callback function.
-+ Example of using `array_filter()` function:
+
+* Example of using `array_filter()` function:
+
 ```php
 $codes = ['#$288IF1', '#$102OJ9', '#$504XD0', '#$192PL0', '#$453ND4', '#$548DA6'];
 
@@ -4252,13 +4291,17 @@ echo '<br>';
 Array ( [0] => #$288IF1 [2] => #$504XD0 [4] => #$453ND4 )
 */
 ```
+
 How it works:
+
 - The `array_filter()` function takes the `$codes` array and a callback function as arguments.
 - The callback function checks if the key of each element is even using the modulo operator (`%`). If the key is even, it returns `true`, indicating that the element should be included in the result; otherwise, it returns `false`.
 - The `ARRAY_FILTER_USE_KEY` flag is used to indicate that the keys of the array
 
 ## Using a method of a class as callback
-+ The following example demonstrates the use of a class method as a callback function in the `array_filter()` function:
+
+- The following example demonstrates the use of a class method as a callback function in the `array_filter()` function:
+
 ```php
 $indexes = [1, 2, 3, 4, 5, 6];
 
@@ -4277,17 +4320,23 @@ echo '<pr>';
 Array ( [0] => 1 [2] => 3 [4] => 5 )
 */
 ```
+
 How it works:
+
 - The `Odd` class defines a method `isOdd()` that checks if a number is odd.
 - An instance of the `Odd` class is created using `new Odd`.
 - The `array_filter()` function is called with the `$indexes` array and the method `isOdd` of the `Odd` class instance as the callback function.
-+ The following syntax can be considered as a general syntax for using a class method as a callback in the `array_filter()` function
+
+* The following syntax can be considered as a general syntax for using a class method as a callback in the `array_filter()` function
+
 ```
 array_filter($array, [new ClassName, 'methodName']);
 ```
 
 ## Using the static method of a class as callback
-+ The following demonstrates the use of a static method as the callback of the `array_filter()` function:
+
+- The following demonstrates the use of a static method as the callback of the `array_filter()` function:
+
 ```php
 $indexes = [1, 2, 3, 4, 5, 6];
 
@@ -4306,14 +4355,18 @@ echo '<pr>';
 Array ( [0] => 1 [2] => 3 [4] => 5 )
 */
 ```
+
 A general syntax for this can be considered as follows
+
 ```php
 array_filter($array, ['ClassName', 'staticMethodName']);
 ```
 
 ## Using a magic method as callback
-+ From PHP 5.3, you can necessarily use the `__invoke()` magic method as a callable
-as follows
+
+- From PHP 5.3, you can necessarily use the `__invoke()` magic method as a callable
+  as follows
+
 ```php
 $mixed_numbers = [-2, -4, 5, -2, 5, 5, 3];
 
@@ -4336,24 +4389,30 @@ Array
 )
 */
 ```
+
 How it works:
+
 - The `Positive` class defines the `__invoke()` magic method, which checks if a number is positive.
 - An instance of the `Positive` class is created using `new Positive()`.
 - The `array_filter()` function is called with the `$mixed_numbers` array and the `Positive` class instance as the callback function.
 - The `array_unique()` function is then used to remove duplicate positive numbers from the filtered result.
 - The result is stored in the `$filtered_numbers` array, which contains only unique positive numbers.
 - The following syntax can be considered as a general syntax for using a magic method as a callback in the `array_filter()` function
+
 ```php
 array_filter($array, new ClassName());
 ```
+
 For a magic method, you just need to call an instance of the class since the `__invoke()` method is called automatically when the object is used as a function.
 
 ## Passing elements to the callback function
-+ By default, the `array_filter()` function passes only the values of the array to the callback function. However, you can change this behavior by using the `mode` parameter.
-+ The `mode` parameter can take the following values:
+
+- By default, the `array_filter()` function passes only the values of the array to the callback function. However, you can change this behavior by using the `mode` parameter.
+- The `mode` parameter can take the following values:
   - `ARRAY_FILTER_USE_KEY`: Passes the key of each element to the callback function.
   - `ARRAY_FILTER_USE_BOTH`: Passes both the value and the key of each element to the callback function.
-+ Example of using the `mode` parameter in the `array_filter()` function:
+- Example of using the `mode` parameter in the `array_filter()` function:
+
 ```php
 $codes = ['#$288IF1', '#$102OJ9', '#$504XD0', '#$192PL0', '#$453ND4', '#$548DA6'];
 $filtered_codes = array_filter($codes, fn ($x, $y) => $y % 2 === 0 ? true : false, ARRAY_FILTER_USE_KEY);
@@ -4364,7 +4423,9 @@ echo '<br>';
 Array ( [0] => #$288IF1 [2] => #$504XD0 [4] => #$453ND4 )
 */
 ```
-+ Example using `ARRAY_FILTER_USE_BOTH` mode:
+
+- Example using `ARRAY_FILTER_USE_BOTH` mode:
+
 ```php
 $codes = ['#$288IF1', '#$102OJ9', '#$504XD0', '#$192PL0', '#$453ND4', '#$548DA6'];
 $filtered_codes = array_filter($codes, fn ($x, $y) => $y % 2 === 0 && strlen($x) > 7 ? true : false, ARRAY_FILTER_USE_BOTH);
@@ -4375,23 +4436,31 @@ echo '<br>';
 Array ( [0] => #$288IF1 [2] => #$504XD0 )
 */
 ```
+
 How it works:
+
 - In the first example, the `ARRAY_FILTER_USE_KEY` mode is used, so the callback function receives the key of each element as the second parameter (`$y`). The function checks if the key is even and returns `true` for even keys, resulting in a filtered array containing only elements with even keys.
 - In the second example, the `ARRAY_FILTER_USE_BOTH` mode is used, so the callback function receives both the value (`$x`) and the key (`$y`) of each element. The function checks if the key is even and if the length of the value is greater than 7. It returns `true` for elements that satisfy both conditions, resulting in a filtered array containing only those elements.
 - `$x` parameter represents the values while `$y` parameter represents the keys of the array elements.
 
 # PHP `array_reduce()` function
-+ The `array_reduce()` function reduces the values of an array into a single value by iteratively applying a callback function to each element of the array. 
-+ Suppose you have an array of numbers and you want to calculate their sum. You can use the `array_reduce()` function to achieve this.
-+ The syntax of the `array_reduce()` function is as follows:
+
+- The `array_reduce()` function reduces the values of an array into a single value by iteratively applying a callback function to each element of the array.
+- Suppose you have an array of numbers and you want to calculate their sum. You can use the `array_reduce()` function to achieve this.
+- The syntax of the `array_reduce()` function is as follows:
+
 ```php
 array_reduce(array $array, callable $callback, mixed $initial = null): mixed
 ```
+
 where,
+
 - `array` is the input array to be reduced.
 - `callback` is a function that defines how to reduce the array. It should take two parameters: the accumulator (the current reduced value) and the current array element. The function should return the updated accumulator.
 - `initial` (optional) is the initial value of the accumulator (which is the first paramter of the callback function). If not provided, the first element of the array is used as the initial value.
-+ Example of using `array_reduce()` function:
+
+* Example of using `array_reduce()` function:
+
 ```php
 $words = ['Sage', 'The', 'Warrior'];
 
@@ -4403,12 +4472,16 @@ echo '<br>';
 /* Output: SageTheWarrior
 */
 ```
+
 How it works:
+
 - The `array_reduce()` function takes the `$words` array and a callback function as arguments.
 - The callback function concatenates the `previous` accumulated string with the `current` word from the array.
 - The result is stored in the `$smashed_words` variable, which contains the concatenated string "SageTheWarrior".
-+ The `previous` parameter is special. It should not be manipulated when passed to the callback function. It holds the accumulated value from the previous iteration.
-+ Consider this example
+
+* The `previous` parameter is special. It should not be manipulated when passed to the callback function. It holds the accumulated value from the previous iteration.
+* Consider this example
+
 ```php
 $carts = [
     ['item' => 'A', 'qty' => 2, 'price' => 10],
@@ -4422,18 +4495,23 @@ echo '<br>';
 echo $total_item;
 echo '<br>';
 ```
+
 The above code will throw an error since in the first iteration, the `$x` parameter will be equal to the first element of the array which is an array itself. To fix this, we need to do the following:
+
 ```php
 $total_item = array_reduce($carts, fn($x, $y) => $x + $y['qty']);
 ```
 
-+ If the input array is empty and the `initial` parameter is not provided, the `array_reduce()` function will return `NULL`. Example:
+- If the input array is empty and the `initial` parameter is not provided, the `array_reduce()` function will return `NULL`. Example:
+
 ```php
 $empty_array = [];
 $result = array_reduce($empty_array, fn($x, $y) => $x + $y);
 var_dump($result); // Output: NULL
 ```
-+ However, if the `initial` parameter is provided, the `array_reduce()` function will return the value of the `initial` parameter. Example:
+
+- However, if the `initial` parameter is provided, the `array_reduce()` function will return the value of the `initial` parameter. Example:
+
 ```php
 $empty_array = [];
 $result = array_reduce($empty_array, fn($x, $y) => $x + $y, 0);
@@ -4441,19 +4519,27 @@ var_dump($result); // Output: int(0)
 ```
 
 # PHP `include` construct
-+ The `include` construct in PHP is used to include (or load) and evaluate a specified file during the execution of a script. It allows you to reuse code from other files, making your code more modular and easier to maintain.
-+ It's syntax is as follows:
+
+- The `include` construct in PHP is used to include (or load) and evaluate a specified file during the execution of a script. It allows you to reuse code from other files, making your code more modular and easier to maintain.
+- It's syntax is as follows:
+
 ```php
 include 'file.php';
 ```
+
 where,
+
 - `file.php` is the path to the file you want to include. It can be a relative or absolute path.
-+ When the `include` construct is encountered, PHP will read the specified file and execute its code as if it were part of the calling file. If it cannot find the specified file, it will generate a warning but continue executing the rest of the script.
+
+* When the `include` construct is encountered, PHP will read the specified file and execute its code as if it were part of the calling file. If it cannot find the specified file, it will generate a warning but continue executing the rest of the script.
+
 ```php
 Warning: include(functions.php): failed to open stream: No such file or directory in ... on line ..
 Warning: include(): Failed opening 'functions.php' for inclusion (include_path='\xampp\php\PEAR') in ... on line ..
 ```
-+ General structure for a PHP project 
+
+- General structure for a PHP project
+
 ```
 .
 ├── index.php
@@ -4467,12 +4553,15 @@ Warning: include(): Failed opening 'functions.php' for inclusion (include_path='
     └── js
         └── app.js
 ```
+
 Thus, by convention, you include the `header.php` and `footer.php` files in the `inc` directory
 
 ## PHP include & variable scopes
-+ When you include a file, all the variables defined in that file inherit the variable scope of the line on which the include occurs. They becomes a global variable in the file that includes it.
-+ Example of using `include` construct and variable scopes:
-+ For example, the following defines the $title and $content variables in the `functions.php`:
+
+- When you include a file, all the variables defined in that file inherit the variable scope of the line on which the include occurs. They becomes a global variable in the file that includes it.
+- Example of using `include` construct and variable scopes:
+- For example, the following defines the $title and $content variables in the `functions.php`:
+
 ```php
 <?php
 
@@ -4483,6 +4572,7 @@ $content = 'This shows how the PHP include construct works.';
 ```
 
 When you include the functions.php in the index.php file, the $title and $content variables become the global variables in the index.php file. And you can use them as follows:
+
 ```php
 
 <?php include 'inc/header.php'; ?>
@@ -4496,8 +4586,11 @@ When you include the functions.php in the index.php file, the $title and $conten
 
 <?php include 'inc/footer.php'; ?>
 ```
+
 Notice that the file containing the reusable variable is included before it is used in that file
-+ But if the `functions.php` file is included in a function, the variables defined in the `functions.php` file will be local to that function only. Example:
+
+- But if the `functions.php` file is included in a function, the variables defined in the `functions.php` file will be local to that function only. Example:
+
 ```php
 <?php include 'inc/header.php'; ?>
 <?php include_once 'functions.php'; ?>
@@ -4519,19 +4612,26 @@ Notice that the file containing the reusable variable is included before it is u
 
 <?php include 'inc/footer.php'; ?>
 ```
+
 In this case, the `$title` and `$content` variables are local to the `render_article()` function and cannot be accessed outside of it.
-+ Also, It’s important to note that all functions, classes, interfaces, and traits defined in the included file will have a global scope.
+
+- Also, It’s important to note that all functions, classes, interfaces, and traits defined in the included file will have a global scope.
 
 # PHP `include_once` construct
-+ The `include_once` construct in PHP is similar to the `include` construct, but it ensures that the specified file is included only once during the execution of a script. If the file has already been included, it will not be included again and it returns `true`
-+ Simply put, the `include_once` loads the file just once, regardless of how many times the file is included.
-+ Suppsose you have a file named `functions.php` and you want to include it in multiple places in your script. Using `include_once` ensures that the file is included only once, preventing potential issues such as function redefinitions or variable overwrites.
-+ It's syntax is as follows:
+
+- The `include_once` construct in PHP is similar to the `include` construct, but it ensures that the specified file is included only once during the execution of a script. If the file has already been included, it will not be included again and it returns `true`
+- Simply put, the `include_once` loads the file just once, regardless of how many times the file is included.
+- Suppsose you have a file named `functions.php` and you want to include it in multiple places in your script. Using `include_once` ensures that the file is included only once, preventing potential issues such as function redefinitions or variable overwrites.
+- It's syntax is as follows:
+
 ```php
 include_once 'file.php';
 ```
+
 Adding `include_once 'file.php'` again in that sam file won't neccessarily yeild an error. Instead, it will simply return `true` without including the file again.
-+ Example of using `include_once` construct:
+
+- Example of using `include_once` construct:
+
 ```php
 <?php
 include_once 'functions.php';
@@ -4542,42 +4642,56 @@ echo 'Functions file included successfully.';
 Functions file included successfully.
 */
 ```
+
 # PHP `require` construct
-+ The `require` construct in PHP is used to include and evaluate a specified file during the execution of a script. It is similar to the `include` construct, but with one key difference: if the specified file cannot be found or included, `require` will generate a fatal error and halt the execution of the script.
-+ It's syntax is as follows:
+
+- The `require` construct in PHP is used to include and evaluate a specified file during the execution of a script. It is similar to the `include` construct, but with one key difference: if the specified file cannot be found or included, `require` will generate a fatal error and halt the execution of the script.
+- It's syntax is as follows:
+
 ```php
 require 'file.php';
 ```
-+ Practically, you often use the `require` construct to load the code from libraries. Since the libraries contain the required functions to execute the script, it’s better to use the `require` construct than the `include` construct.
-+ PHP `require` is not a function, but a language construct. Sometimes, the `require`construct can be used similarly like functions as follows
+
+- Practically, you often use the `require` construct to load the code from libraries. Since the libraries contain the required functions to execute the script, it’s better to use the `require` construct than the `include` construct.
+- PHP `require` is not a function, but a language construct. Sometimes, the `require`construct can be used similarly like functions as follows
+
 ```php
 require('file.php');
 ```
+
 The above is the same as `require 'file.php'`. The parenthesis present in this expression are optional. They are not part of the `require` construct syntax. Instead they belong to the file path expression that is being loaded
 
 ## PHP `require_once` construct
-+ Similar to the `include_once` construct, the `require_once` construct in PHP ensures that the specified file is included only once during the execution of a script. If the file has already been included, it will not be included again. It is different from `include_once` such that if the file cannot be found, it will generate a fatal error and halt the execution of the script.
+
+- Similar to the `include_once` construct, the `require_once` construct in PHP ensures that the specified file is included only once during the execution of a script. If the file has already been included, it will not be included again. It is different from `include_once` such that if the file cannot be found, it will generate a fatal error and halt the execution of the script.
 
 # PHP `__DIR__`
-+ The `__DIR__` magic constant in PHP returns the directory of the file in which it is used. It provides an absolute path to the directory, making it useful for including files or working with file paths relative to the current script's location.
-+ The syntax of the `__DIR__` magic constant is as follows:
+
+- The `__DIR__` magic constant in PHP returns the directory of the file in which it is used. It provides an absolute path to the directory, making it useful for including files or working with file paths relative to the current script's location.
+- The syntax of the `__DIR__` magic constant is as follows:
 
 ```php
 __DIR__
 ```
+
 Technically, `__DIR__` is equivalent to the following expression:
+
 ```php
 dirname(__FILE__)
 ```
-+ Suppose you have a project directory with the following structure
+
+- Suppose you have a project directory with the following structure
+
 ```
 .
 ├── inc
-│   ├── footer.php      
+│   ├── footer.php
 │   └── header.php
 └── index.php
 ```
-+ If you use the `__DIR__` magic constant in the `index.php` file, it will return the absolute path to the directory containing the `index.php` file. Example:
+
+- If you use the `__DIR__` magic constant in the `index.php` file, it will return the absolute path to the directory containing the `index.php` file. Example:
+
 ```php
 // index.php
 echo __DIR__;
@@ -4586,7 +4700,8 @@ C:\path\to\your\project
 */
 ```
 
-+ If you use the `__DIR__` magic constant in the `header.php` file, it will return the absolute path to the directory containing the `header.php` file. Example:
+- If you use the `__DIR__` magic constant in the `header.php` file, it will return the absolute path to the directory containing the `header.php` file. Example:
+
 ```php
 // inc/header.php
 echo __DIR__;
@@ -4595,64 +4710,87 @@ C:\path\to\your\project\inc
 */
 ```
 
-#### Use __DIR__ when:
-+ You are including a file that is in a different directory than the script that’s running.
-+ Your file might be included from multiple locations in your project (like header.php being used in public/index.php and admin/dashboard/index.php).
-+ You want to make your includes robust and portable.
+#### Use **DIR** when:
+
+- You are including a file that is in a different directory than the script that’s running.
+- Your file might be included from multiple locations in your project (like header.php being used in public/index.php and admin/dashboard/index.php).
+- You want to make your includes robust and portable.
+
 ```php
 include __DIR__ . '/inc/header.php';
 ```
-By this, irrespective of where the script is being run from, the correct path to `header.php` will always be resolved.
-#### You don’t really need __DIR__ when:
-+ The file you’re including is in the same directory as the script you’re currently running.
-+ You are in a very small project where the paths are simple and you won’t move files around.
 
-+ `__DIR__` allows you to reference files relative to the included script, not where the initial application execution is
+By this, irrespective of where the script is being run from, the correct path to `header.php` will always be resolved.
+
+#### You don’t really need **DIR** when:
+
+- The file you’re including is in the same directory as the script you’re currently running.
+- You are in a very small project where the paths are simple and you won’t move files around.
+
+- `__DIR__` allows you to reference files relative to the included script, not where the initial application execution is
 
 # PHP Variables variables
-+ In PHP, variable variables allow you to use the value of a variable as the name of another variable. This means that you can dynamically create and access variables based on the values of other variables.
-+ The syntax for variable variables is as follows:
+
+- In PHP, variable variables allow you to use the value of a variable as the name of another variable. This means that you can dynamically create and access variables based on the values of other variables.
+- The syntax for variable variables is as follows:
+
 ```php
 $$variable_name
 ```
+
 where,
+
 - `$variable_name` is the name of the variable whose value will be used as the name of another variable.
-+ Example of using variable variables:
+
+* Example of using variable variables:
+
 ```php
 $var_name = 'greeting';
 $$var_name = 'Hello, World!';
 echo $greeting; // Output: Hello, World!
 ```
+
 How it works:
-+ The variable `$var_name` is assigned the string value `'greeting'`.
-+ The variable variable `$$var_name` is then created, which is equivalent to `$greeting`. It is assigned the value `'Hello, World!'`.
-+ Finally, when we echo `$greeting`, it outputs the value `'Hello, World!'
+
+- The variable `$var_name` is assigned the string value `'greeting'`.
+- The variable variable `$$var_name` is then created, which is equivalent to `$greeting`. It is assigned the value `'Hello, World!'`.
+- Finally, when we echo `$greeting`, it outputs the value `'Hello, World!'
 
 # PHP mail() function
-+ The `mail()` function in PHP is used to send emails directly from a script. It allows you to send simple text-based emails or HTML emails with attachments.
-+ On Linux or Unix systems, you can configure the `mail()` function to use the `sendmail` or `Qmail` program to send messages
-+ On Windows, you can install the `sendmail` and set the `sendmail_path` in `php.ini` file to point at the executable file.
-+ However, it’s more convenient to set the SMTP (Simple Mail Transfer Protocol) server with a port and sendmail_from in the php.ini file on Windows like this:
+
+- The `mail()` function in PHP is used to send emails directly from a script. It allows you to send simple text-based emails or HTML emails with attachments.
+- On Linux or Unix systems, you can configure the `mail()` function to use the `sendmail` or `Qmail` program to send messages
+- On Windows, you can install the `sendmail` and set the `sendmail_path` in `php.ini` file to point at the executable file.
+- However, it’s more convenient to set the SMTP (Simple Mail Transfer Protocol) server with a port and sendmail_from in the php.ini file on Windows like this:
+
 ```
 [mail function]
 SMTP = smtp.yourisp.com
 smtp_port = 25
 sendmail_from = youremail@yourdomain.com
 ```
+
 where,
+
 - `smtp.yourisp.com` is the SMTP server of your email provider. Your email provider is your ISP (Internet Service Provider) in most cases which is the company that provides you with internet access.
 - `25` is the port number used by the SMTP server. The default port for SMTP is `25`. However, some email providers may use different ports for secure connections, such as `465` for SSL or `587` for TLS.
 - `youremail@yourdomain.com` is the email address that will appear in the "From" field of the emails sent using the `mail()` function.
-+ If the SMTP server requires authentication, you can add the following lines for the account to authenticate:
+
+* If the SMTP server requires authentication, you can add the following lines for the account to authenticate:
+
 ```
 auth_username=smtp_user
 auth_password=smpt_password
 ```
+
 where,
+
 - `smtp_user` is the username for the SMTP server authentication.
 - `smtp_password` is the password for the SMTP server authentication.
-+ Once the configuration is ready, you need to restart the webserver.
-+ The syntax of the `mail()` function is as follows:
+
+* Once the configuration is ready, you need to restart the webserver.
+* The syntax of the `mail()` function is as follows:
+
 ```php
 mail(
     string $to,
@@ -4662,15 +4800,18 @@ mail(
     string $additional_params = ""
 ): bool
 ```
-where 
-  + `$to` is the reciever of the email
-  + `$subject` is the subject of the email
-  + `$message` is the body of the email. It can be plain text or HTML. If $message is plain text, you use a CRLF (\r\n) to separate lines. Each line should not exceed 70 character
-  + `$additional_headers` (optional) is used to specify additional headers for the email, such as "From", "Cc", "Bcc", and "Reply-To". It can be a string or an array of strings. If the header comes from an untrusted source, you should always sanitize it for security
-  + `$additional_params` allows you to pass additional flags as the command-line options to the sendmail program
-The `mail()` function returns `true` if the mail was accepted for delivery. It doesn’t mean that the mail is successfully reached the intended receiver. If an error occurred, the `mail()` function return `false`
 
-##  Using the PHP mail() function to send a plain text email example
+where
+
+- `$to` is the reciever of the email
+- `$subject` is the subject of the email
+- `$message` is the body of the email. It can be plain text or HTML. If $message is plain text, you use a CRLF (\r\n) to separate lines. Each line should not exceed 70 character
+- `$additional_headers` (optional) is used to specify additional headers for the email, such as "From", "Cc", "Bcc", and "Reply-To". It can be a string or an array of strings. If the header comes from an untrusted source, you should always sanitize it for security
+- `$additional_params` allows you to pass additional flags as the command-line options to the sendmail program
+  The `mail()` function returns `true` if the mail was accepted for delivery. It doesn’t mean that the mail is successfully reached the intended receiver. If an error occurred, the `mail()` function return `false`
+
+## Using the PHP mail() function to send a plain text email example
+
 ```php
 <?php
 
@@ -4686,14 +4827,18 @@ wordwrap($message, 70, "\r\n");
 
 mail('contact@phptutorial.net', $subject, $message);
 ```
+
 How it works:
-  + The `$subject` variable is assigned the subject of the email.
-  + The `$message` variable is assigned the body of the email using a heredoc syntax for better readability.
-  + The `wordwrap()` function is used to ensure that the lines in the message do not exceed 70 characters, which is a recommended practice for email formatting. It manipulates the `$message` variable directly.
-  + The `mail()` function is called with the recipient's email address, subject, and message to send the email.
+
+- The `$subject` variable is assigned the subject of the email.
+- The `$message` variable is assigned the body of the email using a heredoc syntax for better readability.
+- The `wordwrap()` function is used to ensure that the lines in the message do not exceed 70 characters, which is a recommended practice for email formatting. It manipulates the `$message` variable directly.
+- The `mail()` function is called with the recipient's email address, subject, and message to send the email.
 
 ## Using the PHP mail() function to send a mail with extra headers example
-+ The following example uses the mail() function to send a mail with additional headers like From, Reply-To, and X-Mailer
+
+- The following example uses the mail() function to send a mail with additional headers like From, Reply-To, and X-Mailer
+
 ```php
 <?php
 
@@ -4708,7 +4853,9 @@ $headers[] = 'X-Mailer: PHP/' . phpversion();
 
 mail($to, $subject, $message, implode('\r\n', $headers));
 ```
+
 From PHP 7.2 or later, you can pass the headers as an array like this:
+
 ```php
 <?php
 
@@ -4727,7 +4874,9 @@ mail($to, $subject, $message,  $headers);
 ```
 
 ## Using the PHP mail() function to send HTML email example
-+ To send HTML mail, you need to set the `Content-type` for the header like this:
+
+- To send HTML mail, you need to set the `Content-type` for the header like this:
+
 ```php
 <?php
 
@@ -4766,42 +4915,51 @@ if (mail($to, $subject, $message,  $headers)) {
     echo 'An error occurred.';
 }
 ```
+
 # Guide: Using PHP mail() with Gmail SMTP on XAMPP (Windows)
+
 ## 1. Overview
+
 **Goal**: Use PHP’s `mail()` on XAMPP (Windows) to send email through Gmail’s `SMTP server` (via XAMPP’s sendmail helper), instead of trying to send to `localhost:25`.
 
 ## 2. Prepare your Gmail account
+
 1. Turn on 2‑Step Verification (2FA) for your Google account.
 
 2. Generate a Gmail app password:
 
-  + Go to your Google Account → Security.
+- Go to your Google Account → Security.
 
-  + With 2‑Step Verification enabled, open App passwords. You can necessarily search for it
+- With 2‑Step Verification enabled, open App passwords. You can necessarily search for it
 
-  + Create a new app password (e.g. “XAMPP PHP mail”. It can be anything) and copy the 16‑character code. The code usually comes with spaces - use it without those spaces
+- Create a new app password (e.g. “XAMPP PHP mail”. It can be anything) and copy the 16‑character code. The code usually comes with spaces - use it without those spaces
 
 This app password is what you use in config, not your normal Gmail password.
 
 ## 3. Configure php.ini in XAMPP
+
 File: `C:\xampp\php\php.ini`
 
-+ Find the `[mail function]` section.
+- Find the `[mail function]` section.
 
-+ Comment out direct localhost mail settings if they exist:
+- Comment out direct localhost mail settings if they exist:
+
 ```
 text
 [mail function]
 ;SMTP=localhost
 ;smtp_port=25
 ```
-+ Set the sendmail_path (make sure the path is correct for your XAMPP):
+
+- Set the sendmail_path (make sure the path is correct for your XAMPP):
+
 ```
 text
 sendmail_path = "C:\xampp\sendmail\sendmail.exe -t"
 ```
 
-+ Enable OpenSSL extension (remove ; at the start if present):
+- Enable OpenSSL extension (remove ; at the start if present):
+
 ```
 text
 extension=openssl
@@ -4809,14 +4967,16 @@ extension=openssl
 ;extension=php_openssl.dll  -> change to: extension=php_openssl.dll
 ```
 
-+ Save the file.
+- Save the file.
 
-+ Restart Apache from XAMPP Control Panel after every change to php.ini.
+- Restart Apache from XAMPP Control Panel after every change to php.ini.
 
 ## 4. Configure sendmail.ini in XAMPP
+
 File: `C:\xampp\sendmail\sendmail.ini`
 
-+ Set Gmail SMTP and auth details (example):
+- Set Gmail SMTP and auth details (example):
+
 ```
 text
 smtp_server = smtp.gmail.com
@@ -4826,16 +4986,19 @@ smtp_ssl = tls
 auth_username = your_email@gmail.com
 auth_password = your_app_password
 ```
+
 Notes:
 
 auth_username is your Gmail address.
 
 auth_password is the app password from step 2 (without spaces), not your normal Gmail password.
 
-+ Save the file when done.
+- Save the file when done.
 
 ## 5. Write a simple test script
+
 File: e.g. `C:\xampp\htdocs\testmail.php`
+
 ```
 php
 <?php
@@ -4853,22 +5016,24 @@ if (mail($to, $subject, $message, $headers)) {
 
 ### Important details:
 
-+ From: should usually match the Gmail you used in auth_username.
+- From: should usually match the Gmail you used in auth_username.
 
-+ \r\n is used as line ending in headers.
+- \r\n is used as line ending in headers.
 
-+ $to can be any address you can check (another email or even the same Gmail).
+- $to can be any address you can check (another email or even the same Gmail).
 
 ## 6. Test and debug
-+ Start Apache and MySQL in XAMPP.
 
-+ Open `http://localhost/testmail.php` in your browser.
+- Start Apache and MySQL in XAMPP.
 
-+ If it prints “Mail sent”:
+- Open `http://localhost/testmail.php` in your browser.
 
-+ Check the inbox of receiver@example.com (also check Spam).
+- If it prints “Mail sent”:
 
-+ If mail() returns false:
+- Check the inbox of receiver@example.com (also check Spam).
+
+- If mail() returns false:
+
 ```
 php
 $result = mail($to, $subject, $message, $headers);
@@ -4876,99 +5041,121 @@ if (!$result) {
     var_dump(error_get_last());
 }
 ```
+
 Use error_get_last() to see any internal error message.
 
 ## 7. Security and best practices
-+ Never share or commit your app password (sendmail.ini, php.ini) to GitHub or anywhere public.
 
-+ For real projects, consider using a mail library (like PHPMailer, Symfony Mailer, etc.) with SMTP directly; it gives better error messages, HTML email support, attachments, etc.
+- Never share or commit your app password (sendmail.ini, php.ini) to GitHub or anywhere public.
 
-+ Keep this guide as a reference; when something stops working, re‑check:
+- For real projects, consider using a mail library (like PHPMailer, Symfony Mailer, etc.) with SMTP directly; it gives better error messages, HTML email support, attachments, etc.
 
-  + php.ini mail section
+- Keep this guide as a reference; when something stops working, re‑check:
 
-  + sendmail.ini SMTP settings
+  - php.ini mail section
 
-  + Gmail app password and 2FA status
+  - sendmail.ini SMTP settings
+
+  - Gmail app password and 2FA status
 
 That Apache was restarted after changes
 
 If you like, you can paste this into a text file like xampp-mail-guide.txt and store it alongside your XAMPP projects.
 
 # PHP Cookies
-+ The web works based on HTTP protocol. The HTTP protocol is stateless that is it doesn’t remember anything about the previous requests. 
-+ When a web browser requests a page from a web server, the web server responds with the page content. Later, if the same web browser requests the same page again, and the web server has no information that the request is from the same web browser
-+ Cookies solve this stateless challenge
-+ A cookie is a small piece of data that a web server sends to a web browser to check if two requests come from the same web browser. The web browser stores the cookie and sends it back to the web server with each subsequent request to the same server. This allows the web server to remember information about the user, such as their preferences, login status, and other data.
-+ Cookies are also known as web cookies, HTTP cookies, or browser cookies.
+
+- The web works based on HTTP protocol. The HTTP protocol is stateless that is it doesn’t remember anything about the previous requests.
+- When a web browser requests a page from a web server, the web server responds with the page content. Later, if the same web browser requests the same page again, and the web server has no information that the request is from the same web browser
+- Cookies solve this stateless challenge
+- A cookie is a small piece of data that a web server sends to a web browser to check if two requests come from the same web browser. The web browser stores the cookie and sends it back to the web server with each subsequent request to the same server. This allows the web server to remember information about the user, such as their preferences, login status, and other data.
+- Cookies are also known as web cookies, HTTP cookies, or browser cookies.
+
 ## Why cookies?
-+ Cookies are commonly used for:
+
+- Cookies are commonly used for:
   - Session management: Cookies can be used to store session IDs, allowing users to remain logged in as they navigate through different pages of a website.
   - Personalization: Cookies can store user preferences, such as language settings or theme choices, to enhance the user experience.
   - Tracking: Cookies can be used to track user behavior across different websites for analytics and advertising purposes. For example, on an E-commerce website, you can use cookies to record the products that users previously viewed. Later, you can use this information to recommend the related products that users might be interested in.
-+ The following illustrates how cookies work:
-![](php-cookies.png)
-How it works:
-- When a user visits a website, the web server sends a cookie to the user's web browser.
-- The web browser stores the cookie and sends it back to the web server with each subsequent request to the same server.
-- The web server can then use the information stored in the cookie to remember the user's preferences, login status, and other data.
-Technically speaking:
+- The following illustrates how cookies work:
+  ![](php-cookies.png)
+  How it works:
+
+* When a user visits a website, the web server sends a cookie to the user's web browser.
+* The web browser stores the cookie and sends it back to the web server with each subsequent request to the same server.
+* The web server can then use the information stored in the cookie to remember the user's preferences, login status, and other data.
+  Technically speaking:
   - First, the web browser sends a request to the web server. Suppose the web server doesn’t have any information about the web browser. The web server creates a cookie with a name `return` and a value `1` and attaches the cookie to the HTTP response header. To create a cookie, you’ll use the `setcookie()` function.
   - Second, the web browser stores the cookie.
   - Third, the web browser sends the second request with the stored cookie in the header of the HTTP request to the web server. On the web server, PHP can access the cookie via the `$_COOKIE` superglobal variable and do something accordingly
   - Finally, the web server responds with the content of the request. Typically, it responds to the web browser with the content based on the value of the cookie.
-+ A web browser can store a cookie with a maximum size of 4KB, but this limit varies between browsers.
-+ A cookie has an expiration date. Typically, web browsers store cookies for a specific duration, and the web server can specify the expiration time for a cookie.
-+ A cookie also stores the web address (URL) that indicates the URL that created the cookie. The web browser can send back the cookie that was originally set by the same URL. In other words, a website won’t be able to read a cookie set by other websites.
-+ Most modern web browsers allow users to choose to accept cookies. Therefore, you should not wholly rely on cookies for storing critical data.
+
+- A web browser can store a cookie with a maximum size of 4KB, but this limit varies between browsers.
+- A cookie has an expiration date. Typically, web browsers store cookies for a specific duration, and the web server can specify the expiration time for a cookie.
+- A cookie also stores the web address (URL) that indicates the URL that created the cookie. The web browser can send back the cookie that was originally set by the same URL. In other words, a website won’t be able to read a cookie set by other websites.
+- Most modern web browsers allow users to choose to accept cookies. Therefore, you should not wholly rely on cookies for storing critical data.
 
 ## Setting a cookie in PHP
-+ The `setcookie()` function allows you to send HTTP header to create a cookie on a browser.
-+ It's syntax is as follows:
+
+- The `setcookie()` function allows you to send HTTP header to create a cookie on a browser.
+- It's syntax is as follows:
+
 ```php
 <?php
 
-setcookie ( 
-    string $name , 
-    string $value = "" , 
-    int $expires = 0 , 
-    string $path = "" , 
-    string $domain = "" , 
-    bool $secure = false , 
-    bool $httponly = false 
+setcookie (
+    string $name ,
+    string $value = "" ,
+    int $expires = 0 ,
+    string $path = "" ,
+    string $domain = "" ,
+    bool $secure = false ,
+    bool $httponly = false
 ): bool
 ```
+
 where,
+
 - `name` is the name of the cookie.
 - `value` is the value of the cookie. It is stored on the user's computer. You can store any string value in a cookie. However, you should avoid storing sensitive information in cookies since cookies are stored on the user's computer.
 - `expires` is the expiration time of the cookie. It is specified as a Unix timestamp. If this parameter is set to `0` or not set, the cookie will expire at the end of the session (when the browser closes). You can use the `time()` function to get the current time and add the number of seconds you want the cookie to last. For example, to set a cookie that expires in one hour, you can use `time() + 3600`.
 - `path` specifies the path on the server where the cookie will be available. If set to `/`, the cookie will be available within the entire domain. If set to `/folder/`, the cookie will only be available within that folder and its subfolders.
 - `domain` specifies the domain that the cookie is available to. If not specified, it defaults to the host of the current document.
+
 ```
 https://example.com/page1.html    → host = "example.com"
 ```
+
 - `secure` indicates whether the cookie should only be transmitted over a secure HTTPS connection. If set to `true`, the cookie will only be sent over HTTPS. Also, a secured HTTPS connection means the data between your browser and the website is encrypted using SSL/TLS, so no one can read or tamper with your cookies, passwords, or other information while it's being transmitted.
 - `httponly` indicates whether the cookie should only be accessible through the HTTP protocol. If set to `true`, the cookie will not be accessible via JavaScript, which can help mitigate certain types of cross-site scripting (XSS) attacks.
-+ From PHP 7.3.0, you can also set cookies using an array of options as follows:
+
+* From PHP 7.3.0, you can also set cookies using an array of options as follows:
+
 ```php
-setcookie ( 
-    string $name , 
-    string $value = "" , 
+setcookie (
+    string $name ,
+    string $value = "" ,
     array $options = [] ) : bool
 ```
+
 where,
+
 - `options` is an associative array that can contain the following keys: `expires`, `path`, `domain`, `secure`, `httponly`, and `samesite`. The `samesite` can take a value of `None`, `Lax`, or `Strict`. It is . If you use any other key, the setcookie() function will raise a warning.
-+ The `setcookie()` function must be called before any output is sent to the browser.
-+ The setcookie() function returns true if it successfully executes. Notice that it doesn’t indicate whether the web browser accepts the cookie. The setcookie() function returns false if it fails.
+
+* The `setcookie()` function must be called before any output is sent to the browser.
+* The setcookie() function returns true if it successfully executes. Notice that it doesn’t indicate whether the web browser accepts the cookie. The setcookie() function returns false if it fails.
 
 ## `$_COOKIE` superglobal variable
-+ The `$_COOKIE` superglobal variable in PHP is an associative array that contains all the cookies that have been sent to the server by the client's web browser. Each cookie is represented as a key-value pair, where the key is the name of the cookie and the value is the value of the cookie.
-+ To access a cookies by name, you use the following syntax
+
+- The `$_COOKIE` superglobal variable in PHP is an associative array that contains all the cookies that have been sent to the server by the client's web browser. Each cookie is represented as a key-value pair, where the key is the name of the cookie and the value is the value of the cookie.
+- To access a cookies by name, you use the following syntax
+
 ```php
 $_COOKIE['cookie_name'];
 ```
-+ Suppose the cookie name has spaces ` ` or dots `.`, you replace them by an underscore `_`
-+ To check if a cookies is set, you use the `isset()` function
+
+- Suppose the cookie name has spaces ` ` or dots `.`, you replace them by an underscore `_`
+- To check if a cookies is set, you use the `isset()` function
+
 ```php
 if(isset($_COOKIE['cookie_name'])) {
     // cookie is set
@@ -4976,16 +5163,21 @@ if(isset($_COOKIE['cookie_name'])) {
     // cookie is not set
 }
 ```
-+ `$_COOKIE` is a superglobal variable, which means it is accessible from any scope within a PHP script, including functions and classes, without needing to use the `global` keyword.
+
+- `$_COOKIE` is a superglobal variable, which means it is accessible from any scope within a PHP script, including functions and classes, without needing to use the `global` keyword.
 
 ## Reading a Cookie
-+ Before reading a cookie, you should check if the cookie is set using the `isset()` function to avoid undefined index errors.
+
+- Before reading a cookie, you should check if the cookie is set using the `isset()` function to avoid undefined index errors.
+
 ```php
 if(isset($_COOKIE['cookie_name'])) {
     // process the cookie
 }
 ```
-+ To check if a cookie equal a value, you use the following syntax
+
+- To check if a cookie equal a value, you use the following syntax
+
 ```
 if(isset($_COOKIE['cookie_name']) && $_COOKIE['cookie_name'] === 'value') {
     // cookie is set and equals 'value'
@@ -4995,17 +5187,23 @@ if(isset($_COOKIE['cookie_name']) && $_COOKIE['cookie_name'] === 'value') {
 ```
 
 ## Deleting a Cookie
-+ If you don’t want to use a cookie, you can force the browser to delete it. PHP doesn’t provide a function that directly deletes a cookie. However, you can delete a cookie using the setcookie() function by setting the expiration date to the past
-+ The following code deletes a cookie with the cookie_name in the subsequent page request:
+
+- If you don’t want to use a cookie, you can force the browser to delete it. PHP doesn’t provide a function that directly deletes a cookie. However, you can delete a cookie using the setcookie() function by setting the expiration date to the past
+- The following code deletes a cookie with the cookie_name in the subsequent page request:
+
 ```php
 unset($_COOKIE['cookie_name']);
 setcookie('cookie_name', null, time()-3600);
 ```
+
 How it works:
+
 - The `unset()` function removes the cookie from the `$_COOKIE` superglobal variable in the current script execution.
 - The `setcookie()` function is called with the cookie name, a null value, and an expiration time set to one hour in the past (`time() - 3600`). This instructs the browser to delete the cookie.
-+ Note that deleting a cookie using the `setcookie()` function will only take effect in the next page request. The cookie will still be available in the current script execution until the page is reloaded or a new request is made.
-+ Example of setting and reading a cookie
+
+* Note that deleting a cookie using the `setcookie()` function will only take effect in the next page request. The cookie will still be available in the current script execution until the page is reloaded or a new request is made.
+* Example of setting and reading a cookie
+
 ```php
 const TIME = 60;
 
@@ -5019,14 +5217,18 @@ if (isset($_COOKIE['return'])) {
 
 echo $returning_user ? 'Welcome back!' : 'Welcome to my website';
 ```
+
 How it works:
-  - The code first defines a constant `TIME` with a value of `60` seconds.
-  - It initializes a variable `$returning_user` to `false`.
-  - It checks if a cookie named `return` is set using the `isset()` function.
-    - If the cookie is set, it means the user has visited the website before, so it sets `$returning_user` to `true`. Thus, for any request made by the browser (such as refreshing the page) within the next 60 seconds, the user will be considered a returning user.
-    - If the cookie is not set, it means the user is visiting for the first time. The code then sets a cookie named `return` with a value of `1` and an expiration time of `60` seconds from the current time using the `setcookie()` function. If the page is the requested by the client again, the PHP script runs and `returning_user` will be set to `true`.
-  - Finally, it uses a ternary operator to display a welcome message based on whether the user is a returning user or not. If `$returning_user` is `true`, it displays "Welcome back!"; otherwise, it displays "Welcome to my website".
-  + Consider the following example that demonstrates how to set, read, and delete a cookie in PHP:
+
+- The code first defines a constant `TIME` with a value of `60` seconds.
+- It initializes a variable `$returning_user` to `false`.
+- It checks if a cookie named `return` is set using the `isset()` function.
+  - If the cookie is set, it means the user has visited the website before, so it sets `$returning_user` to `true`. Thus, for any request made by the browser (such as refreshing the page) within the next 60 seconds, the user will be considered a returning user.
+  - If the cookie is not set, it means the user is visiting for the first time. The code then sets a cookie named `return` with a value of `1` and an expiration time of `60` seconds from the current time using the `setcookie()` function. If the page is the requested by the client again, the PHP script runs and `returning_user` will be set to `true`.
+- Finally, it uses a ternary operator to display a welcome message based on whether the user is a returning user or not. If `$returning_user` is `true`, it displays "Welcome back!"; otherwise, it displays "Welcome to my website".
+
+* Consider the following example that demonstrates how to set, read, and delete a cookie in PHP:
+
 ```php
 // Set a cookie
 setcookie('user', 'John Doe', time() + 3600); // Expires in 1 hour
@@ -5043,64 +5245,80 @@ unset($_COOKIE['user']);
 setcookie('user', '', time() - 3600);
 echo 'Cookie has been deleted.<br>';
 ```
+
 How it works:
+
 - The code first sets a cookie named `user` with the value `John Doe` that expires in one hour using the `setcookie()` function.
 - It then checks if the cookie is set using the `isset()` function. If the cookie is set, it greets the user by displaying "Hello, John Doe!". If the cookie is not set, it displays "Cookie is not set.".
 - Finally, it deletes the cookie by setting its expiration time to one hour in the past using the `setcookie()` function and displays "Cookie has been deleted.".
-+ Note that cookies are sent to the server with each HTTP request, so they can be used to maintain state and track user sessions across multiple requests.
+
+* Note that cookies are sent to the server with each HTTP request, so they can be used to maintain state and track user sessions across multiple requests.
+
 # PHP Sessions
-+ Suppose, you click the add to cart button on a `product.php` page and navigate to the `cart.php` page, the web server won’t know that you have added the product to the cart and it renders as if nothing has been done. This is because HTTP is a stateless protocol that doesn’t remember anything about the previous requests.
-![](php-session-HTTP-protocol-2.png)
-+ To persist data across multiple requests, you can use sessions. Therefore, whenever you click the add to cart button, the web server will store the product on the server
-+ When you view the `cart.php` page, the web server gets the products from the session and displays them on the cart.php page:
-![](PHP-Session-How-it-works.png)
-How it works:
+
+- Suppose, you click the add to cart button on a `product.php` page and navigate to the `cart.php` page, the web server won’t know that you have added the product to the cart and it renders as if nothing has been done. This is because HTTP is a stateless protocol that doesn’t remember anything about the previous requests.
+  ![](php-session-HTTP-protocol-2.png)
+- To persist data across multiple requests, you can use sessions. Therefore, whenever you click the add to cart button, the web server will store the product on the server
+- When you view the `cart.php` page, the web server gets the products from the session and displays them on the cart.php page:
+  ![](PHP-Session-How-it-works.png)
+  How it works:
   - When you click the add to cart button on the `product.php` page, the web server creates a unique session ID for your session and stores the product information in a session variable on the server.
   - The web server sends the session ID to your web browser as a cookie.
   - When you navigate to the `cart.php` page, your web browser sends the session ID cookie back to the web server.
   - The web server retrieves the product information from the session variable using the session ID and displays it on the `cart.php` page.
-Technically speaking:
-  + First, the web browser requests for the product.php page.
-  + Second, the web server responds with the product.php page’s content.
-  + Third, you click the Add To Cart button on the product.php page. The page will send an HTTP request (either POST or GET) to the web server. The web server validates the product and generates a session id. It also creates a new text file on the server to store the information related to the selected product.
-  + Fourth, the web server responds to the web browser with the `PHPSESSID` cookie in the response header. If the web browser allows cookies, it will save the `PHPSESSID` cookie, which stores the session id passed by the web server.
-  + Fifth, in the subsequent request, for example, when you view the cart.php page, the web browser passes the `PHPSESSID` back to the web server. When the web server sees the `PHPSESSID` cookie, it will resume the session with the session id stored in it.
-  + Finally, the web server returns the cart page with your selected products.
-+ Sessions allows you to store data in a web server associated with a session id. The session id is usually stored on the client-side as a cookie named `PHPSESSID`. The session id is a unique identifier that is used to identify the session on the server.
-+ A session typically lasts until the user closes the web browser or the session expires on the server. The expiration time can be configured on the server.
+    Technically speaking:
+  * First, the web browser requests for the product.php page.
+  * Second, the web server responds with the product.php page’s content.
+  * Third, you click the Add To Cart button on the product.php page. The page will send an HTTP request (either POST or GET) to the web server. The web server validates the product and generates a session id. It also creates a new text file on the server to store the information related to the selected product.
+  * Fourth, the web server responds to the web browser with the `PHPSESSID` cookie in the response header. If the web browser allows cookies, it will save the `PHPSESSID` cookie, which stores the session id passed by the web server.
+  * Fifth, in the subsequent request, for example, when you view the cart.php page, the web browser passes the `PHPSESSID` back to the web server. When the web server sees the `PHPSESSID` cookie, it will resume the session with the session id stored in it.
+  * Finally, the web server returns the cart page with your selected products.
+- Sessions allows you to store data in a web server associated with a session id. The session id is usually stored on the client-side as a cookie named `PHPSESSID`. The session id is a unique identifier that is used to identify the session on the server.
+- A session typically lasts until the user closes the web browser or the session expires on the server. The expiration time can be configured on the server.
 
 # Creating a new session
-+ To create a new session in PHP, you use the `session_start()` function. This function initializes a new session or resumes an existing session based on the session ID passed by the client (usually via a cookie).
-+ It's syntax is as follows:
+
+- To create a new session in PHP, you use the `session_start()` function. This function initializes a new session or resumes an existing session based on the session ID passed by the client (usually via a cookie).
+- It's syntax is as follows:
+
 ```php
 session_start ( void ) : bool
 ```
-+ When the `session_start()` runs at the first time, PHP generates a unique session id and passes it to the web browser in the form of a cookie named `PHPSESSID`.
 
-+ If a session already exists, PHP checks the `PHPSESSID` cookie sent by the browser, the session_start() function will resume the existing session instead of creating a new one.
+- When the `session_start()` runs at the first time, PHP generates a unique session id and passes it to the web browser in the form of a cookie named `PHPSESSID`.
 
-+ Since PHP sends the `PHPSESSID` cookie in the header of the HTTP response, you need to call the session_start() function before any statement that outputs the content to the web browser. (This is because PHP needs to send the session ID cookie in the HTTP response heade). Otherwise, you will get a warning message saying the header cannot be modified because it is already sent. This is a well-known error message in PHP
+- If a session already exists, PHP checks the `PHPSESSID` cookie sent by the browser, the session_start() function will resume the existing session instead of creating a new one.
+
+- Since PHP sends the `PHPSESSID` cookie in the header of the HTTP response, you need to call the session_start() function before any statement that outputs the content to the web browser. (This is because PHP needs to send the session ID cookie in the HTTP response heade). Otherwise, you will get a warning message saying the header cannot be modified because it is already sent. This is a well-known error message in PHP
 
 ## Where PHP stores session data
-+ PHP sessions are stored in a temporary file on the web server
-+ You can find the location of the temporary files using the directive 
-`session.save_path` in the PHP configuration file
-+ The `ini_get()` function returns the value of the `session.save_path` directive
+
+- PHP sessions are stored in a temporary file on the web server
+- You can find the location of the temporary files using the directive
+  `session.save_path` in the PHP configuration file
+- The `ini_get()` function returns the value of the `session.save_path` directive
+
 ```php
 
 echo ini_get('session.save_path');
 ```
+
 Or you can call the session_save_path() function:
+
 ```php
 echo session_save_path();
 ```
-+ Typically, the session data is stored in the `/tmp` folder of the web server e.g, `/xampp/tmp` .
+
+- Typically, the session data is stored in the `/tmp` folder of the web server e.g, `/xampp/tmp` .
 
 # Accessing session data
+
 Unlike cookies, you can store any data in the session. To store data in the session, you set the key and value in the `$_SESSION` superglobal array.
-+ For example, in the index.php file, you store the user string and roles array in the session as follows:
+
+- For example, in the index.php file, you store the user string and roles array in the session as follows:
+
 ```php
-<?php 
+<?php
     session_start();
     $_SESSION['user'] = 'admin';
     $_SESSION['roles'] = ['administrator', 'approver', 'editor'];
@@ -5115,12 +5333,16 @@ Unlike cookies, you can store any data in the session. To store data in the sess
 </body>
 </html>
 ```
+
 How it works:
-  - The `session_start()` function initializes a new session or resumes an existing session.
-  - The `$_SESSION['user']` variable is set to the string value `'admin'`.
-  - The `$_SESSION['roles']` variable is set to an array containing three roles: `'administrator'`, `'approver'`, and `'editor'`. Therefore, the `$_SESSION` superglobal array contains an array and string as data-types in this case
-  - The HTML part of the code contains a link to the `profile.php` page.
-+ In the profile.php file, you can access the session data as follows:
+
+- The `session_start()` function initializes a new session or resumes an existing session.
+- The `$_SESSION['user']` variable is set to the string value `'admin'`.
+- The `$_SESSION['roles']` variable is set to an array containing three roles: `'administrator'`, `'approver'`, and `'editor'`. Therefore, the `$_SESSION` superglobal array contains an array and string as data-types in this case
+- The HTML part of the code contains a link to the `profile.php` page.
+
+* In the profile.php file, you can access the session data as follows:
+
 ```php
 <?php session_start() ?>
 
@@ -5137,19 +5359,25 @@ How it works:
         </ul>
 <?php endif; ?>
 ```
+
 How it works:
-  - The `session_start()` function initializes a new session or resumes an existing session.
-  - The first `if` statement checks if the `$_SESSION['user']` variable is set using the `isset()` function. If it is set, it displays a welcome message with the value of the `$_SESSION['user']` variable.
-  - The second `if` statement checks if the `$_SESSION['roles']` variable is set. If it is set, it displays a list of roles by iterating over the array using a `foreach` loop and displaying each role in a list item (`<li>`).
+
+- The `session_start()` function initializes a new session or resumes an existing session.
+- The first `if` statement checks if the `$_SESSION['user']` variable is set using the `isset()` function. If it is set, it displays a welcome message with the value of the `$_SESSION['user']` variable.
+- The second `if` statement checks if the `$_SESSION['roles']` variable is set. If it is set, it displays a list of roles by iterating over the array using a `foreach` loop and displaying each role in a list item (`<li>`).
 
 # Deleting the session data
-+ Whenever you close the web browser, PHP automatically deletes the session.
-+ Sometimes, you may want to explictly delete the session data before the browser is closed. You can do this using the `session_destroy()` function. This function destroys all data associated with the current session. However, it does not unset data in the  `$_SESSION` array and cookie
-+ It's syntax is as follows:
+
+- Whenever you close the web browser, PHP automatically deletes the session.
+- Sometimes, you may want to explictly delete the session data before the browser is closed. You can do this using the `session_destroy()` function. This function destroys all data associated with the current session. However, it does not unset data in the `$_SESSION` array and cookie
+- It's syntax is as follows:
+
 ```php
 session_destroy ( void ) : bool
 ```
-+ To completely destroy the session data, you need to unset the variable in  `$_SESSION` array and remove the `PHPSESSID` cookie like this:
+
+- To completely destroy the session data, you need to unset the variable in `$_SESSION` array and remove the `PHPSESSID` cookie like this:
+
 ```php
 <?php
 session_start();
@@ -5165,4 +5393,282 @@ $_SESSION[] = array();
 // destroy the session
 session_destroy();
 ```
-+ Notice that we used the `session_name()` function to get the cookie name instead of using the `PHPSESSID`. PHP allows you to work with multiple sessions with different names on the same script.
+
+- Notice that we used the `session_name()` function to get the cookie name instead of using the `PHPSESSID`. PHP allows you to work with multiple sessions with different names on the same script.
+- The `session_name()` function returns the name of the current session. By default, it returns `PHPSESSID`, but you can change the session name using the `session_name()` function before calling `session_start()`.
+- Use `sessions` to store sensitive data on the server-side instead of cookies. This is because cookies are stored on the client-side (browser) and can be easily manipulated by users. Sessions, on the other hand, store data on the server-side, making them more secure for sensitive information.
+- Sessions are more suitable for storing larger amounts of data compared to cookies, which have size limitations.
+
+# PHP Redirection
+
+- Redirection is the process of sending a user from one URL to another URL via the browser. In PHP, you can perform redirection using the `header()` function to send a `Location` header to the browser.
+- Typically, we use redirection in the following scenarios:
+  - Change the domain name of a website to another.
+  - Replace the URL of a page with another.
+  - Upgrade the HTTP to HTTPS.
+  - Redirect users after form submission to prevent duplicate submissions.
+- Suppose you navigate to the URL https://phptutorial.net/about-us.php, PHP will redirect you to the new URL https://phptutorial.net/about-us.php. The following shows how redirection works:
+  ![](php-redirection.png)
+  How it works:
+  - When you enter the URL https://phptutorial.net/about-us.php in your web browser, the browser sends an HTTP request to the web server.
+  - The web server processes (receives) the request and sends an HTTP response with a `Location` header that contains the new URL `https://phptutorial.net/about-us.php.`
+  - The web browser receives the response and automatically navigates to the new URL by sending another HTTP request to the web server.
+  - Finally, the web server responds with the content of the new page.
+
+## PHP `header()` function
+
+- The `header()` function in PHP is used to send raw HTTP headers to the client (usually a web browser) before any output is sent. It allows you to modify the HTTP response headers, which can control various aspects of how the browser handles the response.
+
+* It's syntax is as follows:
+
+```php
+header ( string $header , bool $replace = true , int $response_code = 0 ) : void
+```
+
+where,
+
+- `header` is the header string to be sent. For example, to redirect the browser to another URL, you can use the `Location` header like this: `Location: https://phptutorial.net/new-page.php`.
+- `replace` indicates whether to replace a previous similar header or add a second header of the same type. By default, it is set to `true`, which means that it will replace any previous header with the same name.
+- `response_code` allows you to specify the HTTP response code to be sent with the header. For example, you can set it to `301` for a permanent redirect or `302` for a temporary redirect. If not specified, the default response code is `200 OK`.
+- Use the `exit()` construct after using the `header()` function for redirection to ensure that no further code is executed after the redirection. This prevents any unintended output or processing that could interfere with the redirection process.
+- Since the `header()` function sends HTTP headers, you must call it before any output is sent to the browser. Otherwise, you will get a warning message saying the header cannot be modified because it is already sent. This is a well-known error message in PHP.
+
+# PHP Forms
+
+- To create a web form, you basically use the `<form>` element as follows:
+
+```html
+<form action="form.php" method="post"></form>
+```
+
+This `<form>` element has two important attributes:
+
+- `action`: specifies the URL of the server-side script that will process the form data when the form is submitted. In this case, the form data will be sent to `form.php` for processing.
+- `method`: specifies the HTTP method to be used when submitting the form. It can be either `GET` or `POST`. In this case, the form data will be sent using the `POST` method, which means that the data will be included in the body of the HTTP request. The form methods are case-insensitive (e.g., `POST`, `post`, `PoSt` are all valid). Also, if the method attribute isn't specified, the element uses `GET` by default
+
+* Input elements used in forms are often called form fields
+* These input elements has important attributes - `name`, `type`, `value`. The `name` attribute will be used to access the `value` in PHP
+
+```html
+<input name="value" type="" />
+```
+
+## HTTP `POST` method
+
+- The `POST` method is used to send data to the server as part of the body of the HTTP request. It is commonly used when submitting form data that may include sensitive information or large amounts of data.
+- After submitting the form, you can access the form data in PHP using the `$_POST` superglobal array. The `$_POST` is an associative array that contains key-value pairs, where the keys are the names of the form fields, and the values are the corresponding values entered by the user. For example, if your form has an input field with the `name` attribute set to `username`, you can access its value in PHP like this:
+
+```php
+$_POST['username'];
+```
+
+- Before accessing the form data, you should check if the form has been submitted using the `isset()` function to avoid undefined index errors. For example if you want to check if the form field with the name `username` is set, you can do it like this:
+
+```php
+if(isset($_POST['username'])) {
+  // process the form data
+}
+```
+
+- The following shows how to create a simple form (`form.php`) with an email input field
+
+```php
+<?php
+/*
+if(isset($_POST['email'])) {
+    echo "Thank you for subscribing to our newsletter";
+} */
+
+if($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = $_POST['email'];
+    echo $email;
+}
+
+?>
+
+<form action="form.php" method="POST">
+    <label for="email"> Email </label>
+    <input type="email" id="email" name="email">
+    <button type="submit">Submit</button>
+</form>
+```
+
+How it works:
+
+- The PHP code at the top checks if the form has been submitted by verifying if the request method is `POST` using the `$_SERVER['REQUEST_METHOD']` variable.
+- If the form has been submitted, it retrieves the value of the `email` input field from the `$_POST` superglobal array and assigns it to the `$email` variable.
+- It then echoes the value of the `$email` variable, which displays the email address entered by the user.
+- The HTML part of the code creates a form with an email input field and a submit button. When the user submits the form, the data is sent to `form.php` using the `POST` method for processing. By this, the `form.php` script runs again and processes the submitted form data.
+- The form includes a `<label>` element for the email input field, which improves accessibility by associating the label with the input field using the `for` and `id` attributes.
+- The `<input>` element has the `type` attribute set to `email`, which ensures that the input is validated as an email address by the browser.
+
+## PHP `GET` Method
+
+- The `GET` method is used to send data to the server as part of the URL query string. It is commonly used when submitting form data that is not sensitive and can be included in the URL.
+- After submitting the form, you can access the form data in PHP using the `$_GET` superglobal array. The `$_GET` is an associative array that contains key-value pairs, where the keys are the names of the form fields, and the values are the corresponding values entered by the user. For example, if your form has an input field with the `name` attribute set to `username`, you can access its value in PHP like this:
+
+```php
+$_GET['username'];
+```
+
+- The follwing creates a search form with an input field
+
+```php
+<?php
+$languages = [
+    'python' => 'Python is a high-level, general-purpose programming language known for its clear, readable syntax that emphasizes the use of significant indentation rather than curly brackets',
+    'php' => 'PHP (a recursive acronym for PHP: Hypertext Preprocessor) is a widely-used, open-source, server-side scripting language designed primarily for web development. It is embedded within HTML to create dynamic and interactive web pages. ',
+    'javascript' => 'JavaScript is a versatile, high-level programming language that is a core technology of the World Wide Web, alongside HTML and CSS'
+];
+
+if($_SERVER['REQUEST_METHOD'] === 'GET') {
+    $search_value = $_GET['search'];
+
+    if(!empty($languages['python'])) {
+        echo "<p>The result of the search for <b>$search_value</b></p>
+              <p>$languages[$search_value]</p>";
+    };
+}
+?>
+
+<form action="form.php">
+    <label for='search'>Search</label>
+    <input type='text' id='search' name='search'>
+    <button type='submit'>Search</button>
+</form>
+```
+
+How it works:
+
+- The PHP code at the top defines an associative array `$languages` that contains descriptions of three programming languages: Python, PHP, and JavaScript.
+- It then checks if the request method is `GET` using the `$_SERVER['REQUEST_METHOD']` variable.
+- If the request method is `GET`, it retrieves the value of the `search` input field from the `$_GET` superglobal array and assigns it to the `$search_value` variable.
+- It checks if the `$languages` array contains a description for the searched language using the `!empty()` function.
+- If a description exists, it echoes a message displaying the search term and the corresponding description from the `$languages` array.
+- The HTML part of the code creates a form with a text input field for searching and a submit button. When the user submits the form, the data is sent to `form.php` using the `GET` method for processing. By this, the `form.php` script runs again and processes the submitted form data.
+- The form includes a `<label>` element for the search input field, which improves accessibility by associating the label with the input field using the `for` and `id` attributes.
+
+* If the form has multiple input elements, the web browser will append the input fields to the URL in the following format
+  `/search.php?name1=value1&name2=value2&name3=value3
+`
+
+## HTTP `GET` vs `POST` Methods
+
+- Generally, use the `GET` method when you want to retrieve data from the server without making any changes to the server's state. For example a search form that allows users to search for information should use the `GET` method
+- Use the `POST` method when you want to send data to the server that will result in a change in the server's state, such as creating or updating a resource. For example, a form that allows users to subscribe to a newsletter should use the `POST` method
+
+## Escaping the output
+
+- In the examples above, both forms display the form data directly. However, the page is not secure if malicious users intentionally inject JavaScript code into the data.
+- For example, if the following JavaScript code is entered in the term field and the form is submitted
+
+```html
+<script>
+  alert("Hello");
+</script>
+```
+
+- Imagine that the script doesn’t just show an alert but redirect users to a malicious page that mimic the legitimate page, users may enter credential information like username/password and lose it. This type of attack is called [cross-site scripting (XSS) attack](https://owasp.org/www-community/attacks/xss/).
+- To prevent XSS attacks, before displaying user input on a webpage, you should always escape the data using the htmlspecialchars() function. This function converts special characters to HTML entities, preventing the browser from interpreting them as HTML or JavaScript code. It's syntax is as follows:
+
+```php
+htmlspecialchars ( string $string , int $flags = ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401 , ?string $encoding = null , bool $double_encode = true ) : string
+```
+
+where,
+
+- `string` is the input string to be escaped.
+- `flags` is a bitmask of one or more of the following flags, which specify how to handle quotes and other special characters. The default value is `ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401`.
+- `encoding` is the character encoding of the input string. If not specified, it defaults to the value of the `default_charset` configuration option.
+- `double_encode` indicates whether to encode existing HTML entities in the input string. If set to `true`, existing entities will be encoded again. The default value is `true`.
+
+* For example, the following form shows how to use the `htmlspecialchars` function to display the search term on the page
+
+```php
+<?php
+
+if($_SERVER['REQUEST_METHOD'] === 'GET') {
+    if(isset($_GET['term'])) {
+        // get the search term from the URL
+        $term = $_GET['term'];
+
+        if($term) {
+            $clean_term = htmlspecialchars($term, ENT_QUOTES, 'UTF-8');
+            // perform search and show the result
+            echo "<p>The result of the search for <b>$clean_term</b>:</p>";
+        }
+    }
+}
+?>
+
+
+<form action="search.php" method="get">
+    <div>
+        <label for="term">Search:</label>
+        <input type="search" name="term" placeholder="Enter search term">
+        <button type="submit">Search</button>
+    </div>
+</form>
+```
+
+By this, the `HTML` code will be considered as a normal text instead of being executed as a script.
+How it works:
+
+- The PHP code at the top checks if the request method is `GET` using the `$_SERVER['REQUEST_METHOD']` variable.
+- If the request method is `GET`, it checks if the `term` input field is set in the `$_GET` superglobal array.
+- If the `term` input field is set, it retrieves its value and assigns it to the `$term` variable.
+- It then checks if the `$term` variable is not empty.
+- If the `$term` variable is not empty, it uses the `htmlspecialchars()` function to escape any special characters in the `$term` variable and assigns the result to the `$clean_term` variable.
+- Finally, it echoes a message displaying the escaped search term.
+- The HTML part of the code creates a form with a search input field and a submit button. When the user submits the form, the data is sent to `search.php` using the `GET` method for processing. By this, the `search.php` script runs again and processes the submitted form data.
+- The form includes a `<label>` element for the search input field, which improves accessibility by associating the label with the input field using the `for` and `id` attributes.
+
+## PHP self-processing form
++ Suppose you have a form that submits data to the same page for processing. This is called a self-processing form.
++ To create a self-processing form, you set the `action` attribute of the `<form>` element to the current page using the `$_SERVER['PHP_SELF']` variable. This variable contains the filename of the currently executing script relative to the document root. By this, even though the file name is later changed, there will be no error
++ The following shows how to create a self-processing form in PHP:
+
+```php
+<?php 
+
+if($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = $_POST['email'];
+    echo htmlspecialchars($email);
+}
+?>
+
+
+<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
+    <div>
+        <label for="email">Email:</label>
+        <input type="email" name="email">
+    </div>
+</form>
+```
+How it works:
+- The PHP code at the top checks if the request method is `POST` using the `$_SERVER['REQUEST_METHOD']` variable.
+- If the request method is `POST`, it retrieves the value of the `email` input field from the `$_POST` superglobal array and assigns it to the `$email` variable.
+- It then echoes the escaped value of the `$email` variable using the `htmlspecialchars()` function to prevent XSS attacks.
+- The HTML part of the code creates a form with an email input field and a submit button. The `action` attribute of the `<form>` element is set to the current page using the `$_SERVER['PHP_SELF']` variable. Note that since the variable is a php code, it must be within the `<?php ?>` tags. To prevent XSS attacks, the `htmlspecialchars()` function is used to escape the value of `$_SERVER['PHP_SELF']`.
++ When the user then submits the form, the data is sent to the same page for processing. By this, the script runs again and processes the submitted form data.
+
+## Organizing Code
++ To create a more organized code, you can separate the PHP code and HTML code into different sections as follows:
+
+```php
+.
+├── css
+│   └── style.css
+├── inc
+│   ├── header.php
+│   ├── footer.php
+│   ├── get.php
+│   ├── post.php
+│   └── .htaccess      
+└── index.php
+```
++ The `index.php` file in the root directory will include the `header.php` and `footer.php` files for the HTML header and footer sections respectively.
+
++ If the request method is GET, the index.php file loads the form in the get.php file. Otherwise, it loads the code from the post.php file for processing the POST request.
+
++ 
