@@ -243,9 +243,7 @@ $variable_name = value;
     <title>PHP Variables</title>
   </head>
   <body>
-    <?php
-        $title = 'PHP is awesome!';
-    ?>
+    <?php $title = 'PHP is awesome!'; ?>
     <h1><?php echo $title; ?></h1>
   </body>
 </html>
@@ -301,17 +299,30 @@ $variable_name = value;
   - Constants by convention don't use the dollar sign (`$`) prefix compare to variables. Also, Constants are defined in uppercase letters. Notice that `SITE_NAME` and `site_name` are different
   - Once the value of a constant is defined, it cannot be changed or undefined
 - PHP constants are defined using
-  - The `define()` function - This function takes two parameters: first, the name of the constant and and secondits value. Example
-
-````php
-  define( 'SITE_NAME', 'My PHP Website' );
-  The `define` function cannot be used to define constants within a class.
-  + The `const` keyword - This keyword is used to define constants within a class or outside a class. Example
+  - The `define()` function - This function takes two parameters: first, the name of the constant and and second its value.
+  * It's syntax is as follows:
   ```php
-  class Config {
-      const VERSION = '1.0.0';
-  }
-````
+    define( string $constant_name, mixed $value, bool $case_insensitive = false ): bool
+  ```
+  where,
+  - `$constant_name` - The name of the constant. It must be a string or a string expression (such as concatenation of strings). By convention, constant names are written in uppercase letters
+  - `$value` - The value of the constant. It can be of any data type, including scalar types (string, integer, float, boolean), arrays, and objects
+  - `$case_insensitive` - An optional parameter that specifies whether the constant name should be case-insensitive. By default, it is set to false (case-sensitive). This parameter is deprecated as of PHP 7.3.0 and removed in PHP 8.0.0
+  * Example
+
+```php
+  define( 'SITE_NAME', 'My PHP Website' );
+```
+
+The `define()` function cannot be used to define constants within a class.
+
+- The `const` keyword - This keyword is used to define constants within a class or outside a class. Example
+
+```php
+class Config {
+    const VERSION = '1.0.0';
+}
+```
 
 is a better syntax to define constants within a class. Also
 
@@ -323,20 +334,79 @@ class Config {
 
 is an invalid syntax.
 
-- `define()` vs `const`
+## `define()` vs `const`
 
-  - The `define()` function can be used to define constants at runtime, while the `const` keyword is used to define constants at compile time.
-  - The `const` keyword can be used to define constants within a class, while the `define()` function cannot.
-  - The `const` keyword supports visibility modifiers (public, protected, private) when defining constants within a class, while the `define()` function does not.
-  - The define() is a function while the const is a language construct. That is `const` defines a function at run-time (execution time) while `const` defines a constant at compile-time (Compile time is when your code is checked, translated, and prepared before execution). Thus `const` is faster than `define()`.
-  - The `define` function allows to name a constant using an expression, while the `const` keyword requires a constant name to be a valid identifier. Example
+- The `define()` function can be used to define constants at runtime, while the `const` keyword is used to define constants at compile time.
+- The `const` keyword can be used to define constants within a class, while the `define()` function cannot.
+- The `const` keyword supports visibility modifiers (public, protected, private) when defining constants within a class, while the `define()` function does not.
+- The `define()` function can be used to defined constants within a control structure while the `const` keyword cannot. Example
 
-  ```php
-    define( 'SITE_' . 'NAME', 'My PHP Website' ); // Valid
-    const SITE_' . 'NAME' = 'My PHP Website'; // Invalid
-  ```
+```php
+  if(!defined('PAYMENT_STATUS')) {
+      const PAYMENT_STATUS = 'Completed';
+  }
+```
 
-* Constants are often used for configuration values (site name, version, database limits)
+The above snippet runs an error
+
+```php
+  if(!defined('PAYMENT_STATUS')) {
+  define('PAYMENT_STATUS', 'Completed');
+  }
+```
+
+While this is the correct way to define a constant within a control structure
+
+- The define() is a function while the const is a language construct. That is `define()` defines a function at run-time (execution time) while `const` defines a constant at compile-time (Compile time is when your code is checked, translated, and prepared before execution). Thus `const` is faster than `define()`.
+- The `define` function allows to name a constant using an expression, while the `const` keyword requires a constant name to be a valid identifier. Example
+
+```php
+  define( 'SITE_' . 'NAME', 'My PHP Website' ); // Valid
+  const SITE_' . 'NAME' = 'My PHP Website'; // Invalid
+```
+
+- Constants are often used for configuration values (site name, version, database limits)
+
+* To check if a certain constant is defined, you can use the `defined()` function. It takes the name of the constant as a parameter and returns true if the constant is defined, otherwise false.
+* It's syntax is as follows:
+
+```php
+defined(string $constant_name): bool
+```
+
+- Example
+
+```php
+const PAGE_TITLE = 'Animal Category';
+
+if(defined('PAGE_TITLE')) {
+    echo 'Constant defined';
+} else {
+    echo 'Constant not defined';
+}
+// Output: Constant defined
+```
+
+- It's use-cases includes
+  - To avoid redefining a constant that is already defined
+  - To check if a constant is defined before using it in the code
+
+* An example of some PHP inbuilt constants includes
+  - `PHP_VERSION` - This constant contains the current version of PHP that is running on the server
+  - `PHP_OS` - This constant contains the operating system on which PHP is running
+  - `DIRECTORY_SEPARATOR` - This constant contains the directory separator character used by the operating system (e.g., `/` for Unix-based systems and `\` for Windows)
+
+## PHP Magic Constants
+
+- PHP Magic Constants are predefined constants that change depending on where they are used. They are called "magic" because they provide useful information about the current script or environment without requiring any additional code.
+- Some examples are:
+  - `__LINE__` - This constant contains the current line number in the script
+  - `__FILE__` - This constant contains the full path and filename of the file or current PHP script
+  - `__DIR__` - This constant contains the directory of the file. It is equivalent to `dirname(__FILE__)`
+  - `__FUNCTION__` - This constant contains the name of the current function
+  - `__CLASS__` - This constant contains the name of the current class
+  - `__METHOD__` - This constant contains the name of the current method
+  - `__NAMESPACE__` - This constant contains the name of the current namespace
 
 # PHP `var_dump()` function
 
@@ -426,7 +496,7 @@ function dump_die($variable) {
 
 ![PHP Types](PHP-types.svg)
 
-# Scalar Types
+## Scalar Types
 
 - A variable is scalar when it holds a single value of the type integer, boolean, flot(double), or string.
   - Integers are whole numbers defined from the set of positive and negative numbers including zero (Z). They are without decimal points. The size of an integer depends on the system in which PHP is running. For example, On a 32-bit system, the size of an integer is 4 bytes, while on a 64-bit system, it is 8 bytes. The constant `PHP_INT_SIZE` specifies the size of the integer on a specific platform
@@ -446,12 +516,10 @@ function dump_die($variable) {
     - All other values are considered true.
   - Strings are sequences of characters surrounded by either single (' ') or double (" ") quotes. Strings can contain letters, numbers, symbols, and whitespace characters.
 
-# Compound Types
+## Compound Types
 
 - Compound types include values that can hold multiple values or collections of values. The compound types in PHP are arrays and objects. They include:
-
   - Arrays - An array is an ordered map that associates keys to values. There are three types of arrays in PHP:
-
     - Indexed arrays - These are arrays where the keys are numeric indices starting from 0. Example
 
     ```php
@@ -480,30 +548,32 @@ function dump_die($variable) {
 
   ```
 
-# Special Types
+## Special Types
 
 - They include
   - NULL - NULL simply represents a variable with no value. It is represented by the `null` keyword
   - Resource - is a specisl variable that references to another source outside of PHP. For example, a database connection is a resource. Resources are created and used by special functions in PHP. When you are done using a resource, you should free it using the appropriate function to avoid memory leaks. Other examples of resources include file handles, image canvases, and network connections.
     ![](php-resources.png)
 
-# PHP Boolean
+## PHP Boolean
 
 - A boolean is simply a truth value that can be either true or false. PHP use the `bool` type to represent boolean values.
-- The `is_bool()` function can be used to check whether a variable is of boolean type. Example
+- The `is_bool()` function can be used to check whether a variable is of boolean type. It does not allow type juggling. Example
 
 ```php
 $is_adult = false;
 echo is_bool( $is_adult ); // Output: 1 (true)
+
+$is_adult = 0;
+echo is_bool( $is_adult ); // Output:  (false)
 ```
 
 Now, when you `echo` a boolean value, PHP converts the result to a string by representing `true` as `1` and `false` as an empty string.
 
-# PHP int
+## PHP int
 
 - To get the size of an integer on a specific platform, you can use the constant `PHP_INT_SIZE`. Similarly, to get the maximum and minimum values of an integer, you can use the constants `PHP_INT_MAX` and `PHP_INT_MIN`, respectively.
 - PHP represnts integers in decimal (base 10), hexadecimal (base 16), octal (base 8), and binary (base 2) notation.
-
   - Decimal numbers - PHP uses sequences of digits (0-9) to represent decimal numbers. These sequence may begin with a plus (+) or minus (-) sign to indicate positive or negative numbers. If no sign is specified, the number is assumed to be positive. Example
 
   ```php
@@ -522,27 +592,45 @@ Now, when you `echo` a boolean value, PHP converts the result to a string by rep
   - Octal numbers - PHP uses a leading zero (0) followed by digits (0-7) to represent octal numbers. Similar to decimals, Octal numbers also takes sign - they can be either positive or negative. Example
 
   ```php
-  0755  // Equivalent to decimal 493
-  -0123 // Equivalent to decimal -83
+  echo 0755;  // Equivalent to decimal 493
+  echo -0123; // Equivalent to decimal -83
   ```
 
   - Hecadecimal numbers - Hexadecimals consist of leading zeroes (0x) or (0X) followed by digits (0-9) or letters (A-F) to represent values from 10 to 15. Hexadecimal numbers can also be either positive or negative. Example
 
-  ````php
-  0x1A3  // Equivalent to decimal 419
-  -0X4F  // Equivalent to decimal -79
-  Particularly, the leading `0x` or `0X` is what indicates a hexadecimal number in PHP.
-  + Binary numbers - begins with `0b` or `0B` followed by a sequence of 0s and 1s. Binary numbers can also be either positive or negative. Example
   ```php
-  0b1101  // Equivalent to decimal 13
-  -0B1010 // Equivalent to decimal -10
-  ````
+  echo 0x1A3;  // Equivalent to decimal 419
+  echo -0X4F;  // Equivalent to decimal -79
+  ```
 
+  Particularly, the leading `0x` or `0X` is what indicates a hexadecimal number in PHP.
+  - Binary numbers - begins with `0b` or `0B` followed by a sequence of 0s and 1s. Binary numbers can also be either positive or negative. Example
+
+  ```php
+  echo 0b1101;  // Equivalent to decimal 13
+  echo -0B1010; // Equivalent to decimal -10
+  ```
+
+- When an integer exceeds the maximum size allowed by the platform (this is gotten by the `PHP_INT_MAX` constant), it is automatically converted to a float.
+- Sum of `PHP_INT_MAX` and `PHP_INT_MIN` outputs `-1` irrespective of the order in which they appear
 - The `is_int()` function can be used to check whether a variable is of integer type. It takes a variable as a parameter and returns true if the variable is an integer, otherwise false.
+- The `number_format()` function is used to formmat an integer into redable form. Example,
 
-# PHP Float
+```php
+print number_format(1000000);
+// Output: 1000,000
+```
+
+## PHP Float
 
 - Floating-point numbers represents numerical values with decimal points or in exponential form.
+- You can use the `PHP_FLOAT_MAX` and `PHP_FLOAT_MIN` constants to get the maximum and minimum representable floating-point numbers on a specific platform, respectively. You can also use `PHP_FLOAT_DIG` to get the number of decimal digits that can be represented without losing precision.
+- To represent any floating point number in exponential form, you simply do this
+
+```php
+echo 1.5e3; // Output: 1500
+```
+
 - Similar to integers, the range/size of float is dependent on the platform running PHP. Also, you can use underscore (`_`) as visual separators in numeric literals to improve readability. Example
 
 ```php
@@ -574,7 +662,42 @@ if ( abs( $total - $expected ) < $epsilon ) {
 
 - The `is_float()` function returns true if the variable is of float type, otherwise false
 
-# PHP String
+### Unexpected Errors with Floats
+
+- Consider the following code snippet
+
+```php
+echo floor((0.1 + 0.7) * 10);
+//Output: 7
+```
+
+How it works: - First, the expression `0.1 + 0.7` is evaluated. Due to the way floating-point numbers are represented in binary, this addition does not yield exactly `0.8`, but rather a value very close to it (e.g., `0.7999999999999999`). - Next, this approximate result is multiplied by `10`, resulting in a value close to `7.999999999999999`. - Finally, the `floor()` function is applied to this value. The `floor()` function rounds down to the nearest integer, which in this case is `7`, not `8` as one might intuitively expect.
+
+- Consider another example:
+
+```php
+echo ceil((0.1 + 0.2) * 10);
+// Output: 4
+```
+
+How it works: - First, the expression `0.1 + 0.2` is evaluated. Similar to the previous example, this addition does not yield exactly `0.3`, but rather a value very close to it (e.g., `0.30000000000000004`). - Next, this approximate result is multiplied by `10`, resulting in a value close to `3.0000000000000004`. - Finally, the `ceil()` function is applied to this value. The `ceil()` function rounds up to the nearest integer, which in this case is `4`, not `3` as one might intuitively expect.
+
+- The `NAN` constant represents a special floating-point value that stands for "Not a Number." It is used to indicate that a value is undefined or unrepresentable, especially in cases of invalid mathematical operations.
+- Example of generating `NAN`:
+
+```php
+$result = 0 / 0; // Division by zero
+echo $result; // Output: NAN
+```
+
+- The `is_nan()` function checks whether a value is `NAN`. It returns true if the value is `NAN`, otherwise false.
+
+* The `INF` constant represents positive infinity in PHP. It is used to indicate that a value exceeds the maximum representable floating-point number.
+* The `-INF` constant represents negative infinity in PHP. It is used to indicate that a value is less than the minimum representable floating-point number.
+  - `is_infinite()` function checks whether a value is positive or negative infinity. It returns true if the value is infinite, otherwise false.
+  - `is_finite()` function checks whether a value is a finite number (not infinite or `NAN`). It returns true if the value is finite, otherwise false.
+
+## PHP String
 
 - A string is a sequence of characters enclosed in either single quotes (' ') or double quotes (" "). Notice that you cannot start a string with a single quote and end it with a double quote and vice versa. The quotes must be consistent else, you'll get a syntax error. Example `'Hello, World!'` and `"Hello, World!"` are valid strings, while `'Hello, World!"` is invalid.
 - To concatente string in PHP, we use the dot / concatenate (`.`) operator. Example
@@ -590,7 +713,6 @@ echo $fullName; // Output: John Doe
 This also follows for single quotes
 
 - Single vs Double Quotes
-
   - Single Quotes (' ') - When you enclose a string in single quotes, PHP treats the content literally. That is, it does not interpret any special characters or variables within the string. Example
 
   ```php
@@ -617,13 +739,43 @@ This also follows for single quotes
   echo "I am {$age} years old."; // Output: I am 25 years old.
   ````
 
-- Accessing String Characters
-  - A string is zero-indexed, meaning the first character is at index 0, the second character is at index 1, and so on. You can access individual characters in a string using square brackets (`[]`) with the index of the character. We use the following syntax:
-  ```php
-  $string[index] #index ranges from 0 to length-1
-  #length is the total number of characters in the string
-  ```
-  - The built-in `strlen()` function returns the length of a string. Example
+### Accessing String Characters
+
+- A string is zero-indexed, meaning the first character is at index 0, the second character is at index 1, and so on. You can access individual characters in a string using square brackets (`[]`) with the index of the character. We use the following syntax:
+
+```php
+$string[index] #index ranges from 0 to length-1
+#length is the total number of characters in the string
+```
+
+- This characters can also be modified by assigning a new value to the specific index. Example
+
+```php
+$name = 'isaac';
+$name[0] = 'I'; // Change the first character to uppercase 'I'
+echo $name; // Output: Isaac
+```
+
+If you try to reassign a character at an index that is out of bounds (greater than or equal to the length of the string), PHP will automatically extend the string and fill the gap with spaces. Example
+
+```php
+$name = 'IsaaC';
+$name[6] = 's';
+echo $name;
+// Output: IsaaC s
+```
+
+- Characters can also be accessed using negative indices. Negative indices count from the end of the string, with -1 being the last character, -2 being the second-to-last character, and so on. Example
+
+```php
+$message = "Hello, World!";
+echo $message[-3]; // Output: l
+```
+
+### The built-in `strlen()`
+
+- The `strlen()`function returns the length of a string. Example
+
   ```php
   $message = "Hello, World!";
   $length = strlen( $message ); // $length will be 13
@@ -631,7 +783,7 @@ This also follows for single quotes
 
 * The in built `is_string()` function checks whether a variable is of string type. It returns true if the variable is a string, otherwise false.
 
-# PHP Heredoc
+### PHP Heredoc
 
 - Heredoc is a syntax for defining multi-line strings in PHP. It allows you to create strings that span multiple lines without the need for concatenation or escape characters.
 - Suppose you have a string that contains the double quotes, you escape them using backslashes (`\`). Example
@@ -683,36 +835,53 @@ $html = <<<HTML
 HTML;
 ```
 
-- Note that if you want to write HTML using the Heredoc syntax, you need the `HTML` identifier after the `<<<` operator else, it will be considered as a normal string
+- Note that the identifier used in this case `HTML` is according to preference. You can use any valid identifier of your choice. But for context, you can use `HTML` when generating HTML content, `SQL` when generating SQL queries, and so on.
+- The `nl2br()` function can be used to convert new line characters (`\n`) in a string to HTML line breaks (`<br>`). This is particularly useful when displaying multi-line strings in a web page. Example
 
-# PHP Nowdoc Syntax
+```php
+$message = <<<EOT
+This is line one.
+This is line two.
+This is line four.
+This is line five.
+EOT;
+echo nl2br( $message );
+```
+
+- It is practical to use the `nl2br()` function when displaying Heredoc strings that contain multiple lines in an HTML context, as it preserves the line breaks in the output. If it is used with an Heredoc string generating HTML content, it may lead to unintended formatting issues.
+
+### PHP Nowdoc Syntax
 
 - It is simlar to Heredoc syntax with the exception that variables within a Nowdoc string are not parsed. That is, they are treated literally. Syntax
 
-````php
+```php
 $str = <<<'IDENTIFIER'
 place a string here
 Another line here
 and include single quote ' and double quotes "
 variables like $name will not be parsed
 IDENTIFIER;
+```
+
 Notice that the identifier after the `<<<` operator is enclosed in single quotes (`' '`). Also, the embedded variables like `$name` ar treated as literal text not parsed.
 
-+ Heredoc strings are like double-quoted strings without escaping.
-+ Nowdoc strings are like single-quoted strings without escaping.
+- Heredoc strings are like double-quoted strings without escaping.
+- Nowdoc strings are like single-quoted strings without escaping.
 
 # Introduction to NULL in PHP
-+ The `null` type is a single-value type with one value: `NULL`. A variable of type `null` has no value assigned to it. It is classified as a special type in PHP
-+ A variable is considered to be of type `null` if:
-  + It has been assigned the constant `NULL`
-  + It has not been assigned any value yet
-  + It has been unset using the `unset()` function - the `unset()` function is used to destroy a variable. Once a variable is unset, it no longer exists in the current scope and is considered to be of type `null`. Example
+
+- The `null` type is a single-value type with one value: `NULL`. A variable of type `null` has no value assigned to it. It is classified as a special type in PHP
+- A variable is considered to be of type `null` if:
+  - It has been assigned the constant `NULL`
+  - It has not been assigned any value yet
+  - It has been unset using the `unset()` function - the `unset()` function is used to destroy a variable. Once a variable is unset, it no longer exists in the current scope and is considered to be of type `null`. Example
+
 ```php
 $var = "Hello, World!";
 var_dump( $var ); // Output: string(13) "Hello, World!"
 unset( $var );
 var_dump( $var ); // Output: NULL
-````
+```
 
 - Since PHP keywords are case-insensitive, you can also use `null`, `Null`, or `NuLL` to represent the `NULL` constant.
 
@@ -728,6 +897,29 @@ if ( $var === null ) {
 }
 ```
 
+- Pratically, if you try to echo/print the value of a null variable, you'll get an empty string. Example
+
+```php
+$x = 95;
+unset($x);
+
+echo $x;
+Output:
+```
+
+Also, type casting null to - string results to an empty string `""` - integer results to `0` - boolean results to `false` - array result to `array{}`
+
+## PHP gettype() function
+
+- The `gettype()` function is a built-in PHP function that returns the data type of a variable as a string. It takes a single parameter, which is the variable whose type you want to determine.
+- Syntax
+
+```php
+gettype( mixed $variable ): string
+```
+
+- Basically, the data-type of each variable is determined at runtime based on the value assigned to it. PHP sees anything surrounded with quotes as a string, whole numbers as integers, numbers with decimal points as floats, and so on.
+
 # PHP Type Casting
 
 - Type casting is the process of converting a value from one data-type to another. To cast a value to a specific type in PHP, you can use the following syntax:
@@ -740,53 +932,90 @@ Thus for example, to cast a variable to an integer, you can use `(int)`, `(integ
 
 - Cast to an integer
   - Suppose you want to cast a string to an integer. If the string is leading numeric, PHP will convert the numeric part to an integer and ignore the rest. Example
+
   ```php
   $price = "199 USD";
   $price_float = (int) $price; // $price_float will be 199
   ```
-  - If the string is not leading numeric, PHP will convert it to 0. Example
+
+  - If the string is not leading numeric or contains no numeric characters or null, PHP will convert it to 0. Example
+
   ```php
   $price = "USD 199";
   echo (int) $price; // Output: 0
   ```
+
+  - If the string is decimal, it truncates the decimal part and converts only the integer part. Example
+
+  ```php
+  echo (int) "99.99"; // Output: 99
+  ```
+
+  Same applies if the numeric string is separated by `_` for readability
+
+  ```php
+  echo (int) "1_000.99"; // Output: 1
+  ```
+
+  This also applied if the numeric string is separated by `_` only for readability
+
+  ```php
+  echo (int) "1_000"; // Output: 1
+  ```
+
 - Cast to a float
   - Similar to casting to an integer, when casting a string to a float, if the string is leading numeric, PHP will convert the numeric part to a float and ignore the rest. Example
+
   ```php
   $price = "199.99 USD";
   $price_float = (float) $price; // $price_float will be 199.99
   ```
+
   - If the string is not leading numeric, PHP will convert it to 0.0. Example
+
   ```php
   $price = "USD 199.99";
   echo (float) $price; // Output: 0
   ```
+
   - Also notice that in Python programming language, when you cast an integer to a float, it adds a decimal point followed by a zero. However, in PHP, it simply converts the integer to a float without adding the decimal point. Example
+
   ```php
   $num = 42;
   $num_float = (float) $num; // $num_float will be 42 not 42.0
   ```
+
 - Cast to a string
   - When casting a value to a string, PHP converts the value to its string representation. Example
+
   ```php
   $age = 25;
   $age_str = (string) $age; // $age_str will be "25"
   ```
+
   - For boolean values, `true` is converted to "1" and `false` is converted to an empty string. Example
+
   ```php
   $is_adult = true;
   $is_adult_str = (string) $is_adult; // $is_adult_str will be "1"
   ```
+
   - The `(string)` operator converts an array to the string "Array". Example
+
   ```php
   $fruits = array("Apple", "Banana", "Orange");
   $fruits_str = (string) $fruits; // $fruits_str will be "Array"
   ```
+
   - Notice that when concatenating an array with a string, PHP automatically converts the array to the string "Array". Example
+
   ```php
   $fruits = array("Apple", "Banana", "Orange");
   $message = "Fruits: " . $fruits; // $message will be "Fruits: Array"
   ```
+
   - Also when concatenating a string with an integer or float, PHP automatically converts the integer or float to its string representation. Example
+
   ```php
   $age = 25;
   $message = "Age: " . $age; // $message will be "Age: 25"
@@ -849,11 +1078,14 @@ echo gettype( $var ); // Output: string
   - Addition (`+`) -
     - The sum of an integer and a float or a float and a float is a float.
     - Computers cannot represent floats precisely. In some cases, the result will not be what you expect. For example:
+
     ```php
     $result = 0.1 + 0.2;
     echo $result; // Output: 0.30000000000000004
     ```
+
     An issue will occur if you add floats and then compare the result using the equality operator (`==`) to another float. To avoid this, you can use a tolerance value (epsilon) when comparing floating-point numbers. Example
+
     ```php
     $total = 0.1 + 0.2;
     $expected = 0.3;
@@ -866,37 +1098,61 @@ echo gettype( $var ); // Output: string
         echo "The numbers are not equal.";
     }
     ```
+
     - Add a number to a string reults in PHP converting the string to a number using type juggling rules before performing the addition to yield a numerical result. If the numerical string contains a non-numeric character, PHP issues a warning and ignores the non-numeric part. Example
+
     ```php
     $num_str = "100 apples";
     $num = 50;
     $sum = $num_str + $num; // $num_str is converted to
     echo $sum; // Output: 150
     ```
+
     Warning: A non-numeric value encountered in /path/to/file.php on line X
     - If PHP fails to convert a string to a number, it will result into a fatal error. Example
+
     ```php
     $num_str = "apples 100";
     $num = 50;
     $sum = $num_str + $num; // Fatal error
     ```
-    Notice that the string wasn't converted to a truthy value which is 1. Instead, it resulted into a fatal error.
+
+    - Notice that the string wasn't converted to a truthy value which is 1. Instead, it resulted into a fatal error.
+    - Also, the `+` operator can be used for type casting as follow
+
+    ```php
+    var_dump(+'10')
+    // Output: int(10)
+    ```
+
   - Subtraction (`-`) - subtracts one number from another
     - Subtracting a float from an integer or a float from a float results in a float.
     - Similar to addition, subtracting a float from another float is inaccurate due to the imprecision of float representation in computers.
       Example
+
     ```php
     $x = 0.3 - 0.1;
     echo $x; // Output: 0.19999999999999998
     // expected output is 0.2
     ```
+
+    - Also, the `-` operator can be used for type casting as follow
+
+    ```php
+    var_dump(-'10')
+    // Output: int(-10)
+    ```
+
   - Multiplication (`*`) - multiplies two numbers together
     - Multiplying a float from an integer or a float from a float results in a float.
   - Division (`/`) - divides first number by the second number
-    - Dividing a float from an integer or a float from a float results in a float.
-    - Dividing by zero results in a fatal error.
+    - Dividing a float from an integer or a float from a float results in a float.\
+    - If two numbers can be evenly divided, it returns an integer whether the two numbers are float or integer.
+    - Dividing by zero results in a fatal error. Suppose you still want to divide by an 0, you can use a function called `fdiv()` then pass in the two numbers accordingly. It returns `INF`
     - Basic Division rules still follows
   - Modulus (`%`) - returns the remainder of a division operation
+    - Suppose you pass in floats as operands, the two will first be cast into integers before being operated on. Thus `echo 10.2 % 2.9` will return `0`. To get the proper float result, you can use the `fmod()` function the pass in the operands accordingly
+    - Also, the sign of the remainder is dependent on the first operand (if first operand is negative, remainder will be negative and so on)
   - Exponentiation (`**`) - raises a number to the power of another number-
 
 * PHP decides how to convert values based on the OPERATOR being used — not just the values themselves.
@@ -930,6 +1186,28 @@ echo $full_name, '<br>';
 ```
 
 First, PHP executes code from left to right. Thus, it first evaluates the expression `$full_name = 'Harry' . ' ' . 'Potter'` which results in the value `Harry Potter`. Then, it assigns this value to the variable `$full_name`. Finally, it echoes the value of `$full_name`, which is `Harry Potter`. The second `echo` statement simply outputs the value of `$full_name` again, which is still `Harry Potter`.
+
+## Assignment tips
+
+### Double Assignment
+
+```php
+$x = $y = 10;
+
+echo $x; // 10
+echo $y // 10
+```
+
+### Complex Assignment
+
+```php
+$x = ($y = 10) + 5;
+
+echo $x; // 15
+echo $y; // 10
+```
+
+Here, the expression in the parenthesis is first executed i.e assigning the variable `$y` to `10` the summing it up to `5` yields `15` which is assigned to variable `$x`. Know that this syntax is not recommended since it makes code less readable
 
 ## Arithmetic Assignment Operators
 
@@ -975,13 +1253,30 @@ echo $message; // Output: Hello, World!
 - PHP comparsion operators are used to compare two values. They return a boolean value (true or false) based on the result of the comparison.
 - The following are the comparison operators in PHP:
   - Equal (`==`) - returns true if two values are equal without considering the type (loose comparison => type juggling) else false
-  - Identical (`===`) - returns true if two values are equal and of the same type (strict comparison) else false
+    - One of the exception to this is the following code
+    ```php
+    var_dump(0 == 'hello');
+    //bool(false)
+    ```
+    Here, since the string `'hello'` is not a numeric string, it converts the first operand to a string i.e `'0'` and does the comparison
+  - Identical (`===`) - returns true if two values are equal and of the same type (strict comparison) else false. To avoid potential issues, use the identical operator for comparison
   - Not equal (`!=` or `<>`) - returns true if two values are not equal (with type juggling - loose comparison) else false
   - Not identical (`!==`) - returns true if two values are not equal or not of the same type (strict comparison) else false
   - Greater than (`>`) - returns true if the left value is greater than the right value else false
   - Less than (`<`) - returns true if the left value is less than the right value else false
   - Greater than or equal to (`>=`) - returns true if the left value is greater than or equal to the right value else false. Note that `>` comes first before `=`. If otherwise, it will be treated as the assignment operator and you will most likely get a syntax error
   - Less than or equal to (`<=`) - returns true if the left value is less than or equal to the right value else false. Similarly, note that `<` comes first before `=`. If otherwise you will most likely get a syntax error
+  - Spaceship Operator (`<=>`) - returns `0` if first operand is equal to second operand - return `-1` if first operand is less than second operand - return `1` if first operand is greater than second operand
+  - Null Coalescing Operator (`??`) - It is used as follow
+
+  ```php
+    $x = null;
+    $y = $x ?? 'Hello';
+
+    echo $y;
+  ```
+
+  The above code will output `Hello`. The operator takes two operand - the `null` constant or an expression yielding null and the value or expression. By this, the operator will return the second operand only if the first is null or an expression yielding `null` else it returns the first operand
 
 # PHP AND Operator
 
@@ -1021,7 +1316,7 @@ echo $message; // Output: Hello, World!
 
 ## Short-Circuiting
 
-- When the values of the first boolean operand is true, the second operand is not evaluated because the overall result will be true regardless of the value of the second operand since we know that `true || anything` is always true. This is known as Short-Circuiting. Thus, the `||` or `or` operator is for Short-Circuiting logical OR operation.
+- When the values of the first boolean operand is true, the second operand (expression or value) is not evaluated because the overall result will be true regardless of the value of the second operand since we know that `true || anything` is always true. This is known as Short-Circuiting. Thus, the `||` or `or` operator is for Short-Circuiting logical OR operation.
 - Practically, the or operator is used in the following pattern
 
 ```php
@@ -1089,7 +1384,205 @@ Logical Operators (lowest):
 and or
 ```
 
-# PHP If Statement
+# PHP Increment Operators
+
+- The increment operator (`++`) is used to increase the value of a variable by 1. It can be used in two ways: as a prefix operator (before the variable) or as a postfix operator (after the variable).
+
+- When used as a prefix operator, the value of the variable is incremented before it is used in an expression. Example
+
+```php
+$x = 5;
+$y = ++$x; // $x is incremented to 6, then assigned to $y
+echo $y; // Output: 6
+```
+
+- When used as a postfix operator, the value of the variable is incremented after it is used in an expression. Example
+
+```php
+$x = 5;
+$y = $x++; // $y is assigned the value of $x (5), then $x is incremented to 6
+echo $y; // Output: 5
+```
+
+## Unexpected behaviours of Increment Operators
+
+- When using the increment operator on a string that contains a (fully) numeric value, PHP will increment the numeric part of the string. Example
+
+```php
+$str = "99";
+$str++;
+echo $str; // Output: 100
+```
+
+- Array, Booleans and Resources cannot be incremented. Arrays will result in a fatal error while booleans and resources will issue a warning and have no effect.
+- Decrementing a null value has no effect but incrementing a null value results to `1`. Example
+
+```php
+$var = null;
+$var++;
+echo $var; // Output: 1
+```
+
+- Decrementing a string has no effect but incrementing a string increases the last character of the string. Same aplies to numeric strings (integer + text). Example
+
+```php
+$str = "abc";
+$str++;
+echo $str; // Output: abd
+```
+
+# PHP Bitwise Operators
+
+- PHP bitwise operators are used to perform bit-level operations on integers. They operate on the binary representation of the integers. The following are the bitwise operators in PHP:
+  - AND (`&`) - performs a bitwise AND operation between two integers. Example
+
+  ```php
+    $a = 5; // Binary: 0101
+    $b = 3; // Binary: 0011
+    $result = $a & $b; // Binary: 0001 (Decimal: 1)
+    echo $result; // Output: 1
+  ```
+
+  This will return `1` because only the last bit in both numbers is `1`.
+  - OR (`|`) - performs a bitwise OR operation between two integers. Example
+
+  ```php
+    $a = 5; // Binary: 0101
+    $b = 3; // Binary: 0011
+    $result = $a | $b; // Binary: 0111 (Decimal: 7)
+    echo $result; // Output: 7
+  ```
+
+  This will return `7` because all bits that are `1` in either number are set to `1`.
+  - XOR (`^`) - performs a bitwise XOR operation between two integers. Example
+
+  ```php
+    $a = 5; // Binary: 0101
+    $b = 3; // Binary: 0011
+    $result = $a ^ $b; // Binary: 0110 (Decimal: 6)
+    echo $result; // Output: 6
+  ```
+
+  This will return `6` because only the bits that are different between the two numbers are set to `1`.
+  - NOT (`~`) - performs a bitwise NOT operation on an integer. Example
+
+  ```php
+    $a = 5; // Binary: 0101
+    $result = ~$a; // Binary: 1010 (Decimal: -6)
+    echo $result; // Output: -6
+  ```
+
+  - Left Shift (`<<`) - shifts the bits of an integer to the left by a specified number of positions. Example
+
+  ```php
+    $a = 5; // Binary: 0101
+    $result = $a << 1; // Binary: 1010 (Decimal: 10)
+    echo $result; // Output: 10
+  ```
+
+  Here, the bits of `5` are shifted one position to the left, resulting in `10`.
+  - Right Shift (`>>`) - shifts the bits of an integer to the right by a specified number of positions. Example
+
+  ```php
+    $a = 5; // Binary: 0101
+    $result = $a >> 1; // Binary: 0010 (Decimal: 2)
+    echo $result; // Output: 2
+  ```
+
+  Here, rather than adding a `0` at the leftmost position, the leftmost bit is replicated (sign bit) to fill in the empty positions. Basically, for this operator, the specified number of bits are removed from the right side of the binary representation of the integer.
+
+## Use-cases of Bitwise Operators
+
+- The use cases of bitwise operators include:
+  - Performing low-level operations on binary data
+  - Manipulating individual bits in a number
+  - Implementing certain algorithms that require bit-level operations
+  - Setting, clearing, or toggling specific bits in a number
+  - Performing efficient calculations on large sets of data
+- Some practical examples of bitwise operations in PHP scenerio include:
+  - Implementing permission systems where each permission is represented by a bit in an integer
+  - Performing image processing operations on pixel data
+  - Implementing cryptographic algorithms that require bit-level operations
+
+# PHP Array Operators
+
+- PHP provides several array operators to perform operations on arrays. The following are the array operators in PHP:
+  - Union (`+`) - combines two arrays into one array. If there are duplicate keys, the values from the first array are retained. Example
+
+  ```php
+    $array1 = array("a" => "Apple", "b" => "Banana");
+    $array2 = array("b" => "Orange", "c" => "Grapes");
+    $result = $array1 + $array2;
+    print_r($result);
+  ```
+
+  This will output:
+
+  ```
+    Array
+    (
+        [a] => Apple
+        [b] => Banana
+        [c] => Grapes
+    )
+  ```
+
+  Also
+
+  ```php
+    $array1 = array("Apple", "Banana");
+    $array2 = array("Orange", "Grapes");
+    $result = $array1 + $array2;
+    print_r($result);
+  ```
+
+  This will output:
+
+  ```
+      Array
+      (
+          [0] => Apple
+          [1] => Banana
+      )
+  ```
+
+  - Equality (`==`) - returns true if two arrays have the same key-value pairs, regardless of the order of the elements and their types. Keys and Elements are compared. Example
+
+  ```php
+    $array1 = array("a" => "Apple", "b" => "Banana");
+    $array2 = array("b" => "Banana", "a" => "Apple");
+    var_dump($array1 == $array2); // Output: bool(true)
+  ```
+
+  - Identity (`===`) - returns true if two arrays have the same key-value pairs in the same order and of the same types. Keys and Elements are compared. Example
+
+  ```php
+    $array1 = array("a" => "Apple", "b" => "Banana");
+    $array2 = array("b" => "Banana", "a" => "Apple");
+    var_dump($array1 === $array2); // Output: bool(false)
+  ```
+
+  - Inequality (`!=` or `<>`) - returns true if two arrays do not have the same key-value pairs. Example
+
+  ```php
+    $array1 = array("a" => "Apple", "b" => "Banana");
+    $array2 = array("a" => "Apple", "b" => "Orange");
+    var_dump($array1 != $array2); // Output: bool(true)
+  ```
+
+  - Non-identity (`!==`) - returns true if two arrays do not have the same key-value pairs in the same order or of the same types. Example
+
+  ```php
+    $array1 = array("a" => "Apple", "b" => "Banana");
+    $array2 = array("a" => "Apple", "b" => "Banana");
+    var_dump($array1 !== $array2); // Output: bool(false)
+  ```
+
+# PHP Control Structures
+
+- A control structure is a block of code that determines the flow of execution based on certain conditions. It allows you to control the order in which statements are executed in your program.
+
+## PHP If Statement
 
 - The `if` statement is a conditional statement that allows you to execute a block of code only if a specified condition or a logical expression is true. The syntax of the `if` statement in PHP is as follows:
 
@@ -1114,7 +1607,7 @@ if ( $age >= 18 )
 
 But still, it’s a good practice to always use curly braces with the if statement even though it has a single statement to execute
 
-## Nesting If Statements
+### Nesting If Statements
 
 - This can be done as follows:
 
@@ -1127,7 +1620,7 @@ if ( condition1 ) {
 }
 ```
 
-## Embeded If Statements
+### Embedded If Statements
 
 - PHP provieds an alternative syntax for embedding `if` statements within HTML code. This syntax is particularly useful when you want to mix PHP code with HTML markup. The syntax for embedded `if` statements is as follows:
 
@@ -1165,7 +1658,7 @@ if ( condition1 ) {
 * Avoid the mistake of using curly braces `{}` with the embedded `if` statement.
 * Also, avoid the use of the assignment operator (`=`) in place of the equality operator (`==`) in the expression of an `if` statement.
 
-# PHP If...Else Statement
+## PHP If...Else Statement
 
 - Suppose you want to execute a block of code when a condition is true and another block of code when the condition is false. You can use the `if...else` statement to achieve this. The syntax of the `if...else` statement in PHP is as follows:
 
@@ -1182,7 +1675,7 @@ Here, if the expression is true, PHP executes the if block. Otherwise, it execut
 - The flow of control in an `if...else` statement is illustrated below
   ![](php-if-else.png)
 
-## PHP If...else statement in HTML
+### PHP If...else statement in HTML
 
 - Similar to the embedded `if` statement, you can also embed the `if...else` statement within HTML code using the following syntax:
 
@@ -1207,8 +1700,7 @@ Here, if the expression is true, PHP executes the if block. Otherwise, it execut
     <title>Login</title>
   </head>
   <body>
-    <?php $is_authenticated = true ?>
-    <?php if ($is_authenticated): ?>
+    <?php $is_authenticated = true ?> <?php if ($is_authenticated): ?>
     <h1>Welcome, again!</h1>
     <a href="#">Log out</a>
     <?php else: ?>
@@ -1219,7 +1711,7 @@ Here, if the expression is true, PHP executes the if block. Otherwise, it execut
 </html>
 ```
 
-# PHP If elseif statement
+## PHP If elseif statement
 
 - The PHP If elseif statement is particularly useful when you have multiple conditions to check. It allows you to test several conditions sequentially and execute different blocks of code based on which condition is true. The syntax of the `if...elseif...else` statement in PHP is as follows:
 
@@ -1238,7 +1730,7 @@ This illustrates how the If elseif statement works
 
 - Here, one a certain if block is executed, the rest are skipped even thought their expression is `true`.
 
-## PHP if elseif alternative syntax
+### PHP if elseif alternative syntax
 
 - PHP supposrts an alternative syntax for the `elseif` statement. This involves exempting the curly braces and using colons (`:`) to indicate the start of each code block. The syntax is as follows:
 
@@ -1257,7 +1749,7 @@ endif;
 - Colons indicates the start of each `if` statements
 - Use the `endif` statement followed by a semi-colon to terminate the final conditional block (either the `else` or `elseif` block)
 - This is similar to writing `if..else` statements in Python
-- Now `elseif` and `else if` are the same in PHP. However, `elseif` is preferred as it is a single word and more concise. Also, if you decide to use the `else if` in the alternative syntax it yields an error. Example
+- Now `elseif` and `else if` are the same in PHP. However, `elseif` is preferred as it is a single word and more concise. Also `elseif` should be used when embedding PHP within HTML. Also, if you decide to use the `else if` in the alternative syntax it yields an error. Example
 
 ```php
 <?php
@@ -1343,7 +1835,7 @@ condition1 ? value_if_true1 :
 
 # PHP Switch
 
-- The switch statement is particularly useful when the value of a variable needs to be compared against multiple possible values in a boolean expression. It provides a more concise and readable way to handle such scenarios compared to using multiple `if...elseif...else` statements.
+- The switch statement is particularly useful when the value of a variable needs to be compared against (or match to) multiple possible values in a boolean expression. It provides a more concise and readable way to handle such scenarios compared to using multiple `if...elseif...else` statements.
 - The syntax of the switch statement in PHP is as follows:
 
 ```php
@@ -1380,6 +1872,8 @@ is used when embedding PHP in HTML. Do not forget the `endswitch;` statement to 
 
 * The flow of control in a switch statement is illustrated below
   ![](php-switch.png)
+
+  Here, once a match is found, the corresponding case block is executed until a break statement is encountered. If no `break` statement is found, the execution will continue to the next case block(s) until a break is encountered or the switch statement ends. If no match is found, the default block is executed (if provided).
 
 - Scenario: Suppose that you’re building a website whose users have many roles like admin, editor, author, and subscriber. You can basically use an if...elseif...else statement to check the user role and display the appropriate content as
 
@@ -1454,7 +1948,7 @@ switch ($role) {
 
 - Since PHP executes a certain case block when a match is found till it encounters a break statement, you can combine multiple cases that share the same code block. Example: Suppose both the editor and author roles share the same welcome message. You can combine their cases as follows:
 
-````php
+```php
 switch ($role):
     case 'editor':
     case 'author':
@@ -1469,20 +1963,162 @@ switch ($role):
     default:
         $message = 'Unauthorized!';
     endswitch;
+```
+By this, if the `$role` is either `editor` or `author`, the same welcome message will be assigned to the `$message` variable.
 
-# PHP for
-+ The `for` statement allows you to execute a block of code repeatedly for a specified number of times. It is commonly used when the number of iterations is known beforehand. The syntax of the `for` statement in PHP is as follows:
+- Switch statements use loose comparison (==) when comparing the expression with the case values. This means that type juggling occurs during the comparison. By this, it does Type Juggling.
+
+## Using continue statement in switch
+- In PHP 7.3 and later versions, you can use the `continue` statement within a switch statement to skip the current case and move to the next iteration of an enclosing loop. This is particularly useful when you want to skip certain cases based on specific conditions while iterating through a loop. Example:
+```php
+for ($i = 0; $i < 5; $i++) {
+    switch ($i) {
+        case 1:
+            echo "Skipping case 1\n";
+            continue 2; // Skip to the next iteration of the for loop
+        case 2:
+            echo "Processing case 2\n";
+            break;
+        case 3:
+            echo "Processing case 3\n";
+            break;
+        default:
+            echo "Processing default case\n";
+    }
+}
+/*
+Output:
+Processing default case
+Skipping case 1
+Processing case 2
+Processing case 3
+Processing default case
+*/
+```
+
+## switch() vs if...elseif...else
++ The expression between the switch parentheses `switch(expression)` can only be a executed once while in the `if...elseif...else` statement, each condition is evaluated separately. Thus, if you have multiple conditions that depend on the same variable or expression, using a switch statement can be more efficient.
++ Consider this example:
+```php
+function x() {
+    sleep(3);
+    echo 'Done';
+    return 4;
+}
+
+if(x() === 1) {
+    echo 1;
+} elseif(x() === 2) {
+    echo 2;
+} elseif(x() === 3) {
+    echo 3;
+} else {
+    echo 4;
+}
+```
+How this works is that the function `x()` is called multiple times (3 times) until a match is found or all conditions are evaluated. Each time the function is called, it sleeps for 3 seconds before returning a value. Thus, if no match is found, the total sleep time will be 9 seconds. To fix and optimize this, you can use a switch statement as follows:
+```php
+function x() {
+    sleep(3);
+    echo 'Done';
+    return 4;
+}
+
+switch(x()) {
+    case 1:
+        echo 1;
+        break;
+    case 2:
+        echo 2;
+        break;
+    case 3:
+        echo 3;
+        break;
+    default:
+        echo 4;
+}
+```
+By this, the function `x()` is called only once, and its return value is compared against the case values. Thus, the total sleep time will be only 3 seconds regardless of whether a match is found or not.
+
+# PHP sleep() Function
++ The `sleep()` function in PHP is used to pause the execution of a script for a specified number of seconds. It is commonly used to introduce delays in the execution of a program, which can be useful in various scenarios such as rate limiting, simulating long-running processes, or waiting for external resources to become available. The syntax of the `sleep()` function is as follows:
+```php
+sleep(seconds);
+```
+
+# PHP Match Expression
++ The `match` expression is a new feature introduced in PHP 8.0 that provides a more concise and expressive way to perform value comparisons and return results based on those comparisons. It is similar to the `switch` statement but has some key differences and advantages. The syntax of the `match` expression in PHP is as follows:
+```php
+match (expression) {
+    value1 => result1,
+    value2 => result2,
+    ...
+    default => default_result,
+};
+```
+- Here, the `expression` is evaluated once, and its value is compared against the specified values (`value1`, `value2`, etc.). These values can also be logical expressions that yields a value. If a match is found, the corresponding result (`result1`, `result2`, etc.) is returned. This result can also be any complex expression. If no match is found, the `default` result is returned (if provided). Unlike the `switch` statement, the `match` expression uses strict comparison (`===`) for value comparisons, which means that both the value and type must match for a case to be considered a match.
+- A use-case of the match expression is as follows:
+```php
+match($role) {
+    'admin' => 'Welcome, admin!',
+    'editor' => 'Welcome! You have some pending articles to edit',
+    'author' => 'Welcome! Do you want to publish the draft article?',
+    'subscriber' => 'Welcome! Check out some new articles',
+    default => 'Unauthorized!',
+};
+```
+Since the match expression returns a value, you can directly assign its result to a variable as follows:
+```php
+$message = match($role) {
+    'admin' => 'Welcome, admin!',
+    'editor' => 'Welcome! You have some pending articles to edit',
+    'author' => 'Welcome! Do you want to publish the draft article?',
+    'subscriber' => 'Welcome! Check out some new articles',
+    default => 'Unauthorized!',
+};
+```
+
++ PHP match expression has the following features:
+  - It uses strict comparison (`===`) for value comparisons.
+  - It returns a value, which can be directly assigned to a variable.
+  - It does not require `break` statements to prevent fall-through behavior.
+  - Each case must result in a value; you cannot have code blocks like in `switch` statements.
+
+## Match expression vs Switch statement
+- Match expressions and switch statements are both used for conditional branching based on the value of an expression. However, there are some key differences between the two:
+  - Comparison Type: Match expressions use strict comparison (`===`), while switch statements use loose comparison (`==`).
+  - Return Value: Match expressions return a value, which can be directly assigned to a variable. Switch statements do not return a value.
+  - Fall-through Behavior: Match expressions do not have fall-through behavior; each case must result in a value. Switch statements can have fall-through behavior if `break` statements are omitted. Suppose you have two cases that share the same code this can be done using match expression as follows:
+  ```php
+    $result = match($value) {
+        'case1', 'case2' => 'Shared result for case1 and case2',
+        'case3' => 'Result for case3',
+        default => 'Default result',
+    };
+  ```
+  - Syntax: Match expressions have a more concise syntax compared to switch statements.
+  - Match expression is exhaustive while Switch statement is not. This means that all possible cases must be handled, either explicitly or through a default case. If a match expression does not cover all possible values and lacks a default case, it will result in an error at runtime.
+  - Switch statement takes multiple statements or code block for each case. For Match expression, each case must result in a single value.
+
+
+# PHP Loops
+
+- A Loop is a control structure that allows you to execute a block of code repeatedly based on a specified condition. Loops are useful when you want to perform repetitive tasks or iterate over a collection of data. PHP provides several types of loops, including `for`, `while`, and `do...while` loops.
+
+## PHP for
+
+- The `for` statement allows you to execute a block of code repeatedly for a specified number of times. It is commonly used when the number of iterations is known beforehand. The syntax of the `for` statement in PHP is as follows:
 
 ```php
 for (start; condition; increment) {
 
 }
-````
+```
 
-- `start` statement is executed when the loop starts
-- `condition` is mostly a boolean expression or value. If its `true`, the code in the block gets executed
-- the `increment` expression is expressed at each iteration
-- In PHP, you can multiply multiple `start`, `condition` and `increment` expressions by separating them with commas. Example
+- `start` statement is executed when the loop starts only not at each iteration. After that, it is never executed again.
+- `condition` is mostly a boolean expression or value evaluated at the beginning of each iteration . If its `true`, the code in the block gets executed
+- the `increment` expression is expressed at the end of each iteration
+- In PHP, you can add multiple `start`, `condition` and `increment` expressions or just any expression by separating them with commas. Their execution will follow how `start`, `condition` and `increment` expressions are written. Example
 
 ```php
 for ( $i = 0, $j = 10; $i < 10, $j > 0; $i++, $j-- ) {
@@ -1524,7 +2160,41 @@ for ( $i = 0; $i < 10; $i += 1 ) {
 }
 ```
 
-# PHP while
+### `for` Loop performance issue
+
+- Suppose you have a large array and you want to iterate over its elements using a `for` loop. If you use the `count()` function in the `condition` expression of the `for` loop, it will be called on every iteration, which can lead to performance issues. Example
+
+```php
+$large_array = [/* large array elements */];
+
+for($i = 0; $i < count($large_array); $i++) {
+    // code to be executed
+}
+```
+
+This can be inefficient because the `count()` function is called on every iteration of the loop. To optimize this, you can store the result of the `count()` function in a variable alongside the `start` statement before the loop starts and use that variable in the `condition` expression. Example
+
+```php
+$large_array = [/* large array elements */];
+
+for($i = 0, $len = count($large_array); $i < $len; $i++) {
+    // code to be executed
+}
+```
+
+Or you can store the length of the array in a variable before the loop starts as follows:
+
+```php
+$large_array = [/* large array elements */];
+$len = count($large_array);
+for($i = 0; $i < $len; $i++) {
+    // code to be executed
+}
+```
+
+In practice, do not call any function in the `condition` expression of a loop if it can be avoided. Instead, store the result of the function in a variable before the loop starts and use that variable in the `condition` expression. This will improve the performance of your code, especially when dealing with large datasets.
+
+## PHP while
 
 - The `while`statement executes a block of code as long as a specified condition (a boolean) is true. It is commonly used when the number of iterations is not known beforehand and depends on a certain condition being met. The syntax of the `while` statement in PHP is as follows:
 
@@ -1549,7 +2219,7 @@ However, it's a good practice to always use curly braces `{}` with the `while` l
 - The following illustrates the flow of control in a `while` loop
   ![](php-while.png)
 
-## An alternative syntax for `while` loop
+### An alternative syntax for `while` loop
 
 - An alternative syntax for the `while` loop is provided in PHP, which is particularly useful when embedding PHP code within HTML. This syntax uses a colon (`:`) to indicate the start of the loop block and the `endwhile;` statement to terminate the loop. The syntax is as follows:
 
@@ -1559,7 +2229,7 @@ while ( condition ):
 endwhile;
 ```
 
-# PHP do...while
+## PHP do...while
 
 - The `do...while` statement is similar to the `while` statement, but with a key difference: the code block is executed at least once before the condition is evaluated. This means that the code block will always run at least one time, regardless of whether the condition is true or false. The syntax of the `do...while` statement in PHP is as follows:
 
@@ -1575,18 +2245,18 @@ Here, the code is executed first before the `expression` is evaluated. If the `e
 - The illustration of the flow of control in a `do...while` loop is as follows
   ![](php-do-while.png)
 
-## do...while vs while
+### do...while vs while
 
 - PHP executes the code in the `do...while` loop at least once, even if the condition is false from the beginning. In contrast, the `while` loop may not execute the code block at all if the condition is false initially.
 - The expression is evaluted at the end of each iteration in the `do...while` loop, while it is evaluated at the beginning of each iteration in the `while` loop.
 
-# PHP foreach
+## PHP foreach
 
 - The `foreach` statement is specifically designed for iterating over elements in arrays or objects. It provides a convenient way to loop through each element in an array or each property in an object without the need for manual indexing.
 - This illustrates the flow of control in a `foreach` loop
   ![](php-foreach.png)
 
-## PHP foreach with indexed arrays
+### PHP foreach with indexed arrays
 
 Syntax:
 
@@ -1598,7 +2268,7 @@ foreach ( $array_name as $element ) {
 
 - Here, if PHP encounters a `foreach` loop, it assigns the first element of the array to the variable `$element` and executes the code block. After executing the code block, it assigns the next element of the array to `$element` and executes the code block again. This process continues until all elements in the array have been processed. Then at the last element, the loop terminates, and the program continues with the next statement after the `foreach` block.
 
-## PHP foreach with associative arrays
+### PHP foreach with associative arrays
 
 - Syntax:
 
@@ -1610,7 +2280,129 @@ foreach($array_name as $key => $value) {
 
 - Here, when PHP executes the `foreach` loop, it assigns the first key of the associative array to the variable `$key` and its corresponding value to the variable `$value`. Then, it executes the code block. After executing the code block, it assigns the next key to `$key` and its corresponding value to `$value`, and executes the code block again. This process continues until all key-value pairs in the associative array have been processed. Finally, when the last key-value pair is processed, the loop terminates, and the program continues with the next statement after the `foreach` block.
 
-# PHP `break` statement
+### Manipulating array elements using `foreach`
+
+- To manipulate array elements using the `foreach` loop, you can use the reference operator (`&`) before the value variable in the loop. This allows you to modify the actual elements of the array directly within the loop. Example
+
+```php
+$numbers = [1, 2, 3, 4, 5];
+
+foreach ($numbers as &$number) {
+    $number *= 2; // Double the value of each element
+}
+
+print_r($numbers);
+/*Output:
+Array
+(
+    [0] => 2
+    [1] => 4
+    [2] => 6
+    [3] => 8
+    [4] => 10
+)
+*/
+```
+
+### `foreach()` Behavior with empty arrays
+- If the array is empty, the code block inside the `foreach` loop will not be executed at all. Example
+
+### Some `foreach()` Behaviours
+- The variable used to hold the value in a `foreach` loop retains its value after the loop ends. Example
+
+```php
+$names = ['John', 'Isaac', 'Gabriel'];
+
+foreach($names as $name) {
+    echo $name;
+}
+
+echo $name; // Output: Gabriel
+```
+- If you are using the `foreach()` loop to manipulate the array element by reference and the variable is assigned immediately after the `foreach` loop, its will overwrite the value of the last element processed in the loop. Example
+
+```php
+$names = ['John', 'Isaac', 'Gabriel'];
+
+foreach($names as &$name) {
+    echo $name;
+}
+
+$name = 'Michael';
+
+print_r($names);
+/*Output:
+Array
+(
+    [0] => John
+    [1] => Isaac
+    [2] => Michael
+)
+```
+- To avoid this issue, you can unset the reference variable after the `foreach` loop as follows:
+
+```php
+$names = ['John', 'Isaac', 'Gabriel'];
+foreach($names as &$name) {
+    echo $name;
+}
+unset($name); // Unset the reference variable
+$name = 'Michael';
+print_r($names);
+/*Output:
+Array
+(
+    [0] => John
+    [1] => Isaac
+    [2] => Gabriel
+)
+*/
+```
+
+## PHP `implode()` function
++ The `implode()` function in PHP is used to join array elements into a single string. It takes two parameters: a separator string and an array. The separator string is placed between each element of the array in the resulting string. The syntax of the `implode()` function is as follows:
+
+```php
+implode(separator, array);
+```
+- Here, the `separator` is a string that will be used to separate the elements in the resulting string, and `array` is the array whose elements you want to join together.
+- An example of using the `implode()` function is as follows:
+
+```php
+$fruits = ['Apple', 'Banana', 'Orange'];
+$result = implode(', ', $fruits);
+
+echo 'The fruits are: ' . $result;
+// Output: The fruits are: Apple, Banana, Orange
+```
+- For best practices, always check if the input variable is an array before using the `implode()` function to avoid potential errors.
+
+## PHP `json_encode()` function
++ The `json_encode()` function in PHP is used to convert a PHP variable (such as an array or object) into a JSON (JavaScript Object Notation) string. JSON is a lightweight data interchange format that is easy for humans to read and write, and easy for machines to parse and generate. The syntax of the `json_encode()` function is as follows:
+
+```php
+json_encode(value, options, depth);
+```
+- Here, the `value` is the PHP variable that you want to convert to a JSON string. The `options` parameter is optional and allows you to specify various options for encoding, such as pretty-printing the JSON output. The `depth` parameter is also optional and specifies the maximum depth of the nested structures to be encoded.
+- An example of using the `json_encode()` function is as follows:
+
+```php
+$data = [
+    'name' => 'John Doe',
+    'age' => 30,
+    'city' => 'New York'
+];
+$json_string = json_encode($data, JSON_PRETTY_PRINT);
+echo $json_string;
+/* Output:
+{
+    "name": "John Doe",
+    "age": 30,
+    "city": "New York"
+}
+*/
+```
+## PHP `break` statement
 
 - The `break` statement terminates the execution of the `for`, `do...while`, `while`, and `switch` statement
 - Practically, we use the `break` statement alongside the `if` statement to specify the condition for the termination of the loop
@@ -1622,7 +2414,7 @@ if (condition){
 }
 ```
 
-## PHP `break` statement with nested loops
+### PHP `break` statement with nested loops
 
 - When using nested loops (a loop inside another loop), the `break` statement only terminates the innermost loop in which it is placed. The outer loop continues to execute as normal. Example
 
@@ -1636,6 +2428,16 @@ for ($i = 1; $i <= 3; $i++) {
         echo "  Inner loop iteration: $j\n";
     }
 }
+// Output:
+// Outer loop iteration: 1
+//   Inner loop iteration: 1
+//   Inner loop iteration: 2
+// Outer loop iteration: 2
+//   Inner loop iteration: 1
+//   Inner loop iteration: 2
+// Outer loop iteration: 3
+//   Inner loop iteration: 1
+//   Inner loop iteration: 2
 ```
 
 - In this example, when `$j` equals 3, the `break` statement terminates the inner loop. The outer loop continues to the next iteration.
@@ -1720,7 +2522,7 @@ for ($i = 0; $i < 6; $i++) {
 }
 ```
 
-# PHP `continue` Statement
+## PHP `continue` Statement
 
 - The `continue` statement is used to skip the current iteration of a loop and move to the next iteration. It is commonly used when you want to skip certain iterations based on a specific condition.
 
@@ -1788,8 +2590,20 @@ sum(1, 2); //Output: 3
 
 ## PHP `return` Statement
 
-- Basically, functions can return values. To do this, we use the `return` statement. The `return` statement is used to specify the value that a function should return to the caller. When a function encounters a `return` statement, it immediately exits the function and sends the specified value back to the point where the function was called.
+- Basically, functions can return values. To do this, we use the `return` statement. The `return` statement is used to specify the value that a function should return to the caller. When PHP encounters a `return` statement within a function, it immediately exits the function and sends the specified value back to the point where the function was called.
 - This value can be literarily any valid data type in PHP, such as integers, strings, arrays, objects, etc. It can even be an expression that evaluates to a value.
+- At default, functions return `NULL` if no `return` statement is specified.
+
+## Function Declaration
++ Normally, in PHP a function can be defined before call or after call. Exceptions to this includes:
+    + Declaring functions conditionally - If a function is to be declared conditionally and it is called before declaration, it will result in an error
+    + Inner functions - Suppose you declare a function inside another function (nested function), the inner function will not be available until the outer function is called. Thus, if you try to call the inner function before calling the outer function, it will result in an error.
+Practically, do not declare functions conditionally or as inner functions unless necessary to avoid such errors.
++ Other things to know regarding function declaration
+    + Function names are case-insensitive. This means that you can call a function using different cases (uppercase or lowercase) without any issues.
+    + You cannot redeclare a function with the same name in the same scope. If you try to do so, it will result in a fatal error.
+    + Functions can be declared inside other functions (nested functions). However, the inner function will only be accessible within the scope of the outer function.
+
 
 ## HTML Code inside a function
 
@@ -1818,6 +2632,24 @@ function displayGreeting($name) { ?>
   // HTML code here
 <?php } ?>
 ```
+
+### `return` statement in a PHP script
++ The `return` statement can be used in a PHP script outside of a function (a global scope) to terminate the execution of the script and optionally return a value to the environment calling the script. By this, when the script is included using `include` or `require` or `include_once` or `require_once`, that expression will return the returned value.
++ Example
+Assume this is a sum.php file
+```php
+function sum(...$x) : int 
+{
+    return array_sum($x);
+}
+return sum(1, 2, 3); // returns 6 and terminates the script
+```
+Suppose this script is then included in another PHP file as follows:
+```php
+$result = include 'sum.php';
+echo $result; // Output: 6
+```
++ When the `return` statement is encountered in a PHP script, it immediately stops the execution of the script and returns control to the calling environment, which is typically the web server or command line interface that initiated the script. Codes after the return statement will not be executed.
 
 # PHP Function Parameters
 
@@ -1990,6 +2822,77 @@ greet("Alice"); // Output: Hello, Alice!
 greet("Bob");   // Output: Hello, Bob!
 ```
 
+# PHP `declare`
+- The `declare` construct in PHP is used to set execution directives for a block of code or an entire script. It allows you to specify certain behaviors or settings that affect how the code is executed. 
+- It does not call a function or produce an output. Rather, it controls how PHP code is interpretted and executed.
++ The syntax of the `declare` construct is as follows:
+
+```php
+declare (directive = value) {
+    // code to be executed
+}
+```
+- Here, the `directive` is a specific setting that you want to apply to the code block. 
+- `value` is the value you want to assign to the directive. This value can be an integer, boolean, or other appropriate data type depending on the directive being used.
+- The code block starts with the `{` and ends with `}`.
+- The `directive` can be one of several options, such as `ticks`, `encoding`, or `strict_types`. Each directive has its own specific purpose and behavior.
+- It can also be applied to the entire script without the curly braces as follows:
+
+```php
+declare (directive = value);
+```
+By this, the directive will apply to any code that comes after it in the script.
+
+
+## PHP `declare(ticks=N)`
+- The `ticks` directive is used to specify the number of ticks that should occur before a registered tick handler function is called. 
++ A tick is a low-level event that occurs during the execution of a PHP script per N statement, and it allows you to execute code at specific intervals during the script's execution.
+- To use the `ticks` directive, you need to register a tick handler function using the `register_tick_function()` function. This function takes the name of the tick handler function as its argument. 
+- The tick handler function will be called every N ticks (i.e after N statements), where N is the value specified in the `declare(ticks=N)` directive.
+- Example
+
+```php
+declare(ticks = 2);
+
+function tick_handler() {
+    print "Executed! \n";
+}
+
+register_tick_function('tick_handler');
+
+$age = 19;
+
+$message = match($age) {
+            18 => 'Diamond',
+            40 => 'Saphaire',
+            50 => 'Golden',
+            60 => 'Silver',
+            default => "You age isn't special!"
+        };
+
+echo $message;
+```
+How it works
+- In this example, the `tick_handler()` function is registered as a tick handler using the `register_tick_function()`
+- This function will be called every time a tick occurs during the execution of the script.
+- The `declare(ticks=2)` directive specifies that a tick should occur every 2 statements.
+- As the script executes, the `tick_handler()` function will be called every 2 statements, resulting in the output "Executed!" being printed multiple times throughout the script's execution.
++ Practically, you can use the `ticks` directive to perform tasks such as profiling, debugging, or monitoring the execution of your PHP code at specific intervals.
+
+## PHP `declare(encoding='encoding_name')`
+- The `encoding` directive is used to specify the character encoding for a block of PHP code. This directive allows you to define the encoding that should be used for string literals and other character data within the specified code block.
+- To use the `encoding` directive, you need to specify the desired encoding name as the value of the directive. Example
+
+```php
+declare(encoding='UTF-8') {
+    // code to be executed with UTF-8 encoding
+}
+```
+
+## PHP `declare(strict_types=1)`    
++ The `strict_types` directive is used to enable strict typing in PHP. When strict typing is enabled, PHP will enforce type declarations for function parameters and return values in that current script, meaning that the types of the argument passed later into the function must match exactly as specified in the function definition.
++ If the script is later included in another script without strict typing enabled, the strict typing rules will not apply to the included script and arguments can be coerced to match the expected types.
+
 # PHP Type Hints
 
 - Adding a string and an integer together results in an error
@@ -2009,6 +2912,7 @@ where
 - `type` can be any valid data type in PHP, such as `int`, `float`, `string`, `array`, `bool`, `callable`, `iterable`, `object`, or a class/interface name.
 - `parameter_1`, `parameter_2`, ... are the names of the parameters.
 - By this, PHP will enforce that the arguments passed to the function match the specified types. If an argument of a different type (that cannot be coerced) is passed, a `TypeError` will be thrown.
+- Note that in the function block, the type of the parameter can be changed and won't result in an error
 
 ## PHP Type Hints for Return Values
 
@@ -2025,7 +2929,7 @@ where
 - `return_type` can be any valid data type in PHP, such as `int`, `float`, `string`, `array`, `bool`, `callable`, `iterable`, `object`, or a class/interface name.
 - By this, PHP will enforce that the value returned by the function matches the specified return type. If a value of a different type (that cannot be coerced) is returned, a `TypeError` will be thrown.
 
-* From PHP 7.0 onward, if a function does not return any value, you can specify the return type as `void`. This indicates that the function is not expected to return any value. Example
+* From PHP 7.0 onward, if a function does not return any value, you can specify the return type as `void`. This indicates that the function is not expected to return any value. By this `NULL` will be returned. If you return a value, you get an error even though you return null. Example
 
 ```php
 function function_name( type $parameter_1, type $parameter_2, ... ) : void {
@@ -2213,6 +3117,7 @@ Fatal error: Only the last parameter can be variadic in...
   - Indexed Arrays
   - Associative Arrays
 - The keys in an Associative array are usually strings, while the keys in an Indexed array are usually integers from 0 to the number of elements present in the array minus one.
+- Arrays are used to store multiple values in a single variable, making it easier to manage and manipulate related data.
 
 ## Creating Arrays
 
@@ -2295,6 +3200,8 @@ $array_name = [ "name" => "John", "age" => 30, "city" => "New York" ];
 echo $array_name["age"]; // Output: 30
 ```
 
+- Unlike strings, you cannot use negative indexes to access elements from the end of an array in PHP. Attempting to do so will result in an undefined array key error. Same applies when you try to access an index that is out of bounds (greater than the highest index in the array).
+
 ## Adding Elements to an Array
 
 - To add an element to an indexed array, you use the following syntax:
@@ -2325,6 +3232,8 @@ $array_name[index_or_key] = new_value;
 unset( $array_name[index_or_key] );
 ```
 
+- This function can also take multiple elements
+
 - Example
 
 ```php
@@ -2333,7 +3242,20 @@ unset( $array_name[1] ); // Removes the element at index 1 (Banana)
 print_r( $array_name ); // Output: Array ( [0] => Apple [2] => Orange )
 ```
 
-Note that after removing an element, the array keys are not automatically reindexed. Thus, if you try to access the removed index, you will get an undefined index error.
+- Note that after removing an element, the array keys are not automatically reindexed. Thus, if you try to access the removed index, you will get an undefined index error.
+- Consider this example
+
+```php
+$even = [2, 40 => 4, 6];
+unset($even[0], $even[40], $even[41]);
+print_r($even);
+
+$even[] = 83;
+
+print_r($even);
+```
+
+By the result in the above example, whenever `unset()` is used to remove all elements in an array, and you try to append an element to the array using `array[] = new_element` or `array_push($array, new_element)`, the largest indexed at that point is retained and the new index of the new element will be the `largest index (before removal) + 1`
 
 - To reindex the array after removing an element, you can use the `array_values()` function. Example
 
@@ -2362,6 +3284,47 @@ echo $length; // Output: 4
 
 ## PHP Associative Arrays
 
+- An associative array is an array that uses named keys (strings or integers) to identify its elements instead of zero-indexed numeric keys.
+- You can create an associative array using the same syntax as indexed arrays, but instead of using numeric indexes, you use string keys. Example
+
+```php
+$assoc_array = [
+  "first" => "Apple",
+  "second" => "Banana",
+  "third" => "Orange"
+];
+```
+
+- Consider another
+
+```php
+$even_indexed_array = [
+        2 => 2,
+        4 => 4
+];
+
+print_r($even_indexed_array);
+```
+
+Here, the keys are integers but they are not zero-indexed. If a key that is neither string nor integer is used, PHP tries to convert it to either a string or an integer.
+
+- Consider this code such that there is both a named key and an indexed key
+
+```php
+
+$arr_name = [
+    a,
+    b,
+    "5" => c,
+    d
+]
+
+print_r($arr_name);
+// Output: Array ( [0] => a [1] => b [5] => c [6] => d )
+```
+
+Here, the indexed after the named index is automatically set to the highest integer index plus one.
+
 - To append an element, to an associative array, you have to specify the key for the new element. That is:
 
 ```php
@@ -2369,6 +3332,45 @@ $array_name["new_key"] = new_value;
 ```
 
 This element will be added at the last of the array.
+
+- If you have multiple keys that are the same, the last one will overwrite the previous ones. Example
+
+```php
+    $versions = [
+        "PHP 7" => "7.4",
+        "PHP 8" => "8.0",
+        "PHP 8" => "8.1" // This will overwrite the previous "PHP 8" key
+    ]
+    print_r($versions);
+    // Output: Array ( [PHP 7] => 7.4 [PHP 8] => 8.1 )
+```
+
+- Now notice that PHP perfroms type juggling when using keys in an associative array. Thus, if you use a key that is an integer or a string that can be converted to an integer, PHP will treat it as an integer key. Example
+
+```php
+$assoc_array = [
+  "1" => "Apple", // This key is treated as integer 1
+  2 => "Banana", // This key is an integer
+  "three" => "Orange" // This key is a string
+];
+print_r( $assoc_array );
+```
+
+- Consider this example
+
+```php
+$assoc_array = [
+  "1" => "Apple", // This key is treated as integer 1
+  2 => "Banana", // This key is an integer
+  "three" => "Orange", // This key is a string
+  true => "Mango", // This key is treated as integer 1 (overwrites "Apple")
+  1 => "Grapes", // This key is an integer (overwrites "Mango")
+  1.5 => "Pineapple" // This key is treated as integer 1 (overwrites "Grapes")
+];
+
+print_r( $assoc_array );
+// Output: Array ( [1] => Pineapple [2] => Banana [three] => Orange )
+```
 
 - Use an associative array to reference elements by names (keys) instead of numbers (indexes).
 
@@ -2601,6 +3603,12 @@ array_shift($array_name);
 
 - Similarly, if the array is empty, `array_shift()` returns `NULL`.
 
+## `array_shift()` with an array of mixed keys
+
+- When `array_shift()` is used with an array that has both indexed and associative keys, it removes and returns the first element based on the internal order of the array, which is determined by the order in which the elements were added to the array and the elements get reindexed.
+  - If one of the keys is at an index different from the normal order, it will be reassigned a new key
+  - If one of the keys is string, it isn't reindexed
+
 # PHP array_keys() function
 
 - The `array_keys()` function in PHP is used to retrieve all the keys from an array. This function returns a new array containing the keys of the original array.
@@ -2611,7 +3619,6 @@ array_keys( array $array, mixed $search_value = null, bool $strict = false ) : a
 ```
 
 - Here,
-
   - `array` is the input array from which you want to retrieve the keys.
   - `search_value` (optional) is a value to search for in the array. If provided, only the keys corresponding to this value will be returned as elements in the array.
   - `strict` (optional) is a boolean flag that determines whether to use strict comparison (type and value) when searching for the `search_value`. The default is `false`.
@@ -4642,6 +5649,9 @@ echo 'Functions file included successfully.';
 Functions file included successfully.
 */
 ```
+- `include` and `include_once` returns `1` on successful inclusion of the file and `false` on failure. 
+### include vs include_once
+- The main difference between `include` and `include_once` is that `include_once` checks if the file has already been included, and if so, it does not include it again if it has been once included. This is useful to prevent issues such as function redefinitions or variable overwrites when the same file is included multiple times.
 
 # PHP `require` construct
 
@@ -4664,6 +5674,31 @@ The above is the same as `require 'file.php'`. The parenthesis present in this e
 ## PHP `require_once` construct
 
 - Similar to the `include_once` construct, the `require_once` construct in PHP ensures that the specified file is included only once during the execution of a script. If the file has already been included, it will not be included again. It is different from `include_once` such that if the file cannot be found, it will generate a fatal error and halt the execution of the script.
+
+### require vs require_once
+- The main difference between `require` and `require_once` is that `require_once` checks if the file has already been included, and if so, it does not include it again if it has been once included. This is useful to prevent issues such as function redefinitions or variable overwrites when the same file is included multiple times.
+
+## include vs require
+- The main difference between `include` and `require` is how they handle errors when the specified file cannot be found or included.
+- `include` generates a warning and continues executing the rest of the script.
+- `require` generates a fatal error and halts the execution of the script.
+
+## Use-cases
++ Best use-cases for include and require is for code readability and structure
++ Suppose you want to include the content of a PHP file in a string, you can use the `include` construct within an output buffer as follows:
+
+```php
+ob_start();
+include 'file.php';
+$content = ob_get_clean();
+
+echo $content;
+```
+How it works:
+    - The `ob_start()` function starts output buffering, which means that any output generated by the included file will be captured in the buffer instead of being sent to the browser.
+    - The `include 'file.php';` statement includes the specified file, and any output generated by that file is captured in the output buffer.
+    - The `ob_get_clean()` function retrieves the contents of the output buffer and clears it. The captured output is then assigned to the `$content` variable.
+    - Thus the `$content` variable can be treated as a string
 
 # PHP `__DIR__`
 
@@ -4732,6 +5767,7 @@ By this, irrespective of where the script is being run from, the correct path to
 # PHP Variables variables
 
 - In PHP, variable variables allow you to use the value of a variable as the name of another variable. This means that you can dynamically create and access variables based on the values of other variables.
+- It's use-case includes scenarios where you want to create variable names dynamically based on user input, configuration settings, or other runtime conditions.
 - The syntax for variable variables is as follows:
 
 ```php
@@ -5051,7 +6087,6 @@ Use error_get_last() to see any internal error message.
 - For real projects, consider using a mail library (like PHPMailer, Symfony Mailer, etc.) with SMTP directly; it gives better error messages, HTML email support, attachments, etc.
 
 - Keep this guide as a reference; when something stops working, re‑check:
-
   - php.ini mail section
 
   - sendmail.ini SMTP settings
@@ -5624,12 +6659,13 @@ How it works:
 - The form includes a `<label>` element for the search input field, which improves accessibility by associating the label with the input field using the `for` and `id` attributes.
 
 ## PHP self-processing form
-+ Suppose you have a form that submits data to the same page for processing. This is called a self-processing form.
-+ To create a self-processing form, you set the `action` attribute of the `<form>` element to the current page using the `$_SERVER['PHP_SELF']` variable. This variable contains the filename of the currently executing script relative to the document root. By this, even though the file name is later changed, there will be no error
-+ The following shows how to create a self-processing form in PHP:
+
+- Suppose you have a form that submits data to the same page for processing. This is called a self-processing form.
+- To create a self-processing form, you set the `action` attribute of the `<form>` element to the current page using the `$_SERVER['PHP_SELF']` variable. This variable contains the filename of the currently executing script relative to the document root. By this, even though the file name is later changed, there will be no error
+- The following shows how to create a self-processing form in PHP:
 
 ```php
-<?php 
+<?php
 
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
@@ -5645,15 +6681,19 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 </form>
 ```
+
 How it works:
+
 - The PHP code at the top checks if the request method is `POST` using the `$_SERVER['REQUEST_METHOD']` variable.
 - If the request method is `POST`, it retrieves the value of the `email` input field from the `$_POST` superglobal array and assigns it to the `$email` variable.
 - It then echoes the escaped value of the `$email` variable using the `htmlspecialchars()` function to prevent XSS attacks.
 - The HTML part of the code creates a form with an email input field and a submit button. The `action` attribute of the `<form>` element is set to the current page using the `$_SERVER['PHP_SELF']` variable. Note that since the variable is a php code, it must be within the `<?php ?>` tags. To prevent XSS attacks, the `htmlspecialchars()` function is used to escape the value of `$_SERVER['PHP_SELF']`.
-+ When the user then submits the form, the data is sent to the same page for processing. By this, the script runs again and processes the submitted form data.
+
+* When the user then submits the form, the data is sent to the same page for processing. By this, the script runs again and processes the submitted form data.
 
 ## Organizing Code
-+ To create a more organized code, you can separate the PHP code and HTML code into different sections as follows:
+
+- To create a more organized code, you can separate the PHP code and HTML code into different sections as follows:
 
 ```php
 .
@@ -5664,11 +6704,344 @@ How it works:
 │   ├── footer.php
 │   ├── get.php
 │   ├── post.php
-│   └── .htaccess      
+│   └── .htaccess
 └── index.php
 ```
-+ The `index.php` file in the root directory will include the `header.php` and `footer.php` files for the HTML header and footer sections respectively.
 
-+ If the request method is GET, the index.php file loads the form in the get.php file. Otherwise, it loads the code from the post.php file for processing the POST request.
+- The `index.php` file in the root directory will include the `header.php` and `footer.php` files for the HTML header and footer sections respectively.
 
-+ 
+- If the request method is GET, the index.php file loads the form in the get.php file. Otherwise, it loads the code from the post.php file for processing the POST request.
+
+# PHP `filter_has_var()` function
+
+- The `filter_has_var()` function in PHP is used to check if a variable of a specified input type exists in the input data. It is commonly used to validate user input from forms or query strings.
+- It's syntax is as follows:
+
+```php
+filter_has_var ( int $type , string $variable_name ) : bool
+```
+
+where,
+
+- `type` is the type of input data to check. It can be one of the following constants:
+  - `INPUT_GET`: to check for variables in the `$_GET` superglobal array.
+  - `INPUT_POST`: to check for variables in the `$_POST` superglobal array.
+  - `INPUT_COOKIE`: to check for variables in the `$_COOKIE` superglobal array.
+  - `INPUT_SERVER`: to check for variables in the `$_SERVER` superglobal array.
+  - `INPUT_ENV`: to check for variables in the `$_ENV` superglobal array.
+- `variable_name` is the name of the variable to check for. This is usually the name attribute of the form field.
+- The function returns `true` if the variable exists in the specified input type, and `false` otherwise.
+- Typically, you use the `filter_has_var()` function alongside `filter_input()` and `filter_var()` to validate input data.
+
+## Checking a GET variable
+
+- The following shows how to use the `filter_has_var()` function to check if a GET variable named `search` exists:
+
+```php
+if(filter_has_var(INPUT_GET, 'search')) {
+    echo "The search variable exists in the GET data.";
+} else {
+    echo "The search variable does not exist in the GET data.";
+}
+```
+
+How it works:
+
+- The `filter_has_var()` function checks if the `search` variable exists in the `$_GET` superglobal array. The variable will only exist if the form is submitted using the GET method with a field named `search`.
+- If the variable exists, it echoes a message indicating that the variable exists in the GET data. Otherwise, it echoes a message indicating that the variable does not exist.
+
+## Checking a POST variable
+
+- The following shows how to use the `filter_has_var()` function to check if a POST variable named `email` exists:
+
+```php
+if(filter_has_var(INPUT_POST, 'email')) {
+    echo "The email variable exists in the POST data.";
+} else {
+    echo "The email variable does not exist in the POST data.";
+}
+```
+
+- The `filter_has_var()` function checks variables that are define in the request body when the form is submitted using the POST method not the variables in the URL query string. By this, the following code returns false:
+
+```php
+<?php
+
+$_POST['email'] = 'example@phptutorial.net';
+
+if(filter_has_var(INPUT_POST, 'email')) { // return false
+    // ...
+}
+```
+
+# PHP `filter_var()` function
+
+- The `filter_var()` function in PHP is used to filter and validate a variable using a specified filter. It is commonly used to sanitize user input and ensure that the data meets certain criteria before processing it.
+- It's syntax is as follows:
+
+```php
+filter_var ( mixed $variable , int $filter = FILTER_DEFAULT , array|int $options = 0 ) : mixed
+```
+
+where,
+
+- `variable` is the variable to be filtered. It can be of any data type.
+- `filter` is the filter to be applied to the variable. It can be one of the predefined filter constants in PHP, such as `FILTER_SANITIZE_STRING`, `FILTER_VALIDATE_EMAIL`, `FILTER_VALIDATE_INT`, etc. The default filter is `FILTER_DEFAULT`, which does not perform any filtering.
+- `$options` is an associative array of filter options or a list of flags separated by the pipe character (`|`). The options vary depending on the filter being used.
+- The function returns the filtered variable if the filtering is successful, or `false` if the filtering fails.
+
+## Validating Data
+
+- The following shows how to use the `filter_var()` function to validate an email address:
+
+```php
+$email = "example@example.com";
+if(filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    echo "The email address is valid.";
+} else {
+    echo "The email address is not valid.";
+}
+```
+
+How it works:
+
+- The code defines a variable `$email` with the value `"example@example.com"`.
+- It then uses the `filter_var()` function to validate the email address by passing the `$email` variable and the `FILTER_VALIDATE_EMAIL` filter as arguments.
+- If the email address is valid, it echoes a message indicating that the email address is valid. Otherwise, it echoes a message indicating that the email address is not valid.
+
+* The following shows how to use the `filter_var()` function to validate an integer:
+
+```php
+if(isset($_GET['age'])) {
+    if(filter_var($_GET['age'], FILTER_VALIDATE_INT, [
+    'options' => [
+        'min_range' => 1,
+        'max_range' => 45
+        ]
+    ])){
+        echo 'Valid age';
+    } else {
+        echo 'Invalid age';
+    }
+}
+```
+
+How it works:
+
+- The code first checks if the `age` variable is set in the `$_GET` superglobal array using the `isset()` function.
+- If the `age` variable is set, it uses the `filter_var()` function to validate the age by passing the `$_GET['age']` variable, the `FILTER_VALIDATE_INT` filter, and an array of options as arguments.
+- The options specify a minimum range of `1` and a maximum range of `45` for the age. This variables `min_range` and `max_range` aren't reserved words in PHP but are specific to the `FILTER_VALIDATE_INT` filter.
+- If the age is valid (i.e., it is an integer within the specified range), it echoes a message indicating that the age is valid. Otherwise, it echoes a message indicating that the age is invalid.
+
+## Sanitizing Data
+
+- The following shows how to use the `filter_var()` function to sanitize a string by removing HTML tags:
+
+```php
+$string = "<h1>Hello, World!</h1>";
+$sanitized_string = filter_var($string, FILTER_SANITIZE_STRING);
+echo $sanitized_string; // Output: Hello, World!
+```
+
+- This example uses the `filter_var()` function to sanitize numeric by removing strings from it:
+
+```php
+$age = '120abg';
+$sanitized_age = filter_var($age, FILTER_SANITIZE_NUMBER_INT);
+
+echo $santized_age === false ? echo 'Invalid age' : echo $sanitized_age; // Output: 120
+```
+
+How it works:
+
+- The code defines a variable `$age` with the value `'120abg'`, which contains both numeric and non-numeric characters.
+- It then uses the `filter_var()` function to sanitize the age by passing the `$age` variable and the `FILTER_SANITIZE_NUMBER_INT` filter as arguments.
+- The `FILTER_SANITIZE_NUMBER_INT` filter removes all non-numeric characters from the string, leaving only the numeric characters.
+- Finally, it echoes the sanitized age, which is `120`. If the result is `false`, it echoes 'Invalid age'.
+
+## PHP `filter_input()` function
+
+- The `filter_input()` function in PHP is used to retrieve a specific input variable from a specified input type and optionally filter it using a specified or more than one filter. It is commonly used to validate and sanitize user input from forms or query strings.
+- A good rule of thumb is that you should never trust external data and always:
+  - Sanitize and validate data before storing it in the database.
+  - Escape data before displaying it on a web page.
+- _Sanitization_ disables potential malicious code from data before processing it.
+- _Validation_ ensures the data is in the correct format regarding data type, range, and value.
+
+* The syntax of the `filter_input()` function is as follows:
+
+```php
+filter_input ( int $type , string $variable_name , int $filter = FILTER_DEFAULT , array|int $options = 0 ) : mixed
+```
+
+where,
+
+- `type` is the type of input data to retrieve. It can be one of the following constants:
+  - `INPUT_GET`: to retrieve variables from the `$_GET` superglobal array.
+  - `INPUT_POST`: to retrieve variables from the `$_POST` superglobal array.
+  - `INPUT_COOKIE`: to retrieve variables from the `$_COOKIE` superglobal array.
+  - `INPUT_SERVER`: to retrieve variables from the `$_SERVER` superglobal array.
+  - `INPUT_ENV`: to retrieve variables from the `$_ENV` superglobal array.
+- `variable_name` is the name of the variable to retrieve. This is usually the name attribute of the form field.
+- `filter` is the filter to be applied to the variable. It can be one of the predefined filter constants in PHP, such as `FILTER_SANITIZE_STRING`, `FILTER_VALIDATE_EMAIL`, `FILTER_VALIDATE_INT`, etc. The default filter is `FILTER_DEFAULT`, which does not perform any filtering.
+- `$options` is an associative array of filter options or a list of flags separated by the pipe character (`|`). The options vary depending on the filter being used.
+- The function returns the filtered variable if the filtering is successful, or `false` if the filtering fails. If `$var_name` does not exist, it returns `null`.
+
+* For example, the following shows how to use the `filter_input()` function to validate an email address from a POST request:
+
+```php
+$email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+if($email) {
+    echo "The email address is valid.";
+} else {
+    echo "The email address is not valid.";
+}
+```
+
+- Consider this example
+
+```php
+<?php
+
+$term_html = filter_input(INPUT_GET, 'term', FILTER_SANITIZE_SPECIAL_CHARS);
+$term_url = filter_input(INPUT_GET, 'term', FILTER_SANITIZE_ENCODED);
+
+?>
+<form action="search.php" method="get">
+    <label for="term"> Search </label>
+    <input type="search" name="term" id="term" value="<?php echo $term_html ?>">
+    <input type="submit" value="Search">
+</form>
+
+<?php
+
+if (null !== $term_html) {
+	echo "The search result for <mark> $term_html </mark>.";
+}
+```
+
+How it works:
+
+- The code first uses the `filter_input()` function to retrieve and sanitize the `term` variable from the `$_GET` superglobal array using two different filters: `FILTER_SANITIZE_SPECIAL_CHARS` and `FILTER_SANITIZE_ENCODED`. The sanitized values are assigned to the `$term_html` and `$term_url` variables, respectively. The `FILTER_SANITIZE_SPECIAL_CHARS` filter returns a value for showing on the search field and the `FILTER_SANITIZE_ENCODED` filter returns a value for displaying on the page.
+- The HTML part of the code creates a form with a search input field and a submit button. The `value` attribute of the input field is set to the sanitized value of `$term_html`, which ensures that any special characters in the search term are properly escaped when displayed in the input field.
+- When the user submits the form, the data is sent to `search.php` using the `GET` method for processing. By this, the `search.php` script runs again and processes the submitted form data.
+- Finally, the code checks if the `$term_html` variable is not `null`. If it is not `null`, it echoes a message displaying the sanitized search term.
+- `type` is the type of input data to check. It can be one of the following constants:
+  - `INPUT_GET`: to check for variables in the `$_GET` superglobal array.
+  - `INPUT_POST`: to check for variables in the `$_POST` superglobal array.
+
+* Use the `filter_input()` function when you need to validate and sanitize data coming directly from user and `filter_var()` when the input is already in a variable
+* `filter_input()` - Validate / sanitize form input
+* `filter_var()` - Validate / sanitize a variable
+
+## PHP Form Validation
+
+- To validate data in PHP, you use filters with
+  - `filter_has_var()` - check if a variable exist in the `GET` and `POST` requests
+  - `filter_input()` - validate data
+
+## Validating Emails
+
+- The following code shows how emails are validated
+
+```php
+<form action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post">
+    <div>
+        <label for="email">Email:</label>
+        <input type="text" name="email">
+        <button type="submit">Submit</button>
+    </div>
+</form>
+
+<?php
+
+if($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Check if the email field is set and not empty
+    if(filter_has_var(INPUT_POST, 'email')) {
+        // validate email
+        $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+        if($email !== false) {
+            echo "Email is valid: " . htmlspecialchars($email);
+        } else {
+            echo "Invalid email format." . $_POST['email'];
+        }
+    }
+}
+```
+
+- How it works:
+
+*
+
+## Validating Integers
+
+- The following code demonstrates how integers can be validated
+
+```php
+<?php
+
+if($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Check if the age field is set and not empty
+    if(filter_has_var(INPUT_POST, 'age')) {
+        // validate age between 0 and 150
+        $age = filter_input(INPUT_POST, 'age', FILTER_VALIDATE_INT, [
+            'options' => [
+                'min_range' => 0,
+                'max_range' => 150
+            ]
+        ]);
+
+        if($age !== false) {
+            echo "Age is valid: " . htmlspecialchars($age);
+        } else {
+            echo "Age is not valid:" . $_POST['age'];
+        }
+    }
+}
+?>
+
+<form action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post">
+    <div>
+        <label for="age">Age:</label>
+        <input type="text" name="age" placeholder="Enter your age">
+        <button type="submit">Submit</button>
+    </div>
+</form>
+```
+
+How it works:
+
+## Validating Floats
+
+```php
+<?php
+
+if($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Check if the weight field is set and not empty
+    if(filter_has_var(INPUT_POST, 'weight')) {
+        // validate weight between 0 and 150
+        $weight = filter_input(INPUT_POST, 'weight', FILTER_VALIDATE_FLOAT, [
+            'options' => [
+                'min_range' => 0,
+                'max_range' => 300
+
+            ]
+        ]);
+
+        if($weight !== false) {
+            echo "Weight is valid: " . htmlspecialchars($weight);
+        } else {
+            echo "Weight is not valid:" . $_POST['weight'];
+        }
+    }
+}
+?>
+
+<form action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post">
+    <div>
+        <label for="weight">Weight:</label>
+        <input type="text" name="weight" placeholder="Enter your weight in lbs">
+        <button type="submit">Submit</button>
+    </div>
+</form>
+```

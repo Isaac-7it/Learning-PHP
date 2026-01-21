@@ -984,7 +984,7 @@ echo */
 // print_r($person);
 // echo '<br>';
 
-const TIME = 60;
+/*const TIME = 60;
 
 $returning_user = false;
 
@@ -997,4 +997,211 @@ if (isset($_COOKIE['return'])) {
 }
 
 echo $returning_user ? "Welcome back!
-$name" : "Welcome to my website $name";
+$name" : "Welcome to my website $name";*/
+/*
+const PAGE_TITLE = 'Animal Category';
+
+if(defined('PAGE_TITLE')) {
+    echo 'Constant defined';
+} else {
+    echo 'Constant is not defined';
+} */
+
+// ERROR CODE!!!
+/*if(!defined('PAYMENT_STATUS')) {
+    const PAYMENT_STATUS = 'paid';
+}
+*/
+///////////////////////////////////////
+/*
+if(!defined('PAYMENT_STATUS')) {
+    define('PAYMENT_STATUS', 'paid');
+}
+
+echo PAYMENT_STATUS . '<br>';
+
+function heyy() {
+    echo __FUNCTION__;
+}
+
+
+
+echo __NAMESPACE__ . '<br>';
+
+function sum(int $x, int $y) {
+    var_dump($x, $y);
+    return $x + $y;
+}
+
+// echo sum(10, 2.2);
+
+echo var_dump(is_bool(false)) . '<br>';
+
+echo (PHP_INT_MAX + PHP_INT_MIN) . '<br>';
+
+echo (int) '0' . '<br>';
+
+echo (int) '1_000.99' . '<br>';
+
+echo PHP_FLOAT_DIG . '<br>';
+
+$result = floor((0.1 + 0.7) * 10);
+echo $result . '<br>';
+
+$name = 'IsaaC';
+
+$name[6] = 's';
+
+echo $name;
+
+$message = <<<TEXT
+<h1>Welcome!</h1>
+<p>It's great you are here</p>
+TEXT;
+
+echo nl2br($message);
+
+$even_indexed_array = [
+        2 => 2,
+        4 => 4
+];
+
+echo '<pre>';
+print_r($even_indexed_array);
+echo '<pre>';
+
+$assoc_array = [
+  "1" => "Apple", // This key is treated as integer 1
+  2 => "Banana", // This key is an integer
+  "three" => "Orange" // This key is a string
+];
+
+echo '<pre>';
+print_r( $assoc_array );
+echo '<pre>';
+
+$arr = [1, 2, 'def' => 6, 0];
+
+echo '<pre>';
+print_r($arr);
+echo '<pre>';
+
+$even = [2, 40 => 4, 6];
+unset($even[0], $even[40], $even[41]);
+print_r($even);
+
+$even[] = 83;
+array_push($even, 84);
+
+print_r($even);
+
+echo 10.0 / 2, '<br>';
+
+$x = $y = 10;
+
+echo $x, '<br>', $y, '<br>';
+
+echo '<br>';
+var_dump(0 == '0hello');
+echo '<br>';
+
+$y = 1 ?? 'Guest';
+
+echo '<br>';
+echo $y;
+echo '<br>';
+
+$x = 3;
+echo ++$x, '<br>';
+echo $x, '<br>';
+
+$price = '99';
+
+$price++;
+
+echo $price, '<br>';
+
+echo $x, '<br>';
+
+$even_keys = ['1' => 1, 3 => 2, 5 => 3];
+$odd_keys = [1 => '1', 3 => 2, 5 => 3];
+
+var_dump($even_keys == $odd_keys);
+
+$x = ['a', 'b', 'c'];
+$y = ['d', 'e', 'f'];
+
+$z = $x + $y;
+
+echo '<pre>';
+print_r($z);
+echo '<pre>';
+
+$names = ['John', 'Isaac', 'Gabriel'];
+
+foreach($names as $name) {
+    echo $name;
+}
+
+echo $name; */
+
+// $name = 'Michael';
+
+// echo '<pre>';
+// print_r($names);
+// echo '<pre>';
+/*
+function x() {
+    sleep(3);
+    echo 'Done';
+    return 4;
+}
+
+if(x() === 1) {
+    echo 1;
+} elseif(x() === 2) {
+    echo 2;
+} elseif(x() === 3) {
+    echo 3;
+} else {
+    echo 4;
+}
+*/
+
+/*
+declare(ticks = 1);
+
+function tick_handler() {
+    print "Executed! \n";
+}
+
+register_tick_function('tick_handler');
+
+$age = 19;
+
+$message = match($age) {
+            18 => 'Diamond',
+            40 => 'Saphaire',
+            50 => 'Golden',
+            60 => 'Silver',
+            default => "You age isn't special!"
+        };
+
+echo '<br>';
+echo $message;
+echo '<br>'; */
+
+/*
+echo '<br>';
+echo include_once 'index.view.php';
+echo '<br>';
+
+$sum = include_once 'sum.php';
+
+echo $sum; */
+
+ob_start();
+include 'nav.php';
+$content = ob_get_clean();
+
+echo $content;
