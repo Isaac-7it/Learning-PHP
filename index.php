@@ -1199,9 +1199,161 @@ echo '<br>';
 $sum = include_once 'sum.php';
 
 echo $sum; */
-
+/*
 ob_start();
 include 'nav.php';
 $content = ob_get_clean();
 
 echo $content;
+*/
+
+/* $nums = [1,3, 'even' => [2, 4]];
+
+$sum = array_sum($nums);
+
+echo $sum; */
+/*
+function getValue() {
+    $value = someHeavyFunction();
+
+    echo $value;
+}
+
+function someHeavyFunction() {
+    sleep(2);
+
+    return 10;
+}
+
+getValue();
+
+getValue();
+
+getValue();*/
+
+// Callable
+/*
+function multiply(callable $callback, $x) {
+    return $callback($x);
+}
+
+function double($y) {
+    return $y * 2;
+}
+
+function triple($y) {
+    return $y * 3;
+}
+
+function quad($y) {
+    return $y * 4;
+}
+
+echo multiply('double', 4), '<br>';
+echo multiply('triple', 4), '<br>';
+echo multiply('quad', 4), '<br>'; */
+
+/*
+function multiply(Closure $callback, $x) {
+    return $callback($x);
+}
+
+function double($y) {
+    return $y * 2;
+}
+
+echo multiply('double', 4), '<br>';
+echo multiply(fn ($y) => $y * 3, 4), '<br>';
+echo multiply(fn ($y) => $y * 4, 4), '<br>';
+
+$timestamp = time() - (22 * 24 * 60 * 60);
+
+date_default_timezone_set('UTC');
+echo date('jS / M / o H : iA', $timestamp), '<br>';
+
+
+echo date('jS / M / o H : iA', strtotime('first day of november')), '<br>';
+
+$codes = ['#$88IF1', '#$102OJ9', '#$504XD0', '#$192L0', '#$453ND4', '#$548DA6'];
+
+echo '<br>';
+print_r($codes);
+echo '<br>';
+
+$filtered_codes = array_filter($codes, fn ($x, $y) => strlen($x) > 7, ARRAY_FILTER_USE_BOTH);
+echo '<br>';
+print_r($filtered_codes);
+echo '<br>'; 
+
+$evens = [2, 4];
+$odds = [1, 3, 5];
+
+// echo '<br>';
+// print_r(array_map(fn($x, $y) => $x * $y, $evens, $odds));
+// echo '<br>';
+
+echo '<br>';
+print_r(array_map(null, $evens, $odds));
+echo '<br>';
+
+$fruits = [
+    "a" => "Apple",
+    "b" => "Banana",
+    "c" => "Orange",
+    "d" => "Banana"
+];
+$key = array_search("Banana", $fruits);
+echo $key; // Output: 1 */
+/*
+$array1 = [ "a" => "Apple", "b" => "Banana", "c" => "Cherry", "d" => "Date" ];
+$array2 = [ "b" => "Banana", "c" => "Date" ];
+$difference = array_diff_key( $array1, $array2 );
+print_r( $difference ); // Output: Array ( [a] => Apple [d] => Date )
+
+echo ini_get('memory_limit'), '<br>';
+function customErrorHandler(int $type, string $msg, ?string $file = null, ?int $line = null) {
+    echo "<b>Error Detected</b>: $msg in $file on $line also $type";
+
+    exit;
+}
+
+set_error_handler('customErrorHandler', E_ALL); 
+
+echo $z;*/
+$dir = scandir(__DIR__);
+
+$dir_list = array_filter($dir, fn ($x) => is_dir($x));
+
+echo '<br>';
+print_r($dir_list);
+echo '<br>';
+
+// mkdir('User/names', 0755, true);
+// rmdir('User/names');
+// rmdir('User');
+
+/*
+echo filesize('note'), '<br>';
+
+file_put_contents('note', 'New file');
+file_put_contents('note.txt', 'New file');
+
+clearstatcache();
+echo filesize('note'), '<br>';
+
+file_put_contents('note', 'New file');
+echo filesize('note'), '<br>';
+
+file_put_contents('note', 'New Content. Send a mail if found');
+clearstatcache();
+echo filesize('note'), '<br>'; */
+
+if(file_exists('note')) {
+    $file = fopen('note', 'r');
+
+    while(($line = fgets($file)) !== false) {
+        echo $line, '<br>';
+    }
+
+    // fwrite($file, 'Okay!');
+}
