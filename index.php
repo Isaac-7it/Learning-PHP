@@ -1,5 +1,25 @@
+<!-- <form method="POST" action="order.php">
+Braised Noodles with: <select name="noodle">
+<option>crab meat</option>
+<option>mushroom</option>
+<option>barbecued pork</option>
+<option>shredded ginger and green onion</option>
+</select>
+<br/>
+Sweet: <select name="sweet[]" multiple>
+<option value="puff"> Sesame Seed Puff
+<option value="square"> Coconut Milk Gelatin Square
+<option value="cake"> Brown Sugar Cake
+<option value="ricemeat"> Sweet Rice and Meat
+</select>
+<br/>
+Sweet Quantity: <input type="text" name="sweet_q">
+<br/>
+<input type="submit" name="submit" value="Order">
+</form> -->
+
 <?php
-declare(strict_types = 1);
+// declare(strict_types = 1);
 // $person = ['name' => 'Kylian','occupation' => 'Footballer', 'age' => 35, 'bmi' => 13.5, 'is_active' => true]; //Associated Array
 
 // $he = 'Bob';
@@ -290,12 +310,12 @@ echo "<h1>$sum</h1> <br>";
 
 $message = "Hello, Soldier! <br>";
 
-function greet() {
+function Invoke() {
     global $message;
     echo $message;
 }
 
-greet();
+Invoke();
 
 function function_call_count() {
     static $calls = 0;
@@ -1007,7 +1027,7 @@ if(defined('PAGE_TITLE')) {
     echo 'Constant is not defined';
 } */
 
-// ERROR CODE!!!
+// E CODE!!!
 /*if(!defined('PAYMENT_STATUS')) {
     const PAYMENT_STATUS = 'paid';
 }
@@ -1311,15 +1331,15 @@ $difference = array_diff_key( $array1, $array2 );
 print_r( $difference ); // Output: Array ( [a] => Apple [d] => Date )
 
 echo ini_get('memory_limit'), '<br>';
-function customErrorHandler(int $type, string $msg, ?string $file = null, ?int $line = null) {
-    echo "<b>Error Detected</b>: $msg in $file on $line also $type";
+function customEHandler(int $type, string $msg, ?string $file = null, ?int $line = null) {
+    echo "<b>E Detected</b>: $msg in $file on $line also $type";
 
     exit;
 }
 
-set_error_handler('customErrorHandler', E_ALL); 
+set_e_handler('customEHandler', E_ALL); 
 
-echo $z;*/
+echo $z;
 $dir = scandir(__DIR__);
 
 $dir_list = array_filter($dir, fn ($x) => is_dir($x));
@@ -1346,7 +1366,7 @@ echo filesize('note'), '<br>';
 
 file_put_contents('note', 'New Content. Send a mail if found');
 clearstatcache();
-echo filesize('note'), '<br>'; */
+echo filesize('note'), '<br>'; 
 
 if(file_exists('note')) {
     $file = fopen('note', 'r');
@@ -1357,3 +1377,190 @@ if(file_exists('note')) {
 
     // fwrite($file, 'Okay!');
 }
+
+echo number_format(1111111111111); */
+
+/*
+class robot {
+    public $name;
+    public $age;
+
+    public function Invoke($name) {
+        return "Hello, I'm $name";
+    }
+}
+
+$axle = new robot('Isaac', 18);
+echo $axle.Invoke();
+*/
+
+/*
+class Entree {
+    public $name;
+    public $ingredients = [];
+
+    public function hasIngredient($ingredient) {
+        return in_array($ingredient, $this->ingredients);
+    }
+}
+
+$first_entree = new Entree;
+*/
+
+/*
+class Agent {
+    public $name;
+    public $model;
+    public $co_agents;
+    public $is_available;
+
+    public function __construct($agent_name, $agent_model, $co_agents, $is_available, $user='Guest') {
+        if (!is_string($agent_name) || !is_string($user)) {
+            throw new Exception('Name must be a string');
+        }
+
+        $this -> name = $agent_name;
+        $this -> model = $agent_model;
+        $this -> co_agents = $co_agents;
+        $this -> agentInvoke($user);
+        $this -> is_available = $is_available;
+    }
+
+    public function agentInvoke ($username) {
+        echo '<pre>';
+        echo "Hey there, I'm {$this -> name}. Nice to meet you $username";
+        echo '<pre>';
+    }
+
+    public function modelRequest() {
+        return "Currently, I'm {$this -> name}{$this -> model}";
+    }
+
+    public function hasCoAgent($agent_name) {
+        if (in_array($agent_name, $this -> co_agents)) {
+            return "Yes! I provide services alongside $agent_name";
+        } elseif (!in_array($agent_name, $this -> co_agents)) {
+            return "Currently, I haven't been integrated into $agent_name";
+        }
+    }
+
+    public function serviceRequest() {
+        return "I have been integrated into" ." " . implode(', ', $this -> co_agents);
+    }
+}
+
+try {
+$adigun = new Agent('Adigun', '4.0', ['Gemini', 'Claude'], true);
+$milito = new Agent('Milito', '3.65', ['ChatGPT', 'Claude'], true);
+
+} catch (Exception $e) {
+    echo '<pre>';
+    echo "Couldn't create agent: {$e->getMessage()}";
+    echo '<pre>';
+}
+class AdvancedAgent extends Agent{
+    public function __construct() {
+
+    }
+}
+*/
+
+// class Entree {
+//     protected $name;
+
+//     protected $ingredients = array();
+//     /* Since $name is private, this provides a way to read it */
+//     public function getName() {
+//         return $this->name;
+//     }
+//     public function __construct($name, $ingredients) {
+//         if (! is_array($ingredients)) {
+//             throw new Exception('$ingredients must be an array');
+//         }
+//         $this->name = $name;
+//         $this->ingredients = $ingredients;
+//     }
+
+//     public function hasIngredient($ingredient) {
+//         return in_array($ingredient, $this->ingredients);
+//     }
+// }
+
+// $soup = new Entree('soup', ['chicken', 'pasta']);
+
+// // $soup -> name = 'Veggies';
+
+// echo $soup -> name;
+
+/*
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    class Agent {
+        public $name;
+        public $model;
+        public $co_agents;
+        public $is_available;
+
+        public function __construct($agent_name, $agent_model, $co_agents, $is_available) {
+            if (!is_string($agent_name)) {
+                throw new Exception('Name must be a string');
+            }
+
+            $this -> name = $agent_name;
+            $this -> model = $agent_model;
+            $this -> co_agents = $co_agents;
+            $this -> agentInvoke();
+            $this -> is_available = $is_available;
+        }
+
+        public function agentInvoke () {
+            echo '<pre>';
+            echo "Hey there {$_POST['user_name']}! I'm {$this -> name}. I will be your personal AI assistant for this session";
+            echo '<pre>';
+        }
+
+        public function modelRequest() {
+            return "Currently, I'm {$this -> name}{$this -> model}";
+        }
+
+        public function hasCoAgent($agent_name) {
+            if (in_array($agent_name, $this -> co_agents)) {
+                return "Yes! I provide services alongside $agent_name";
+            } elseif (!in_array($agent_name, $this -> co_agents)) {
+                return "Currently, I haven't been integrated into $agent_name";
+            }
+        }
+
+        public function serviceRequest() {
+            return "I have been integrated into" ." " . implode(', ', $this -> co_agents);
+        }
+    }
+
+    try {
+    if (18 <= $_POST['age']) {
+        $adigun = new Agent('Adigun', '4.0', ['Gemini', 'Claude'], true);
+    } else {
+        $milito = new Agent('Milito', '3.65', ['ChatGPT', 'Claude'], true);
+    }
+
+    echo $_SERVER['REMOTE_HOST'];
+    } catch (Exception $e) {
+        echo '<pre>';
+        echo "Couldn't create agent: {$e->getMessage()}";
+        echo '<pre>';
+    }
+
+} else {
+    echo <<<HTML
+    <form action="$_SERVER[PHP_SELF]" method="POST">
+        <label for="user_name">Name</label>
+        <input type="text" id="name" name="user_name"><br>
+        <label for="age">Age</label>
+        <input type="text" id="age" name="age"><br>
+        <button type="submit">Submit</button>
+    </form>
+    HTML;
+}
+?>*/
+
+// DATABASES
+include_once './pdo.php';

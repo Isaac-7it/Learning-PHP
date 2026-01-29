@@ -251,7 +251,7 @@ $variable_name = value;
 
 - Variables are used for runtime data (user input, calculations, loop counters)
 
-* Mixing PHP code with HTML will make the code unmaintainable, especially when the application grows. To avoid this, you can separate the code into separate files. For example
+- Mixing PHP code with HTML will make the code unmaintainable, especially when the application grows. To avoid this, you can separate the code into separate files. For example
   - `index.php` – store the logic for defining and assigning value to variables.
   - index.view.php – store the code that displays the variables
   - Use the `require` construct to include the code from the `index.view.php` in the `index.php` file.
@@ -300,15 +300,17 @@ $variable_name = value;
   - Once the value of a constant is defined, it cannot be changed or undefined
 - PHP constants are defined using
   - The `define()` function - This function takes two parameters: first, the name of the constant and and second its value.
-  * It's syntax is as follows:
+  - It's syntax is as follows:
+
   ```php
     define( string $constant_name, mixed $value, bool $case_insensitive = false ): bool
   ```
+
   where,
   - `$constant_name` - The name of the constant. It must be a string or a string expression (such as concatenation of strings). By convention, constant names are written in uppercase letters
   - `$value` - The value of the constant. It can be of any data type, including scalar types (string, integer, float, boolean), arrays, and objects
   - `$case_insensitive` - An optional parameter that specifies whether the constant name should be case-insensitive. By default, it is set to false (case-sensitive). This parameter is deprecated as of PHP 7.3.0 and removed in PHP 8.0.0
-  * Example
+  - Example
 
 ```php
   define( 'SITE_NAME', 'My PHP Website' );
@@ -367,8 +369,8 @@ While this is the correct way to define a constant within a control structure
 
 - Constants are often used for configuration values (site name, version, database limits)
 
-* To check if a certain constant is defined, you can use the `defined()` function. It takes the name of the constant as a parameter and returns true if the constant is defined, otherwise false.
-* It's syntax is as follows:
+- To check if a certain constant is defined, you can use the `defined()` function. It takes the name of the constant as a parameter and returns true if the constant is defined, otherwise false.
+- It's syntax is as follows:
 
 ```php
 defined(string $constant_name): bool
@@ -391,7 +393,7 @@ if(defined('PAGE_TITLE')) {
   - To avoid redefining a constant that is already defined
   - To check if a constant is defined before using it in the code
 
-* An example of some PHP inbuilt constants includes
+- An example of some PHP inbuilt constants includes
   - `PHP_VERSION` - This constant contains the current version of PHP that is running on the server
   - `PHP_OS` - This constant contains the operating system on which PHP is running
   - `DIRECTORY_SEPARATOR` - This constant contains the directory separator character used by the operating system (e.g., `/` for Unix-based systems and `\` for Windows)
@@ -692,8 +694,8 @@ echo $result; // Output: NAN
 
 - The `is_nan()` function checks whether a value is `NAN`. It returns true if the value is `NAN`, otherwise false.
 
-* The `INF` constant represents positive infinity in PHP. It is used to indicate that a value exceeds the maximum representable floating-point number.
-* The `-INF` constant represents negative infinity in PHP. It is used to indicate that a value is less than the minimum representable floating-point number.
+- The `INF` constant represents positive infinity in PHP. It is used to indicate that a value exceeds the maximum representable floating-point number.
+- The `-INF` constant represents negative infinity in PHP. It is used to indicate that a value is less than the minimum representable floating-point number.
   - `is_infinite()` function checks whether a value is positive or negative infinity. It returns true if the value is infinite, otherwise false.
   - `is_finite()` function checks whether a value is a finite number (not infinite or `NAN`). It returns true if the value is finite, otherwise false.
 
@@ -781,7 +783,7 @@ echo $message[-3]; // Output: l
   $length = strlen( $message ); // $length will be 13
   ```
 
-* The in built `is_string()` function checks whether a variable is of string type. It returns true if the variable is a string, otherwise false.
+- The in built `is_string()` function checks whether a variable is of string type. It returns true if the variable is a string, otherwise false.
 
 ### PHP Heredoc
 
@@ -885,8 +887,8 @@ var_dump( $var ); // Output: NULL
 
 - Since PHP keywords are case-insensitive, you can also use `null`, `Null`, or `NuLL` to represent the `NULL` constant.
 
-* The `is_null()` function checks whether a variable is of type `null`. It returns true if the variable is `null`, otherwise false.
-* You can also use the Strict comparison operator (`===`) to check if a variable is `null`. Example
+- The `is_null()` function checks whether a variable is of type `null`. It returns true if the variable is `null`, otherwise false.
+- You can also use the Strict comparison operator (`===`) to check if a variable is `null`. Example
 
 ```php
 $var = null;
@@ -1035,12 +1037,14 @@ echo gettype( $var ); // Output: string
 - Type juggling simply mean when converting a data-type to another data-type, PHP automatically convert them to the common most comparable data-type.
   For example
   - when you use the addition operator (`+`) to add an integer and a float, PHP automatically converts the integer to a float before performing the addition. Example
+
   ```php
   $int_num = 10; // Integer
   $float_num = 5.5; // Float
   $sum = $int_num + $float_num; // $int_num is converted to float
   echo $sum; // Output: 15.5
   ```
+
 - Also, when you use the concatenation operator (`.`) to concatenate a string and an integer, PHP automatically converts the integer to its string representation before performing the concatenation. Example
 
 ```php
@@ -1064,8 +1068,8 @@ echo gettype( $var ); // Output: string
 
 - Comparing string and integer using the equality operator (`==`) results in type juggling, where the string is converted to an integer for comparison.
 
-* Loosely comparing `NULL` with the boolean false using the equality operator (`==`) results in type juggling, where `NULL` and `false` are treated as false for comparison.
-* PHP has conversion priorities:
+- Loosely comparing `NULL` with the boolean false using the equality operator (`==`) results in type juggling, where `NULL` and `false` are treated as false for comparison.
+- PHP has conversion priorities:
   - Numeric comparison if possible
   - Boolean comparison only when necessary
   - Special loose rules for NULL, "", "0"
@@ -1155,7 +1159,7 @@ echo gettype( $var ); // Output: string
     - Also, the sign of the remainder is dependent on the first operand (if first operand is negative, remainder will be negative and so on)
   - Exponentiation (`**`) - raises a number to the power of another number-
 
-* PHP decides how to convert values based on the OPERATOR being used — not just the values themselves.
+- PHP decides how to convert values based on the OPERATOR being used — not just the values themselves.
 
 # PHP Assignment Operators
 
@@ -1228,8 +1232,8 @@ Thus for any arithmetic operation, you can use the corresponding arithmetic assi
 - Modulus assignment (`%=`) - calculates the modulus of a variable by a value and assigns the result to the variable
 - Exponentiation assignment (`**=`) - raises a variable to the power of a value and assigns the result to the variable
 
-* Notice that the arithmetic assignment operators perform the arithmetic operation on the current value of the variable and the specified value, then update the variable with the new result.
-* Also, in the syntax, the variable appears at the left side of the operator while the value appears at the right side. Furthermore, for each arithmetic assignment operator, the arithmetic operation is performed and comes first before the assignment operation. Below is more of a general syntax of an arithmetic assignment operator
+- Notice that the arithmetic assignment operators perform the arithmetic operation on the current value of the variable and the specified value, then update the variable with the new result.
+- Also, in the syntax, the variable appears at the left side of the operator while the value appears at the right side. Furthermore, for each arithmetic assignment operator, the arithmetic operation is performed and comes first before the assignment operation. Below is more of a general syntax of an arithmetic assignment operator
 
 ```php
 $variable operator= value;
@@ -1254,10 +1258,12 @@ echo $message; // Output: Hello, World!
 - The following are the comparison operators in PHP:
   - Equal (`==`) - returns true if two values are equal without considering the type (loose comparison => type juggling) else false
     - One of the exception to this is the following code
+
     ```php
     var_dump(0 == 'hello');
     //bool(false)
     ```
+
     Here, since the string `'hello'` is not a numeric string, it converts the first operand to a string i.e `'0'` and does the comparison
   - Identical (`===`) - returns true if two values are equal and of the same type (strict comparison) else false. To avoid potential issues, use the identical operator for comparison
   - Not equal (`!=` or `<>`) - returns true if two values are not equal (with type juggling - loose comparison) else false
@@ -1275,6 +1281,8 @@ echo $message; // Output: Hello, World!
 
     echo $y;
   ```
+
+    This operator returns the first operand if it is not null, otherwise it returns the second operand. It is useful if you want to provide a default value when dealing with variables that may be null. In the above example, since `$x` is `null`, the operator returns the second operand which is the string `Hello` and assigns it to `$y`. Thus, printing `$y` outputs `Hello`.
 
   The above code will output `Hello`. The operator takes two operand - the `null` constant or an expression yielding null and the value or expression. By this, the operator will return the second operand only if the first is null or an expression yielding `null` else it returns the first operand
 
@@ -1594,7 +1602,7 @@ if(expression) {
 
 - Here, the `expression` is a boolean expression that evaluates to either true or false. It is executed first. If the expression is true, the code block inside the curly braces `{}` is executed. If the expression is false, the code block is skipped and the program continues with the next statement after the `if` block.
 
-* The below diagram illustrates the flow of control in an `if` statement
+- The below diagram illustrates the flow of control in an `if` statement
   ![](php-if.png)
 
 - If you want to execute only a single statement when the condition is true, you can omit the curly braces. Example
@@ -1655,8 +1663,8 @@ if ( condition1 ) {
 - Notice that the `if`, `elseif`, `else`, and `endif` keywords are used to define the structure of the embedded `if` statement. Also, they are written in a different <?php ?> element. The colon (`:`) is used to indicate the start of the code block, and the `endif;` keyword is used to close the `if` statement.
 - After all conditions have been checked, the `endif;` keyword is used to close the `if` statement.
 
-* Avoid the mistake of using curly braces `{}` with the embedded `if` statement.
-* Also, avoid the use of the assignment operator (`=`) in place of the equality operator (`==`) in the expression of an `if` statement.
+- Avoid the mistake of using curly braces `{}` with the embedded `if` statement.
+- Also, avoid the use of the assignment operator (`=`) in place of the equality operator (`==`) in the expression of an `if` statement.
 
 ## PHP If...Else Statement
 
@@ -1689,7 +1697,7 @@ Here, if the expression is true, PHP executes the if block. Otherwise, it execut
 
 - Note that you don’t need to place a semicolon (;) after the endif keyword because the endif is the last statement in the PHP block. The enclosing tag ?> automatically implies a semicolon
 
-* An examples is as follows
+- An examples is as follows
 
 ```html
 <!DOCTYPE html>
@@ -1758,11 +1766,11 @@ $x = 10;
 $y = 20;
 
 if ($x > $y) :
-	echo 'x is greater than y';
+ echo 'x is greater than y';
 else if ($x < $y):
-	echo 'x is equal to y';
+ echo 'x is equal to y';
 else:
-	echo 'x is less than y';
+ echo 'x is less than y';
 endif;
 ```
 
@@ -1808,7 +1816,7 @@ $result = condition ?: value_if_false;
 ```
 
 - Here is `condition` is `false`, the `$result` variable is assigned the `value_if_false`. If it is `true`, the `$result` variable is assigned the value produced by the `condition`
-- The following example uses the shorthand ternary operator to assign the value of the `$path` to the `$url` if the $path is not empty. If the `$path` is empty, the ternary operator assigns the literal string ‘`/`’ to the `$url`
+- The following example uses the shorthand ternary operator to assign the value of the `$path` to the `$url` if the $path is not empty. If the `$path`is empty, the ternary operator assigns the literal string ‘`/`’ to the`$url`
 
 ```php
 $path = "\about"
@@ -1870,7 +1878,7 @@ is used when embedding PHP in HTML. Do not forget the `endswitch;` statement to 
 
 - Here, the `expression` is evaluated once and its value is compared against the values specified in each `case`. If a match is found, the corresponding code block is executed. The `break` statement is used to exit the switch statement after executing a case block. If no match is found, the code block under the `default` case is executed (if provided). If the `default` case is omitted and no match is found, no code block is executed.
 
-* The flow of control in a switch statement is illustrated below
+- The flow of control in a switch statement is illustrated below
   ![](php-switch.png)
 
   Here, once a match is found, the corresponding case block is executed until a break statement is encountered. If no `break` statement is found, the execution will continue to the next case block(s) until a break is encountered or the switch statement ends. If no match is found, the default block is executed (if provided).
@@ -2106,6 +2114,7 @@ $message = match($role) {
   - Comparison Type: Match expressions use strict comparison (`===`), while switch statements use loose comparison (`==`).
   - Return Value: Match expressions return a value, which can be directly assigned to a variable. Switch statements do not return a value.
   - Fall-through Behavior: Match expressions do not have fall-through behavior; each case must result in a value. Switch statements can have fall-through behavior if `break` statements are omitted. Suppose you have two cases that share the same code this can be done using match expression as follows:
+
   ```php
     $result = match($value) {
         'case1', 'case2' => 'Shared result for case1 and case2',
@@ -2401,6 +2410,14 @@ echo 'The fruits are: ' . $result;
 
 - For best practices, always check if the input variable is an array before using the `implode()` function to avoid potential errors.
 
+## PHP `explode()` function
+
+- The `explode()` function in PHP is used to split a string into an array based on a specified delimiter. It takes two parameters: the delimiter string and the input string. The syntax of the `explode()` function is as follows:
+
+```php
+explode(delimiter, string, limit);
+```
+
 ## PHP `json_encode()` function
 
 - The `json_encode()` function in PHP is used to convert a PHP variable (such as an array or object) into a JSON (JavaScript Object Notation) string. JSON is a lightweight data interchange format that is easy for humans to read and write, and easy for machines to parse and generate. The syntax of the `json_encode()` function is as follows:
@@ -2469,7 +2486,7 @@ for ($i = 1; $i <= 3; $i++) {
 
 - In this example, when `$j` equals 3, the `break` statement terminates the inner loop. The outer loop continues to the next iteration.
 
-* Now, to break out the both the outer and inner loops, you can specify the number of levels to break out of by providing an optional numeric argument to the `break` statement. Example
+- Now, to break out the both the outer and inner loops, you can specify the number of levels to break out of by providing an optional numeric argument to the `break` statement. Example
 
 ```php
 for ($i = 1; $i <= 3; $i++) {
@@ -2486,7 +2503,7 @@ for ($i = 1; $i <= 3; $i++) {
 - Here, the `break 2;` statement terminates both the inner and outer loops when `$j` equals 3.
 - Basically, the numeric argument specifies how many nested levels of loops to break out of. If no argument is provided, it defaults to 1, meaning only the innermost loop is terminated.
 
-* Consider this a similar example with switch statement
+- Consider this a similar example with switch statement
 
 ```php
 $grade = 'B';
@@ -2553,8 +2570,8 @@ for ($i = 0; $i < 6; $i++) {
 
 - The `continue` statement is used to skip the current iteration of a loop and move to the next iteration. It is commonly used when you want to skip certain iterations based on a specific condition.
 
-* It is used to skip all remaining statement that follow it in the current iteration of a loop and proceed to the next iteration of the loop.
-* The syntax of the `continue` statement in PHP is as follows:
+- It is used to skip all remaining statement that follow it in the current iteration of a loop and proceed to the next iteration of the loop.
+- The syntax of the `continue` statement in PHP is as follows:
 
 ```php
 if (condition) {
@@ -2743,7 +2760,7 @@ function function_name($param1 = default_value, $param2 = default_value, ...) {
 
 - Default arguments are the actual values assigned to the parameters when defining a function with default parameters. These default arguments are used when the caller does not provide a (default) value for the corresponding parameter when calling the function.
 
-* Thus a default argument exists when a function parameter has a default value
+- Thus a default argument exists when a function parameter has a default value
 
 # PHP Named Arguments
 
@@ -2799,7 +2816,7 @@ echo $message; // This will result in an error because $message is not defined i
 ## Global Variable
 
 - When you define a variable outside of any function, that variable is said to have a global scope. This means that the variable can be accessed and modified from anywhere in the script, even when the script is included in another script and also including inside functions.
-- Now, for a global variable to be accessible inside a function, you need to use the `global` keyword to import the global variable into the local scope of the function. Example
+- Now, for a global variable to be accessible inside a function, you need to use the `global` keyword to import the global variable into the local scope of the function or take advantage of the superglobal `_$GLOBAL` variable. Example
 
 ```php
 $message = "Hello, World!"; // Global variable
@@ -2831,15 +2848,15 @@ greet(); // Output: Hello, World!
 - They provide information about the PHP script's environment, server, and user input.
 - Some common superglobal variables include `$_GET`, `$_POST`, `$_SESSION`, `$_COOKIE`, and `$_SERVER`.
 
-* Below shows a table of some common superglobal variables in PHP and their meanings:
+- Below shows a table of some common superglobal variables in PHP and their meanings:
   - $GLOBALS | An associative array containing references to all global variables in the script. The variable names are the keys of the array.
   - $\_SERVER | An associative array containing information about the server and execution environment.
-  - $\_GET | An associative array of variables passed to the current script via the URL parameters (query string). Basically used to collect data sent in the URL.It returns data from a GET request.
+  - $\_GET | An associative array of variables passed to the current script via the URL parameters (query string). Basically used to collect data sent in the URL. It returns data from a GET request.
   - $\_POST | An associative array of variables passed to the current script via the HTTP POST method. It is used to collect data sent in a POST request.
   - $\_COOKIE | An associative array of variables passed to the current script via HTTP cookies. It returns data from an HTTP cookies.
   - $\_FILES | An associative array of items uploaded to the current script via the HTTP POST method. It returns data from a POST file upload.
   - $\_ENV | An associative array of variables passed to the current script via the environment method.
-  - $_REQUEST | An associative array that contains the contents of `$\_GET`, `$_POST`, and `$\_COOKIE`. It is used to collect data after submitting an HTML form.
+  - $_REQUEST | An associative array that contains the contents of `$\_GET`,`$_POST`, and `$\_COOKIE`. It is used to collect data after submitting an HTML form.
   - $\_SESSION | An associative array containing session variables available to the current script. It is used to store and retrieve data across multiple pages during a user's session.
 
 ## Static Variables
@@ -2913,7 +2930,7 @@ greet("Bob");   // Output: Hello, Bob!
 - The `declare` construct in PHP is used to set execution directives for a block of code or an entire script. It allows you to specify certain behaviors or settings that affect how the code is executed.
 - It does not call a function or produce an output. Rather, it controls how PHP code is interpretted and executed.
 
-* The syntax of the `declare` construct is as follows:
+- The syntax of the `declare` construct is as follows:
 
 ```php
 declare (directive = value) {
@@ -2937,7 +2954,7 @@ By this, the directive will apply to any code that comes after it in the script.
 
 - The `ticks` directive is used to specify the number of ticks that should occur before a registered tick handler function is called.
 
-* A tick is a low-level event that occurs during the execution of a PHP script per N statement, and it allows you to execute code at specific intervals during the script's execution.
+- A tick is a low-level event that occurs during the execution of a PHP script per N statement, and it allows you to execute code at specific intervals during the script's execution.
 
 - To use the `ticks` directive, you need to register a tick handler function using the `register_tick_function()` function. This function takes the name of the tick handler function as its argument.
 - The tick handler function will be called every N ticks (i.e after N statements), where N is the value specified in the `declare(ticks=N)` directive.
@@ -2972,7 +2989,7 @@ How it works
 - The `declare(ticks=2)` directive specifies that a tick should occur every 2 statements.
 - As the script executes, the `tick_handler()` function will be called every 2 statements, resulting in the output "Executed!" being printed multiple times throughout the script's execution.
 
-* Practically, you can use the `ticks` directive to perform tasks such as profiling, debugging, or monitoring the execution of your PHP code at specific intervals.
+- Practically, you can use the `ticks` directive to perform tasks such as profiling, debugging, or monitoring the execution of your PHP code at specific intervals.
 
 ## PHP `declare(encoding='encoding_name')`
 
@@ -3026,13 +3043,15 @@ where
 - `return_type` can be any valid data type in PHP, such as `int`, `float`, `string`, `array`, `bool`, `callable`, `iterable`, `object`, or a class/interface name.
 - By this, PHP will enforce that the value returned by the function matches the specified return type. If a value of a different type (that cannot be coerced) is returned, a `TypeError` will be thrown.
 
-* From PHP 7.0 onward, if a function does not return any value, you can specify the return type as `void`. This indicates that the function is not expected to return any value. By this `NULL` will be returned. If you return a value, you get an error even though you return null. Example
+- From PHP 7.0 onward, if a function does not return any value, you can specify the return type as `void`. This indicates that the function is not expected to return any value. By this `NULL` will be returned. If you return a value, you get an error even though you return null. Example
 
 ```php
 function function_name( type $parameter_1, type $parameter_2, ... ) : void {
 
 }
 ```
+
+- Know that if you expect a function as an argument, you use `callable`. Also, if you expect a class you use the Name of the class as Type Hints
 
 ## The Union Type
 
@@ -3323,7 +3342,7 @@ $array_name[index_or_key] = new_value;
 
 - To remove an element from an array, you can use the `unset()` function.
 
-* Its syntax is as follows:
+- Its syntax is as follows:
 
 ```php
 unset( $array_name[index_or_key] );
@@ -3570,7 +3589,7 @@ $array_name[index1][index2]...
 
 - To sort a multidimensional array in PHP, you can use the `usort()` function along with a custom comparison function. The `usort()` function sorts an array by values using a user-defined comparison function. It takes two parameters: the array to be sorted and the comparison function.
 
-* The `usort()` has the following syntax:
+- The `usort()` has the following syntax:
 
 ```php
 usort( array, comparison_function );
@@ -3805,7 +3824,7 @@ Here,
 - `haystack` is the input array in which you want to search for the value.
 - `strict` (optional) is a boolean flag that determines whether to use strict comparison (type and value) when searching for the `needle`. The default is `false`. This is useful to avoid type juggling during the search.
 
-* Consider this example:
+- Consider this example:
 
 ```php
 $device = [
@@ -3938,7 +3957,7 @@ But the difference of this and using the `array_merge()` function is that it whe
 
 - The `array_sum()` function in PHP is used to calculate the sum of all the values in an array. It takes an array as input and returns the total sum of its elements.
 
-* It's syntax is as follows:
+- It's syntax is as follows:
 
 ```php
 array_sum( array $array ) : float|int
@@ -3974,7 +3993,7 @@ Why is the output `4`?
 
 - The `array_chunk()` function in PHP is used to split an array into smaller arrays (chunks) of a specified size. It takes an array and a chunk size as input and returns a multidimensional array containing the chunks.
 
-* It's syntax is as follows:
+- It's syntax is as follows:
 
 ```php
 array_chunk( array $array, int $size, bool $preserve_keys = false ) : array
@@ -3986,7 +4005,7 @@ where
 - `size` is the size of each chunk (number of elements in each chunk).
 - `preserve_keys` (optional) is a boolean flag that determines whether to preserve the original array keys in the chunks. The default is `false`, which means the keys will be reindexed in each chunk.
 
-* Consider this example:
+- Consider this example:
 
 ```php
 $numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -4060,7 +4079,7 @@ Array
 
 - The `array_combine()` function in PHP is used to create a new associative array by combining two arrays: one for the keys and another for the values. It takes two arrays as input and returns a new associative array where the elements from the first array are used as keys and the elements from the second array are used as values.
 
-* It's syntax is as follows:
+- It's syntax is as follows:
 
 ```php
 array_combine( array $keys, array $values ) : array
@@ -4071,7 +4090,7 @@ where
 - `keys` is the array containing the keys for the new associative array.
 - `values` is the array containing the values for the new associative array.
 
-* Consider this example:
+- Consider this example:
 
 ```php
 $keys = ['name', 'age', 'city'];
@@ -4094,7 +4113,7 @@ Array
 
 - The `array_search()` function in PHP is used to search for a specific value in an array and return the first corresponding key if the value is found. If the value is not found, it returns `false`otherwise.
 
-* It's syntax is as follows:
+- It's syntax is as follows:
 
 ```php
 array_search( mixed $needle, array $haystack, bool $strict = false ) : int|string|false
@@ -4106,7 +4125,7 @@ where
 - `haystack` is the input array in which you want to search for the value.
 - `strict` (optional) is a boolean flag that determines whether to use strict comparison (type and value) when searching for the `needle`. The default is `false`. This is useful to avoid type juggling during the search.
 
-* Consider this example:
+- Consider this example:
 
 ```php
 $fruits = [
@@ -4123,7 +4142,7 @@ echo $key; // Output: b
 
 - The `array_diff()` function in PHP is used to compare two or more arrays and return the values from the first array that are not present in any of the other arrays. It performs a value-based comparison (not keys) and returns an array containing the differences.
 
-* It's syntax is as follows:
+- It's syntax is as follows:
 
 ```php
 array_diff( array $array1, array $array2, array ...$arrays ) : array
@@ -4142,7 +4161,7 @@ print_r( $difference ); // Output: Array ( [0] => a [2] => c )
 
 - The `array_diff_assoc()` function in PHP is used to compare two or more associative arrays and return the key-value pairs from the first array that are not present in any of the other arrays. It performs a key-value based comparison and returns an array containing the differences.
 
-* It's syntax is as follows:
+- It's syntax is as follows:
 
 ```php
 array_diff_assoc( array $array1, array $array2, array ...$arrays ) : array
@@ -4161,7 +4180,7 @@ print_r( $difference ); // Output: Array ( [a] => Apple [c] => Cherry [d] => Dat
 
 - The `array_diff_key()` function in PHP is used to compare the keys of two or more arrays and return the key-value pairs from the first array whose keys are not present in any of the other arrays. It performs a key-based comparison and returns an array containing the differences.
 
-* It's syntax is as follows:
+- It's syntax is as follows:
 
 ```php
 array_diff_key( array $array1, array $array2, array ...$arrays ) : array
@@ -4698,7 +4717,7 @@ where,
 - `array` is the input array that you want to sort.
 - `flags` (optional) is a parameter that determines the sorting behavior. It can take various values such as `SORT_REGULAR`, `SORT_NUMERIC`, `SORT_STRING`, etc. The default is `SORT_REGULAR`.
 
-* Example of using `rsort()` function:
+- Example of using `rsort()` function:
 
 ```php
 $numbers = [ 5, 2, 8, 1, 4 ];
@@ -4752,7 +4771,7 @@ Here, the `ksort()` function sorts the associative array `$fruits` by its keys i
 
 - The `krsort()` function in PHP is used to sort the elements of an array by their keys in descending order. This function modifies the original array and sorts its elements based on their keys.
 
-* The syntax of the `krsort()` function is as follows:
+- The syntax of the `krsort()` function is as follows:
 
 ```php
 krsort( array &$array, int $flags = SORT_REGULAR ) : bool
@@ -4834,7 +4853,7 @@ How it works:
   - If `$x` is greater than `$y`, it returns `1`, indicating that `$x` should come after `$y`.
 - The `usort()` function uses this comparison logic to sort the `$numbers` array in ascending order.
 
-* To sort in descending order, you can modify the comparison function as follows:
+- To sort in descending order, you can modify the comparison function as follows:
 
 ```php
 $numbers = [2, 4, 36, 43, 9, 2, 0];
@@ -5085,7 +5104,7 @@ where
   - A positive value if the first element should come after the second element.
   - Zero if both elements are considered equal.
 
-* Example of using `uasort()` function:
+- Example of using `uasort()` function:
 
 ```php
 $countries = [
@@ -5215,7 +5234,7 @@ empty(mixed $var) : bool
 
 - A variable is said to be empty if it does not exist or if its value equal `false` (or equal to any of false, (int) 0, (float) 0.0, -0.0, (string) "0", (array) [], or NULL)
 
-* The `empty($var)` is essentially the same as this expression that uses `isset()` and equality operator `==`
+- The `empty($var)` is essentially the same as this expression that uses `isset()` and equality operator `==`
 
 ```php
 !isset($v) ||  $v == false
@@ -5428,9 +5447,9 @@ Here, by using the `&` symbol before `$count` in the `use` construct, we pass `$
 ```php
 function multiplier($x)
 {
-	return function ($y) use ($x) {
-		return $x * $y;
-	};
+ return function ($y) use ($x) {
+  return $x * $y;
+ };
 }
 
 $double = multiplier(2);
@@ -5490,7 +5509,7 @@ where,
 - `$variable` is a variable that contains the name of the method as a string.
 - `$arguments` are the arguments to be passed to the method.
 
-* Example of using variable functions to call a method:
+- Example of using variable functions to call a method:
 
 ```php
 class Calculator {
@@ -5599,7 +5618,7 @@ By this, all callbacks that must be passed into the `multiply()` function must b
 
 - The `is_callable()` function in PHP is used to check if a variable can be called as a function. It returns `true` if the variable is a valid callable (i.e., a function or method that can be invoked), and `false` otherwise.
 
-* The syntax of the `is_callable()` function is as follows:
+- The syntax of the `is_callable()` function is as follows:
 
 ```php
 is_callable( mixed $var, bool $syntax_only = false, string &$callable_name = null ) : bool
@@ -5611,7 +5630,7 @@ where,
 - `syntax_only` (optional) is a boolean parameter that, when set to `true`, checks only the syntax of the callable without verifying its existence.
 - `callable_name` (optional) is a string variable that, if provided, will be set to the name of the callable if it is valid.
 
-* Example of using `is_callable()` function:
+- Example of using `is_callable()` function:
 
 ```php
 function greet($name) {
@@ -5640,7 +5659,7 @@ where,
 - `callback` is the function to be called. It can be a string containing the function name, an array containing an object and method name, or a closure.
 - `args` is an array of parameters to be passed to the callback function.
 
-* Example of using `call_user_func_array()` function:
+- Example of using `call_user_func_array()` function:
 
 ```php
 $evens = [2, 4, 6];
@@ -5738,7 +5757,7 @@ How it works:
 - The `array_map()` function is used to apply the static method `Square::area` to each element of the `$lengths` array.
 - The result is stored in the `$areas` array, which contains the areas of the squares.
 
-* Note that the syntax for passing a public static method to the array_map() function is as follows:
+- Note that the syntax for passing a public static method to the array_map() function is as follows:
 
 ```php
 'className::staticMethodName'
@@ -5779,7 +5798,7 @@ where,
   - `ARRAY_FILTER_USE_BOTH`: Passes both the value and the key of each element to the callback function.
   - Default is `0`, which means only the value of each element is passed to the callback function.
 
-* Example of using `array_filter()` function:
+- Example of using `array_filter()` function:
 
 ```php
 $codes = ['#$288IF1', '#$102OJ9', '#$504XD0', '#$192PL0', '#$453ND4', '#$548DA6'];
@@ -5829,7 +5848,7 @@ How it works:
 - An instance of the `Odd` class is created using `new Odd`.
 - The `array_filter()` function is called with the `$indexes` array and the method `isOdd` of the `Odd` class instance as the callback function.
 
-* The following syntax can be considered as a general syntax for using a class method as a callback in the `array_filter()` function
+- The following syntax can be considered as a general syntax for using a class method as a callback in the `array_filter()` function
 
 ```
 array_filter($array, [new ClassName, 'methodName']);
@@ -5988,7 +6007,7 @@ where,
 - `callback` is a function that defines how to reduce the array. It should take two parameters: the accumulator (the current reduced value) and the current array element. The function should return the updated accumulator.
 - `initial` (optional) is the initial value of the accumulator (which is the first paramter of the callback function). If not provided, the first element of the array is used as the initial value.
 
-* Example of using `array_reduce()` function:
+- Example of using `array_reduce()` function:
 
 ```php
 $words = ['Sage', 'The', 'Warrior'];
@@ -6008,8 +6027,8 @@ How it works:
 - The callback function concatenates the `previous` accumulated string with the `current` word from the array.
 - The result is stored in the `$smashed_words` variable, which contains the concatenated string "SageTheWarrior".
 
-* The `previous` parameter is special. It should not be manipulated when passed to the callback function. It holds the accumulated value from the previous iteration.
-* Consider this example
+- The `previous` parameter is special. It should not be manipulated when passed to the callback function. It holds the accumulated value from the previous iteration.
+- Consider this example
 
 ```php
 $carts = [
@@ -6060,7 +6079,7 @@ where,
 
 - `file.php` is the path to the file you want to include. It can be a relative or absolute path.
 
-* When the `include` construct is encountered, PHP will read the specified file and execute its code as if it were part of the calling file. If it cannot find the specified file, it will generate a warning but continue executing the rest of the script.
+- When the `include` construct is encountered, PHP will read the specified file and execute its code as if it were part of the calling file. If it cannot find the specified file, it will generate a warning but continue executing the rest of the script.
 
 ```php
 Warning: include(functions.php): failed to open stream: No such file or directory in ... on line ..
@@ -6125,17 +6144,17 @@ Notice that the file containing the reusable variable is included before it is u
 <?php include_once 'functions.php'; ?>
 
 <?php
-	function render_article()
-	{
-		include 'functions.php';
+ function render_article()
+ {
+  include 'functions.php';
 
-		return "<article>
+  return "<article>
                     <h1>$title</h1>
                 $content
                 </article>";
-	}
+ }
 
-	echo render_article();
+ echo render_article();
 ?>
 
 
@@ -6225,6 +6244,19 @@ echo $content;
 
 How it works: - The `ob_start()` function starts output buffering, which means that any output generated by the included file will be captured in the buffer instead of being sent to the browser. - The `include 'file.php';` statement includes the specified file, and any output generated by that file is captured in the output buffer. - The `ob_get_clean()` function retrieves the contents of the output buffer and clears it. The captured output is then assigned to the `$content` variable. - Thus the `$content` variable can be treated as a string
 
+# How PHP Search for files
+
+- If require or include is given an absolute pathname—one that starts with / on OS X
+  or Linux or with a drive letter or \ on Windows—then the PHP engine just looks in
+  that specific place for the file.
+- Similarly, if a relative path is provided—starting with ./ for the current directory
+  or ../ for the parent of the current directory—then the PHP only looks in that place
+  for the file.
+- However, for other filenames or pathnames provided, the PHP engine consults the
+  configuration directive include_path. Its value is a list of directories to look in when requiring or including files. If the file can’t be found in any of those directories,
+  the PHP engine checks the directory that contains the file doing the requiring or
+  including.
+
 # PHP `__DIR__`
 
 - The `__DIR__` magic constant in PHP returns the directory of the file in which it is used. It provides an absolute path to the directory, making it useful for including files or working with file paths relative to the current script's location.
@@ -6270,7 +6302,7 @@ C:\path\to\your\project\inc
 */
 ```
 
-#### Use **DIR** when:
+#### Use **DIR** when
 
 - You are including a file that is in a different directory than the script that’s running.
 - Your file might be included from multiple locations in your project (like header.php being used in public/index.php and admin/dashboard/index.php).
@@ -6282,7 +6314,7 @@ include __DIR__ . '/inc/header.php';
 
 By this, irrespective of where the script is being run from, the correct path to `header.php` will always be resolved.
 
-#### You don’t really need **DIR** when:
+#### You don’t really need **DIR** when
 
 - The file you’re including is in the same directory as the script you’re currently running.
 - You are in a very small project where the paths are simple and you won’t move files around.
@@ -6303,7 +6335,7 @@ where,
 
 - `$variable_name` is the name of the variable whose value will be used as the name of another variable.
 
-* Example of using variable variables:
+- Example of using variable variables:
 
 ```php
 $var_name = 'greeting';
@@ -6337,7 +6369,7 @@ where,
 - `25` is the port number used by the SMTP server. The default port for SMTP is `25`. However, some email providers may use different ports for secure connections, such as `465` for SSL or `587` for TLS.
 - `youremail@yourdomain.com` is the email address that will appear in the "From" field of the emails sent using the `mail()` function.
 
-* If the SMTP server requires authentication, you can add the following lines for the account to authenticate:
+- If the SMTP server requires authentication, you can add the following lines for the account to authenticate:
 
 ```
 auth_username=smtp_user
@@ -6349,8 +6381,8 @@ where,
 - `smtp_user` is the username for the SMTP server authentication.
 - `smtp_password` is the password for the SMTP server authentication.
 
-* Once the configuration is ready, you need to restart the webserver.
-* The syntax of the `mail()` function is as follows:
+- Once the configuration is ready, you need to restart the webserver.
+- The syntax of the `mail()` function is as follows:
 
 ```php
 mail(
@@ -6575,7 +6607,7 @@ if (mail($to, $subject, $message, $headers)) {
 }
 ```
 
-### Important details:
+### Important details
 
 - From: should usually match the Gmail you used in auth_username.
 
@@ -6591,7 +6623,7 @@ if (mail($to, $subject, $message, $headers)) {
 
 - If it prints “Mail sent”:
 
-- Check the inbox of receiver@example.com (also check Spam).
+- Check the inbox of <receiver@example.com> (also check Spam).
 
 - If mail() returns false:
 
@@ -6640,9 +6672,9 @@ If you like, you can paste this into a text file like xampp-mail-guide.txt and s
   ![](php-cookies.png)
   How it works:
 
-* When a user visits a website, the web server sends a cookie to the user's web browser.
-* The web browser stores the cookie and sends it back to the web server with each subsequent request to the same server.
-* The web server can then use the information stored in the cookie to remember the user's preferences, login status, and other data.
+- When a user visits a website, the web server sends a cookie to the user's web browser.
+- The web browser stores the cookie and sends it back to the web server with each subsequent request to the same server.
+- The web server can then use the information stored in the cookie to remember the user's preferences, login status, and other data.
   Technically speaking:
   - First, the web browser sends a request to the web server. Suppose the web server doesn’t have any information about the web browser. The web server creates a cookie with a name `return` and a value `1` and attaches the cookie to the HTTP response header. To create a cookie, you’ll use the `setcookie()` function.
   - Second, the web browser stores the cookie.
@@ -6688,7 +6720,7 @@ https://example.com/page1.html    → host = "example.com"
 - `secure` indicates whether the cookie should only be transmitted over a secure HTTPS connection. If set to `true`, the cookie will only be sent over HTTPS. Also, a secured HTTPS connection means the data between your browser and the website is encrypted using SSL/TLS, so no one can read or tamper with your cookies, passwords, or other information while it's being transmitted.
 - `httponly` indicates whether the cookie should only be accessible through the HTTP protocol. If set to `true`, the cookie will not be accessible via JavaScript, which can help mitigate certain types of cross-site scripting (XSS) attacks.
 
-* From PHP 7.3.0, you can also set cookies using an array of options as follows:
+- From PHP 7.3.0, you can also set cookies using an array of options as follows:
 
 ```php
 setcookie (
@@ -6701,8 +6733,8 @@ where,
 
 - `options` is an associative array that can contain the following keys: `expires`, `path`, `domain`, `secure`, `httponly`, and `samesite`. The `samesite` can take a value of `None`, `Lax`, or `Strict`. It is . If you use any other key, the setcookie() function will raise a warning.
 
-* The `setcookie()` function must be called before any output is sent to the browser.
-* The setcookie() function returns true if it successfully executes. Notice that it doesn’t indicate whether the web browser accepts the cookie. The setcookie() function returns false if it fails.
+- The `setcookie()` function must be called before any output is sent to the browser.
+- The setcookie() function returns true if it successfully executes. Notice that it doesn’t indicate whether the web browser accepts the cookie. The setcookie() function returns false if it fails.
 
 ## `$_COOKIE` superglobal variable
 
@@ -6761,8 +6793,8 @@ How it works:
 - The `unset()` function removes the cookie from the `$_COOKIE` superglobal variable in the current script execution.
 - The `setcookie()` function is called with the cookie name, a null value, and an expiration time set to one hour in the past (`time() - 3600`). This instructs the browser to delete the cookie.
 
-* Note that deleting a cookie using the `setcookie()` function will only take effect in the next page request. The cookie will still be available in the current script execution until the page is reloaded or a new request is made.
-* Example of setting and reading a cookie
+- Note that deleting a cookie using the `setcookie()` function will only take effect in the next page request. The cookie will still be available in the current script execution until the page is reloaded or a new request is made.
+- Example of setting and reading a cookie
 
 ```php
 const TIME = 60;
@@ -6787,7 +6819,7 @@ How it works:
   - If the cookie is not set, it means the user is visiting for the first time. The code then sets a cookie named `return` with a value of `1` and an expiration time of `60` seconds from the current time using the `setcookie()` function. If the page is the requested by the client again, the PHP script runs and `returning_user` will be set to `true`.
 - Finally, it uses a ternary operator to display a welcome message based on whether the user is a returning user or not. If `$returning_user` is `true`, it displays "Welcome back!"; otherwise, it displays "Welcome to my website".
 
-* Consider the following example that demonstrates how to set, read, and delete a cookie in PHP:
+- Consider the following example that demonstrates how to set, read, and delete a cookie in PHP:
 
 ```php
 // Set a cookie
@@ -6812,7 +6844,7 @@ How it works:
 - It then checks if the cookie is set using the `isset()` function. If the cookie is set, it greets the user by displaying "Hello, John Doe!". If the cookie is not set, it displays "Cookie is not set.".
 - Finally, it deletes the cookie by setting its expiration time to one hour in the past using the `setcookie()` function and displays "Cookie has been deleted.".
 
-* Note that cookies are sent to the server with each HTTP request, so they can be used to maintain state and track user sessions across multiple requests.
+- Note that cookies are sent to the server with each HTTP request, so they can be used to maintain state and track user sessions across multiple requests.
 
 # PHP Sessions
 
@@ -6827,12 +6859,12 @@ How it works:
   - When you navigate to the `cart.php` page, your web browser sends the session ID cookie back to the web server.
   - The web server retrieves the product information from the session variable using the session ID and displays it on the `cart.php` page.
     Technically speaking:
-  * First, the web browser requests for the product.php page.
-  * Second, the web server responds with the product.php page’s content.
-  * Third, you click the Add To Cart button on the product.php page. The page will send an HTTP request (either POST or GET) to the web server. The web server validates the product and generates a session id. It also creates a new text file on the server to store the information related to the selected product.
-  * Fourth, the web server responds to the web browser with the `PHPSESSID` cookie in the response header. If the web browser allows cookies, it will save the `PHPSESSID` cookie, which stores the session id passed by the web server.
-  * Fifth, in the subsequent request, for example, when you view the cart.php page, the web browser passes the `PHPSESSID` back to the web server. When the web server sees the `PHPSESSID` cookie, it will resume the session with the session id stored in it.
-  * Finally, the web server returns the cart page with your selected products.
+  - First, the web browser requests for the product.php page.
+  - Second, the web server responds with the product.php page’s content.
+  - Third, you click the Add To Cart button on the product.php page. The page will send an HTTP request (either POST or GET) to the web server. The web server validates the product and generates a session id. It also creates a new text file on the server to store the information related to the selected product.
+  - Fourth, the web server responds to the web browser with the `PHPSESSID` cookie in the response header. If the web browser allows cookies, it will save the `PHPSESSID` cookie, which stores the session id passed by the web server.
+  - Fifth, in the subsequent request, for example, when you view the cart.php page, the web browser passes the `PHPSESSID` back to the web server. When the web server sees the `PHPSESSID` cookie, it will resume the session with the session id stored in it.
+  - Finally, the web server returns the cart page with your selected products.
 - Sessions allows you to store data in a web server associated with a session id. The session id is usually stored on the client-side as a cookie named `PHPSESSID`. The session id is a unique identifier that is used to identify the session on the server.
 - A session typically lasts until the user closes the web browser or the session expires on the server. The expiration time can be configured on the server.
 
@@ -6901,7 +6933,7 @@ How it works:
 - The `$_SESSION['roles']` variable is set to an array containing three roles: `'administrator'`, `'approver'`, and `'editor'`. Therefore, the `$_SESSION` superglobal array contains an array and string as data-types in this case
 - The HTML part of the code contains a link to the `profile.php` page.
 
-* In the profile.php file, you can access the session data as follows:
+- In the profile.php file, you can access the session data as follows:
 
 ```php
 <?php session_start() ?>
@@ -6967,10 +6999,10 @@ session_destroy();
   - Replace the URL of a page with another.
   - Upgrade the HTTP to HTTPS.
   - Redirect users after form submission to prevent duplicate submissions.
-- Suppose you navigate to the URL https://phptutorial.net/about-us.php, PHP will redirect you to the new URL https://phptutorial.net/about-us.php. The following shows how redirection works:
+- Suppose you navigate to the URL <https://phptutorial.net/about-us.php>, PHP will redirect you to the new URL <https://phptutorial.net/about-us.php>. The following shows how redirection works:
   ![](php-redirection.png)
   How it works:
-  - When you enter the URL https://phptutorial.net/about-us.php in your web browser, the browser sends an HTTP request to the web server.
+  - When you enter the URL <https://phptutorial.net/about-us.php> in your web browser, the browser sends an HTTP request to the web server.
   - The web server processes (receives) the request and sends an HTTP response with a `Location` header that contains the new URL `https://phptutorial.net/about-us.php.`
   - The web browser receives the response and automatically navigates to the new URL by sending another HTTP request to the web server.
   - Finally, the web server responds with the content of the new page.
@@ -6979,7 +7011,7 @@ session_destroy();
 
 - The `header()` function in PHP is used to send raw HTTP headers to the client (usually a web browser) before any output is sent. It allows you to modify the HTTP response headers, which can control various aspects of how the browser handles the response.
 
-* It's syntax is as follows:
+- It's syntax is as follows:
 
 ```php
 header ( string $header , bool $replace = true , int $response_code = 0 ) : void
@@ -7006,8 +7038,8 @@ This `<form>` element has two important attributes:
 - `action`: specifies the URL of the server-side script that will process the form data when the form is submitted. In this case, the form data will be sent to `form.php` for processing.
 - `method`: specifies the HTTP method to be used when submitting the form. It can be either `GET` or `POST`. In this case, the form data will be sent using the `POST` method, which means that the data will be included in the body of the HTTP request. The form methods are case-insensitive (e.g., `POST`, `post`, `PoSt` are all valid). Also, if the method attribute isn't specified, the element uses `GET` by default
 
-* Input elements used in forms are often called form fields
-* These input elements has important attributes - `name`, `type`, `value`. The `name` attribute will be used to access the `value` in PHP
+- Input elements used in forms are often called form fields
+- These input elements has important attributes - `name`, `type`, `value`. The `name` attribute will be used to access the `value` in PHP
 
 ```html
 <input name="value" type="" />
@@ -7015,7 +7047,7 @@ This `<form>` element has two important attributes:
 
 ## HTTP `POST` method
 
-- The `POST` method is used to send data to the server as part of the body of the HTTP request. It is commonly used when submitting form data that may include sensitive information or large amounts of data.
+- The `POST` method is used to send data to the server as part of the body of the HTTP request. It is commonly used when submitting form data that may include sensitive information or large amounts of data. A `POST` is usually a form submission.
 - After submitting the form, you can access the form data in PHP using the `$_POST` superglobal array. The `$_POST` is an associative array that contains key-value pairs, where the keys are the names of the form fields, and the values are the corresponding values entered by the user. For example, if your form has an input field with the `name` attribute set to `username`, you can access its value in PHP like this:
 
 ```php
@@ -7064,7 +7096,7 @@ How it works:
 
 ## PHP `GET` Method
 
-- The `GET` method is used to send data to the server as part of the URL query string. It is commonly used when submitting form data that is not sensitive and can be included in the URL.
+- The `GET` method is used to send data to the server as part of the URL query string. It is commonly used when submitting form data that is not sensitive and can be included in the URL.  A `GET` request usually means a regular page retrieval
 - After submitting the form, you can access the form data in PHP using the `$_GET` superglobal array. The `$_GET` is an associative array that contains key-value pairs, where the keys are the names of the form fields, and the values are the corresponding values entered by the user. For example, if your form has an input field with the `name` attribute set to `username`, you can access its value in PHP like this:
 
 ```php
@@ -7108,7 +7140,7 @@ How it works:
 - The HTML part of the code creates a form with a text input field for searching and a submit button. When the user submits the form, the data is sent to `form.php` using the `GET` method for processing. By this, the `form.php` script runs again and processes the submitted form data.
 - The form includes a `<label>` element for the search input field, which improves accessibility by associating the label with the input field using the `for` and `id` attributes.
 
-* If the form has multiple input elements, the web browser will append the input fields to the URL in the following format
+- If the form has multiple input elements, the web browser will append the input fields to the URL in the following format
   `/search.php?name1=value1&name2=value2&name3=value3
 `
 
@@ -7142,7 +7174,7 @@ where,
 - `encoding` is the character encoding of the input string. If not specified, it defaults to the value of the `default_charset` configuration option.
 - `double_encode` indicates whether to encode existing HTML entities in the input string. If set to `true`, existing entities will be encoded again. The default value is `true`.
 
-* For example, the following form shows how to use the `htmlspecialchars` function to display the search term on the page
+- For example, the following form shows how to use the `htmlspecialchars` function to display the search term on the page
 
 ```php
 <?php
@@ -7214,7 +7246,7 @@ How it works:
 - It then echoes the escaped value of the `$email` variable using the `htmlspecialchars()` function to prevent XSS attacks.
 - The HTML part of the code creates a form with an email input field and a submit button. The `action` attribute of the `<form>` element is set to the current page using the `$_SERVER['PHP_SELF']` variable. Note that since the variable is a php code, it must be within the `<?php ?>` tags. To prevent XSS attacks, the `htmlspecialchars()` function is used to escape the value of `$_SERVER['PHP_SELF']`.
 
-* When the user then submits the form, the data is sent to the same page for processing. By this, the script runs again and processes the submitted form data.
+- When the user then submits the form, the data is sent to the same page for processing. By this, the script runs again and processes the submitted form data.
 
 ## Organizing Code
 
@@ -7334,7 +7366,7 @@ How it works:
 - It then uses the `filter_var()` function to validate the email address by passing the `$email` variable and the `FILTER_VALIDATE_EMAIL` filter as arguments.
 - If the email address is valid, it echoes a message indicating that the email address is valid. Otherwise, it echoes a message indicating that the email address is not valid.
 
-* The following shows how to use the `filter_var()` function to validate an integer:
+- The following shows how to use the `filter_var()` function to validate an integer:
 
 ```php
 if(isset($_GET['age'])) {
@@ -7393,7 +7425,7 @@ How it works:
 - _Sanitization_ disables potential malicious code from data before processing it.
 - _Validation_ ensures the data is in the correct format regarding data type, range, and value.
 
-* The syntax of the `filter_input()` function is as follows:
+- The syntax of the `filter_input()` function is as follows:
 
 ```php
 filter_input ( int $type , string $variable_name , int $filter = FILTER_DEFAULT , array|int $options = 0 ) : mixed
@@ -7412,7 +7444,7 @@ where,
 - `$options` is an associative array of filter options or a list of flags separated by the pipe character (`|`). The options vary depending on the filter being used.
 - The function returns the filtered variable if the filtering is successful, or `false` if the filtering fails. If `$var_name` does not exist, it returns `null`.
 
-* For example, the following shows how to use the `filter_input()` function to validate an email address from a POST request:
+- For example, the following shows how to use the `filter_input()` function to validate an email address from a POST request:
 
 ```php
 $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
@@ -7441,7 +7473,7 @@ $term_url = filter_input(INPUT_GET, 'term', FILTER_SANITIZE_ENCODED);
 <?php
 
 if (null !== $term_html) {
-	echo "The search result for <mark> $term_html </mark>.";
+ echo "The search result for <mark> $term_html </mark>.";
 }
 ```
 
@@ -7455,9 +7487,9 @@ How it works:
   - `INPUT_GET`: to check for variables in the `$_GET` superglobal array.
   - `INPUT_POST`: to check for variables in the `$_POST` superglobal array.
 
-* Use the `filter_input()` function when you need to validate and sanitize data coming directly from user and `filter_var()` when the input is already in a variable
-* `filter_input()` - Validate / sanitize form input
-* `filter_var()` - Validate / sanitize a variable
+- Use the `filter_input()` function when you need to validate and sanitize data coming directly from user and `filter_var()` when the input is already in a variable
+- `filter_input()` - Validate / sanitize form input
+- `filter_var()` - Validate / sanitize a variable
 
 ## PHP Form Validation
 
@@ -7496,7 +7528,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 - How it works:
 
-*
+-
 
 ## Validating Integers
 
@@ -7599,7 +7631,7 @@ time ( ) : int
 
 - The function does not take any parameters and returns the current Unix timestamp as an integer value.
 
-* The following code shows how to use the `time()` function to get the current Unix timestamp:
+- The following code shows how to use the `time()` function to get the current Unix timestamp:
 
 ```php
 $timestamp = time();
@@ -7716,7 +7748,7 @@ where,
   - `-1`: PHP will attempt to determine whether DST is in effect based on the provided date and time.
 - The function returns the Unix timestamp corresponding to the specified date and time, or `false` if the provided date and time is invalid.
 
-* For example, the following code shows how to use the `mktime()` function to create a Unix timestamp for a specific date and time:
+- For example, the following code shows how to use the `mktime()` function to create a Unix timestamp for a specific date and time:
 
 ```php
 $timestamp = mktime(14, 30, 0, 6, 15, 2024);
@@ -7740,7 +7772,7 @@ where,
 - `base_timestamp` is an optional parameter that specifies a base Unix timestamp to use as a reference point for relative date and time calculations. If not provided, the current time will be used as the base.
 - The function returns the Unix timestamp corresponding to the specified date and time string, or `false` if the provided string cannot be parsed.
 
-* For example, the following code shows how to use the `strtotime()` function to convert a human-readable date and time string into a Unix timestamp:
+- For example, the following code shows how to use the `strtotime()` function to convert a human-readable date and time string into a Unix timestamp:
 
 ```php
 $timestamp = strtotime("2024-06-15 14:30:00");
@@ -7783,7 +7815,7 @@ where,
   - `month`: The full name of the month (e.g., "January").
   - `0`: The Unix timestamp.
 
-* For example, the following code shows how to use the `getdate()` function to retrieve date and time information for the current date and time:
+- For example, the following code shows how to use the `getdate()` function to retrieve date and time information for the current date and time:
 
 ```php
 $date_info = getdate();
@@ -7873,76 +7905,108 @@ ini_set('error_reporting', E_ALL);
 - Know that it is advisable to stick to `E_ALL` during development and change it to a less verbose level in production. But still, it is advisable to log errors in production (i.e setting it to `E_ALL`).
 
 - `display_errors`: This directive controls whether errors should be displayed to the user or not. It can be set to `On` or `Off`. For example, to display errors, you can set it as follows:
+
 ```ini
 display_errors = On
 ```
+
 Or in PHP code:
+
 ```php
 ini_set('display_errors', '1');
 ```
+
 - It is advisable to set this directive to `On` during development and `Off` (the integer `0`) in production to avoid exposing sensitive information to users.
 - `post_max_size`: This directive sets the maximum size of POST data that PHP will accept. It is specified in bytes. For example, to set the maximum POST size to 8 megabytes, you can set it as follows:
+
 ```ini
 post_max_size = 8M
 ```
+
 Or in PHP code:
+
 ```php
 ini_set('post_max_size', '8M');
 ```
+
 - `max_execution_time`: This directive sets the maximum time in seconds that a PHP script is allowed to run before it is terminated by the parser. For example, to set the maximum execution time to 30 seconds (which is the default), you can set it as follows:
+
 ```ini
 max_execution_time = 30
 ```
+
 Or in PHP code:
+
 ```php
 ini_set('max_execution_time', '30');
 ```
+
 Know that if the script runs beyong the `max_execution_time`, a fatal error will be thrown.
+
 - `memory_limit`: This directive sets the maximum amount of memory that a PHP script is allowed to allocate / consume. It is specified in bytes. For example, to set the memory limit to 128 megabytes (default), you can set it as follows:
+
 ```ini
 memory_limit = 128M
 ```
+
 Or in PHP code:
+
 ```php
 ini_set('memory_limit', '128M');
 ```
+
 - `file_uploads`: This directive controls whether file uploads are allowed in PHP. It can be set to `On` or `Off`. For example, to enable file uploads, you can set it as follows:
+
 ```ini
 file_uploads = On
 ```
+
 Or in PHP code:
+
 ```php
 ini_set('file_uploads', '1');
 ```
+
 `Off` (the integer `0`) is used to disable file uploads.
+
 - `upload_tmp_dir`: This directive sets the temporary directory where uploaded files are stored before they are moved to their final destination. For example, to set the upload temporary directory to `/tmp/uploads`, you can set it as follows:
+
 ```ini
 upload_tmp_dir = /tmp/uploads
 ```
+
 Or in PHP code:
+
 ```php
 ini_set('upload_tmp_dir', '/tmp/uploads');
 ```
+
 `upload_max_filesize`: This directive sets the maximum size of an uploaded file that PHP will accept. It is specified in bytes. For example, to set the maximum upload file size to 2 megabytes, you can set it as follows:
+
 ```ini
 upload_max_filesize = 2M
 ```
+
 Or in PHP code:
+
 ```php
 ini_set('upload_max_filesize', '2M');
 ```
 
 ## The `ini_get()` function
-+ This function is used to retrieve the value of a configuration option at runtime. The syntax of the `ini_get()` function is as follows:
+
+- This function is used to retrieve the value of a configuration option at runtime. The syntax of the `ini_get()` function is as follows:
 
 ```php
 ini_get ( string $option ) : string|false
 ```
 
 where,
+
 - `option` is the name of the configuration option to be retrieved.
 - The function returns the current value of the specified configuration option as a string, or `false` if the option does not exist.
-+ For example suppose you want to check the current value of the `memory_limit` directive, you can use the `ini_get()` function as follows:
+
+- For example suppose you want to check the current value of the `memory_limit` directive, you can use the `ini_get()` function as follows:
 
 ```php
 $memory_limit = ini_get('memory_limit');
@@ -7950,34 +8014,40 @@ echo "Current memory limit: " . $memory_limit;
 ```
 
 # PHP Error Handling
-+ There are different types of errors in PHP:
+
+- There are different types of errors in PHP:
   - **Parse errors**: These occur when there is a syntax error in the code, such as a missing semicolon or an unmatched parenthesis. Parse errors are detected by the PHP parser before the script is executed.
   - **Fatal errors**: These occur when the script encounters a critical error that prevents it from continuing execution, such as calling a non-existent function or class. Fatal errors result in the termination of the script.
   - **Warning errors**: These occur when the script encounters a non-critical error, such as including a non-existent file or using an undefined variable. Warning errors do not terminate the script, but they may affect its behavior.
   - **Notice errors**: These occur when the script encounters a minor issue, such as accessing an undefined variable or using a deprecated function. Notice errors do not terminate the script and are often used for debugging purposes.
-+ PHP determines what error to report based on the `error_reporting` directive in the `php.ini` configuration file or using the `error_reporting()` function in the code. The `error_reporting` directive specifies the types of errors that should be reported by PHP. For example, setting `error_reporting` to `E_ALL` will report all types of errors, while setting it to `E_ERROR | E_WARNING` will only report fatal errors and warning errors. Setting it to `0` will disable error reporting altogether (`error_reporting(0)`).
-+ Make sure all error levels are stored in a constant. You can also combine multiple error levels using the bitwise operators. Suppose you want to combine all errors except warnings, you can do that as follows
+- PHP determines what error to report based on the `error_reporting` directive in the `php.ini` configuration file or using the `error_reporting()` function in the code. The `error_reporting` directive specifies the types of errors that should be reported by PHP. For example, setting `error_reporting` to `E_ALL` will report all types of errors, while setting it to `E_ERROR | E_WARNING` will only report fatal errors and warning errors. Setting it to `0` will disable error reporting altogether (`error_reporting(0)`).
+- Make sure all error levels are stored in a constant. You can also combine multiple error levels using the bitwise operators. Suppose you want to combine all errors except warnings, you can do that as follows
+
 ```php
 error_reporting(E_ALL & ~E_WARNING);
 ```
-+ A list of the predefined error constants can be found in the [PHP documentation](https://www.php.net/manual/en/errorfunc.constants.php). In this list, the ones with the `_USER_` tag are generated by using the `trigger_error()` function
+
+- A list of the predefined error constants can be found in the [PHP documentation](https://www.php.net/manual/en/errorfunc.constants.php). In this list, the ones with the `_USER_` tag are generated by using the `trigger_error()` function
 
 ## PHP `trigger_error()` function
-+ This function is used to generate a user-level error message in PHP. It allows you to create custom error messages that can be handled by the PHP error handling mechanism.
-+ The syntax of the `trigger_error()` function is as follows:
+
+- This function is used to generate a user-level error message in PHP. It allows you to create custom error messages that can be handled by the PHP error handling mechanism.
+- The syntax of the `trigger_error()` function is as follows:
 
 ```php
 trigger_error ( string $message , int $error_type = E_USER_NOTICE ) : bool
 ```
 
 where,
+
 - `message` is a string that represents the error message to be generated.
 - `error_type` is an optional parameter that specifies the type of error to be generated. It can take one of the following predefined error constants:
   - `E_USER_NOTICE`: Generates a user-level notice message.
   - `E_USER_WARNING`: Generates a user-level warning message.
   - `E_USER_ERROR`: Generates a user-level fatal error message.
 - The function returns `true` if the error was successfully triggered, or `false` if there was an error triggering the error.
-+ For example, the following code shows how to use the `trigger_error()` function to generate a user-level warning message:
+
+- For example, the following code shows how to use the `trigger_error()` function to generate a user-level warning message:
 
 ```php
 $age = -5;
@@ -7985,21 +8055,28 @@ if($age < 0) {
     trigger_error("Age cannot be negative.", E_USER_WARNING);
 }
 ```
+
 - The code checks if the `$age` variable is less than `0`. If it is, it calls the `trigger_error()` function to generate a user-level warning message indicating that age cannot be negative. Thus the output becomes
+
 ```
 Warning: Age cannot be negative. in /path/to/script.php on line X
 
 ```
-+ To access the PHP error log file, you can check the `error_log` directive in your `php.ini` configuration file. This directive specifies the path to the error log file where PHP will write error messages. Or you can check through XAMPP as follow
-!['PHP Error Log'](PHP Error Handling.png)
+
+- To access the PHP error log file, you can check the `error_log` directive in your `php.ini` configuration file. This directive specifies the path to the error log file where PHP will write error messages. Or you can check through XAMPP as follow
+  !['PHP Error Log'](PHP Error Handling.png)
 
 ## PHP `error_log()` function
-+ The `error_log()` function in PHP is used to send an error message to the web server's error log or to a specified file. This function allows you to log custom error messages for debugging and troubleshooting purposes.
-+ The syntax of the `error_log()` function is as follows:
+
+- The `error_log()` function in PHP is used to send an error message to the web server's error log or to a specified file. This function allows you to log custom error messages for debugging and troubleshooting purposes.
+- The syntax of the `error_log()` function is as follows:
+
 ```php
 error_log ( string $message , int $message_type = 0 , ?string $destination = null , ?string $extra_headers = null ) : bool
 ```
+
 where,
+
 - `message` is a string that represents the error message to be logged.
 - `message_type` is an optional parameter that specifies the type of message to be logged. It can take one of the following values:
   - `0`: Logs the message to the web server's error log (default).
@@ -8009,30 +8086,35 @@ where,
 - `destination` is an optional parameter that specifies the destination for the logged message. It is required when `message_type` is set to `1` or `3`.
 - `extra_headers` is an optional parameter that specifies additional headers to be sent when `message_type` is set to `1`.
 - The function returns `true` if the error message was successfully logged, or `false` if there was an error logging the message.
-+ For example, the following code shows how to use the `error_log()` function to log an error message to the web server's error log:
+
+- For example, the following code shows how to use the `error_log()` function to log an error message to the web server's error log:
 
 ```php
 $error_message = "An unexpected error occurred.";
 error_log($error_message);
 ```
+
 - The code defines an error message and calls the `error_log()` function to log the message to the web server's error log.
 
 ## Error Handling with `set_error_handler()`
-+ The `set_error_handler()` function in PHP is used to set a custom error handler function that will be called whenever an error occurs in the script. This allows you to define your own error handling logic and customize how errors are handled.
-+ The syntax of the `set_error_handler()` function is as follows:
+
+- The `set_error_handler()` function in PHP is used to set a custom error handler function that will be called whenever an error occurs in the script. This allows you to define your own error handling logic and customize how errors are handled.
+- The syntax of the `set_error_handler()` function is as follows:
 
 ```php
 set_error_handler ( callable $error_handler , int $error_types = E_ALL ) : ?callable
 ```
 
 where,
+
 - `error_handler` is a callable function that will be called when an error occurs. This function should accept the following parameters:
   `$severity` → error type (e.g. E_WARNING, E_NOTICE, E_ALL)
   `$message` → error description
   `$file` → file where it happened
   `$line` → line number
 - The function returns the previous error handler function if one was set, or `null` if no previous error handler was set.
-+ For example, the following code shows how to use the `set_error_handler()` function to set a custom error handler function:
+
+- For example, the following code shows how to use the `set_error_handler()` function to set a custom error handler function:
 
 ```php
 function customErrorHandler((int $type, string $msg, ?string $file = null, ?int $line = null) {
@@ -8045,6 +8127,7 @@ set_error_handler("customErrorHandler");
 // Trigger an error
 echo $undefined_variable;
 ```
+
 - The code defines a custom error handler function named `customErrorHandler()` that takes the error parameters and displays a formatted error message. It then calls the `set_error_handler()` function to set the custom error handler. Finally, it triggers an error by trying to echo an undefined variable, which will invoke the custom error handler and display the error message.
 - When the script tries to access the undefined variable `$undefined_variable`, it triggers a notice-level error. The custom error handler function `customErrorHandler()` is called, which displays the error message and terminates the script execution.
 - The `set_error_handler()` function overrides whatever has been set in the `error_reporting` directive. So even if you have set `error_reporting(0)`, the custom error handler will still be invoked for all error types specified in the `error_types` parameter (default is `E_ALL`).
@@ -8057,65 +8140,75 @@ echo $undefined_variable;
   - `E_COMPILE_ERROR`
   - `E_COMPILE_WARNING`
 
-
 - Know that you can restore the previous error handler using the `restore_error_handler()` function as follows:
 
 ```php
 restore_error_handler();
 ```
+
 By this, any subsequent errors will be handled by the previous error handler or the default PHP error handling mechanism if no previous handler was set. Example
+
 ```php
 restore_error_handler();
 // This will be handled by the previous error handler or default PHP error handling
 ```
 
 # Basic Apache Configuration and Virtual Hosting
+
 - Apache configuration file is usually named `httpd.conf` and is located in the `conf` directory of your Apache installation. For example, in XAMPP, it can be found at `C:\xampp\apache\conf\httpd.conf`.
 - You can also access it through the XAMPP control panel by clicking the `Config` button and selecting `Apache (httpd.conf)` from the dropdown menu.
-!['Apache Config'](Apache Config.png)
+  !['Apache Config'](Apache Config.png)
 - You can access Apache's log file through XAMPP by selecting any of the options under `Logs` in the XAMPP control panel.
-!['Apache Logs'](Apache Log.png)
+  !['Apache Logs'](Apache Log.png)
 
 ## PHP Virtual Hosts
+
 - Virtual hosts allow you to run multiple websites on a single server by configuring Apache to respond to different domain names or IP addresses.
 - To set up virtual hosts in Apache, you need to edit the `httpd-vhosts.conf` file, which is usually located in the `extra` directory of your Apache installation. For example, in XAMPP, it can be found at `C:\xampp\apache\conf\extra\httpd-vhosts.conf`.
 - You can also access it through the XAMPP control panel by clicking the `Config` button and selecting `Apache (httpd-vhosts.conf)` from the dropdown menu. After this has been accessed, follow these steps
+
 1. Under `#<VirtualHost *:80>` uncomment the following line in the `httpd.conf` file to enable virtual hosts:
 
 ```apache
     DocumentRoot "C:/xampp/htdocs/ProjectDirectory"
     ServerName ProjectDirectory.com
 ```
-By this, you are telling Apache to serve files from the `ProjectDirectory` directory () when the `ProjectDirectory.com` domain is accessed.
-2. Add another virtual host configuration for another project as follows:
+
+By this, you are telling Apache to serve files from the `ProjectDirectory` directory () when the `ProjectDirectory.com` domain is accessed. 2. Add another virtual host configuration for another project as follows:
+
 ```apache
     DocumentRoot "C:/xampp/htdocs/AnotherProject"
     ServerName AnotherProject.com
 ```
-3. Save the `httpd-vhosts.conf` file and restart Apache through the XAMPP control panel for the changes to take effect.
-4. Finally, you need to update your system's `hosts` file to map the domain names to the local IP address. To do this, open the `hosts` file located at `C:\Windows\System32\drivers\etc\hosts` in a text editor with administrative privileges and add the following lines:
+
+1. Save the `httpd-vhosts.conf` file and restart Apache through the XAMPP control panel for the changes to take effect.
+2. Finally, you need to update your system's `hosts` file to map the domain names to the local IP address. To do this, open the `hosts` file located at `C:\Windows\System32\drivers\etc\hosts` in a text editor with administrative privileges and add the following lines:
+
 ```
 127.0.0.1   ProjectDirectory.com
 127.0.0.1   AnotherProject.com
 ```
+
 This maps the domain names `ProjectDirectory.com` and `AnotherProject.com` to the local IP address `127.0.0.1`. Note that the domain `.com` is just an example. It can also be `.local`, `.test`, etc.
+
 - Save the `hosts` file and close the text editor.
 - Now, you can access your projects by entering the domain names in your web browser. For example, you can access `ProjectDirectory` by navigating to `http://ProjectDirectory.com` and `AnotherProject` by navigating to `http://AnotherProject.com`.
 - Make sure to clear your browser cache if you encounter any issues accessing the virtual hosts.
 
 ## PHP `htaccess` file
-+ `htaccess` (hypertext access) is a configuration files (also called distributed configuration files) used by the Apache web server to manage various settings and behaviors for a specific directory and its subdirectories. It allows you to override the default server configuration on a per-directory basis without modifying the main server configuration files.
-+ The `htaccess` file is typically named `.htaccess` and is placed in the root directory of your website or in any subdirectory where you want to apply specific settings.
-+ Note that the `htaccess` file must be named exactly `.htaccess`, including the leading dot, and it should not have any file extension.
-+ Also, changes made to the `htaccess` file take effect immediately without requiring a server restart.
-+ Some common uses of the `htaccess` file include:
+
+- `htaccess` (hypertext access) is a configuration files (also called distributed configuration files) used by the Apache web server to manage various settings and behaviors for a specific directory and its subdirectories. It allows you to override the default server configuration on a per-directory basis without modifying the main server configuration files.
+- The `htaccess` file is typically named `.htaccess` and is placed in the root directory of your website or in any subdirectory where you want to apply specific settings.
+- Note that the `htaccess` file must be named exactly `.htaccess`, including the leading dot, and it should not have any file extension.
+- Also, changes made to the `htaccess` file take effect immediately without requiring a server restart.
+- Some common uses of the `htaccess` file include:
   - URL rewriting: You can use `htaccess` to create user-friendly URLs by rewriting complex URLs into simpler and more readable formats.
   - Access control: You can restrict access to certain files or directories based on IP addresses, usernames, or passwords.
   - Custom error pages: You can define custom error pages for different HTTP status codes (e.g., 404 Not Found, 500 Internal Server Error).
   - Redirects: You can set up redirects from one URL to another, which is useful for maintaining SEO when changing URLs.
   - MIME types: You can specify custom MIME types for specific file extensions.
-+ It is highly recommended to use the `htaccess` file judiciously, as excessive use of `htaccess` files can lead to performance issues since they are read on every request. Whenever possible, it is better to make configuration changes in the main server configuration files (e.g., `httpd.conf`) for better performance.
-+ Here is an example of a simple `.htaccess` file that demonstrates some common configurations:
+- It is highly recommended to use the `htaccess` file judiciously, as excessive use of `htaccess` files can lead to performance issues since they are read on every request. Whenever possible, it is better to make configuration changes in the main server configuration files (e.g., `httpd.conf`) for better performance.
+- Here is an example of a simple `.htaccess` file that demonstrates some common configurations:
 
 ```apache
 # Enable URL rewriting
@@ -8131,7 +8224,9 @@ ErrorDocument 404 /custom-404.html
     Allow from
 </Directory>
 ```
+
 Example explanation:
+
 - The `RewriteEngine On` directive enables the URL rewriting engine.
 - The `RewriteRule` directive redirects requests from `old-page.html` to `new-page.html` with a 301 (permanent) redirect.
 - The `ErrorDocument` directive specifies a custom error page for 404 Not Found errors.
@@ -8144,32 +8239,40 @@ Example explanation:
     AllowOverride None
 </Directory>
 ```
-+ This prevents Apache from reading and applying any `.htaccess` files in the specified directory and its subdirectories.
+
+- This prevents Apache from reading and applying any `.htaccess` files in the specified directory and its subdirectories.
 
 ## How to rewrite URLs using `.htaccess` file
-+ URL rewriting is a technique used to modify the appearance of URLs in a web application. It allows you to create user-friendly and search engine-friendly URLs by transforming complex URLs into simpler and more readable formats.
-+ To rewrite URLs using the `.htaccess` file, you can use the `mod_rewrite` module in Apache. Here are the steps to set up URL rewriting using `.htaccess`:
+
+- URL rewriting is a technique used to modify the appearance of URLs in a web application. It allows you to create user-friendly and search engine-friendly URLs by transforming complex URLs into simpler and more readable formats.
+- To rewrite URLs using the `.htaccess` file, you can use the `mod_rewrite` module in Apache. Here are the steps to set up URL rewriting using `.htaccess`:
+
 1. Ensure that the `mod_rewrite` module is enabled in your Apache configuration. You can do this by checking the `httpd.conf` file for the following line and uncommenting it if necessary:
 
 ```apache
 LoadModule rewrite_module modules/mod_rewrite.so
 ```
-2. Create or edit the `.htaccess` file in the root directory of your website (or the directory that you intend to apply the configuration).
-3. Add the following directives to the `.htaccess` file to enable URL rewriting:
+
+1. Create or edit the `.htaccess` file in the root directory of your website (or the directory that you intend to apply the configuration).
+2. Add the following directives to the `.htaccess` file to enable URL rewriting:
 
 ```apache
 RewriteEngine On
 ```
-4. Define your rewrite rules using the `RewriteRule` directive. The syntax of the `RewriteRule` directive is as follows:
+
+1. Define your rewrite rules using the `RewriteRule` directive. The syntax of the `RewriteRule` directive is as follows:
 
 ```apache
 RewriteRule Pattern Substitution [Flags]
 ```
+
 where,
+
 - `Pattern` is a regular expression that matches the URL you want to rewrite. e.g to match URLs like `product/123`, you can use the pattern `^product/([0-9]+)$`.
 - `Substitution` is the new URL format that you want to use. e.g to rewrite to `product.php?id=123`, you can use the substitution `product.php?id=$1`.
 - `Flags` are optional parameters that modify the behavior of the rewrite rule. e.g `[R=301,L]` indicates a permanent redirect and that this is the last rule to be processed.
-5. Here is an example of a complete `.htaccess` file that rewrites URLs for a simple page:
+
+1. Here is an example of a complete `.htaccess` file that rewrites URLs for a simple page:
 
 ```apache
 <IfModule mod_rewrite.c>
@@ -8180,22 +8283,30 @@ where,
     RewriteRule ^ index.php [L]
 </IfModule>
 ```
+
 Explantion to the above snippet is:
+
 - The `<IfModule mod_rewrite.c>` directive checks if the `mod_rewrite` module is enabled before applying the rewrite rules.
 - The `RewriteEngine On` directive enables the URL rewriting engine.
 - The `RewriteCond` directives check if the requested file or directory does not exist.
 - The `RewriteRule` directive rewrites all requests to `index.php`, allowing you to handle routing within your PHP application.
-6. Save the `.htaccess` file and test your URL rewriting by accessing the rewritten URLs in your web browser. For example, if you have a product with ID `123`, you can access it using the URL `http://yourdomain.com/product/123`, and it will be rewritten to `http://yourdomain.com/product.php?id=123`.
-The above can also be done by copying the code above into the virtual hosting file under `<VirtualHost *:80> ... </VirtualHost>` block. After this, restart your server
+
+1. Save the `.htaccess` file and test your URL rewriting by accessing the rewritten URLs in your web browser. For example, if you have a product with ID `123`, you can access it using the URL `http://yourdomain.com/product/123`, and it will be rewritten to `http://yourdomain.com/product.php?id=123`.
+   The above can also be done by copying the code above into the virtual hosting file under `<VirtualHost *:80> ... </VirtualHost>` block. After this, restart your server
 
 # PHP Filesystems Functions
+
 ## PHP `scandir()`
-+ This function is used to retrieve a list of files and directories within a specified directory. It returns an array containing the names of the files and directories found in the specified directory.
-+ The syntax of the `scandir()` function is as follows:
+
+- This function is used to retrieve a list of files and directories within a specified directory. It returns an array containing the names of the files and directories found in the specified directory.
+- The syntax of the `scandir()` function is as follows:
+
 ```php
 scandir ( string $directory , int $sorting_order = SCANDIR_SORT_ASCENDING , ?resource $context = null ) : array|false
 ```
+
 where,
+
 - `directory` is a string that represents the path to the directory you want to scan.
 - `sorting_order` is an optional parameter that specifies the order in which the files and directories should be sorted. It can take one of the following values:
   - `SCANDIR_SORT_ASCENDING`: Sorts the files and directories in ascending order (default).
@@ -8203,21 +8314,25 @@ where,
   - `SCANDIR_SORT_NONE`: No sorting is applied; the files and directories are returned in the order they are found.
 - `context` is an optional parameter that can be used to specify a context resource created with `stream_context_create()`. It allows you to modify the behavior of the directory scanning operation.
 - The function returns an array containing the names of the files and directories found in the specified directory, or `false` if the directory cannot be opened.
-+ For example, the following code shows how to use the `scandir()` function to retrieve a list of files and directories in a specified directory:
+
+- For example, the following code shows how to use the `scandir()` function to retrieve a list of files and directories in a specified directory:
 
 ```php
 $dir = scandir(__DIR__);
 
 print_r($dir);
 ```
-+ To take this example further, you can filter out the directory as follows:
+
+- To take this example further, you can filter out the directory as follows:
 
 ```php
 $dir_list = array_filter($dir, fn ($x) => is_dir($x));
 
 print_r($dir_list);
 ```
+
 How it works:
+
 - The code calls the `scandir()` function with the current directory (`__DIR__`) to retrieve a list of files and directories. It then uses the `print_r()` function to display the contents of the returned array.
 - The code uses the `array_filter()` function along with an anonymous function to filter out only the directories from the list obtained from `scandir()`. It then uses the `print_r()` function to display the filtered list of directories.
 
@@ -8225,18 +8340,23 @@ How it works:
 - Similarly, the `arry()` function will return `true` if its argument is a file and `false` if otherwise. The `is_file()` function is used to check if a _specified path_ is a regular file.
 
 ## PHP `mkdir()`
-+ This function is used to create a new directory with the specified name and permissions. It allows you to create directories programmatically in your PHP scripts.
-+ The syntax of the `mkdir()` function is as follows:
+
+- This function is used to create a new directory with the specified name and permissions. It allows you to create directories programmatically in your PHP scripts.
+- The syntax of the `mkdir()` function is as follows:
+
 ```php
 mkdir ( string $directory , int $permissions = 0777 , bool $recursive = false , ?resource $context = null ) : bool
 ```
+
 where,
+
 - `directory` is a string that represents the path to the directory you want to create.
 - `permissions` is an optional parameter that specifies the permissions to be set for the newly created directory. It is specified as an octal value (e.g., `0755`, `0777`). The default value is `0777`, which grants read, write, and execute permissions to the owner, group, and others.
 - `recursive` is an optional parameter that specifies whether to create directories recursively. If set to `true`, it will create any necessary parent directories that do not exist. The default value is `false`.
 - `context` is an optional parameter that can be used to specify a context resource created with `stream_context_create()`. It allows you to modify the behavior of the directory creation operation.
 - The function returns `true` if the directory was successfully created, or `false` if there was an error creating the directory.
-+ For example, the following code shows how to use the `mkdir()` function to create a new directory:
+
+- For example, the following code shows how to use the `mkdir()` function to create a new directory:
 
 ```php
 $directory_name = "new_directory";
@@ -8246,13 +8366,16 @@ if(mkdir($directory_name, 0755)) {
     echo "Failed to create directory '$directory_name'.";
 }
 ```
+
 How it works:
+
 - The code defines a variable `$directory_name` with the name of the directory to be created. It then calls the `mkdir()` function with the specified directory name and permissions (`0755`). If the directory is created successfully, it echoes a success message; otherwise, it echoes a failure message.
 - The permissions `0755` grant read, write, and execute permissions to the owner, and read and execute permissions to the group and others.
 - Note that the actual permissions set on the directory may be affected by the system's `umask` value, which can restrict the permissions that are applied.
 - Make sure to handle errors appropriately when using the `mkdir()` function, as attempting to create a directory that already exists or providing an invalid path can result in errors.
-+ The `mkdir()` function is commonly used in scenarios where you need to create directories dynamically, such as when uploading files, organizing data, or managing user-generated content.
-+ The following shows how to use the `mkdir()` function to create a directory recursively:
+
+- The `mkdir()` function is commonly used in scenarios where you need to create directories dynamically, such as when uploading files, organizing data, or managing user-generated content.
+- The following shows how to use the `mkdir()` function to create a directory recursively:
 
 ```php
 $directory_path = "parent_directory/child_directory";
@@ -8262,26 +8385,34 @@ if(mkdir($directory_path, 0755, true)) {
     echo "Failed to create directory '$directory_path'.";
 }
 ```
+
 By this, if the `parent_directory` does not exist, it will be created along with the `child_directory`.
 
 ## PHP `rmdir()`
-+ This function is used to remove (delete) an _empty_ directory from the filesystem. It allows you to delete directories programmatically in your PHP scripts.
-+ The syntax of the `rmdir()` function is as follows:
+
+- This function is used to remove (delete) an _empty_ directory from the filesystem. It allows you to delete directories programmatically in your PHP scripts.
+- The syntax of the `rmdir()` function is as follows:
+
 ```php
 rmdir ( string $directory , ?resource $context = null ) : bool
 ```
+
 where,
+
 - `directory` is a string that represents the path to the directory you want to remove.
 - `context` is an optional parameter that can be used to specify a context resource created with `stream_context_create()`. It allows you to modify the behavior of the directory removal operation.
 - The function returns `true` if the directory was successfully removed, or `false` if there was an error removing the directory.
-+ For example, the following code shows how to use the `rmdir()` function to remove an empty directory:
+
+- For example, the following code shows how to use the `rmdir()` function to remove an empty directory:
 
 ```php
 $directory_name = "empty_directory";
 rmdir($directory_name);
 ```
+
 - If you attempt to remove a directory that is not empty, the `rmdir()` function will fail and return `false`. To remove a non-empty directory, you would need to first delete all files and subdirectories within it before removing the directory itself.
-+ Here is an example of how to remove a non-empty directory by first deleting its contents:
+
+- Here is an example of how to remove a non-empty directory by first deleting its contents:
 
 ```php
 function deleteDirectory($directory) {
@@ -8302,7 +8433,9 @@ function deleteDirectory($directory) {
     return rmdir($directory); // Remove the empty directory
 }
 ```
+
 How it works:
+
 - The `deleteDirectory()` function takes a directory path as an argument. It first checks if the specified path is a directory. If it is not, the function returns `false`.
 - It then uses the `scandir()` function to retrieve a list of files and directories within the specified directory.
 - The function iterates over each item in the list. If the item is not `.` or `..`, it constructs the full path of the item.
@@ -8310,12 +8443,16 @@ How it works:
 - After all files and subdirectories have been deleted, the function calls the `rmdir()` function to remove the now-empty directory and returns the result of that operation.
 
 ## PHP `file_exists()`
-+ This function is used to check whether a file or directory exists at a specified path. It returns a boolean value indicating whether the file or directory exists.
-+ The syntax of the `file_exists()` function is as follows:
+
+- This function is used to check whether a file or directory exists at a specified path. It returns a boolean value indicating whether the file or directory exists.
+- The syntax of the `file_exists()` function is as follows:
+
 ```php
 file_exists ( string $filename ) : bool
 ```
-+ For example
+
+- For example
+
 ```php
 $filename = 'example.txt';
 if (file_exists($filename)) {
@@ -8326,17 +8463,22 @@ if (file_exists($filename)) {
 ```
 
 ### `file_exists()` vs `is_file()` and `is_dir()`
+
 - The `file_exists()` function checks whether a file or directory exists at the specified path, returning `true` if it exists and `false` otherwise. It does not differentiate between files and directories.
 - The `is_file()` function checks specifically whether the specified path points to a regular file. It returns `true` if the path is a file and `false` otherwise.
 - The `is_dir()` function checks specifically whether the specified path points to a directory. It returns `true` if the path is a directory and `false` otherwise.
 
 ## PHP `filesize()`
-+ This function is used to get the size of a file in bytes. It returns the size of the specified file as an integer value. It can be useful for determining the size of files before performing operations such as file uploads or downloads.
-+ The syntax of the `filesize()` function is as follows:
+
+- This function is used to get the size of a file in bytes. It returns the size of the specified file as an integer value. It can be useful for determining the size of files before performing operations such as file uploads or downloads.
+- The syntax of the `filesize()` function is as follows:
+
 ```php
 filesize ( string $filename ) : int|false
 ```
-+ For example
+
+- For example
+
 ```php
 $filename = 'example.txt';
 if (file_exists($filename)) {
@@ -8347,8 +8489,9 @@ if (file_exists($filename)) {
 }
 ```
 
-+ Know that for all file related function, PHP will cache the results to improve performance. What this mean is that if you call a file related function multiple times (e.g., `filesize()`, `file_exists()`, etc.) for the same file, PHP may return the cached result instead of retrieving the information from the filesystem again.
-+ So if you make changes to a file (e.g., modifying its size), you may need to clear the cache using the `clearstatcache()` function before calling functions like `filesize()` to get the updated information. Example
+- Know that for all file related function, PHP will cache the results to improve performance. What this mean is that if you call a file related function multiple times (e.g., `filesize()`, `file_exists()`, etc.) for the same file, PHP may return the cached result instead of retrieving the information from the filesystem again.
+- So if you make changes to a file (e.g., modifying its size), you may need to clear the cache using the `clearstatcache()` function before calling functions like `filesize()` to get the updated information. Example
+
 ```php
 echo filesize('example.txt'); // Get the initial file size
 
@@ -8357,20 +8500,27 @@ clearstatcache(); // Clear the cache
 
 echo filesize('example.txt'); // Get the updated file size
 ```
+
 How it works:
+
 - The code first calls the `filesize()` function to get the initial size of the file `example.txt`.
 - It then modifies the content of the file using the `file_put_contents()` function.
 - After modifying the file, it calls the `clearstatcache()` function to clear the cached information about the file.
 - Finally, it calls the `filesize()` function again to get the updated size of the file `example.txt`.
-+ Note that if the specified file does not exist or is not accessible, the `filesize()` function will return `false`.
+
+- Note that if the specified file does not exist or is not accessible, the `filesize()` function will return `false`.
 
 ## PHP `file_put_contents()`
-+ This function is used to write data to a file. It allows you to create a new file or overwrite an existing file with the specified content. It can also be used to append data to an existing file.
-+ The syntax of the `file_put_contents()` function is as follows:
+
+- This function is used to write data to a file. It allows you to create a new file or overwrite an existing file with the specified content. It can also be used to append data to an existing file.
+- The syntax of the `file_put_contents()` function is as follows:
+
 ```php
 file_put_contents ( string $filename , mixed $data , int $flags = 0 , ?resource $context = null ) : int|false
 ```
+
 where,
+
 - `filename` is a string that represents the path to the file where the data should be written.
 - `data` is the data to be written to the file. It can be a string, an array, or a stream resource.
 - `flags` is an optional parameter that specifies how the data should be written to the file. It can take one or more of the following values:
@@ -8379,7 +8529,8 @@ where,
   - `LOCK_EX`: Acquire an exclusive lock on the file while writing to it.
 - `context` is an optional parameter that can be used to specify a context resource created with `stream_context_create()`. It allows you to modify the behavior of the file writing operation.
 - The function returns the number of bytes that were written to the file, or `false` if there was an error writing to the file.
-+ For example, the following code shows how to use the `file_put_contents()` function to append data to a file:
+
+- For example, the following code shows how to use the `file_put_contents()` function to append data to a file:
 
 ```php
 $filename = 'example.txt';
@@ -8388,25 +8539,34 @@ file_put_contents($filename, $data, FILE_APPEND);
 ```
 
 ## PHP `clearstatcache()`
-+ This function is used to clear the cached information about files and directories. PHP caches file status information to improve performance, but sometimes you may need to clear this cache to get updated information about files or directories.
-+ The syntax of the `clearstatcache()` function is as follows:
+
+- This function is used to clear the cached information about files and directories. PHP caches file status information to improve performance, but sometimes you may need to clear this cache to get updated information about files or directories.
+- The syntax of the `clearstatcache()` function is as follows:
+
 ```php
 clearstatcache ( bool $clear_realpath_cache = false , ?string $filename = null ) : void
 ```
+
 where,
+
 - `clear_realpath_cache` is an optional parameter that specifies whether to clear the realpath cache. If set to `true`, it will clear the realpath cache as well. The default value is `false`.
 - `filename` is an optional parameter that specifies a specific file or directory to clear from the cache. If not provided, the entire cache will be cleared.
 - The function does not return any value.
-+ The meaning of the term `cache` in this context refers to the stored information about the status of files and directories that PHP keeps to optimize performance.
-+ Check out his [link](https://www.php.net/manual/en/function.clearstatcache.php) for more information.
+
+- The meaning of the term `cache` in this context refers to the stored information about the status of files and directories that PHP keeps to optimize performance.
+- Check out his [link](https://www.php.net/manual/en/function.clearstatcache.php) for more information.
 
 ## PHP `fopen()`
-+ This function is used to open a file or URL and returns a file pointer resource that can be used to read from or write to the file. It allows you to perform various file operations, such as reading, writing, appending, and more.
-+ The syntax of the `fopen()` function is as follows:
+
+- This function is used to open a file or URL and returns a file pointer resource that can be used to read from or write to the file. It allows you to perform various file operations, such as reading, writing, appending, and more.
+- The syntax of the `fopen()` function is as follows:
+
 ```php
 fopen( string $filename , string $mode , bool $use_include_path = false , ?resource $context = null ) : resource|false
 ```
+
 where,
+
 - `filename` is a string that represents the path to the file or URL you want to open.
 - `mode` is a string that specifies the mode in which the file should be opened. It can take one of the following values:
   - `'r'`: Open the file for reading only. The file pointer is placed at the beginning of the file.
@@ -8420,7 +8580,8 @@ where,
 - `use_include_path` is an optional parameter that specifies whether to search for the file in the include path. The default value is `false`.
 - `context` is an optional parameter that can be used to specify a context resource created with `stream_context_create()`. It allows you to modify the behavior of the file opening operation.
 - The function returns a file pointer `resource` (data type) if the file was successfully opened, or it displays a warning and return `false` if there was an error opening the file. To suppress the warning, you can check if the file exists using `file_exists()` before calling `fopen()`.
-+ For example, the following code shows how to use the `fopen()` function to open a file for reading:
+
+- For example, the following code shows how to use the `fopen()` function to open a file for reading:
 
 ```php
 $filename = 'example.txt';
@@ -8432,22 +8593,29 @@ if ($file) {
     echo "Failed to open the file '$filename'.";
 }
 ```
+
 How it works:
+
 - The code defines a variable `$filename` with the name of the file to be opened. It then calls the `fopen()` function with the specified filename and mode (`'r'` for reading). If the file is opened successfully, it can perform file operations (not shown in this example) and then closes the file using the `fclose()` function. If the file cannot be opened, it echoes a failure message.
 - A file pointer resource is a special type of variable in PHP that represents an open file or stream. It is used to perform various operations on the file, such as reading, writing, and closing the file.
 - The file pointer resource is obtained by calling functions like `fopen()`, which opens a file and returns a resource that can be used to interact with the file.
 
 ## PHP `fgets()`
-+ This function is used to read a line from an open file pointer. It reads characters from the file until it reaches the end of the line or the specified length, whichever comes first. It is commonly used to read text files line by line.
-+ The syntax of the `fgets()` function is as follows:
+
+- This function is used to read a line from an open file pointer. It reads characters from the file until it reaches the end of the line or the specified length, whichever comes first. It is commonly used to read text files line by line.
+- The syntax of the `fgets()` function is as follows:
+
 ```php
 fgets ( resource $handle , ?int $length = null ) : string|false
 ```
+
 where,
+
 - `handle` is a file pointer resource that is obtained from a previous call to the `fopen()` function.
 - `length` is an optional parameter that specifies the maximum number of bytes to read from the file. If not provided, it will read until the end of the line or the end of the file.
 - The function returns a string containing the line read from the file, or `false` if there was an error reading from the file or if the end of the file has been reached.
-+ For example, the following code shows how to use the `fgets()` function to read a file line by line:
+
+- For example, the following code shows how to use the `fgets()` function to read a file line by line:
 
 ```php
 $filename = 'example.txt';
@@ -8465,28 +8633,36 @@ if(file_exists($filename)) {
     echo "The file '$filename' does not exist.";
 }
 ```
+
 How it works:
+
 - The code first checks if the specified file `example.txt` exists using the `file_exists()` function. If the file exists, it opens the file for reading using the `fopen()` function.
 - It then enters a `while` loop that continues until the end of the file is reached. Inside the loop, it calls the `fgets()` function to read a line from the file and assigns it to the variable `$line`. If a line is successfully read, it echoes the line (you can replace this with any processing logic you need).
 - After reading all lines from the file, it closes the file using the `fclose()` function. If the file cannot be opened or does not exist, it echoes an appropriate error message.
-+ Note that the `fgets()` function includes the newline character (`\n`) at the end of the line in the returned string. If you want to remove the newline character, you can use the `rtrim()` function as follows:
+
+- Note that the `fgets()` function includes the newline character (`\n`) at the end of the line in the returned string. If you want to remove the newline character, you can use the `rtrim()` function as follows:
 
 ```php
 $line = rtrim(fgets($file));
 ```
 
 ## PHP `fwrite()`
-+ This function is used to write data to an open file pointer. It allows you to write strings or binary data to a file. It is commonly used for creating or updating files in PHP.
-+ The syntax of the `fwrite()` function is as follows:
+
+- This function is used to write data to an open file pointer. It allows you to write strings or binary data to a file. It is commonly used for creating or updating files in PHP.
+- The syntax of the `fwrite()` function is as follows:
+
 ```php
 fwrite ( resource $handle , string $string , ?int $length = null ) : int|false
 ```
+
 where,
+
 - `handle` is a file pointer resource that is obtained from a previous call to the `fopen()` function.
 - `string` is the data to be written to the file. It should be a string.
 - `length` is an optional parameter that specifies the maximum number of bytes to write to the file. If not provided, it will write the entire string.
 - The function returns the number of bytes that were written to the file, or `false` if there was an error writing to the file.
-+ For example, the following code shows how to use the `fwrite()` function to write data to a file:
+
+- For example, the following code shows how to use the `fwrite()` function to write data to a file:
 
 ```php
 $filename = 'example.txt';
@@ -8504,26 +8680,34 @@ if ($file) {
     echo "Failed to open the file '$filename'.";
 }
 ```
+
 How it works:
+
 - The code defines a variable `$filename` with the name of the file to be written to. It then opens the file for writing using the `fopen()` function with the mode `'w'`, which will create the file if it does not exist or truncate it if it does.
 - It defines a variable `$data` with the content to be written to the file. It then calls the `fwrite()` function to write the data to the file and stores the number of bytes written in the variable `$bytesWritten`.
 - If the write operation is successful, it echoes a success message with the number of bytes written; otherwise, it echoes a failure message.
 - Finally, it closes the file using the `fclose()` function. If the file cannot be opened, it echoes an appropriate error message.
 
 ## PHP `fgetcsv()`
-+ This function is used to read a line from an open file pointer and parse it as CSV (Comma-Separated Values) data. It returns an array containing the fields from the CSV line. It is commonly used to read CSV files in PHP.
-+ The syntax of the `fgetcsv()` function is as follows:
+
+- This function is used to read a line from an open file pointer and parse it as CSV (Comma-Separated Values) data. It returns an array containing the fields from the CSV line. It is commonly used to read CSV files in PHP.
+- The syntax of the `fgetcsv()` function is as follows:
+
 ```php
 fgetcsv ( resource $handle , ?int $length = null , string $separator = "," , string $enclosure = '"' , string $escape = "\\" ) : array|false
 ```
+
 where,
+
 - `handle` is a file pointer resource that is obtained from a previous call to the `fopen()` function.
 - `length` is an optional parameter that specifies the maximum number of bytes to read from the file. If not provided, it will read until the end of the line or the end of the file.
 - `separator` is an optional parameter that specifies the character used to separate fields in the CSV line. The default value is a comma (`,`).
 - `enclosure` is an optional parameter that specifies the character used to enclose fields in the CSV line. The default value is a double quote (`"`).
 - `escape` is an optional parameter that specifies the character used to escape special characters in the CSV line. The default value is a backslash (`\`).
 - The function returns an array containing the fields from the CSV line, or `false` if there was an error reading from the file or if the end of the file has been reached.
-+ For example, the following code shows how to use the `fgetcsv()` function to read a CSV file line by line:
+
+- For example, the following code shows how to use the `fgetcsv()` function to read a CSV file line by line:
+
 ```php
 $filename = 'data.csv';
 if(file_exists($filename)) {
@@ -8540,7 +8724,9 @@ if(file_exists($filename)) {
     echo "The file '$filename' does not exist.";
 }
 ```
+
 Detailed Explanation of the above code:
+
 - The code first checks if the specified CSV file `data.csv` exists using the `file_exists()` function. If the file exists, it opens the file for reading using the `fopen()` function.
 - It then enters a `while` loop that continues until the end of the file is reached. Inside the loop, it calls the `fgetcsv()` function to read a line from the CSV file and parse it into an array, assigning it to the variable `$data`. If a line is successfully read and parsed, it uses the `print_r()` function to display the array (you can replace this with any processing logic you need).
 - After reading all lines from the CSV file, it closes the file using the `fclose()` function. If the file cannot be opened or does not exist, it echoes an appropriate error message.
@@ -8549,19 +8735,24 @@ Detailed Explanation of the above code:
 - Also, each line read from the CSV file will be parsed into an array, where each element of the array corresponds to a field in the CSV line. By this, we can say that at each iteration of the `while` loop, `$data` will contain an array of fields from the current CSV line.
 
 ## PHP `file_get_contents()`
-+ This function is used to read the entire contents of a file into a string. It allows you to quickly and easily read the contents of a file without having to manually open and read it line by line.
-+ The syntax of the `file_get_contents()` function is as follows:
+
+- This function is used to read the entire contents of a file into a string. It allows you to quickly and easily read the contents of a file without having to manually open and read it line by line.
+- The syntax of the `file_get_contents()` function is as follows:
+
 ```php
 file_get_contents ( string $filename , bool $use_include_path = false , ?resource $context = null , int $offset = 0 , ?int $length = null ) : string|false
 ```
+
 where,
+
 - `filename` is a string that represents the path to the file you want to read.
 - `use_include_path` is an optional parameter that specifies whether to search for the file in the include path. The default value is `false`.
 - `context` is an optional parameter that can be used to specify a context resource created with `stream_context_create()`. It allows you to modify the behavior of the file reading operation.
 - `offset` is an optional parameter that specifies the position in the file to start reading from. The default value is `0`, which means to start reading from the beginning of the file.
 - `length` is an optional parameter that specifies the maximum number of bytes to read from the file. If not provided, it will read until the end of the file.
 - The function returns a string containing the contents of the file, or `false` if there was an error reading the file.
-+ A very practical example of using the `file_get_contents()` function is shown below:
+
+- A very practical example of using the `file_get_contents()` function is shown below:
 
 ```php
 $filename = 'example.txt';
@@ -8572,12 +8763,15 @@ if ($content !== false) {
     echo "Failed to read the file '$filename'.";
 }
 ```
+
 How it works:
+
 - The code defines a variable `$filename` with the name of the file to be read. It then calls the `file_get_contents()` function with the specified filename and assigns the returned content to the variable `$content`.
 - If the content is successfully read (i.e., `$content` is not `false`), it echoes the content of the file; otherwise, it echoes a failure message.
 - Note that if the specified file does not exist or is not accessible, the `file_get_contents()` function will return `false`.
-+ The `file_get_contents()` function is commonly used for reading configuration files, loading templates, or retrieving data from external sources such as APIs or web pages.
-+ Here is an example of how to read a specific portion of a file using the `offset` and `length` parameters:
+
+- The `file_get_contents()` function is commonly used for reading configuration files, loading templates, or retrieving data from external sources such as APIs or web pages.
+- Here is an example of how to read a specific portion of a file using the `offset` and `length` parameters:
 
 ```php
 $filename = 'example.txt';
@@ -8590,18 +8784,23 @@ if ($content !== false) {
     echo "Failed to read the file '$filename'.";
 }
 ```
+
 How it works:
+
 - The code defines a variable `$filename` with the name of the file to be read. It also defines the `offset` and `length` variables to specify the starting position and the maximum number of bytes to read from the file.
 - It then calls the `file_get_contents()` function with the specified filename, `offset`, and `length`, and assigns the returned content to the variable `$content`.
 - If the content is successfully read (i.e., `$content` is not `false`), it echoes the specified portion of the file; otherwise, it echoes a failure message.
 - In this example, the function will read up to 50 bytes starting from the 10th byte of the file `example.txt`.
 
 ### file_get_contents() vs fget()
+
 - The `file_get_contents()` function reads the entire contents of a file into a string in one operation. It is a convenient way to quickly read the entire file without having to manually open and read it line by line.
 - The `fgets()` function, on the other hand, reads a single line from an open file pointer. It is typically used in a loop to read a file line by line, allowing for more granular control over the reading process.
 - Use `file_get_contents()` when you need to read the entire file at once, and use `fgets()` when you need to read the file line by line or when you want to process each line individually.
-+ For example, here is how you can read a file using both `file_get_contents()` and `fgets()`:
-Using `file_get_contents()`:
+
+- For example, here is how you can read a file using both `file_get_contents()` and `fgets()`:
+  Using `file_get_contents()`:
+
 ```php
 $filename = 'example.txt';
 $content = file_get_contents($filename);
@@ -8611,7 +8810,9 @@ if ($content !== false) {
     echo "Failed to read the file '$filename'.";
 }
 ```
+
 Using `fgets()`:
+
 ```php
 $filename = 'example.txt';
 $handle = fopen($filename, 'r');
@@ -8626,12 +8827,16 @@ if ($handle) {
 ```
 
 ## PHP `file_put_contents()`
-+ This function is used to write data to a file. It allows you to create a new file or overwrite an existing file with the specified content. It can also be used to append data to an existing file.
-+ The syntax of the `file_put_contents()` function is as follows:
+
+- This function is used to write data to a file. It allows you to create a new file or overwrite an existing file with the specified content. It can also be used to append data to an existing file.
+- The syntax of the `file_put_contents()` function is as follows:
+
 ```php
 file_put_contents ( string $filename , mixed $data , int $flags = 0 , ?resource $context = null ) : int|false
 ```
+
 where,
+
 - `filename` is a string that represents the path to the file where the data should be written.
 - `data` is the data to be written to the file. It can be a string, an array, or a stream resource.
 - `flags` is an optional parameter that specifies how the data should be written to the file. It can take one or more of the following values:
@@ -8640,55 +8845,72 @@ where,
   - `LOCK_EX`: Acquire an exclusive lock on the file while writing to it.
 - `context` is an optional parameter that can be used to specify a context resource created with `stream_context_create()`. It allows you to modify the behavior of the file writing operation.
 - The function returns the number of bytes that were written to the file, or `false` if there was an error writing to the file.
-+ For example, the following code shows how to use the `file_put_contents()` function to append data to a file:
+
+- For example, the following code shows how to use the `file_put_contents()` function to append data to a file:
 
 ```php
 $filename = 'example.txt';
 $data = "This is a new line of text.\n";
 file_put_contents($filename, $data, FILE_APPEND);
 ```
+
 How it works:
+
 - The code defines a variable `$filename` with the name of the file to which the data should be appended. It also defines a variable `$data` with the content to be appended to the file.
 - It then calls the `file_put_contents()` function with the specified filename, data, and the `FILE_APPEND` flag to append the data to the end of the file.
 - If the file `example.txt` does not exist, it will be created. If it already exists, the new data will be added to the end of the file without overwriting the existing content.c
 - Note that if there is an error writing to the file, the `file_put_contents()` function will return `false`.
-+ The `file_put_contents()` function is a convenient way to write data to files in PHP, whether you want to create new files, overwrite existing files, or append data to files.
-+ It basically combines the functionality of opening a file (`fopen()`), writing to it (`fwrite()`), and closing it (`fclose()`) into a single function call, making it easier to work with files in your PHP scripts.
+
+- The `file_put_contents()` function is a convenient way to write data to files in PHP, whether you want to create new files, overwrite existing files, or append data to files.
+- It basically combines the functionality of opening a file (`fopen()`), writing to it (`fwrite()`), and closing it (`fclose()`) into a single function call, making it easier to work with files in your PHP scripts.
 
 ## PHP `unlink()`
-+ This function is used to delete a file from the filesystem. It allows you to remove files programmatically in your PHP scripts.
-+ The syntax of the `unlink()` function is as follows:
+
+- This function is used to delete a file from the filesystem. It allows you to remove files programmatically in your PHP scripts.
+- The syntax of the `unlink()` function is as follows:
+
 ```php
 bool unlink ( string $filename [, resource $context ] )
 ```
+
 where,
+
 - `filename` is a string that represents the path to the file you want to delete.
 - `context` is an optional parameter that can be used to specify a context resource created with `stream_context_create()`. It allows you to modify the behavior of the file deletion operation.
 - The function returns `true` if the file was successfully deleted, or `false` if there was an error deleting the file.
 
 ## PHP `copy()`
-+ This function is used to copy a file from one location to another. It allows you to duplicate files programmatically in your PHP scripts.
-+ The syntax of the `copy()` function is as follows:
+
+- This function is used to copy a file from one location to another. It allows you to duplicate files programmatically in your PHP scripts.
+- The syntax of the `copy()` function is as follows:
+
 ```php
 copy( string $source , string $destination , ?resource $context = null ) : bool
 ```
+
 where,
+
 - `source` is a string that represents the path to the source file you want to copy.
 - `destination` is a string that represents the path to the destination where you want to copy the file. If it does not exist, it will be created. If the file existed, it will be over written
 - `context` is an optional parameter that can be used to specify a context resource created with `stream_context_create()`. It allows you to modify the behavior of the file copy operation.
 - The function returns `true` if the file was successfully copied, or `false` if there was an error copying the file.
 
 ## PHP `rename()`
-+ This function is used to rename a file or directory. It allows you to change the name of a file or directory programmatically in your PHP scripts.
-+ The syntax of the `rename()` function is as follows:
+
+- This function is used to rename a file or directory. It allows you to change the name of a file or directory programmatically in your PHP scripts.
+- The syntax of the `rename()` function is as follows:
+
 ```php
 rename ( string $oldname , string $newname , ?resource $context = null ) : bool
 ```
+
 where,
+
 - `oldname` is a string that represents the current name (path) of the file or directory you want to rename.
 - `newname` is a string that represents the new name (path) you want to assign to the file or directory.
 - `context` is an optional parameter that can be used to specify a context resource created with `stream_context_create()`. It allows you to modify the behavior of the rename operation.
 - The function returns `true` if the file or directory was successfully renamed, or `false` if there was an error renaming it.+ For example, the following code shows how to use the `rename()` function to rename a file:
+
 ```php
 $oldname = 'old_file.txt';
 $newname = 'new_file.txt';
@@ -8700,12 +8922,16 @@ if (rename($oldname, $newname)) {
 ```
 
 ## PHP `path_info()`
-+ This function is used to retrieve information about a file path. It returns an associative array containing various components of the file path, such as the directory name, base name, file extension, and filename.
-+ The syntax of the `pathinfo()` function is as follows:
+
+- This function is used to retrieve information about a file path. It returns an associative array containing various components of the file path, such as the directory name, base name, file extension, and filename.
+- The syntax of the `pathinfo()` function is as follows:
+
 ```php
 pathinfo ( string $path , int $options = PATHINFO_ALL ) : array|string
 ```
+
 where,
+
 - `path` is a string that represents the file path you want to analyze.
 - `options` is an optional parameter that specifies which components of the file path to return. It can take one of the following values:
   - `PATHINFO_DIRNAME`: Returns the directory name.
@@ -8714,7 +8940,9 @@ where,
   - `PATHINFO_FILENAME`: Returns the filename without extension.
   - `PATHINFO_ALL`: Returns all components as an associative array (default behavior).
 - The function returns an associative array containing the requested components of the file path, or a string if a specific component is requested.
-+ For example, the following code shows how to use the `pathinfo()` function to retrieve information about a file path:
+
+- For example, the following code shows how to use the `pathinfo()` function to retrieve information about a file path:
+
 ```php
 $path = '/path/to/file/example.txt';
 $info = pathinfo($path);
@@ -8730,3 +8958,1804 @@ Array
 )
 */
 ```
+
+# PHP `number_format()`
+
+- The `number_format()` function in PHP is used to format a number with grouped thousands and specified decimal points. It is commonly used to format numbers for display purposes, such as currency values or large numbers.
+- The syntax of the `number_format()` function is as follows:
+
+```php
+number_format ( float $number , int $decimals = 0 , ?string $decimal_separator = "." , ?string $thousands_separator = "," ) : string
+```
+
+where,
+
+- `number` is the number you want to format.
+- `decimals` is an optional parameter that specifies the number of decimal points to display. The default value is `0`, which means no decimal points.
+- `decimal_separator` is an optional parameter that specifies the character to use as the decimal point. The default value is a period (`.`).
+- `thousands_separator` is an optional parameter that specifies the character to use as the thousands separator. The default value is a comma (`,`).
+- The function returns a formatted string representing the number with the specified formatting options.
+
+# PHP `dechex` function
+
+- The `dechex()` function in PHP is used to convert a decimal number to its hexadecimal representation. It takes a decimal integer as input and returns a string containing the hexadecimal equivalent.
+- The syntax of the `dechex()` function is as follows:
+
+```php
+dechex ( int $number ) : string
+```
+
+where,
+
+- `number` is the decimal integer you want to convert to hexadecimal.
+- The function returns a string representing the hexadecimal equivalent of the input decimal number.
+
+# PHP Objects
+
+- An Object in PHP is an instance (i.e individual usage) of a class. A class is a blueprint for creating objects, and it defines the properties (attributes) and methods (functions) that the objects created from the class will have.
+- In programming an object is a structure that combines data about a thing with actions on that thing. Humanly speaking, an object is a thing that has properties and can perform actions. For example, a car is an object that has properties such as color, make, model, and year, and it can perform actions such as start, stop, and accelerate.
+
+## Basic terms related to Objects
+
+- Class => A class is a blueprint or template for creating objects. It defines the properties and methods that the objects created from the class will have.
+- Properties => Properties are the attributes or characteristics of an object. They represent the data associated with the object. They can be seen as variables defined in a class
+- Method => Methods are the functions or actions that an object can perform. They define the behavior of the object and can manipulate its properties or perform specific tasks. They can be seen as functions defined in a class.
+- Instance => An instance is a specific object created from a class. It represents a unique (or individual) occurrence of the class with its own set of properties and methods. Creating an instance of a class is often referred to as "instantiating an object"
+- Constructor => A constructor is a special method that is automatically called when an object is created from a class. It is used to initialize the properties of the object and perform any necessary setup tasks. Basically, it is used to set up object properties
+- Static Method => A static method is a method that belongs to the class itself rather than to any specific instance of the class. It can be called without creating an instance of the class and is often used for utility functions or operations that don't require object state.
+
+## Objects Basics
+
+### Defining an Class
+
+- To define a class in PHP, you use the `class` keyword followed by the name of the class. The class definition is enclosed in curly braces `{}`. Inside the class, you can define properties and methods.
+
+```php
+class ClassName {
+    // Properties
+    public $property1;
+    protected $property2;
+    private $property3;
+
+    // Methods
+    public function method1($param1) {
+        // Method code
+        return $param1 . $this->property1;
+    }
+
+    protected function method2() {
+        // Method code
+    }
+
+    private function method3() {
+        // Method code
+    }
+}
+```
+
+where,
+
+- `ClassName` is the name of the class. By convention, class names in PHP are usually written in PascalCase (each word starts with a capital letter).
+- `public`, `protected`, and `private` are access modifiers that determine the visibility of properties and methods.
+  - `public` means the property or method can be accessed from anywhere.
+  - `protected` means it can only be accessed within the class itself and its subclasses.
+  - `private` means it can only be accessed within the class itself.
+- `property1`, `property2`, and `property3` are examples of properties defined in the class.
+- `method1()`, `method2()`, and `method3()` are examples of methods defined in the class.
+- `$this` is a special variable that refers to the current instance of the class. It is used to access properties and methods within the class. Know that when `$this` is used with `->` (the arrow operator), it is used to access instance properties and methods. Also, the properties do not require a `$` when accessed via `$this`.
+
+- Example:
+
+```php
+
+class Entree {
+    public $name;
+    public $ingredients = [];
+
+    public function hasIngredient($ingredient) {
+        return in_array($ingredient, $this->ingredients);
+    }
+}
+
+$entree = new Entree();
+$entree->name = "Pasta Primavera";
+$entree->ingredients = ["pasta", "tomatoes", "basil", "olive oil"];
+if ($entree->hasIngredient("basil")) {
+    echo "{$entree->name} contains basil.";
+} else {
+    echo "{$entree->name} does not contain basil.";
+}
+
+// Output: Pasta Primavera contains basil.
+```
+
+How it works:
+
+- The code defines a class named `Entree` with two public properties: `name` and `ingredients`. It also defines a method named `hasIngredient()` that checks if a specific ingredient is present in the `ingredients` array.
+- An instance of the `Entree` class is created using the `new` keyword and assigned to the variable `$entree`.
+- The `name` property is set to "Pasta Primavera", and the `ingredients` is set to an array of ingredients.
+- The `hasIngredient()` method is called with the argument "basil" to check if basil is present in the ingredients. Depending on the result, it echoes whether the entree contains basil or not.
+
+### Creating an Instance of a Class (Object)
+
+- To create an instance of a class, we use the `new` keyword followed by the class name
+
+```php
+$object_name = new ClassName;
+```
+
+- After creating an instance of the class, we need to assign it properties to values using the arrow operator `->` as follows
+
+```php
+$object_name->property1 = value1;
+$object_name->property2 = value2;
+```
+
+- To access methods, we follow the same syntax with the difference that we need to provide parenthesis at the end of the method name
+
+```php
+$result = $object_name->method1($param1);
+```
+
+- A complete example is given below:
+
+```php
+class Agent {
+    public $name;
+    public $model;
+    public $co_agents;
+
+    public function agentInvoke ($username) {
+        return "Hey there, I'm {$this -> name}. Nice to meet you $username";
+    }
+
+    public function modelRequest() {
+        return "Currently, I'm {$this -> name}{$this -> model}";
+    }
+
+    public function hasCoAgent($agent_name) {
+        if (in_array($agent_name, $this -> co_agents)) {
+            return "Yes! I provide services alongside $agent_name";
+        } elseif (!in_array($agent_name, $this -> co_agents)) {
+            return "Currently, I haven't been integrated into $agent_name";
+        }
+    }
+
+    public function serviceRequest() {
+        return "I have been integrated into" ." " . implode(', ', $this -> co_agents);
+    }
+}
+
+$adigun = new Agent;
+$adigun -> name = 'Adigun';
+$adigun -> model = '4.0';
+$adigun -> agentInvoke('Isaac');
+$adigun -> co_agents = ['Gemini', 'Claude'];
+
+echo '<pre>';
+print $adigun -> agentInvoke('Isaac');
+echo '<pre>';
+
+echo '<pre>';
+print $adigun -> modelRequest();
+echo '<pre>';
+
+$agents = ['Claude', 'ChatGPT', 'Perplexity'];
+
+foreach($agents as $agent) {
+    echo '<pre>';
+    echo $adigun -> hasCoAgent($agent);
+    echo '<pre>';
+}
+
+echo '<pre>';
+print $adigun -> serviceRequest();
+echo '<pre>';
+```
+
+How it works:
+
+- The code defines a class named `Agent` with properties `name`, `model`, and `co_agents`. It also defines several methods: `agentInvoke()`, `modelRequest()`, `hasCoAgent()`, and `serviceRequest()`.
+- An instance of the `Agent` class is created using the `new` keyword and assigned to the variable `$adigun`.
+- The properties `name`, `model`, and `co_agents` are set for the `$adigun` object.
+- The methods of the `$adigun` object are called to demonstrate their functionality, and the results are printed to the screen.
+
+### Static Methods
+
+- Static methods are defined using the `static` keyword within a class. They can be called directly on the class itself without creating an instance of the class.
+
+```php
+class ClassName {
+    public static function staticMethodName($param1) {
+        // Method code
+        return $param1;
+    }
+}
+```
+
+- To call a static method, we use the scope resolution operator `::` as follows:
+
+```php
+ClassName::staticMethodName($param1);
+```
+
+- A complete example is given below:
+
+```php
+class Calculator {
+    public static function add($a, $b) {
+        return $a + $b;
+    }
+
+    public static function subtract($a, $b) {
+        return $a - $b;
+    }
+}
+
+echo Calculator::add(5, 3); // Output: 8
+echo Calculator::subtract(10, 4); // Output: 6
+```
+
+### Constructors
+
+- A constructor is a special method that runs whenever an instance of a class is created. It is used to initialize the properties of the object and perform any necessary setup tasks.
+- In PHP, constructors are defined using the `__construct()` method within a class. Here's the syntax for defining a constructor:
+
+```php
+class ClassName {
+    public $property1;
+    public $property2;
+
+    public function __construct($param1, $param2) {
+        // Constructor code
+        $this->property1 = $param1;
+        $this->property2 = $param2;
+    }
+}
+```
+
+- When creating an instance of the class, you can pass arguments to the constructor to initialize the properties:
+
+```php
+$object_name = new ClassName($value1, $value2);
+```
+
+- Behind the scenes, `$value1` will be assigned to `property1` and `$value2` will be assigned to `property2` through the constructor.
+- Know that when you create an instance of the class using the `new` keyword, PHP automatically calls the `__construct()` method and passes any provided arguments to it.
+- An example is given below:
+
+```php
+class Agent {
+    public $name;
+    public $model;
+    public $co_agents;
+
+    public function __construct($agent_name, $agent_model, $co_agents, $user='Guest') {
+        $this -> name = $agent_name;
+        $this -> model = $agent_model;
+        $this -> co_agents = $co_agents;
+        $this -> agentInvoke($user);
+    }
+
+    public function agentInvoke ($username) {
+        echo '<pre>';
+        echo "Hey there, I'm {$this -> name}. Nice to meet you $username";
+        echo '<pre>';
+    }
+
+    public function modelRequest() {
+        return "Currently, I'm {$this -> name}{$this -> model}";
+    }
+
+    public function hasCoAgent($agent_name) {
+        if (in_array($agent_name, $this -> co_agents)) {
+            return "Yes! I provide services alongside $agent_name";
+        } elseif (!in_array($agent_name, $this -> co_agents)) {
+            return "Currently, I haven't been integrated into $agent_name";
+        }
+    }
+
+    public function serviceRequest() {
+        return "I have been integrated into" ." " . implode(', ', $this -> co_agents);
+    }
+}
+
+$adigun = new Agent('Adigun', '4.0', ['Gemini', 'Claude']);
+
+echo '<pre>';
+print $adigun -> modelRequest();
+echo '<pre>';
+
+$agents = ['Claude', 'ChatGPT', 'Perplexity'];
+
+foreach($agents as $agent) {
+    echo '<pre>';
+    echo $adigun -> hasCoAgent($agent);
+    echo '<pre>';
+}
+
+echo '<pre>';
+print $adigun -> serviceRequest();
+echo '<pre>';
+```
+
+How it works:
+
+- The code defines a class named `Agent` with properties `name`, `model`, and `co_agents`. It also defines a constructor method `__construct()` that initializes these properties when an instance of the class is created. The constructor also calls the `agentInvoke()` method to greet the user.
+- An instance of the `Agent` class is created using the `new` keyword and assigned to the variable `$adigun`. The constructor is called with the arguments 'Adigun', '4.0', and an array of co-agents.
+- The methods of the `$adigun` object are called to demonstrate their functionality, and the results are printed to the screen.
+- The constructor initializes the properties of the `$adigun` object with the provided values and greets the user "Guest" by default.
+- Know that the `new` keyword is the one that triggers the constructor to run automatically when creating an instance of the class.
+
+### Indicating a Problem with Exceptions
+
+- Constructors are great for verifying that arguments provided are of the right type. They do this with the help of _Exceptions_
+- An _exception_ is a special object that can be used to indicate that something exceptional has happened
+
+#### Throwing an Exception
+
+- To throw an exception in PHP, you use the `throw` keyword followed by an instance of the `Exception` class or a subclass of it. Here's the syntax for throwing an exception:
+
+```php
+throw new Exception("Error message");
+```
+
+- When an exception is thrown, it interrupts the normal flow of the program and transfers control to the nearest exception handler. If there is no exception handler, the program will terminate with a fatal error.
+- An example is given below:
+
+```php
+class Agent {
+    public $name;
+    public $model;
+    public $co_agents;
+
+    public function __construct($agent_name, $agent_model, $co_agents, $user='Guest') {
+        if (!is_string($agent_name) || !is_string($user)) {
+            throw new Exception('Name must be a string');
+        }
+
+        $this -> name = $agent_name;
+        $this -> model = $agent_model;
+        $this -> co_agents = $co_agents;
+        $this -> agentInvoke($user);
+    }
+
+    public function agentInvoke ($username) {
+        echo '<pre>';
+        echo "Hey there, I'm {$this -> name}. Nice to meet you $username";
+        echo '<pre>';
+    }
+
+    public function modelRequest() {
+        return "Currently, I'm {$this -> name}{$this -> model}";
+    }
+
+    public function hasCoAgent($agent_name) {
+        if (in_array($agent_name, $this -> co_agents)) {
+            return "Yes! I provide services alongside $agent_name";
+        } elseif (!in_array($agent_name, $this -> co_agents)) {
+            return "Currently, I haven't been integrated into $agent_name";
+        }
+    }
+
+    public function serviceRequest() {
+        return "I have been integrated into" ." " . implode(', ', $this -> co_agents);
+    }
+}
+
+$adigun = new Agent(7, '4.0', ['Gemini', 'Claude']);
+
+echo '<pre>';
+print $adigun -> modelRequest();
+echo '<pre>';
+
+$agents = ['Claude', 'ChatGPT', 'Perplexity'];
+
+foreach($agents as $agent) {
+    echo '<pre>';
+    echo $adigun -> hasCoAgent($agent);
+    echo '<pre>';
+}
+
+echo '<pre>';
+print $adigun -> serviceRequest();
+echo '<pre>';
+```
+
+How it works:
+
+- The code defines a class named `Agent` with properties `name`, `model`, and `co_agents`. It also defines a constructor method `__construct()` that initializes these properties when an instance of the class is created. The constructor checks if the provided `agent_name` and `user` are strings; if not, it throws an exception with an appropriate error message.
+- An instance of the `Agent` class is created using the `new` keyword and assigned to the variable `$adigun`. However, since the `agent_name` provided is an integer (7) instead of a string, the constructor throws an exception.
+- As a result, the program terminates with a fatal error, and the subsequent method calls are not executed.
+- The function of the `throw` construct is to interrupt the normal flow of the program by the PHP Engine and signal that an exceptional condition has occurred.
+
+#### Handling Exceptions
+
+- To handle exceptions in PHP, you use a `try-catch` block. The code that may throw an exception is placed inside the `try` block, and the `catch` block is used to handle the exception if it occurs. Here's the syntax for handling exceptions:
+
+```php
+try {
+    // Code that may throw an exception
+} catch (Exception $e) {
+    // Code to handle the exception
+}
+```
+
+where,
+
+- The `try` block contains the code that may potentially throw an exception.
+- The `catch` block is executed if an exception is thrown in the `try` block. The exception object is passed to the `catch` block as a parameter (in this case, `$e`), which can be used to access information about the exception.
+
+- Example
+
+```php
+class Agent {
+    public $name;
+    public $model;
+    public $co_agents;
+
+    public function __construct($agent_name, $agent_model, $co_agents, $user='Guest') {
+        if (!is_string($agent_name) || !is_string($user)) {
+            throw new Exception('Name must be a string');
+        }
+
+        $this -> name = $agent_name;
+        $this -> model = $agent_model;
+        $this -> co_agents = $co_agents;
+        $this -> agentInvoke($user);
+    }
+
+    public function agentInvoke ($username) {
+        echo '<pre>';
+        echo "Hey there, I'm {$this -> name}. Nice to meet you $username";
+        echo '<pre>';
+    }
+
+    public function modelRequest() {
+        return "Currently, I'm {$this -> name}{$this -> model}";
+    }
+
+    public function hasCoAgent($agent_name) {
+        if (in_array($agent_name, $this -> co_agents)) {
+            return "Yes! I provide services alongside $agent_name";
+        } elseif (!in_array($agent_name, $this -> co_agents)) {
+            return "Currently, I haven't been integrated into $agent_name";
+        }
+    }
+
+    public function serviceRequest() {
+        return "I have been integrated into" ." " . implode(', ', $this -> co_agents);
+    }
+}
+
+try {
+$adigun = new Agent(5, '4.0', ['Gemini', 'Claude']);
+
+echo '<pre>';
+print $adigun -> modelRequest();
+echo '<pre>';
+
+$agents = ['Claude', 'ChatGPT', 'Perplexity'];
+
+foreach($agents as $agent) {
+    echo '<pre>';
+    echo $adigun -> hasCoAgent($agent);
+    echo '<pre>';
+}
+
+echo '<pre>';
+print $adigun -> serviceRequest();
+echo '<pre>';
+} catch (Exception $e) {
+    echo '<pre>';
+    echo "Couldn't create agent: {$e->getMessage()}";
+    echo '<pre>';
+}
+```
+
+How it works:
+
+- The code defines a class named `Agent` with properties `name`, `model`, and `co_agents`. It also defines a constructor method `__construct()` that initializes these properties when an instance of the class is created. The constructor checks if the provided `agent_name` and `user` are strings; if not, it throws an exception with an appropriate error message.
+- The code that creates an instance of the `Agent` class and calls its methods is placed inside a `try` block. If an exception is thrown during the instantiation of the `Agent` class, the control is transferred to the `catch` block.
+- In this case, since the `agent_name` provided is an integer (5) instead of a string, the constructor throws an exception. The `catch` block catches the exception and prints an error message indicating that the agent could not be created, along with the specific error message from the exception.
+- The function of the `try-catch` construct is to allow developers to gracefully handle exceptional conditions that may arise during the execution of their code, preventing abrupt termination of the program and providing meaningful error messages.
+- Notice that when defining the `catch` block, we made use of two things between the parenthesis - `Exception` and the paramter `$e`
+  - `Exception` indicates the type of exception we want to catch. In this case, we are catching exceptions of the `Exception` class. You can also catch specific subclasses of `Exception` if needed.
+  - `$e` is a variable that represents the caught exception object. It allows us to access information about the exception, such as the error message, using methods like `getMessage()`. Also, we can use `getCode()`, and `getTrace()` alongside this parameter.
+
+- Consider this as a skeleton for Handling Exceptions
+
+```php
+class ClassName {
+
+    public function __constructor() {
+        if(// boolean expression that causes an exception
+        ) {
+            throw new Exception('
+            // Error Message
+            ');
+        }
+
+    }
+}
+
+try {
+    // Code that may cause an Error
+} catch (Exception $paramter) {
+    // Code to handle the Exception
+}
+```
+
+### Extending an Object (Inheritance)
+
+- Inheritance is a fundamental concept in object-oriented programming that allows a class (called the child class or subclass) to inherit properties and methods from another class (called the parent class or superclass). This promotes code reusability and establishes a hierarchical relationship between classes.
+- In PHP, you can create a subclass that extends a parent class using the `extends` keyword. Here's the syntax for extending a class:
+
+```php
+
+class ParentClass {
+    // Parent class code
+}
+
+class SubClass extends ParentClass {
+    // Subclass code
+}
+```
+
+By extending a class, the subclass inherits all the properties and methods of the parent class. The subclass can also define its own properties and methods or override the inherited ones.
+
+- An basic example is given below:
+
+```php
+class Vehicle {
+    public $make;
+    public $model;
+
+    public function __construct($make, $model) {
+        $this->make = $make;
+        $this->model = $model;
+    }
+
+    public function startEngine() {
+        return "The engine of the {$this->make} {$this->model} is starting.";
+    }
+}
+
+class Car extends Vehicle {
+    public $doors;
+
+    public function honkHorn() {
+        return "The horn of the {$this->make} {$this->model} goes beep beep!";
+    }
+}
+
+$myCar = new Car('Toyota', 'Camry');
+echo $myCar->startEngine(); // Inherited method from Vehicle class
+echo $myCar->honkHorn();    // Method from Car class
+```
+
+How it works:
+
+- The code defines a parent class named `Vehicle` with properties `make` and `model`, and a method `startEngine()`.
+- The `Car` class is defined as a subclass of `Vehicle` using the `extends` keyword. It inherits the properties and methods of the `Vehicle` class and also defines its own property `doors` and method `honkHorn()`.
+- An instance of the `Car` class is created using the `new` keyword and assigned to the variable `$myCar`.
+- The `startEngine()` method is called on the `$myCar` object, which is inherited from the `Vehicle` class. It returns a message indicating that the engine is starting.
+- The `honkHorn()` method is called on the `$myCar` object, which is defined in the `Car` class. It returns a message indicating that the horn is honking.
+
+- Consider another advanced solution
+
+```php
+// Parent class
+class Entree {
+    public $name;
+    public $ingredients;
+
+    public function __construct($name, $ingredients) {
+        if (!is_array($ingredients)) {
+            throw new Exception('Ingredients must be an array');
+        }
+
+        $this->name = $name;
+        $this->ingredients = $ingredients;
+    }
+
+    public function hasIngredient($ingredient) {
+        return in_array($ingredient, $this->ingredients);
+    }
+}
+
+// Subclass
+class ComboMeal extends Entree {
+
+    // Override hasIngredient()
+    public function hasIngredient($ingredient) {
+        foreach ($this->ingredients as $entree) {
+            // Each ingredient is itself an Entree object
+            if ($entree->hasIngredient($ingredient)) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
+// --------------------
+// Using the classes
+// --------------------
+
+// Some soup with name and ingredients
+$soup = new Entree(
+    'Chicken Soup',
+    ['chicken', 'water']
+);
+
+// A sandwich with name and ingredients
+$sandwich = new Entree(
+    'Chicken Sandwich',
+    ['chicken', 'bread']
+);
+
+// A combo meal (ingredients are Entree objects)
+$combo = new ComboMeal(
+    'Soup + Sandwich',
+    [$soup, $sandwich]
+);
+
+// Test ingredients
+foreach (['chicken', 'water', 'pickles'] as $ing) {
+    if ($combo->hasIngredient($ing)) {
+        print "Something in the combo contains $ing.\n";
+    }
+}
+```
+
+How it works:
+
+- The code defines a parent class named `Entree` with properties `name` and `ingredients`, and a method `hasIngredient()`.
+- The `ComboMeal` class is defined as a subclass of `Entree` using the `extends` keyword. It overrides the `hasIngredient()` method to check if any of its ingredients (which are themselves `Entree` objects) contain a specific ingredient.
+- Instances of the `Entree` class are created for a soup and a sandwich, each with their respective ingredients.
+- An instance of the `ComboMeal` class is created, which contains the soup and sandwich as its ingredients.
+- The code tests for the presence of specific ingredients in the combo meal by calling the overridden `hasIngredient()` method. It prints messages indicating whether each ingredient is found in the combo meal.
+- The code demonstrates the concept of inheritance, where the `ComboMeal` class inherits from the `Entree` class and extends its functionality by overriding a method.
+
+### Putting Constructors in a Subclass
+
+- When a subclass extends a parent class, it can also define its own constructor. If the subclass defines a constructor, it can call the parent class's constructor using the `parent::__construct()` syntax to ensure that the parent class's properties are properly initialized.
+
+```php
+class ParentClass {
+    public $property1;
+
+    public function __construct($param1) {
+        $this->property1 = $param1;
+    }
+}
+
+class SubClass extends ParentClass {
+    public $property2;
+
+    public function __construct($param1, $param2) {
+        // Call the parent class constructor
+        parent::__construct($param1);
+        $this->property2 = $param2;
+    }
+}
+```
+
+- An example is given below:
+
+```php
+class Vehicle {
+    public $make;
+    public $model;
+
+    public function __construct($make, $model) {
+        $this->make = $make;
+        $this->model = $model;
+    }
+
+    public function startEngine() {
+        return "The engine of the {$this->make} {$this->model} is starting.";
+    }
+}
+
+class Car extends Vehicle {
+    public $doors;
+
+    public function __construct($make, $model, $doors) {
+        // Call the parent class constructor
+        parent::__construct($make, $model);
+        $this->doors = $doors;
+    }
+
+    public function honkHorn() {
+        return "The horn of the {$this->make} {$this->model} goes beep beep!";
+    }
+}
+
+$myCar = new Car('Toyota', 'Camry', 4);
+echo $myCar->startEngine(); // Inherited method from Vehicle class
+echo $myCar->honkHorn(); // Method from Car class
+```
+
+How it works:
+
+- The code defines a parent class named `Vehicle` with properties `make` and `model`, and a method `startEngine()`.
+- The `Car` class is defined as a subclass of `Vehicle` using the `extends` keyword. It defines its own constructor that takes an additional parameter `doors`.
+- Inside the `Car` constructor, the parent class's constructor is called using `parent::__construct($make, $model)` to initialize the inherited properties `make` and `model`.
+- An instance of the `Car` class is created using the `new` keyword and assigned to the variable `$myCar`.
+- The `startEngine()` method is called on the `$myCar` object, which is inherited from the `Vehicle` class. It returns a message indicating that the engine is starting.
+- The `honkHorn()` method is called on the `$myCar` object, which is defined in the `Car` class. It returns a message indicating that the horn is honking.
+- The code demonstrates how to properly initialize inherited properties in a subclass by calling the parent class's constructor from within the subclass's constructor.
+
+- Know that exceptions can also be thrown in a subclass constructor
+
+```php
+class ParentClass {
+    public $property1;
+
+    public function __construct($param1) {
+        if (!is_string($param1)) {
+            throw new Exception('Property1 must be a string');
+        }
+        $this->property1 = $param1;
+    }
+}
+
+class SubClass extends ParentClass {
+    public $property2;
+
+    public function __construct($param1, $param2) {
+        // Call the parent class constructor
+        parent::__construct($param1);
+        if (!is_int($param2)) {
+            throw new Exception('Property2 must be an integer');
+        }
+        $this->property2 = $param2;
+    }
+}
+```
+
+How it works:
+
+- The code defines a parent class named `ParentClass` with a property `property1` and a constructor that checks if the provided parameter is a string; if not, it throws an exception.
+- The `SubClass` class is defined as a subclass of `ParentClass` using the `extends` keyword. It defines its own constructor that takes an additional parameter `param2`.
+- Inside the `SubClass` constructor, the parent class's constructor is called using `parent::__construct($param1)` to initialize the inherited property `property1`. It also checks if `param2` is an integer; if not, it throws an exception.
+- An instance of the `SubClass` can be created, and if the provided parameters do not meet the specified conditions, exceptions will be thrown accordingly.
+- Consider another example
+
+```php
+// Parent class
+class Entree {
+    public $name;
+    public $ingredients;
+
+    public function __construct($name, $ingredients) {
+        if (!is_array($ingredients)) {
+            throw new Exception('Ingredients must be an array');
+        }
+
+        $this->name = $name;
+        $this->ingredients = $ingredients;
+    }
+
+    public function hasIngredient($ingredient) {
+        return in_array($ingredient, $this->ingredients);
+    }
+}
+
+class ComboMeal extends Entree {
+    public function __construct($name, $entrees) {
+        parent::__construct($name, $entrees);
+        foreach ($entrees as $entree) {
+            if (! $entree instanceof Entree) {
+                throw new Exception('Elements of $entrees must be Entree objects');
+            }
+        }
+    }  
+
+    public function hasIngredient($ingredient) {
+        foreach ($this->ingredients as $entree) {
+            if ($entree->hasIngredient($ingredient)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+}
+```
+
+How it works:
+
+- The code defines a parent class named `Entree` with properties `name` and `ingredients`, and a method `hasIngredient()`. The constructor checks if the provided `ingredients` parameter is an array; if not, it throws an exception.
+- The `ComboMeal` class is defined as a subclass of `Entree` using the `extends` keyword. It defines its own constructor that takes an additional parameter `entrees`.
+- Inside the `ComboMeal` constructor, the parent class's constructor is called using `parent::__construct($name, $entrees)` to initialize the inherited properties `name` and `ingredients`. It also checks if each element in the `entrees` array is an instance of the `Entree` class (using the `instanceof` operator); if not, it throws an exception. By this, we check if each ingredient is itself an Entree object.
+- An instance of the `ComboMeal` can be created, and if the provided parameters do not meet the specified conditions, exceptions will be thrown accordingly.
+- The code demonstrates how to properly initialize inherited properties in a subclass by calling the parent class's constructor from within the subclass's constructor, while also incorporating exception handling to ensure data integrity.
+
+### Property & Method Visibility
+
+- In PHP, property and method visibility is controlled using access modifiers: `public`, `protected`, and `private`. These modifiers determine the accessibility of properties and methods within a class and its subclasses.
+
+- The following shows the use-case of the `private` modifier
+
+```php
+class Entree {
+    private $name;
+
+    protected $ingredients = array();
+    /* Since $name is private, this provides a way to read it */
+    public function getName() {
+        return $this->name;
+    }
+    public function __construct($name, $ingredients) {
+        if (! is_array($ingredients)) {
+            throw new Exception('$ingredients must be an array');
+        }
+        $this->name = $name;
+        $this->ingredients = $ingredients;
+    }
+
+    public function hasIngredient($ingredient) {
+        return in_array($ingredient, $this->ingredients);
+    }
+}
+
+$soup = new Entree('soup', ['chicken', 'pasta']);
+
+$soup -> name = 'Veggies';
+
+echo $soup -> name;
+```
+
+The above code will throw an error because the property `name` is declared as `private`, which means it can only be accessed and modified within the `Entree` class itself. Attempting to access or modify the `name` property from outside the class (as shown in the code) will result in a fatal error.
+
+- The following shows the use-case of the `protected` modifier
+
+```php
+class Entree {
+    protected $name;
+
+    protected $ingredients = array();
+    /* Since $name is protected, this provides a way to read it */
+    public function getName() {
+        return $this->name;
+    }
+    public function __construct($name, $ingredients) {
+        if (! is_array($ingredients)) {
+            throw new Exception('$ingredients must be an array');
+        }
+        $this->name = $name;
+        $this->ingredients = $ingredients;
+    }
+
+    public function hasIngredient($ingredient) {
+        return in_array($ingredient, $this->ingredients);
+    }
+}
+
+$soup = new Entree('soup', ['chicken', 'pasta']);
+$soup -> name = 'Veggies';
+echo $soup -> name;
+```
+
+The above code will also throw an error because the property `name` is declared as `protected`, which means it can only be accessed and modified within the `Entree` class itself and its subclasses. Attempting to access or modify the `name` property from outside the class (as shown in the code) will result in a fatal error.
+
+- To properly access and modify the `name` property, you can use public methods within the class, such as getter and setter methods. Here's an example of how to do that:
+
+```php
+class Entree {
+    private $name;
+
+    protected $ingredients = array();
+
+    // Getter method for name
+    public function getName() {
+        return $this->name;
+    }
+
+    // Setter method for name
+    public function setName($name) {
+        $this->name = $name;
+    }
+
+    public function __construct($name, $ingredients) {
+        if (! is_array($ingredients)) {
+            throw new Exception('$ingredients must be an array');
+        }
+        $this->name = $name;
+        $this->ingredients = $ingredients;
+    }
+
+    public function hasIngredient($ingredient) {
+        return in_array($ingredient, $this->ingredients);
+    }
+}
+
+$soup = new Entree('soup', ['chicken', 'pasta']);
+$soup->setName('Veggies');
+echo $soup->getName();
+```
+
+# PHP Namespaces
+
+- A namespace is a way to encapsulate and organize code in PHP, allowing you to group related classes, functions, and constants together under a common name. This helps prevent naming conflicts and makes it easier to manage large codebases.
+
+- To define a namespace in PHP, you use the `namespace` keyword at the beginning of your PHP file, followed by the desired namespace name. Here's the syntax for defining a namespace:
+
+```php
+namespace MyNamespace;
+```
+
+## Defining a Namespace (for Classes)
+
+- Once a namespace is defined, all classes, functions, and constants declared in that file will belong to that namespace. Here's an example of defining a namespace for a class:
+
+```php
+namespace MyApp\Models;
+
+class User {
+    public $name;
+
+    public function __construct($name) {
+        $this->name = $name;
+    }
+
+    public function greet() {
+        return "Hello, my name is {$this->name}.";
+    }
+}
+```
+
+How it works:
+
+- The code defines a namespace named `MyApp\Models` using the `namespace` keyword.
+- The `User` class is declared within this namespace, with a property `name` and methods `__construct()` and `greet()`.
+- The `__construct()` method initializes the `name` property, and the `greet()` method returns a greeting message.
+- To use the `User` class defined in the `MyApp\Models` namespace, you need to either import it using the `use` keyword or refer to it with its fully qualified name. Here's an example of how to use the `User` class:
+
+```php
+require 'path/to/User.php'; // Include the file where the User class is defined
+use MyApp\Models\User; // Import the User class from the MyApp\Models namespace
+$user = new User('Alice'); // Create an instance of the User class
+echo $user->greet(); // Output: Hello, my name is Alice.
+```
+
+# PHP Forms
+
+- Basically, forms are how users communicate with the server. Forms collect user input and send it to the server for processing.
+
+- Using a form in a PHP program is of two steps:
+  1. Create the HTML form that collects user input.
+  2. Write PHP code to process the form data when it is submitted.
+- Here's a simple template that can be followed in creating a basic form in PHP:
+
+```php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Process form data
+    $name = $_POST['name'];
+    echo "Hello, " . htmlspecialchars($name) . "!";
+} else {
+    // Display the form
+    echo '<form method="POST" action="$_SERVER[PHP_SELF]">
+            Name: <input type="text" name="name" required>
+            <input type="submit" value="Submit">
+          </form>';
+}
+```
+
+How it works:
+
+- The code checks if the form has been submitted by verifying the request method using `$_SERVER["REQUEST_METHOD"]`. Know that when comparing this variable with the string "POST" (or any other HTPP request), the string is enclosed in double quotes and should be uppercase
+- If the form is submitted (i.e., the request method is "POST"), it processes the form data by retrieving the value of the `name` input field from the `$_POST` superglobal array. It then outputs a greeting message using the submitted name, ensuring to sanitize the input with `htmlspecialchars()` to prevent XSS attacks.
+- The `action` attribute of the form is set to `$_SERVER['PHP_SELF']`, which means the form submits to the same page. Notice that when the key, `PHP_SELF` was inputed into the $_SERVER superglobal array, it was not enclosed
+- If the form has not been submitted, it displays the HTML form with a text input field for the user's name and a submit button. The form uses the POST method to send data to the same page when submitted.
+- When the user fills out the form and clicks the submit button, the form data is sent to the server, and the PHP code processes it accordingly.
+
+## Useful Server Variables
+
+Elements in the $_SERVER superglobal array that are useful when working with forms include:
+
+- `$_SERVER['PHP_SELF']`: The filename of the currently executing script. It is often used in the `action` attribute of a form to submit the form data to the same page.
+- `$_SERVER['REQUEST_METHOD']`: The request method used to access the page (e.g., "GET", "POST"). It is used to determine how the form data was submitted.
+- `$_SERVER['QUERY_STRING']`: The query string, if any, via which the page was accessed. It contains the part of the URL after the `?` character and is useful for retrieving data sent via the GET method. For example, the Query String for this URL `http://www.example.com/catalog/store.php?category=kitchen&price=5.` is `category=kitchen&price=5`.
+- `$_SERVER['HTTP_REFERER']`: The address of the page (if any) which referred the user agent to the current page. It can be used to track where the form submission came from.
+- `$_SERVER['REMOTE_ADDR']`: The IP address from which the user is viewing the current page. It can be used for logging or tracking purposes.
+- `$_SERVER['HTTP_USER_AGENT']`: The user agent string of the browser accessing the page. It provides information about the browser and operating system being used by the client.
+- `$_SERVER['CONTENT_TYPE']`: The content type of the request, useful for determining the type of data being sent in the request body, especially for POST requests.
+- `$_SERVER['PATH_INFO']`: Contains any additional path information provided in the URL. It can be useful for routing or handling dynamic URLs in form submissions.
+- `$_SERVER['SERVER_NAME']`: The name of the server host under which the current script is executing. It can be useful for generating URLs or handling form submissions based on the server name.
+- `$_SERVER['DOCUMENT_ROOT']`: The document root directory under which the current script is executing. It can be useful for including files or handling form submissions based on the server's file structure.
+- `$_SERVER['REMOTE_HOST']`: The hostname of the client accessing the page. It can be used for logging or tracking purposes.
+
+## Multiple-valued form elements
+
+- In HTML forms, multiple-valued form elements allow users to select more than one option from a list. This is commonly used with checkboxes and multi-select dropdowns.
+- To create a multiple-valued form element, you need to use the `name` attribute with square brackets `[]` to indicate that the field can accept multiple values. Here's an example of a form with checkboxes that allow multiple selections:
+
+```php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Process form data
+    if (isset($_POST['fruits'])) {
+        $selectedFruits = $_POST['fruits'];
+        echo "You selected: " . implode(", ", $selectedFruits);
+    } else {
+        echo "No fruits selected.";
+    }
+} else {
+    // Display the form
+    echo '<form method="POST" action="' . htmlspecialchars($_SERVER["PHP_SELF"]) . '">
+            <label><input type="checkbox" name="fruits[]" value="Apple"> Apple</label><br>
+            <label><input type="checkbox" name="fruits[]" value="Banana"> Banana</label><br>
+            <label><input type="checkbox" name="fruits[]" value="Cherry"> Cherry</label><br>
+            <input type="submit" value="Submit">
+          </form>';
+}
+```
+
+How it works:
+
+- The code checks if the form has been submitted by verifying the request method using `$_SERVER["REQUEST_METHOD"]`.
+- If the form is submitted (i.e., the request method is "POST"), it checks if the `fruits` field is set in the `$_POST` superglobal array. If it is set, it retrieves the selected fruits as an array and outputs the selected fruits using `implode()` to join them into a comma-separated string. If no fruits are selected, it outputs a message indicating that.
+- If the form has not been submitted, it displays the HTML form with checkboxes for selecting fruits. The `name` attribute of each checkbox is set to `fruits[]`, indicating that multiple values can be selected and sent as an array when the form is submitted.
+- When the user selects multiple fruits and clicks the submit button, the form data is sent to the server, and the PHP code processes it accordingly, allowing for multiple selections to be handled.
+- This example shows with the select tag
+
+```php
+//index.php
+<form method="POST" action="eat.php">
+<select name="lunch[]" multiple>
+    <option value="pork">BBQ Pork Bun</option>
+    <option value="chicken">Chicken Bun</option>
+    <option value="lotus">Lotus Seed Bun</option>
+    <option value="bean">Bean Paste Bun</option>
+    <option value="nest">Bird-Nest Bun</option>
+</select>
+<input type="submit" name="submit">
+</form>
+
+//eat.php
+<?php
+print_r($_POST['lunch']);
+?>
+```
+
+### Acessing multiple submitted values
+
+- The following shows how to access multiple submitted values from a form element:
+
+```php
+<form method="POST" action="eat.php">
+    <select name="lunch[]" multiple>
+        <option value="pork">BBQ Pork Bun</option>
+        <option value="chicken">Chicken Bun</option>
+        <option value="lotus">Lotus Seed Bun</option>
+        <option value="bean">Bean Paste Bun</option>
+        <option value="nest">Bird-Nest Bun</option>
+    </select>
+    <input type="submit" name="submit">
+</form>
+Selected buns:
+<br/>
+<?php
+    if (isset($_POST['lunch'])) {
+        foreach ($_POST['lunch'] as $choice) {
+        print "You want a $choice bun. <br/>";
+        }
+}
+?>
+```
+
+How it works:
+
+- The code defines an HTML form with a multi-select dropdown for selecting lunch options. The `name` attribute of the select element is set to `lunch[]`, indicating that multiple values can be selected and sent as an array when the form is submitted.
+- When the form is submitted, the PHP code checks if the `lunch` field is set in the `$_POST` superglobal array.
+- If the `lunch` field is set, it iterates over the selected values using a `foreach` loop and prints a message for each selected lunch option, indicating the type of bun chosen by the user.
+
+## Validating Data
+
+1. Stripe unneccessary characters from user input using `trim()` function
+2. Remove backslashes `\` from user input data using PHP `stripslahes()` function
+3. Pass all variables through the `htmlspecialchars()` function
+4. To avoid repetition, you can create a reusable function as follows to do this
+
+```php
+
+function sanitizedInput($data) {
+    return htmlspecialchars(stripslashes(trim($data)));
+}
+
+if($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $sanitized_data = santizedInput($_POST['name']);
+    echo $santized_data;
+}
+```
+
+Note that before validation, the form we must first check if the form has been submitted using `if($_SERVER['REQUEST_METHOD']) === POST` else, it should display a blank form
+
+## PHP Form Required
+
+- For required forms, before using the inputed data, we should first validate if the data is empty using the `empty()` function
+
+```php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Process form data
+    if (empty($_POST['name'])) {
+        echo "Name is required.";
+    } else {
+        $name = sanitizedInput($_POST['name']);
+        echo "Hello, " . $name . "!";
+    }
+} else {
+    // Display the form
+    echo '<form method="POST" action="' . htmlspecialchars($_SERVER["PHP_SELF"]) . '">
+            Name: <input type="text" name="name" required>
+            <input type="submit" value="Submit">
+          </form>';
+}
+```
+
+### Validating Email Address
+
+- To validate an email address in PHP, you can use the `filter_var()` function with the `FILTER_VALIDATE_EMAIL` filter. Here's an example of how to validate an email address:
+
+```php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Process form data
+    $email = sanitizedInput($_POST['email']);
+    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo "The email address '$email' is valid.";
+    } else {
+        echo "The email address '$email' is not valid.";
+    }
+} else {
+    // Display the form
+    echo '<form method="POST" action="' . htmlspecialchars($_SERVER["PHP_SELF"]) . '">
+            Email: <input type="text" name="email" required>
+            <input type="submit" value="Submit">
+          </form>';
+}
+```
+
+### Validating Name
+
+- To validate a name in PHP, you can use a regular expression to ensure that the name contains only valid characters (e.g., letters, spaces, hyphens, and apostrophes). Here's an example of how to validate a name:
+
+```php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Process form data
+    $name = sanitizedInput($_POST['name']);
+    if (preg_match("/^[a-zA-Z-' ]*$/", $name)) {
+        echo "The name '$name' is valid.";
+    } else {
+        echo "The name '$name' is not valid. Only letters, spaces, hyphens, and apostrophes are allowed.";
+    }
+} else {
+    // Display the form
+    echo '<form method="POST" action="' . htmlspecialchars($_SERVER["PHP_SELF"]) . '">
+            Name: <input type="text" name="name" required>
+            <input type="submit" value="Submit">
+          </form>';
+}
+```
+
+### Validating URL
+
+- To validate a URL in PHP, you can use the `filter_var()` function with the `FILTER_VALIDATE_URL` filter. Here's an example of how to validate a URL:
+
+```php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Process form data
+    $url = sanitizedInput($_POST['url']);
+    if (filter_var($url, FILTER_VALIDATE_URL)) {
+        echo "The URL '$url' is valid.";
+    } else {
+        echo "The URL '$url' is not valid.";
+    }
+} else {
+    // Display the form
+    echo '<form method="POST" action="' . htmlspecialchars($_SERVER["PHP_SELF"]) . '">
+            URL: <input type="text" name="url" required>
+            <input type="submit" value="Submit">
+          </form>';
+}
+```
+
+# PHP Databases
+
+- A database is a program which is an organized collection of data that can be easily accessed, managed, and updated. Databases are used to store and retrieve information for various applications, such as websites, software applications, and data analysis tools.
+
+- PHP can interact with databases using various extensions, such as MySQLi and PDO (PHP Data Objects). These extensions provide functions and methods to connect to a database, execute queries, and retrieve results.
+
+## Organizing Data in a Database
+
+- Infromation in your database is organized into _tables_, which consist of rows and columns. Each table represents a specific entity or concept, and each row represents a record or instance of that entity. Columns represent the attributes or properties of the entity and are sometimes referred to as _fields_
+
+- Each column in a table is a category of information and seach row is a set of values for each column
+- SQL (Structured Query Language) is used to manage and manipulate data in a database. SQL allows you to perform various operations, such as creating tables, inserting data, updating records, deleting records, and querying data.
+- Know that SQL Keywords are not case sensitive but for the sake of convention writte them in uppercase to distinguish them from other parts of the queries but names of tables and columns are case sensitive depending on the database system being used.
+- Almost all SQL Queries you write in your PHP programs rely on one of four SQL commands: INSERT, UPDATE, DELETE or SELECT
+
+## Connecting to a Database program
+
+- To connect locally to a database using mysql, xampp and PHP, do the following
+
+1. If XAMPP is installed on your local machine, head up to `localhost/phpmyadim` or just simply click the `Admin` button via the MySQL row. This will take you to the MySQL page where you can create you database. Assume the name of the db you created is `demo`
+2. Create you db on the site
+3. After that, head-up to your PHP script and connect you db as follow
+
+```php
+$db = new PDO('mysql: host=localhost; dbname=demo', root, '');
+```
+
+Explanation:
+
+- The PDO class here is used to create a new database connection.
+- The first parameter is a Data Source Name (DSN) string that specifies the database type (`mysql`), the host (`localhost` since we are using XAMPP), and the database name (`demo`).
+- The second parameter is the username for the database connection. In this case, it is set to `root`, which is the default username for MySQL in XAMPP.
+- The third parameter is the password for the database connection. In this case, it is set to an empty string (`''`), which is the default password for the `root` user in XAMPP.
+- If the connection is successful, a new PDO object is created and assigned to the variable `$db`, which can be used to interact with the database.
+- For better error handling, you can wrap it as a `try...catch` block as follows
+
+```php
+try {
+    $db = new PDO('mysql: host=localhost; dbname=demo', 'root', '');
+} catch (PDOException $e) {
+    echo "Connection failed: " . $e->getMessage();
+}
+```
+
+Here, the `PDOException` class is used to catch any exceptions that occur during the connection attempt. If an exception is thrown, the error message is displayed using `getMessage()` method, indicating that the connection failed.
+
+## Creating a Table
+
+- Before you can put data into or retrieve any data from a database table, a table must first be created. This is done once
+
+- To do this we use the SQL command - `CREATE TABLE` followed by the name of the table and the list of columns and their data types enclosed in parentheses. Assume you want to create a table named `users` with columns for `id`, `name`, and `email`. The SQL query would look like this:
+
+```sql
+CREATE TABLE users (
+    id INT(11) AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    logged_in INT(1) DEFAULT 0
+);
+```
+
+Explanation:
+
+- The `CREATE TABLE` command is used to create a new table named `users`.
+- The `id` column is defined as an integer (`INT`) with a maximum length of 11 digits. It is set to auto-increment (`AUTO_INCREMENT`), meaning that it will automatically generate a unique value for each new record. It is also designated as the primary key (`PRIMARY KEY`) of the table, which uniquely identifies each record (i.e for each row, a unique `id` is generated).
+- The `name` column is defined as a variable character string (`VARCHAR`) with a maximum length of 50 characters. It is set to not allow null values (`NOT NULL`), meaning that a value must be provided for this column when inserting a new record.
+- The `email` column is defined as a variable character string (`VARCHAR`) with a maximum length of 100 characters. It is also set to not allow null values (`NOT NULL`).
+- The `logged_in` column is defined as an integer (`INT`) with a maximum length of 1 digit. It has a default value of 0 (`DEFAULT 0`), meaning that if no value is provided for this column when inserting a new record, it will automatically be set to 0.
+- This SQL query creates the `users` table with the specified columns and their data types, allowing you to store user information in the database.
+- Common database table column types
+| Column Type | Description                                      |
+|-------------|--------------------------------------------------|
+| INT         | Integer values (whole numbers)                   |
+| VARCHAR(_length_) | Variable-length character strings with a specified maximum length |
+| TEXT        | Large text data                                  |
+| DATE        | Date values in the format 'YYYY-MM-DD'          |
+| DATETIME    | Date and time values in the format 'YYYY-MM-DD HH:MM:SS' |
+| BOOLEAN     | Boolean values (true/false)                      |
+| DECIMAL(_total_digits_, _decimal_places_) | Fixed-point decimal numbers with a specified total number of digits and decimal places |
+
+- Know that MySQL allows VARCHAR columns to be up to 255 characters long
+
+- To create the table using PHP, you can use the following code:
+
+```php
+try {
+    $db = new PDO('mysql: host=localhost; dbname=demo', 'root', '');
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $createTableQuery = "CREATE TABLE users (
+        id INT(11) AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(50) NOT NULL,
+        email VARCHAR(100) NOT NULL,
+        logged_in INT(1) DEFAULT 0
+    )";
+    $q = $db->exec($createTableQuery);
+    echo "Table 'users' created successfully.";
+} catch (PDOException $e) {
+    echo "Connection failed: " . $e->getMessage();
+}
+```
+
+Explanation:
+
+- The code establishes a connection to the MySQL database using PDO.
+- It defines a SQL query to create the `users` table with the specified columns and their data types.
+- The `exec()` method of the PDO object is used to execute the SQL query. This method is suitable for queries that do not return results, such as `CREATE TABLE`.
+- If the table is created successfully, a success message is displayed. If there is an error during the connection or table creation, an exception is caught, and the error message is displayed.
+- The code demonstrates how to create a database table using PHP and PDO, allowing you to store user information in the database.
+- The `setAttribute()` method is used to set the error mode attribute of the PDO object to `PDO::ERRMODE_EXCEPTION`, which enables exception handling for database errors (not only connection errors). This means that if any errors occur during the execution of SQL queries, a `PDOException` will be thrown, allowing you to handle the error gracefully in the `catch` block.
+- After this, you can refresh your database page to see the created table.
+
+## Removing a table
+
+- To remove a table from a database, you can use the SQL command `DROP TABLE` followed by the name of the table you want to delete. Here's an example of how to remove the `users` table created earlier:
+
+```sql
+DROP TABLE users;
+```
+
+- This can also, be done in PHP as follows:
+
+```php
+try {
+    $db = new PDO('mysql: host=localhost; dbname=demo', 'root', '');
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $dropTableQuery = "DROP TABLE users";
+    $q = $db->exec($dropTableQuery);
+    echo "Table 'users' dropped successfully.";
+} catch (PDOException $e) {
+    echo "Connection failed: " . $e->getMessage();
+}
+```
+
+## Putting Data into the Database
+
+- Assuming you db successfully connected, the onject returned by `new PDO()` provides access to data in your database. Calling the object's function lets us send queries to the database program and access the results
+
+- To put some data into the database, pass an `INSERT` statement to the object's `exec()` method as show below
+
+```php
+try {
+    $db = new PDO('mysql: host=localhost; dbname=demo', 'root', '');
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $insertQuery = "INSERT INTO users (name, email) VALUES ('John Doe', 'johndoe@gmail.com')";
+    $q = $db->exec($insertQuery);
+    echo "Data inserted successfully.";
+} catch (PDOException $e) {
+    echo "Connection failed: " . $e->getMessage();
+}
+```
+
+Explanation:
+
+- The code establishes a connection to the MySQL database using PDO.
+- It defines a SQL `INSERT` query to add a new record to the `users` table with the name 'John Doe' and email '<johndoe@gmail.com>'.
+- The `exec()` method of the PDO object is used to execute the SQL query. This method is suitable for queries that do not return results, such as `INSERT`.
+- If the data is inserted successfully, a success message is displayed. If there is an error during the connection or data insertion, an exception is caught, and the error message is displayed.
+- The code demonstrates how to insert data into a database table using PHP and PDO.
+- The `exec()` method returns the number of rows affected by the sql query, which is assigned to the variable `$q`. In this case, it will return `1` if the insertion is successful, indicating that one row was added to the table.
+
+## Checking for errors from exec()
+
+- To check for errors when using the `exec()` method, you can use a try-catch block to catch any exceptions that may be thrown during the execution of the SQL query.
+
+- Before that, know that PDO error mode are of three types:
+
+1. `PDO::ERRMODE_SILENT`: This is the default error mode. In this mode, PDO will not raise any errors or exceptions. Instead, it will set an error code that can be checked using the `errorCode()` method. You need to manually check for errors after each database operation. This mode is not recommended as it can lead to silent failures.
+2. `PDO::ERRMODE_WARNING`: In this mode, PDO will raise warnings for errors that occur during database operations. Warnings are not as severe as exceptions, but they can still indicate potential issues. You can check for warnings using the `errorInfo()` method. This mode is useful for debugging purposes.
+3. `PDO::ERRMODE_EXCEPTION`: In this mode, PDO will raise exceptions for errors that occur during database operations. This is the most robust error handling mode, as it allows you to catch and handle exceptions using try-catch blocks. This mode is recommended for production code, as it provides better error handling and debugging capabilities.
+
+- Here's an example of how to check for errors when using the `exec()` method with the `PDO::ERRMODE_EXCEPTION` error mode:
+
+```php
+try {
+    $db = new PDO('mysql: host=localhost; dbname=demo', 'root', '');
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $insertQuery = "INSERT INTO users (name, email) VALUES ('Jane Doe', 'janedoe@gmail.com')";
+    $q = $db->exec($insertQuery);
+    echo "Data inserted successfully.";
+} catch (PDOException $e) {
+    $error = $db -> errorInfo();
+    echo "Error inserting data:";
+    echo "SQL Error={$error[0]}, DB Error={$error[1]}, Message={$error[2]}";
+}
+```
+
+## SQL Lesson: INSERT
+
+- The `INSERT` command adds a row to a database table.
+
+- It's syntax is as follow
+
+```sql
+INSERT INTO table_name (column1, column2, column3, ...)
+VALUES (value1, value2, value3, ...);
+```
+
+### Quoting a string value
+
+- In SQL, string values must be enclosed in single quotes (`'`) to differentiate them from other data types, such as numbers or keywords. This is important because it helps the database understand that the value is a string and should be treated as such. For example, when inserting a string value into a database table, you would use single quotes around the value, like this:
+
+```sql
+INSERT INTO users (name, email) VALUES ('John Doe', 'johndoe@gmail.com');
+```
+
+- Suppose you want to insert a string value that contains a single quote character, such as "O'Reilly". In this case, you need to escape the single quote by using two single quotes (`''`) to represent a single quote within the string. Here's an example:
+
+```sql
+INSERT INTO authors (name) VALUES ('O''Reilly');
+```
+
+### INSERTING WITHOUT ALL COLUMN
+
+- When inserting data into a database table, you don't always have to provide values for all columns. If a column has a default value or allows null values, you can omit it from the `INSERT` statement. Here's an example:
+
+```sql
+CREATE TABLE products (
+    id INT(11) AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    price DECIMAL(10, 2) DEFAULT 0.00,
+    description TEXT
+);
+
+INSERT INTO products (name, description) VALUES ('Widget', 'A useful widget.');
+```
+
+## SQL Lesson: UPDATE
+
+- The `UPDATE` command modifies existing records in a database table.
+
+- Its syntax is as follow
+
+```sql
+UPDATE table_name SET column1=new_value1, column2=new_value2, ...
+WHERE some_column=some_value;
+```
+
+- For example, to update the email address and name of a user with a specific `id`, you would use the following SQL query:
+
+```sql
+UPDATE users SET email='newemail@example.com', name='New Name' WHERE id=1;
+```
+
+- Know that when choosing your where clause, be sure it matches only the rows you want to update. If you omit the `WHERE` clause, all rows in the table will be updated with the new values.
+
+- Also, that value of the column that is changed can be a string, integer or the result of an expression. For example, to increase the price (column name) of a product by 10%, you could use the following SQL query:
+
+```sql
+UPDATE products SET price = price * 1.10 WHERE id = 1;
+```
+
+### SQL Comments
+
+- Comments in SQL starts with `;`
+
+- For example
+
+```sql
+; Creating table
+
+CREATE TABLE authors(name, email);
+```
+
+- Here, the text `Creating table` will be ignored
+
+### Updating multiple rows
+
+- To update multiple rows in a database table using the `UPDATE` command, you can use a `WHERE` clause that matches multiple records. This can be done by using conditions that apply to more than one row, such as using the `IN` operator or specifying a range of values. Here's an example:
+
+```sql
+UPDATE users SET logged_in = 1 WHERE id IN (2, 3, 4);
+```
+
+## SQL Lesson: DELETE
+
+- The `DELETE` command removes rows from a table
+
+- It's syntax is as follow
+
+```sql
+DELETE FROM table_name WHERE where_clause
+```
+
+- Consider this example:
+
+```sql
+DELETE FROM table_name
+```
+
+The above code will neccessarily delete all rows in the table. To gain more control, you can use the `WHERE` command alongside it. Any expression can fit into the where clause
+
+- Know that the logical operators `AND`, `OR` and `NOT` can be used in the `WHERE` clause to combine multiple conditions. For example, to delete users who are inactive and have not logged in for a certain period, you could use the following SQL query:
+
+```sql
+DELETE FROM users WHERE active = 0 AND last_login < '2023-01-01';
+```
+
+- Also, whenever you want to delete from a table with an `id`, there would not be renumbering of the remaining rows. For example, if you have a table with rows having `id` values 1, 2, 3, and you delete the row with `id` 2, the remaining rows will still have `id` values 1 and 3. The `id` values are unique identifiers for each row and are not automatically renumbered when a row is deleted. To renumber the `id` values, you would need to manually update them using an `UPDATE` statement or recreate the table and reinsert the data.
+
+- The is no SQL `UNDELETE` so be careful with your `DELETE` commands
+
+## Inserting Form Data Safely
+
+- PDO provides a way to safely insert form data into a database using _prepared statements_ and parameterized queries. This helps prevent SQL injection attacks by separating the SQL code from the user input.
+
+- To do this:
+First, give PDO's `prepare()` method a version of your query with aplaceholder `?` in the SQL in each place you want a value to go. Thismethod returns a `PDOStatement` object. Then you can call the `execut()` method on your `PDOStatement` object passing it an array of valuesto be substituted for the placeholding characters `?`. By this, thevalues are properly quoted before they are put into the query,projecting you from SQL injection attacks. An example is shown below
+
+```php
+$stmt = $db -> prepare("INSERT INTO users (name, email) VALUES (?)");
+$stmt -> execute(['Alice']);   
+```
+
+- Multiple placeholders can be used as shown below
+
+```php
+$stmt = $db -> prepare("INSERT INTO users (name, email) VALUES (?, ?)");
+$stmt -> execute(['Bob', 'bob@example.com']);
+```
+
+## Retreiving Data from the Database
+
+### PHP `query()`
+
+- To retrieve data from a database using PHP, you can use the `query()` method of the PDO object. This method is used to execute SQL `SELECT` statements and returns a `PDOStatement` object that contains the result set.
+
+### PHP `fetch()`
+
+- The `fetch()` method of the `PDOStatement` object is used to retrieve a single row from the result set. It returns an associative array, a numeric array, or both, depending on the fetch mode specified. But at default, it returns an associative array where the key is the column name and the value is the corresponding value from the row.
+
+- Each time the `fetch()` method is called, it retrieves the next row from the result set until there are no more rows to fetch. After there are no more rows to set, it returns a value that evaluates to false
+
+### SQL Lesson: SELECT
+
+- The `SELECT` command retrieves data from a database table.
+
+- Its syntax is as follow
+
+```sql
+SELECT column1, column2, ...
+FROM table_name
+WHERE some_column=some_value;
+```
+
+- Now, we can retrieve data from a table using the `SELECT` command, `query()` method and `fetch()` method as shown below
+
+```php
+
+$db = new PDO('mysql: host=localhost; dbname=demo', 'root', '');
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$stmt = $db->query("SELECT name, email FROM users");
+while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    echo "Name: " . $row['name'] . ", Email: " . $row['email'] . "<br>";
+}
+```
+
+Explanation:
+
+- The code establishes a connection to the MySQL database using PDO.
+- It sets the error mode attribute of the PDO object to `PDO::ERRMODE_EXCEPTION` for better error handling.
+- The `query()` method is used to execute a SQL `SELECT` statement that retrieves the `name` and `email` columns from the `users` table. This method returns a `PDOStatement` object.
+- A `while` loop is used to iterate over the result set. The `fetch()` method is called on the `PDOStatement` object to retrieve each row as an associative array (`PDO::FETCH_ASSOC`). Without this flag, it prints both numeric and associative arrays.
+- Inside the loop, the `name` and `email` values are accessed from the associative array and printed to the screen.
+
++ The `fetch()` method can also be chained with the query as follow:
+
+```php
+$stmt = $db->query("SELECT name, email FROM users")->fetch(PDO::FETCH_ASSOC);
+echo "Name: " . $stmt['name'] . ", Email: " . $stmt['email'] . "<br>";
+```
+
+- To retrive all columns from a table, you can use the asterisk (`*`) wildcard character. For example, to retrieve all columns from the `users` table, you would use the following SQL query:
+
+```sql
+SELECT * FROM users;
+```
+
+### PHP `fetchAll()`
+
+- For a table with a small number of row, you can use the `fetchAll` method to put them into an array without looping
+
+- For example
+
+```php
+$stmt = $db -> query("SELECT * 
+                        FROM users");
+
+$users = $stmt -> fetchAll();
+```
+
++ Know that you can either use `PDO::FETCH_ASSOC` or `PDO::FETCH_NUM` or `PDO::FETCH_BOTH` as the parameter for the `fetchAll()` and `fetch` method to specify the type of array you want to retrieve.
+
+#### PHP setFetchMode()
+
++ The `setFetchMode()` method of the `PDOStatement` object is used to set the default fetch mode for retrieving rows from the result set. This method allows you to specify how the rows should be returned when using the `fetch()` or `fetchAll()` methods.
+
+- For example, to set the fetch mode to associative array (`PDO::FETCH_ASSOC`), you can use the following code:
+
+```php
+$stmt = $db->query("SELECT name, email FROM users");
+$stmt->setFetchMode(PDO::FETCH_ASSOC);
+while ($row = $stmt->fetch()) { 
+    echo "Name: " . $row['name'] . ", Email: " . $row['email'] . "<br>";
+}
+```
+
+Notice that by the influence of this function, you don't need to pass anything in the `fetch()` or `fetchAll()`
+- - To set a default fetch style for all fetches, you can use the `setFetchMode()` method as shown below:
+
+```php
+$db -> setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_NUM)
+```
+
++ Know that in the above demonstration, `FETCH_NUM` was just used for demonstration. We can also use `FETCH_ASSOC` or `FETCH_OBJ`
+
+### SQL `COUNT()` Function
+
+- The `COUNT()` function in SQL is used to count the number of rows in a database table that match a specified condition. It returns the total number of rows as an integer value. For a large database, you can you the `COUNT()` function to count the number of rows in a table without retrieving all the data. This is more efficient and faster, especially for large datasets.
+
+- Here's an example of how to use the `COUNT()` function to count the number of rows in the `users` table:
+
+```php
+$stmt = $db->query("SELECT COUNT(*) AS total_users FROM users");
+$row = $stmt->fetch(PDO::FETCH_ASSOC);
+echo "Total users: " . $row['total_users'];
+
+// Output: Total users: X
+// where X is the total number of users in the table
+```
+
+Explanation:
+
+- The code executes a SQL `SELECT` statement that uses the `COUNT()` function to count the total number of rows in the `users` table. The result is aliased as `total_users`.
+- The `fetch()` method is called on the `PDOStatement` object to retrieve the result as an associative array.
+- The total number of users is accessed from the associative array using the key `total_users` and can be printed or used as needed.
+
+## SQL Lesson: SELECT Clause
+
+- The `SELECT` clause is used to specify the columns that you want to retrieve from a database table.
+
+- Its syntax is as follow
+
+```sql
+SELECT column1, column2, ...
+FROM table_name;
+```
+
+- To gain more specific control over the data you want to retrieve, you can use the `WHERE` clause to filter the results based on specific conditions. The `WHERE` clause allows you to specify criteria that must be met for a row to be included in the result set.
+
+- Its syntax is as follow
+
+```sql
+SELECT column1, column2, ...
+FROM table_name
+WHERE some_column=some_value;
+```
+
+- The where clause is more of a logical expression that can include comparison operators such as `=`, `!=`, `<`, `>`, `<=`, `>=`, and logical operators such as `AND`, `OR`, and `NOT` to combine multiple conditions.
+
+## SQL Lesson: ORDER BY and LIMIT
+
+### ORDER BY Clause
+
++ `ORDER BY` clause is used to sort the result set of a SQL query in ascending or descending order based on one or more columns.
+
+- Its syntax is as follow
+
+```sql
+SELECT column1, column2, ...
+FROM table_name
+ORDER BY column1 [ASC|DESC], column2 [ASC|DESC], ...;
+```
+
+where `ASC` specifies ascending order (default) and `DESC` specifies descending order.
+The pipe `|` in this syntax just indicates that you can choose either `ASC` or `DESC` but not both.
+- The following demonstrates
+
+```php
+$select_query = $db -> query("SELECT user_id FROM users ORDER BY user_id DESC");
+
+while($row = $select_query -> fetch(PDO::FETCH_ASSOC)) {
+    echo '<pre>';
+    print_r($row);
+    echo '<pre>';
+}
+```
+
++ Know the above code will not sort the table on the database but just the result set returned. We can then stored the sorted db as follow
+
+```php
+
+$select_query = $db -> query("SELECT user_id FROM users ORDER BY user_id DESC");
+
+while($row = $select_query -> fetch(PDO::FETCH_ASSOC)) {
+    $users[] = $row;
+}
+
+echo '<pre>';
+print_r($users);
+echo '<pre>';
+```
+
+#### Ordering by multiple columns
+
++ You can order the result set by multiple columns by specifying them in the `ORDER BY` clause, separated by commas. Each column can have its own sorting order (ascending or descending).
+
+- For example, to order the result set first by `last_name` in ascending order and then by `first_name` in descending order, you would use the following SQL query:
+
+```sql
+SELECT * FROM users ORDER BY last_name ASC, first_name DESC;
+```
+
+`*` is used here because we are selecting all columns from the `users` table.
+
+### LIMIT Clause
+
++ The `LIMIT` clause is used to specify the maximum number of rows to return in the result set of a SQL query. This is useful when you want to retrieve a subset of data from a large table.
+
+- Its syntax is as follow
+
+```sql
+SELECT column1, column2, ...
+FROM table_name
+LIMIT number_of_rows;
+```
+
+- For example, to retrieve the first 5 rows from the `users` table, you would use the following SQL query:
+
+```php
+$select_query = $db -> query("SELECT * FROM users LIMIT 5");
+
+while($row = $select_query -> fetch(PDO::FETCH_ASSOC)) {
+    echo '<pre>';
+    print_r($row);
+    echo '<pre>';
+}
+```
+
+## SQL Lesson: Wildcards
+
++ Wildcards are special characters used in SQL to represent one or more characters in a string. They are commonly used in conjunction with the `LIKE` operator in the `WHERE` clause to perform pattern matching searches.
+
+- The two most commonly used wildcards in SQL are:
+1. Percent sign (`%`): Represents zero or more characters. It can be used to match any sequence of characters, including an empty string.
+2. Underscore (`_`): Represents a single character. It can be used to match any single character at a specific position in a string.
+
+### Some SQL wildcards example
++ To find all users whose names start with the letter 'A', you can use the following SQL query:
+
+```sql
+SELECT * FROM users WHERE name LIKE 'A%';
+```
++ To find all users whose names have 'son' anywhere in the string, you can use the following SQL query:
+```sql
+SELECT * FROM users WHERE name LIKE '%son%';
+```
++ To find all users whose names end with the letter 'n', you can use the following SQL query:
+```sql
+SELECT * FROM users WHERE name LIKE '%n';
+```
++ To find all users whose names have 'a' as the second character, you can use the following SQL query:
+```sql
+SELECT * FROM users WHERE name LIKE '_a%';
+```
++ To find all users whose names have 'e' as the third character and 'n' as the fifth character, you can use the following SQL query:
+```sql
+SELECT * FROM users WHERE name LIKE '__e_n%';
+```
+- To find words of the pattern `Smith .oy`, you can use the following SQL query:
+
+```sql
+SELECT * FROM users WHERE name LIKE 'Smith _oy';
+```
++ To escape a wildcard character in a string, you can use the backslash (`\`) before the wildcard character. For example, to search for names that contain the literal string '50%', you can use the following SQL query:
+
+```sql
+UPDATE products SET name = '50\% off sale' WHERE id = 1;
+```
+### The `quote()` and `strtr()` Methods
++ This methods are used to escape special characters in a string to make it safe for use in SQL queries. The `quote()` method adds quotes around the string and escapes any special characters, while the `strtr()` method replaces specific characters in the string with their escaped counterparts.
++ They can be used in forms by
+
+```php
+$user_input = $_POST['user_input'];
+$safe_input = $db->quote($user_input);
+$escaped_input = strtr($safe_input, [
+    '%' => '\%',
+    '_' => '\_',
+    '\\' => '\\\\'
+]);
+$query = "SELECT * FROM users WHERE name LIKE $escaped_input";  
+$stmt = $db->query($query);
+while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    echo "Name: " . $row['name'] . "<br>";
+}
+```
+By this, any special characters in the user input are properly escaped, preventing SQL injection attacks when using the input in a `LIKE` clause.
